@@ -52,7 +52,7 @@ public class StudyServiceImpl implements StudyService {
 	public StudyVO studySelect(StudyVO vo) {
 		// 글 상세보기
 
-		String sql = "select * from study where study_writer";
+		
 
 		return null;
 	}
@@ -61,20 +61,22 @@ public class StudyServiceImpl implements StudyService {
 	public int studyInsert(StudyVO vo) {
 		// 글 등록
 		int n = 0;
-		String sql = "INSERT INTO STUDY VALUES(STUDY_SEQ.NEXTVAL,?,?,?,0,0,?,?,?,?)";
+		String sql = "INSERT INTO STUDY VALUES(STUDY_SEQ.NEXTVAL,?,?,?,0,0,?,?,?,?,?,?,?,?)";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 
-			psmt.setString(1, vo.getStudyWriter());
-			psmt.setString(2, vo.getStudyTitle());
-			psmt.setString(3, vo.getStudySubject());
-			psmt.setDate(4, vo.getStudyDate());
-			psmt.setDate(5, vo.getStudyStartDate());
-			psmt.setString(6, vo.getStudyAttech());
-			psmt.setString(7, vo.getStudyAttechDir());
-			psmt.setString(8, vo.getStudyLanguage());
-			psmt.setString(9, vo.getStudyMember());
+			psmt.setString(1, vo.getStudyWriter());//
+			psmt.setString(2, vo.getStudyTitle());//
+			psmt.setString(3, vo.getStudySubject());//
+			psmt.setDate(4, vo.getStudyDate());//
+			psmt.setDate(5, vo.getStudyStartDate());//
+			psmt.setString(6, vo.getStudyAttech());//
+			psmt.setString(7, vo.getStudyAttechDir());//
+			psmt.setString(8, vo.getStudyLanguage());//
+			psmt.setString(9, vo.getStudyMember());//
+			psmt.setString(10, vo.getStudySystem());//
+			psmt.setString(11, vo.getStudyPeriod());//
 
 			n = psmt.executeUpdate();
 
@@ -89,14 +91,14 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public int studyDelete(StudyVO vo) {
 		// 글 삭제 
-		int n =0;
+		
 	    return 0;
 	}
 
 	@Override
 	public int studyUpdate(StudyVO vo) {
 		// 글 수정
-		int n =0;
+		
 		return 0;
 	}
 
@@ -132,7 +134,8 @@ public class StudyServiceImpl implements StudyService {
 		}
 		return list;
 	}
-
+/////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 	private void close() {
 		try {
 			if (rs != null)

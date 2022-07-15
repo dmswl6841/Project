@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.team.prj.MainCommand;
-import com.team.prj.manager.command.MemberList;
+
+import com.team.prj.study.command.StudyForm;
+
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -27,8 +29,9 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// 초기화 하는 메소드(Mapping하는 부분을 작성)
 		map.put("/main.do", new MainCommand()); // 처음접속하는 페이지
-		map.put("/memberList.do", new MemberList());
-	}
+
+		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
+
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
