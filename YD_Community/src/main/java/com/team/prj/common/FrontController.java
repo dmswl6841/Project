@@ -32,7 +32,8 @@ public class FrontController extends HttpServlet {
 
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
 
-
+	}
+	
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 서비스(실행)하는 메소드
