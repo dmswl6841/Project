@@ -1,5 +1,7 @@
 package com.team.prj.study.vo;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,11 +14,14 @@ public class StudyVO {
 	private String StudyAttech; //첨부파일
 	private String StudyAttechDir; //첨부파일 위치
 	private String StudyWriter; //작성자
-	private String StudyDate; //작성일자
-	private String StudyStartDate; //모집시작일자
+	private Date StudyDate; //작성일자
+	private Date StudyStartDate; //모집시작일자
 	private String StudySystem; //진행방식
 	private String StudyPeriod; //진행기간
 	private String StudyMember; //인원 수
 	private String StudyLanguage; //사용기술
 	private int StudyScrap; //스터디 스크랩
+	
+		
+	
 }
