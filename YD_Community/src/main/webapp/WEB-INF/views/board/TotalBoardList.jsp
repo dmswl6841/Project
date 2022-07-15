@@ -51,8 +51,8 @@
 			<table border="1">
 				<tbody>
 					<c:choose>
-						<c:when test="${not empty list }">	
-							<c:forEach items="${list }" var="b">
+						<c:when test="${not empty boardlist }">	
+							<c:forEach items="${boardlist }" var="b">
 						<tr>
 							<td>${b.boardCategory }</td>
 							<td><a href="views/board/FreeBoardList">${b.boardTitle }</a></td>
@@ -83,8 +83,8 @@
 			<table border="1">
 				<tbody>
 					<c:choose>
-						<c:when test="${not empty list }">	
-							<c:forEach items="${list }" var="b">
+						<c:when test="${not empty boardlist }">	
+							<c:forEach items="${boardlist }" var="b">
 						<tr>
 							<td>${b.boardCategory }</td>
 							<td><a href="views/board/QnaBoardList">${b.boardTitle }</a></td>
