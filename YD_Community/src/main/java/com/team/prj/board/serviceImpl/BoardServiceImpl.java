@@ -47,7 +47,8 @@ public class BoardServiceImpl implements BoardService {
 		//전체조회
 		List<BoardVO> totallist = new ArrayList<>();
 		BoardVO vo;
-		String sql = "SELECT * FROM BOARD ORDER BY BOARD_NO DESC";
+
+		String sql = "SELECT * FROM BOARD ORDER BY BOARD_ID DESC";
 		
 		try {
 			conn = dao.getConnection();
