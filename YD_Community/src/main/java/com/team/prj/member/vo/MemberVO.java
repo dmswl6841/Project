@@ -1,10 +1,14 @@
 package com.team.prj.member.vo;
 
+import com.team.prj.board.vo.BoardVO;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class MemberVO {
 	private int memberNo;
 	private String memberId; //유저 Id
@@ -16,5 +20,7 @@ public class MemberVO {
 	private int memberWarning; //유저 경고횟수
 	private String memberAuthor; //유저 권한
 	private String memberJoin; //유저 가입여부
+	
+	BoardVO bvo;
 	 
 }
