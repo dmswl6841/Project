@@ -16,4 +16,5 @@ public class MemberVO {
 	private int memberWarning; //유저 경고횟수
 	private String memberAuthor; //유저 권한
 	private String memberJoin; //유저 가입여부
+	 
 }
