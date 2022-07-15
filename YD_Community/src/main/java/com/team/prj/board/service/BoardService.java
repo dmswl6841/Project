@@ -24,7 +24,8 @@ public interface BoardService {
 		int QboardDelete(BoardVO vo); //글삭제
 		int QboardUpdate(BoardVO vo); //글수정
 		
-		//Hot 주간 인기글 게시판 crud (인기글 게시판으로 올라가면 수정은 불가해짐)
+		//Hot 주간 인기글 게시판 crud (인기글 게시판으로 올라가면 수정은 불가능해짐)
+
 		List<BoardVO> HboardSelectList(); //전체조회
 		int HboardDelete(BoardVO vo); //글삭제
 
