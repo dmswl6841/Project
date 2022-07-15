@@ -21,6 +21,7 @@ public class StudyVO {
 	private String StudyMember; //인원 수
 	private String StudyLanguage; //사용기술
 	private int StudyScrap; //스터디 스크랩
+	private int memberNo; //member fk
 	
 		
 	
