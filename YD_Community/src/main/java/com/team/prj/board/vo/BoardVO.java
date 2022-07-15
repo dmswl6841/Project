@@ -16,4 +16,5 @@ public class BoardVO {
 	private int boardScrap; //게시글 스크랩
 	private int boardHit; //게시글 조회수
 	private String boardCategory; //게시글 말머리
+	private int memberNo;
 }

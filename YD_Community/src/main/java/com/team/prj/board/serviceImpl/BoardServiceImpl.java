@@ -11,8 +11,6 @@ import com.team.prj.board.service.BoardService;
 import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.DataSource;
 
-import co.micol.prj.notice.vo.NoticeVO;
-
 public class BoardServiceImpl implements BoardService {
 
 	private DataSource dao = DataSource.getInstance();
@@ -47,7 +45,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> TboardSelectList() {
 		//전체조회
-		List<BoardVO> Totallist = new ArrayList<>();
+		List<BoardVO> totallist = new ArrayList<>();
 		BoardVO vo;
 		String sql = "SELECT * FROM BOARD ORDER BY BOARD_ID DESC";
 		
@@ -55,13 +53,25 @@ public class BoardServiceImpl implements BoardService {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new BoardVO();
+				vo.setBoardNo(rs.getInt("board_no"));
+				vo.setBoardTitle(rs.getString("board_title"));
+				vo.setBoardWriter(rs.getString("board_writer"));
+				vo.setBoardDate(rs.getString("board_date"));
+				vo.setBoardScrap(rs.getInt("board_scrap"));
+				vo.setBoardHit(rs.getInt("board_hit"));
+				vo.setBoardCategory(rs.getString("board_category"));
+				vo.setMemberNo(rs.getInt("member_no"));
+				totallist.add(vo);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		
-		return Totallist;
+		return totallist;
 	}
 	
 	
@@ -94,7 +104,33 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> QboardSelectList() {
 		//전체조회
-		return null;
+		List<BoardVO> qnalist = new ArrayList<>();
+		BoardVO vo;
+		String sql = "SELECT * FROM BOARD ORDER BY BOARD_NO DESC";
+		
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new BoardVO();
+				vo.setBoardNo(rs.getInt("board_no"));
+				vo.setBoardTitle(rs.getString("board_title"));
+				vo.setBoardWriter(rs.getString("board_writer"));
+				vo.setBoardDate(rs.getString("board_date"));
+				vo.setBoardScrap(rs.getInt("board_scrap"));
+				vo.setBoardHit(rs.getInt("board_hit"));
+				vo.setBoardCategory(rs.getString("board_category"));
+				vo.setMemberNo(rs.getInt("member_no"));
+				qnalist.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return qnalist;
 	}
 	@Override
 	public int QboardDelete(BoardVO vo) {
@@ -121,6 +157,21 @@ public class BoardServiceImpl implements BoardService {
 	public int HboardDelete(BoardVO vo) {
 		//글삭제
 		return 0;
+	}
+	
+	
+	
+	
+	/////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////
+	private void close() {
+		try {
+			if(rs != null) rs.close();
+			if(psmt !=null)psmt.close();
+			if(conn != null) conn.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
