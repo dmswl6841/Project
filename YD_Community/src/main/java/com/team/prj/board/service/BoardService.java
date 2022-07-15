@@ -9,7 +9,8 @@ public interface BoardService {
 		//게시판 공통기능 (글 입력, 글 1개 보기, 글 검색)
 		int boardInsert(BoardVO vo); //글입력
 		BoardVO boardSelect(BoardVO vo);	//글 1개 클릭하여 조회
-		List<BoardVO> boardSearchList(String key,String val); //글 목록에서 검색
+		List<BoardVO> boardSearchList(String categorykey,String categoryval, String searchkey, String searchval); 
+		//카테고리 선택박스 (전체, 자유, qna, 인기) 세부분류 선택박스 (글쓴이, 제목 포함단어...)     
 		
 	    //Total 커뮤니티 전체 메인 페이지 crud
 		List<BoardVO> TboardSelectList(); //전체조회
