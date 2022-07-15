@@ -23,7 +23,7 @@ public interface ManagerService {
 	
 	//금지어 관리
 	List<XwordVO> XwordSelectList(); //금지어 전체 조회
-	List<XwordVO> XwordSearchList(); //금지어 목록 검색
+	List<XwordVO> XwordSearchList(String key, String val); //금지어 목록 검색
 	
 	int XwordInsert(XwordVO vo); // 금지어 입력
 	int XwordDelete(XwordVO vo); // 금지어 삭제

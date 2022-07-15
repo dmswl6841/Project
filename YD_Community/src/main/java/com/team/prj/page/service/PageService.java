@@ -12,5 +12,7 @@ public interface PageService {
 	List<BoardVO> myBoardList(); //내가 작성한 게시글 
 	List<ScrapVO> myScrapList(); // 스크랩한 게시글
 	List<StudyVO> myStudyList(); //찜한 스터디
+	
+
 }
 
