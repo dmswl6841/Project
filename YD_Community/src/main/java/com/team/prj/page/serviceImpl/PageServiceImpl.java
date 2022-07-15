@@ -57,8 +57,11 @@ public class PageServiceImpl implements PageService {
 		//내가 쓴 게시글 목록
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		BoardVO vo;
-		String sql = "SELECT * FROM BOARD WHERE MEMBER_NO = ? "; 
 		//세션 아이디로 member_no를 보내고 세션아이디랑 내 아이디가 같으면 출력하는 식으로
+		String sql = "select * from board where = ";
+
+		//String sql = "SELECT * FROM BOARD WHERE MEMBER_NO = ? ";  아니면 이렇게
+		
 		
 		 // order by regdate desc
 		
