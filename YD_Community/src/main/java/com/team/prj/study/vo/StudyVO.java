@@ -2,6 +2,8 @@ package com.team.prj.study.vo;
 
 import java.sql.Date;
 
+import com.team.prj.member.vo.MemberVO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,5 +26,5 @@ public class StudyVO {
 	private int memberNo; //member fk
 	
 		
-	
+
 }
