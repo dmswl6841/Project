@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.team.prj.MainCommand;
+import com.team.prj.board.command.FreeBoardList;
+import com.team.prj.board.command.NoticeBoardList;
+import com.team.prj.board.command.QnaBoardList;
+import com.team.prj.board.command.TotalBoardList;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -26,6 +30,11 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// 초기화 하는 메소드(Mapping하는 부분을 작성)
 		map.put("/main.do", new MainCommand()); // 처음접속하는 페이지
+		// board 게시판
+		map.put("/totalBoardList.do", new TotalBoardList()); // 커뮤니티 메인 처음화면
+		map.put("/freeBoardList.do", new FreeBoardList()); // 자유 게시판 처음화면
+		map.put("/qnaBoardList.do", new QnaBoardList()); // qna 게시판 처음화면
+		map.put("/noticeBoardList.do", new NoticeBoardList()); // 공지 게시판 처음화면
 
 	}
 
