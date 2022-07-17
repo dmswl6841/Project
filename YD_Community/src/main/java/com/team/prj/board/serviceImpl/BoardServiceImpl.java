@@ -21,7 +21,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	/////////////////////////////////////////////////////////////////////////////
-	///////////////////게시판 공통기능 (글 입력, 글 1개 보기, 글 검색)////////////////////
+	///////////////////게시판 공통기능 (글 입력, 글 1개 보기, 글 1개 삭제, 글 검색)////////////////////
 	@Override
 	public int boardInsert(BoardVO vo) {
 		//글입력
@@ -47,6 +47,10 @@ public class BoardServiceImpl implements BoardService {
 		return n;
 	}
 	
+
+	
+	
+	
 	@Override
 	public BoardVO boardSelect(BoardVO vo) {
 		//글 1개 클릭하여 조회
@@ -57,15 +61,16 @@ public class BoardServiceImpl implements BoardService {
 			psmt.setInt(1, vo.getBoardNo());
 			rs = psmt.executeQuery();
 				if(rs.next()) {
-					vo.setBoardNo(rs.getInt("board_no"));
-					vo.setBoardTitle(rs.getString("board_title"));
-					vo.setBoardSubject(rs.getString("board_subject"));
-					vo.setBoardAttech(rs.getString("board_attech"));
 					vo.setBoardWriter(rs.getString("board_writer"));
-					vo.setBoardDate(rs.getString("board_date"));
 					vo.setBoardScrap(rs.getInt("board_scrap"));
+					vo.setBoardRecommend(rs.getInt("board_recommend"));
 					vo.setBoardHit(rs.getInt("board_hit"));
-					vo.setBoardCategory(rs.getString("board_category"));	
+					vo.setBoardNo(rs.getInt("board_no"));
+					vo.setBoardCategory(rs.getString("board_category"));
+					vo.setBoardTitle(rs.getString("board_title"));
+					vo.setBoardDate(rs.getString("board_date"));
+					vo.setBoardAttech(rs.getString("board_attech"));
+					vo.setBoardSubject(rs.getString("board_subject"));
 				}   
 				
 		}catch(SQLException e){
@@ -76,11 +81,58 @@ public class BoardServiceImpl implements BoardService {
 		return vo;
 	}
 	
+	
+	
+	
+	@Override
+	public int boardDelete(BoardVO vo) {
+		//글삭제
+		int n =0;
+		String sql = "DELETE FROM BOARD WHERE BOARD_NO "
+				+ "IN (SELECT BOARD_NO FROM BOARD START WITH BOARD_NO = ? "
+				+ "CONNECT BY PRIOR BOARD_NO = BOARD_RECOMMEND)";
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, vo.getBoardNo());
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo.setBoardNo(rs.getInt("board_no"));
+				vo.setBoardTitle(rs.getString("board_title"));
+				vo.setBoardSubject(rs.getString("board_subject"));
+				vo.setBoardAttech(rs.getString("board_attech"));
+				vo.setBoardWriter(rs.getString("board_writer"));
+				vo.setBoardDate(rs.getString("board_date"));
+				vo.setBoardScrap(rs.getInt("board_scrap"));
+				vo.setBoardHit(rs.getInt("board_hit"));
+				vo.setBoardCategory(rs.getString("board_category"));	
+				vo.setBoardHot(rs.getString("board_hot"));
+				vo.setBoardRecommend(rs.getInt("board_recommend"));
+				n = psmt.executeUpdate();
+			}   
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return n;
+	}
+	
+	
+	
+	
+	
+	@Override
+	public int boardUpdate(BoardVO vo) {
+		//글 수정
+		return 0;
+	}
+	
 
 
 	@Override
 	public List<BoardVO> boardSearchList(String categorykey, String categoryval, String searchkey, String searchval) {
-		// 글 검색기능                  //카테고리 선택박스 (전체, 자유, qna, 인기)  세부분류 선택박스 (글쓴이, 제목 포함단어...)             
+		// 글 검색기능                  //카테고리 선택박스 (전체, 공지, 자유, qna, 인기)  세부분류 선택박스 (글쓴이, 제목 포함단어...)             
 		List<BoardVO> boardlist = new ArrayList<>();
 		BoardVO vo;
 		String sql = "SELECT * FROM BOARD WHERE ? LIKE %?% AND ? LIKE %?% ORDER BY BOARD_NO DESC";
@@ -103,6 +155,9 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardHit(rs.getInt("board_hit"));
 				vo.setBoardCategory(rs.getString("board_category"));
 				vo.setMemberNo(rs.getInt("member_no"));
+				vo.setBoardHot(rs.getString("board_hot"));
+				vo.setBoardRecommend(rs.getInt("board_recommend"));
+				vo.setBoardDate(rs.getString("board_attech"));
 				boardlist.add(vo);
 			}
 		}catch(SQLException e) {
@@ -115,15 +170,20 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	/////////////////////////////////////////////////////////////////////////////
-	/////////////////////////Total 커뮤니티 전체 메인 페이지//////////////////////////
+	
+	///////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////Total 게시판 메인//////////////////////////////
+	
+	
+	
+	
+
 	@Override
 	public List<BoardVO> TboardSelectList() {
 		//전체조회
-		List<BoardVO> boardlist = new ArrayList<>();
+		List<BoardVO> totalboardlist = new ArrayList<>();
 		BoardVO vo;
-
-		String sql = "SELECT * FROM BOARD ORDER BY BOARD_ID DESC";
+		String sql = "SELECT * FROM BOARD ORDER BY BOARD_NO DESC";
 		
 		try {
 			conn = dao.getConnection();
@@ -134,20 +194,58 @@ public class BoardServiceImpl implements BoardService {
 				vo = new BoardVO();
 				vo.setBoardNo(rs.getInt("board_no"));
 				vo.setBoardTitle(rs.getString("board_title"));
-				vo.setBoardWriter(rs.getString("board_writer"));
 				vo.setBoardDate(rs.getString("board_date"));
 				vo.setBoardScrap(rs.getInt("board_scrap"));
 				vo.setBoardHit(rs.getInt("board_hit"));
 				vo.setBoardCategory(rs.getString("board_category"));
 				vo.setMemberNo(rs.getInt("member_no"));
-				boardlist.add(vo);
+				vo.setBoardRecommend(rs.getInt("board_recommend"));
+				totalboardlist.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		return boardlist;
+		return totalboardlist;
+	}
+	
+	
+	
+	
+	///////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////Notice 공지게시판//////////////////////////////
+	
+	@Override
+	public List<BoardVO> NboardSelectList() {
+		//전체조회
+				List<BoardVO> noticeboardlist = new ArrayList<>();
+				BoardVO vo;
+				String sql = "SELECT * FROM BOARD WHERE board_category ='공지' ORDER BY BOARD_NO DESC";
+				
+				try {
+					conn = dao.getConnection();
+					psmt = conn.prepareStatement(sql);
+					rs = psmt.executeQuery();
+					
+					while(rs.next()) {
+						vo = new BoardVO();
+						vo.setBoardNo(rs.getInt("board_no"));
+						vo.setBoardWriter(rs.getString("board_writer"));
+						vo.setBoardTitle(rs.getString("board_title"));
+						vo.setBoardDate(rs.getString("board_date"));
+						vo.setBoardAttech(rs.getString("board_attech"));
+						vo.setBoardScrap(rs.getInt("board_scrap"));
+						vo.setBoardRecommend(rs.getInt("board_recommend"));
+						vo.setBoardHit(rs.getInt("board_hit"));
+						noticeboardlist.add(vo);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}finally {
+					close();
+				}
+				return noticeboardlist;
 	}
 	
 	
@@ -159,9 +257,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> FboardSelectList() {
 		//전체조회
-				List<BoardVO> boardlist = new ArrayList<>();
+				List<BoardVO> freeboardlist = new ArrayList<>();
 				BoardVO vo;
-				String sql = "SELECT * FROM BOARD WHERE board_category like '자유' ORDER BY BOARD_NO DESC";
+				String sql = "SELECT * FROM BOARD WHERE board_category = '자유' ORDER BY BOARD_NO DESC";
 				
 				try {
 					conn = dao.getConnection();
@@ -171,34 +269,24 @@ public class BoardServiceImpl implements BoardService {
 					while(rs.next()) {
 						vo = new BoardVO();
 						vo.setBoardNo(rs.getInt("board_no"));
-						vo.setBoardTitle(rs.getString("board_title"));
 						vo.setBoardWriter(rs.getString("board_writer"));
+						vo.setBoardTitle(rs.getString("board_title"));
 						vo.setBoardDate(rs.getString("board_date"));
+						vo.setBoardAttech(rs.getString("board_attech"));
 						vo.setBoardScrap(rs.getInt("board_scrap"));
+						vo.setBoardRecommend(rs.getInt("board_recommend"));
 						vo.setBoardHit(rs.getInt("board_hit"));
-						vo.setBoardCategory(rs.getString("board_category"));
-						vo.setMemberNo(rs.getInt("member_no"));
-						boardlist.add(vo);
+						freeboardlist.add(vo);
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}finally {
 					close();
 				}
-				return boardlist;
+				return freeboardlist;
 	}
 	
-	@Override
-	public int FboardDelete(BoardVO vo) {
-		//글삭제
-		return 0;
-	}
 	
-	@Override
-	public int FboardUpdate(BoardVO vo) {
-		//글수정
-		return 0;
-	}
 	
 	
 	
@@ -208,9 +296,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> QboardSelectList() {
 		//전체조회
-		List<BoardVO> qnalist = new ArrayList<>();
+		List<BoardVO> qnaboardlist = new ArrayList<>();
 		BoardVO vo;
-		String sql = "SELECT * FROM BOARD WHERE board_category like'QnA' ORDER BY BOARD_NO DESC";
+		String sql = "SELECT * FROM BOARD WHERE board_category ='QnA' ORDER BY BOARD_NO DESC";
 		
 		try {
 			conn = dao.getConnection();
@@ -219,33 +307,26 @@ public class BoardServiceImpl implements BoardService {
 			
 			while(rs.next()) {
 				vo = new BoardVO();
+				vo = new BoardVO();
 				vo.setBoardNo(rs.getInt("board_no"));
-				vo.setBoardTitle(rs.getString("board_title"));
 				vo.setBoardWriter(rs.getString("board_writer"));
+				vo.setBoardTitle(rs.getString("board_title"));
 				vo.setBoardDate(rs.getString("board_date"));
+				vo.setBoardAttech(rs.getString("board_attech"));
 				vo.setBoardScrap(rs.getInt("board_scrap"));
+				vo.setBoardRecommend(rs.getInt("board_recommend"));
 				vo.setBoardHit(rs.getInt("board_hit"));
-				vo.setBoardCategory(rs.getString("board_category"));
-				vo.setMemberNo(rs.getInt("member_no"));
-				qnalist.add(vo);
+				qnaboardlist.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		return qnalist;
+		return qnaboardlist;
 	}
-	@Override
-	public int QboardDelete(BoardVO vo) {
-		//글삭제
-		return 0;
-	}
-	@Override
-	public int QboardUpdate(BoardVO vo) {
-		//글수정
-		return 0;
-	}
+	
+	
 	
 	
 	
@@ -255,15 +336,37 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> HboardSelectList() {
 		//전체조회
-		return null;
+		List<BoardVO> hotboardlist = new ArrayList<>();
+		BoardVO vo;
+		String sql = "SELECT * FROM BOARD WHERE board_category ='HOT' ORDER BY BOARD_NO DESC";
+		
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new BoardVO();
+				vo = new BoardVO();
+				vo.setBoardNo(rs.getInt("board_no"));
+				vo.setBoardWriter(rs.getString("board_writer"));
+				vo.setBoardTitle(rs.getString("board_title"));
+				vo.setBoardDate(rs.getString("board_date"));
+				vo.setBoardAttech(rs.getString("board_attech"));
+				vo.setBoardScrap(rs.getInt("board_scrap"));
+				vo.setBoardRecommend(rs.getInt("board_recommend"));
+				vo.setBoardHit(rs.getInt("board_hit"));
+
+				hotboardlist.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return hotboardlist;
 	}
-	@Override
-	public int HboardDelete(BoardVO vo) {
-		//글삭제
-		return 0;
-	}
-	
-	
+
 	
 	
 	/////////////////////////////////////////////////////////////////////////////
@@ -277,5 +380,8 @@ public class BoardServiceImpl implements BoardService {
 			e.printStackTrace();
 		}
 	}
+
+
+
 	
 }
