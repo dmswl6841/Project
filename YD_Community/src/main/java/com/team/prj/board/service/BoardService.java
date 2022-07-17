@@ -8,7 +8,9 @@ public interface BoardService {
 	
 		//게시판 공통기능 (글 입력, 글 1개 보기, 글 검색)
 		int boardInsert(BoardVO vo); //글입력
-		BoardVO boardSelect(BoardVO vo);	//글 1개 클릭하여 조회
+		//BoardVO boardSelect(BoardVO vo);	
+		//글 1개 클릭하여 조회
+		List<BoardVO> boardViewList(int boardno);
 		int boardDelete(BoardVO vo); //글삭제
 		int boardUpdate(BoardVO vo); //글수정
 		List<BoardVO> boardSearchList(String categorykey,String categoryval, String searchkey, String searchval); 

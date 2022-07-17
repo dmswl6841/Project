@@ -20,8 +20,7 @@
 						<tr>
 							<th width="150">게시판</th>
 							<td width="200">
-								<input type="text" id="boardCategory" name="boardCategory" value="공지">
-								공지
+								<input readonly id="boardCategory" name="boardCategory" value="공지">
 							</td>
 							<th width="150">작성자</th>
 							<td width="200">
