@@ -1,6 +1,6 @@
 package com.team.prj.member.vo;
 
-import com.team.prj.board.vo.BoardVO;
+import com.team.prj.study.vo.StudyVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +21,6 @@ public class MemberVO {
 	private String memberAuthor; //유저 권한
 	private String memberJoin; //유저 가입여부
 	
-	BoardVO bvo;
+	
 	 
 }
