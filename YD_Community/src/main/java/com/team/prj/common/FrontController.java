@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.team.prj.MainCommand;
 import com.team.prj.page.command.MemberBoard;
 import com.team.prj.study.command.StudyForm;
+import com.team.prj.study.command.StudyInsert;
+import com.team.prj.study.command.StudyList;
 
 
 
@@ -30,10 +32,11 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// 초기화 하는 메소드(Mapping하는 부분을 작성)
 		map.put("/main.do", new MainCommand()); // 처음접속하는 페이지
-
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
-		
 		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 게시글 목록
+		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출
+		map.put("/StudyInsert.do", new StudyInsert());//게시글등록
+
 
 	}
 	
