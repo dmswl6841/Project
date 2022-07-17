@@ -5,12 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team.prj.common.Command;
 
-public class StudyForm implements Command {
+public class StudyUpdate implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		// 게시글양식호출
-		return "study/StudyForm";
+		// 게시판 수정
+		return null;
 	}
 
 }

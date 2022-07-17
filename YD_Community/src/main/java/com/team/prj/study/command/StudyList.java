@@ -16,11 +16,11 @@ public class StudyList implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		// 게시글 목록가져오기
-		StudyService studyDao= new StudyServiceImpl();
-		List<StudyVO> list = new ArrayList<>();
+	StudyService studyDao = new StudyServiceImpl();
+	List<StudyVO> list = new ArrayList<>();
 		list = studyDao.studySelectList();
 		request.setAttribute("list", list);
-		return "study/studyList";
+		return "study/StudyList";
 	}
 
 }
