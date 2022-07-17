@@ -12,7 +12,7 @@ import com.team.prj.common.DataSource;
 import com.team.prj.member.vo.MemberVO;
 import com.team.prj.xword.vo.XwordVO;
 
-public class managerServiceImpl implements ManagerService {
+public class ManagerServiceImpl implements ManagerService {
 
 	private DataSource dao = DataSource.getInstance();
 	private Connection conn;

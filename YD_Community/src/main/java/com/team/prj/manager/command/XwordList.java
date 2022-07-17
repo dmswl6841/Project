@@ -9,17 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.team.prj.common.Command;
 import com.team.prj.manager.service.ManagerService;
 import com.team.prj.manager.service.ManagerServiceImpl;
-import com.team.prj.member.vo.MemberVO;
+import com.team.prj.xword.vo.XwordVO;
 
-public class MemberList implements Command {
+public class XwordList implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		//회원 목록 가져오기
+		//금지어 목록
 		ManagerService managerDao = new ManagerServiceImpl();
-		List<MemberVO> list = new ArrayList<>();
-		list = managerDao.memberSelectList();
+		List<XwordVO> list = new ArrayList<>();
+		list = managerDao.XwordSelectList();
 		request.setAttribute("list", list);
-		return "manager/memberList"; 
+		return "manager/XwordList";
 	}
+
 }

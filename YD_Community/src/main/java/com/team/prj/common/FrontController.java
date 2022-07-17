@@ -11,8 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.team.prj.MainCommand;
 
+import com.team.prj.MainCommand;
+import com.team.prj.manager.command.BoardList;
+import com.team.prj.manager.command.MemberList;
+import com.team.prj.manager.command.memberSelectList;
 import com.team.prj.study.command.StudyForm;
 
 
@@ -31,6 +34,20 @@ public class FrontController extends HttpServlet {
 		map.put("/main.do", new MainCommand()); // 처음접속하는 페이지
 
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
+		
+		
+		//관리자
+		//map.put("/memberMain.do", new MemberMain()); //메인 화면
+		map.put("/memberList.do", new MemberList()); //회원 전체 목록
+		map.put("/memberSearchList.do", new memberSelectList()); //회원 검색
+		map.put("/boardList.do", new BoardList()); //게시글 전체 목록
+		//
+		//map.put("/boardSearchList.do", new BoardSelectList()); //게시글 검색
+		//map.put("/XwordList.do", new XwordList()); //금지어 전체 목록
+		//map.put("/XwordSearchList.do", new XwordSearchList()); //금지어 검색
+		//map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
+		//map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
+		//map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
 
 	}
 	
