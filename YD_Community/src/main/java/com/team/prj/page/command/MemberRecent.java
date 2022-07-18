@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.Command;
-import com.team.prj.log.vo.LogVO;
 import com.team.prj.member.vo.MemberVO;
 import com.team.prj.page.serviceImpl.PageServiceImpl;
 
@@ -21,7 +21,7 @@ public class MemberRecent implements Command{
 		MemberVO member = (MemberVO) session.getAttribute("member"); //세션 가져오기
 		int memberNo = member.getMemberNo();
 		//int memberNo = (int) request.getAttribute("memberNo");
-		List<LogVO> list = pageService.myLogList(memberNo);
+		List<BoardVO> list = pageService.myLogList(memberNo);
 		request.setAttribute("list", list);
 		return "page/memberRecent";
 	}
