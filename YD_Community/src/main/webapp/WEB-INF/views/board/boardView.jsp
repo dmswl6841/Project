@@ -13,6 +13,7 @@
 	<div align="center">
 	<div><h1>게시글 보기</h1></div>
 	
+	
 		<div>
 			<table border="1">
 				<tbody>
