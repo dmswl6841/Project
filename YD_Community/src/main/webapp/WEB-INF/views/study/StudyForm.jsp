@@ -75,7 +75,7 @@ h1 {
 							<td width="200"><input type="text" id="studyWriter"
 								name="studyWriter"></td>
 							<th width="150">제목</th>
-							<td width="200"><input type="text" id="studyWriter"
+							<td width="200"><input type="text" id="studyTitle"
 								name="studyTitle"></td>
 						</tr>
 						
@@ -87,20 +87,20 @@ h1 {
 
 						<tr>
 							<th width="150">사용언어</th>
-							<td width="200"><input type="text" id="studyWriter"
+							<td width="200"><input type="text" id="studyLanguage"
 								name="studyLanguage"></td>
 						</tr>
 						
 						<tr>
 							<th width="150">스터디개월수</th>
-							<td width="200"><input type="text" id="studyWriter"
+							<td width="200"><input type="text" id="studyPeriod"
 								name="studyPeriod"></td>
 							<th width="150">스터디방식</th>
-							<td width="200"><input type="text" id="studyWriter"
+							<td width="200"><input type="text" id="studySystem"
 								name="studySystem"></td>
 								<th width="150">쌤플</th>
-							<td width="200"><input type="text" id="studyWriter"
-								name="memberno"></td>
+							<td width="200"><input type="number" id="memberNo"
+								name="memberNo"></td>
 						</tr>
 						
 						<tr>
@@ -114,11 +114,8 @@ h1 {
 							<td colspan="3"><input type="file" id="file" name="file">
 							</td>
 						</tr>
-						<tr>
-						<th width="150">작성일자</th>
-							<td width="200"><input type="date" id="studyDate"
-								name="studyDate"></td>
-						</tr>
+						
+
 					</table>
 				</div>
 				<br>

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.team.prj.common.DataSource;
 import com.team.prj.study.service.StudyService;
 import com.team.prj.study.vo.StudyVO;
@@ -24,7 +25,7 @@ public class StudyServiceImpl implements StudyService {
 		// 전체목록(studyList.jsp파일생성)
 		List<StudyVO> list = new ArrayList<>();
 		StudyVO vo;
-		String sql = "SELECT STUDY_NO, STUDY.STUDY_TITLE, "
+		String sql = "SELECT STUDY_NO, STUDY_TITLE, "
 				+ "STUDY_SYSTEM, STUDY_PERIOD, STUDY_LANGUAGE, STUDY_WRITER, STUDY_DATE "
 				+ "FROM STUDY ORDER BY STUDY_NO DESC";
 		try {
@@ -53,12 +54,35 @@ public class StudyServiceImpl implements StudyService {
 	
 
 	@Override
-	public StudyVO studySelect(StudyVO vo) {
-		// 글 상세보기
-
+	public List<StudyVO> studyViewList(int study_no) {
+		// 단건조회
+		List<StudyVO> studyviewlist = new ArrayList<>();
+		StudyVO vo = new StudyVO();
+		String sql = "SELECT * FROM STUDY WHERE STUDY_NO = ?";
 		
-
-		return null;
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, study_no);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo.setStudyNo(rs.getInt("study_no"));
+				vo.setStudyTitle(rs.getString("study_Title"));
+				vo.setStudySubject(rs.getString("study_Subject"));
+				vo.setStudyLanguage(rs.getString("study_Language"));
+				vo.setStudySystem(rs.getString("study_System"));
+				vo.setStudyPeriod(rs.getString("study_Period"));
+				vo.setMemberNo(rs.getInt("member_no"));
+				vo.setStudyAttech(rs.getString("study_Attech"));
+				vo.setStudyAttechDir(rs.getString("study_AttechDir"));
+				vo.setStudyDate(rs.getString("study_date"));	
+				studyviewlist.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return studyviewlist;
 	}
 
 	@Override
@@ -66,13 +90,10 @@ public class StudyServiceImpl implements StudyService {
 		// 글 등록
 		int n = 0;
 		System.out.println("0데이터확인");
-		String sql = "INSERT INTO STUDY VALUES(STUDY_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,sysdate)";
+		String sql = "INSERT INTO STUDY VALUES (STUDY_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,sysdate)";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			System.out.println("1데이터확인");
-			
-           // psmt.setInt(1, vo.getStudyNo());
 			psmt.setString(1, vo.getStudyTitle());
 			psmt.setString(2, vo.getStudySubject());
             psmt.setString(3, vo.getStudyWriter());
@@ -80,30 +101,13 @@ public class StudyServiceImpl implements StudyService {
             psmt.setString(5, vo.getStudySystem());
             psmt.setString(6, vo.getStudyPeriod());
             psmt.setString(7, vo.getStudyMember());
-            psmt.setInt(8,vo.getMemberNo());
+            psmt.setInt(8, vo.getMemberNo());
             psmt.setString(9, vo.getStudyAttech());
             psmt.setString(10, vo.getStudyAttechDir());
-            //psmt.setString(10, vo.getStudyDate());
-            System.out.println("2데이터확인");
+            //psmt.setString(11,vo.getStudyDate());
+            
             n = psmt.executeUpdate();
-            if(rs.next()){
-            	
-            	//vo.setStudyNo(rs.getInt("STUDY_NO"));// 1글 순서번호
-            	vo.setStudyTitle(rs.getString("STUDY_TITLE")); // 2글 제목
-            	vo.setStudySubject(rs.getString("STUDY_SUBJECT")); //3글 내용
-            	vo.setStudyWriter(rs.getString("STUDY_WRITER"));//4글작성자
-            	vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));//5스터디언어;
-            	vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 6스터디방식
-            	vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 7스터디기간
-            	vo.setStudyMember(rs.getString("STUDY_MEMBER"));//8스터디멤버
-            	vo.setMemberNo(rs.getInt("MEMBER_NO"));//9포링키
-            	vo.setStudyAttech(rs.getString("STUDY_ATTECH"));//10첨부파일
-            	vo.setStudyAttechDir(rs.getString("STUDY_ATTECHDIR"));//11첨부파일위치
-            	vo.setStudyDate(rs.getString("STUDY_DATE"));//12작성일자
-            	System.out.println("3데이터확인");
-            }
-			System.out.println("4데이터확인"+n);
-
+         
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

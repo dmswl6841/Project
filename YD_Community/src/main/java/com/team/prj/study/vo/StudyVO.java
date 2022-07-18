@@ -2,7 +2,9 @@ package com.team.prj.study.vo;
 
 
 
-import com.team.prj.member.vo.MemberVO;
+
+
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class StudyVO {
 	private int StudyNo;
-	private String StudyTitle; //제목1
+	public String StudyTitle; //제목1
 	private String StudySubject; //내용2
 	private String StudyWriter; //작성자3
 	private String StudyDate; //작성일자4

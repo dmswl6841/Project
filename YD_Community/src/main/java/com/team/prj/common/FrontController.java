@@ -29,6 +29,7 @@ import com.team.prj.board.command.TotalBoardList;
 import com.team.prj.page.command.MemberBoard;
 import com.team.prj.study.command.StudyInsert;
 import com.team.prj.study.command.StudyList;
+import com.team.prj.study.command.StudyView;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -72,10 +73,11 @@ public class FrontController extends HttpServlet {
 		//map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
 		//map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		//map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
-
+        ///////스터디
 		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 게시글 목록
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출
 		map.put("/StudyInsert.do", new StudyInsert());//게시글등록
+		map.put("/StudyView.do", new StudyView());//게시글세부내용
 
 	}
 	
