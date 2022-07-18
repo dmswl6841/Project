@@ -48,13 +48,28 @@
 							</tr>
 						</c:otherwise>
 					</c:choose>
-				</tbody>
+				</tbody>		
 			</table>
 		</div><br>
-	
-	
-	
+		
+		<div>
+			<button type="button" id="boardUpdate">수정</button>
+			<button type="button" id="boardDelete">삭제</button>
+		</div>
 	
 	</div>
+	
+	
+	<script>
+		$("#boardDelete").click(function(){
+			var result = confirm("게시글을 삭제하시겠습니까?");
+			if(result){
+				location.href = 'boardDelete.do?board_no=${b.board_no}';
+			}
+		});
+	</script>
+	
+	
+	
 </body>
 </html>
