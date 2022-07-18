@@ -37,7 +37,7 @@ public class ManagerServiceImpl implements ManagerService {
 				vo.setMemberId(rs.getString("member_id"));
 				vo.setMemberNick(rs.getString("member_nick"));
 				vo.setMemberWarning(rs.getInt("member_warning"));
-				vo.setMemberJoin(rs.getString("member_join"));
+				vo.setMemberAuthor(rs.getString("member_author"));
 				list.add(vo);
 			}
 		} catch (Exception e) {
@@ -53,13 +53,11 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<MemberVO> memberSearchList(String key, String val) {
 		List<MemberVO> list = new ArrayList<MemberVO>();
 		MemberVO vo = new MemberVO();
-		String sql = "select * from member where ? like %?%";
+		String sql = "select * from member where " + key + " like '%" + val + "%'";
 
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, key);
-			psmt.setString(2, val);
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
@@ -68,7 +66,7 @@ public class ManagerServiceImpl implements ManagerService {
 				vo.setMemberId(rs.getString("member_id"));
 				vo.setMemberNick(rs.getString("member_nick"));
 				vo.setMemberWarning(rs.getInt("member_warning"));
-				vo.setMemberJoin(rs.getString("member_join"));
+				vo.setMemberAuthor(rs.getString("member_author"));
 				list.add(vo);
 			}
 		} catch (Exception e) {
@@ -79,6 +77,31 @@ public class ManagerServiceImpl implements ManagerService {
 		return list;
 	}
 
+	@Override
+	public int memberDelete(MemberVO vo) {
+		int r = 0;
+		String sql = "delete from member where member_Id=?";
+
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getMemberId());
+
+			r = psmt.executeUpdate();
+
+			if (rs.next()) {
+				vo = new MemberVO();
+				vo.setMemberId(rs.getString("member_Id"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return r;
+	}
+	
 	// 게시글 전체 조회
 	@Override
 	public List<BoardVO> boardSelectList() {
@@ -112,7 +135,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<BoardVO> boardSearchList(String key, String val) {
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		BoardVO vo;
-		String sql = "select * from board where ? like %?%";
+		String sql = "select * from board  where " + key + " like '%" + val + "%'";
 
 		try {
 			conn = dao.getConnection();
@@ -170,7 +193,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<CommentsVO> commentsSearchList(String key, String val) {
 		List<CommentsVO> list = new ArrayList<CommentsVO>();
 		CommentsVO vo;
-		String sql = "select * from Comments where ? like %?%";
+		String sql = "select * from Comments where " + key + " like '%" + val + "%'";
 
 		try {
 			conn = dao.getConnection();
@@ -226,7 +249,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<XwordVO> XwordSearchList(String key, String val) {
 		List<XwordVO> list = new ArrayList<XwordVO>();
 		XwordVO vo;
-		String sql = "select * from Xword where ? like %?%";
+		String sql = "select * from Xword where " + key + " like '%" + val + "%'";
 
 		try {
 			conn = dao.getConnection();
