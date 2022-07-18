@@ -51,8 +51,8 @@
 							<div id="memberAuthor" name="memberAuthor"><td>${m.memberAuthor }</td></div>
 							<td><button type="button" onclick="memberJoin()">승인</button></td>
 							<td align="center">
-										<button type="button" onclick="memberDelete(this)">삭제</button>
-									</td>
+								<button type="button" onclick="memberDelete(this)">삭제</button>
+							</td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -122,43 +122,29 @@
 			var tbody = $("<tbody />");
 			$.each(data, function(index, item){
 				var row = $("<tr />").append(
+							$("<td />").append($("<checkbox>")),
 							$("<td />").text(item.memberNo),
 							$("<td />").text(item.memberId),
 							$("<td />").text(item.memberNick),
 							$("<td />").text(item.memberWarning),
 							$("<td />").text(item.memberAuthor),
-							$("<td />").append($("<botton onclick=memberJoin(${item.Author})/>").text("승인")),
-							$("<td />").append($("<botton onclick=memberDelete(${item.memberNo})/>").text("탈퇴"))
+							$("<td />").append($("<botton onclick=memberJoin(this) />").text("승인")),
+							$("<td />").append($("<botton onclick=memberDelete(this) />").text("삭제"))
 						);
 				tbody.append(row);
 			});
 			$('table').append(tbody);
 		}
 		
-		function memberJoin() {
-			let author = document.getElementById(memberAuthor);
-			if(author == "guest"){
-				alert("가입 승인되었습니다.");
-				author ="USER";
-				
-			}else{
-				alert("이미 가입된 회원입니다.");
-			}
-			return true;
-		}
-		
-		function errorCallback(err){
-			console.log('error : '+err.message);
-		}
-		function memberDelete(obj){
-			let mid = document.getElementById('memberId');
-			console.log(mid);
+		function memberJoin(obj) {
 			let row = $(obj).parent().parent().get(0);
-			let td = row.cells[0];
-			let id = $(td).html();
+			let td = row.cells[5];
+			let author = $(td).html();
+			console.log(author);
 			
 			const xhr = new XMLHttpRequest();
-			const url = "memberDelete.do?memberId="+mid;
+			const url = "memberJoin.do?memberNo="+no;
+			console.log(url)
 			xhr.onload = function(){
 				if(xhr.status >=200 && xhr.status <300){
 					if(xhr.response ==1){
@@ -172,7 +158,47 @@
 				}
 			};
 			xhr.open('GET',url);
+			console.log(xhr.open('GET',url));
 			xhr.send(); 
+			-----------
+			if(author == 'guest'){
+				alert("가입 승인되었습니다.");
+				$("#memberAuthor").text
+				author ="USER";
+				
+			}else{
+				alert("이미 가입된 회원입니다.");
+			}
+			return true;
+		}
+		
+		function errorCallback(err){
+			console.log('error : '+err.message);
+		}
+		function memberDelete(obj){
+			let row = $(obj).parent().parent().get(0);
+			let td = row.cells[1];
+			let no = $(td).html();
+			
+			const xhr = new XMLHttpRequest();
+			const url = "memberDelete.do?memberNo="+no;
+			console.log(url)
+			xhr.onload = function(){
+				if(xhr.status >=200 && xhr.status <300){
+					if(xhr.response ==1){
+						$(row).remove();
+					}else{
+						alert ("삭제할 수 없습니다.")
+					}
+					
+				}else {
+					errorCallback(new Error(xhr.stautsText));
+				}
+			};
+			xhr.open('GET',url);
+			console.log(xhr.open('GET',url));
+			xhr.send(); 
+			
 		}
 	</script>
 </body>
