@@ -38,7 +38,7 @@
 								<tr>
 									<td>${c.scrapNo }</td>
 									<td>${c.boardNo }</td>
-									<td><a href="boardView.do?board_no=${c.boardNo}">${c.boardTitle }</a></td>
+									<td><a href="boardView.do?board_no=${c.boardNo}> ${c.boardTitle}"></a></td>
 									
 									
 									</tr>
