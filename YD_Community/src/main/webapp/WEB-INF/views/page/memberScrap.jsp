@@ -5,33 +5,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의 최근 활동</title>
-<script src="js/jquery-3.6.0.min.js"></script>
+<title>Insert title here</title>
+	<script src="js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
-	<div align="center"></div>
-	<div><h1>나의 최근 활동</h1></div>
-	<div class="rightSide">
-	
-	</div>
-	
+<div align="center"></div>
+	<div><h1>스크랩 목록</h1></div>
 	
 	<div>
 	<table>
 		<thead>
 			<tr>
-			<th width="400">카테고리</th>
-		
-			
+			<th width="130">스크랩 번호</th>
+			<th width="130">게시글 번호</th>
+			<th width="200">게시글 제목</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:choose>
 						<c:when test="${not empty list }">
-							<c:forEach items="${list }" var="r">
+							<c:forEach items="${list }" var="c">
 								<tr>
-									<td>#${r.boardDate }  ${r.boardTitle }</td>
+									<td>${c.scrapNo }</td>
+									<td>${c.boardNo }</td>
+									<td>${r.boardTitle }</td>
 									
 									
 									</tr>
@@ -40,7 +37,7 @@
 						<c:otherwise>
 							<tr>
 								<td colspan="6" align="center">
-									최근 활동이 없습니다!
+									스크랩 글이 존재하지 않습니다!
 								</td>
 							</tr>
 						</c:otherwise>

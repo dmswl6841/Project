@@ -2,9 +2,11 @@ package com.team.prj.board.vo;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class BoardVO {
 	private int boardNo;
 	private String boardTitle; //게시글 제목
@@ -19,4 +21,5 @@ public class BoardVO {
 	private int memberNo; //member fk
 	private String boardHot;
 	private int boardRecommend;
+
 }

@@ -8,9 +8,12 @@ import com.team.prj.scrap.vo.ScrapVO;
 import com.team.prj.study.vo.StudyVO;
 
 public interface PageService {
-	List<LogVO> myLogList(); 	//최근 활동
-	List<BoardVO> myBoardList(); //내가 작성한 게시글 
-	List<ScrapVO> myScrapList(); // 스크랩한 게시글
-	List<StudyVO> myStudyList(); //찜한 스터디
+	//List<LogVO> myLogList(int memberNo); 	//최근 활동 (로그 저장식으로 하려면 이거 써야함)
+	List<BoardVO> myLogList(int memberNo); //최근 활동 (7일 내의 작성글만 보여주는 법)
+	List<BoardVO> myBoardList(int memberNo); //내가 작성한 게시글 
+	List<ScrapVO> myScrapList(int memberNo); // 스크랩한 게시글
+	List<ScrapVO> myStudyList(int memberNo); //찜한 스터디
+	
+
 }
 
