@@ -27,7 +27,7 @@
 	<table>
 		<thead>
 			<tr>
-			<th width="400">카테고리</th>
+			<th width="400"></th>
 		
 			
 			</tr>
