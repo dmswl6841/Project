@@ -1,30 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>자유게시판</title>
 <script src="js/jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
 	<div align="center">
 	
-	    <!-- -------- 공지게시판 ------------->
-		<div><h1>공지사항</h1></div><br>
+	    <!-- 자유게시판 -->
+		<div><h1>자유게시판</h1></div><br>
 		
 		
-		<!-- -------- 공통 검색기능 ------------->
+		<!-- 공통 검색기능 -->
 		<div>
 			<form id="frm">
 				<select id="categorykey" name="categorykey">
-				  	<option value="board_category" id="categoryval" name="categoryval">자유</option> 
+				  	<option value="board_category" id="categoryval" name="categoryval" selected>자유</option> 
 				  	<option value="board_category" id="categoryval" name="categoryval">QnA</option> 
-				  	<option value="board_category" id="categoryval" name="categoryval" selected>공지</option> 
+				  	<option value="board_category" id="categoryval" name="categoryval">공지</option> 
 				  	<option value="board_category" id="categoryval" name="categoryval">HOT</option> 
-				</select> &nbsp;
+				</select>
 			</form>
 			
 			<form id="frm">
@@ -37,7 +36,7 @@
 				<input type="button" value="검색" onclick="boardSearch()">
 			</form>
 		</div><br>
-		<!-- -------- 공통 검색기능 ------------->
+		<!-- 공통 검색기능 -->
 	
 		
 		<div>
@@ -56,9 +55,9 @@
 				</thead>
 				<tbody>
 					<c:choose>
-						<c:when test="${not empty noticeboardlist }">
-							<c:forEach items="${noticeboardlist }" var="b">
-								<tr>
+						<c:when test="${not empty freeboardlist }">
+							<c:forEach items="${freeboardlist }" var="b">
+								<tr onclick="clickBoardView()" >
 									<td>${b.boardNo }</td>
 									<td>${b.boardWriter }</td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
@@ -67,12 +66,12 @@
 									<td>${b.boardScrap }</td>
 									<td>${b.boardRecommend }</td>
 									<td>${b.boardHit }</td>
-								</tr>
+								</tr>	
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="6" align="center">
+								<td colspan="8" align="center">
 									게시글이 존재하지 않습니다
 								</td>
 							</tr>
@@ -80,22 +79,17 @@
 					</c:choose>
 				</tbody>
 			</table>
-			
-			<!-- 관리자 권한으로 글쓰기 -->
-			<div>
-				<c:if test="${author == 'ADMIN'}">
-					<button type="button" onclick="location.href='noticeBoardForm.do'">글등록</button>
-				</c:if>
-			</div>
 		</div><br>
 
+		<!-- 글쓰기 버튼 -->
+		<div>
+			<button type="button" onclick="location.href='freeBoardForm.do'">글쓰기</button>
+		</div>
 	</div>
-
-
-
+	
 	
 	<script type="text/javascript">
-		function noticeSearch() {
+		function boardSearch() {
 			let categorykey = $("#categorykey").val();
 			let categoryval = $("#categoryval").val();
 			let searchkey = $("#searchkey").val();
@@ -137,5 +131,6 @@
 			$('table').append(tbody);
 		}
 	</script>
+
 </body>
 </html>

@@ -5,20 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글 보기</title>
+<title>게시글 보기</title>
 <script src="js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
 	<div align="center">
+	<div><h1>게시글 보기</h1></div>
 	
 	
 		<div>
 			<table border="1">
 				<tbody>
 					<c:choose>
-						<c:when test="${not empty vo}">
-							<c:forEach items="${vo }" var="b">
+						<c:when test="${not empty boardviewlist}">
+							<c:forEach items="${boardviewlist }" var="b">
 								<tr>
 									<td>${b.boardWriter }</td>
 									<td>${b.boardScrap }</td>
@@ -30,12 +31,12 @@
 									<td>${b.boardCategory }</td>
 								</tr>
 								<tr>
-									<td>${b.boardTitle }</td>
+									<td colspan="3">${b.boardTitle }</td>
 									<td>${b.boardDate }</td>
 									<td>${b.boardAttech }</td>
 								</tr>
 								<tr>
-									<td>${b.boardSubject }</td>
+									<td colspan="4">${b.boardSubject }</td>
 								</tr>
 							</c:forEach>
 						</c:when>

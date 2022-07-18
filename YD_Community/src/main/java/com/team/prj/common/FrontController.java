@@ -12,12 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.team.prj.MainCommand;
+import com.team.prj.board.command.BoardView;
+import com.team.prj.board.command.FreeBoardForm;
 import com.team.prj.manager.command.BoardList;
 import com.team.prj.manager.command.MemberList;
 import com.team.prj.manager.command.memberSelectList;
 import com.team.prj.study.command.StudyForm;
 import com.team.prj.board.command.FreeBoardList;
+import com.team.prj.board.command.NoticeBoardForm;
 import com.team.prj.board.command.NoticeBoardList;
+import com.team.prj.board.command.QnaBoardForm;
 import com.team.prj.board.command.QnaBoardList;
 import com.team.prj.board.command.TotalBoardList;
 import com.team.prj.page.command.MemberBoard;
@@ -44,6 +48,11 @@ public class FrontController extends HttpServlet {
 		map.put("/freeBoardList.do", new FreeBoardList()); // 자유 게시판 처음화면
 		map.put("/qnaBoardList.do", new QnaBoardList()); // qna 게시판 처음화면
 		map.put("/noticeBoardList.do", new NoticeBoardList()); // 공지 게시판 처음화면
+
+		map.put("/boardView.do", new BoardView()); // 글 상세보기화면
+		map.put("/freeBoardForm.do", new FreeBoardForm()); // 자유게시판 글쓰기 화면
+		map.put("/qnaBoardForm.do", new QnaBoardForm()); // Qna게시판 글쓰기 화면
+		map.put("/noticeBoardForm.do", new NoticeBoardForm()); // 공지게시판 글쓰기 화면
 
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
     
