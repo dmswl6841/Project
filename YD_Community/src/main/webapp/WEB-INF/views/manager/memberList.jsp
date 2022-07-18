@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원관리</title>
+<script src="js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div align="center">
@@ -16,7 +17,7 @@
 		<select id="key" name="key">
 			<option value="member_id">아이디</option>
 			<option value="member_warning">경고횟수</option>
-			<option value="member_jion">가입승인</option>
+			<option value="member_join">회원권한</option>
 		</select>&nbsp;
 		<input type="text" id="val" name="val">&nbsp;
 		<input type="button" value="검색" onclick="memberSearch()">
@@ -31,8 +32,7 @@
 				<th>사용자 ID</th>
 				<th>사용자 명</th>
 				<th>경고 횟수</th>
-				<th>회원정보</th>
-				<th>가입승인</th>
+				<th>회원권한</th>
 				<th>탈퇴</th>
 			</tr>
 		</thead>
@@ -46,14 +46,14 @@
 							<td>${m.memberId }</td>
 							<td>${m.memberNick }</td>
 							<td>${m.memberWarning }</td>
-							<td><input type="button" value="가입승인" onclick="memberjoin()"></td>
+							<td>${m.memberAuthor }</td>
 							<td><input type="button" value="탈퇴" onclick="memberDelete()"></td>
 						</tr>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td colspan="8" align="center">
+						<td colspan="7" align="center">
 							회원이 존재하지 않습니다
 						</td>
 					</tr>
@@ -79,7 +79,6 @@
 					}
 				},
 				error : function() {
-					
 				}
 			})
 		}
@@ -89,17 +88,27 @@
 			var tbody = $("<tbody />");
 			$.each(data, function(index, item){
 				var row = $("<tr />").append(
-							$("<td />").text(item.<input type="checkbox">),
 							$("<td />").text(item.memberNo),
 							$("<td />").text(item.memberId),
 							$("<td />").text(item.memberNick),
 							$("<td />").text(item.memberWarning),
-							<td><input type="button" value="가입승인" onclick="memberjoin()"></td>,
-							<td><input type="button" value="탈퇴" onclick="memberDelete()"></td>
+							$("<td />").text(item.memberAuthor),
+							$("<td />").append($("<botton onclick=memberDelete(${item.memberId})/>").text("탈퇴"))
 						);
 				tbody.append(row);
 			});
 			$('table').append(tbody);
+		}
+		
+		function memberJoin(){
+			var memberState = memberAuthor;
+			if(memberState == "GEUST"){
+				memberState = "USER";
+				alert("가입 승인되었습니다.");
+			}else{
+				alert("이미 가입된 회원입니다.");
+			}
+			return memberState;
 		}
 	</script>
 </body>

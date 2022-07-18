@@ -13,7 +13,7 @@ import com.team.prj.manager.service.ManagerService;
 import com.team.prj.manager.service.ManagerServiceImpl;
 import com.team.prj.member.vo.MemberVO;
 
-public class memberSelectList implements Command {
+public class memberSearchList implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
