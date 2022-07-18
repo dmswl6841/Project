@@ -11,7 +11,6 @@ import com.team.prj.board.serviceImpl.BoardServiceImpl;
 import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.Command;
 
-
 public class FreeBoardList implements Command {
 
 	@Override

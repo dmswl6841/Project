@@ -26,7 +26,9 @@ public class BoardServiceImpl implements BoardService {
 	public int boardInsert(BoardVO vo) {
 		//글입력
 		int n =0;
-		String sql = "INSERT INTO BOARD VALUES(board_seq.nextval,?,?,?,?)";
+		String sql = "INSERT INTO BOARD(BOARD_NO, BOARD_TITLE, BOARD_SUBJECT, BOARD_ATTECH, BOARD_ATTECHDIR, "
+				+ "BOARD_WRITER, BOARD_DATE ,BOARD_CATEGORY, BOARD_SCRAP, BOARD_HIT, BOARD_RECOMMEND, MEMBER_NO) "
+				+ "VALUES(board_seq.nextval,?,?,?,?,?,?,?)";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
@@ -38,6 +40,11 @@ public class BoardServiceImpl implements BoardService {
 			psmt.setString(5, vo.getBoardWriter());
 			psmt.setString(6, vo.getBoardDate());
 			psmt.setString(7, vo.getBoardCategory());
+			psmt.setInt(8, vo.getBoardScrap());
+			psmt.setInt(9, vo.getBoardHit());
+			psmt.setInt(10, vo.getBoardRecommend());
+			psmt.setInt(11, vo.getMemberNo());
+			
 			n = psmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -83,40 +90,6 @@ public class BoardServiceImpl implements BoardService {
 		return boardviewlist;
 	}
 
-	
-	
-	/*@Override
-	public BoardVO boardSelect(BoardVO vo) {
-		//글 1개 클릭하여 조회
-		String sql = "SELECT * FROM BOARD WHERE BOARD_NO = ?";
-		try {
-			conn = dao.getConnection();
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, vo.getBoardNo());
-			rs = psmt.executeQuery();
-				if(rs.next()) {
-					vo.setBoardWriter(rs.getString("board_writer"));
-					vo.setBoardScrap(rs.getInt("board_scrap"));
-					vo.setBoardRecommend(rs.getInt("board_recommend"));
-					vo.setBoardHit(rs.getInt("board_hit"));
-					vo.setBoardNo(rs.getInt("board_no"));
-					vo.setBoardCategory(rs.getString("board_category"));
-					vo.setBoardTitle(rs.getString("board_title"));
-					vo.setBoardDate(rs.getString("board_date"));
-					vo.setBoardAttech(rs.getString("board_attech"));
-					vo.setBoardSubject(rs.getString("board_subject"));
-				}   
-				
-				System.out.println("글 정보 저장 완료!");
-				
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally {
-			close();
-		}
-		return vo;
-	}*/
-	
 	
 	
 	
@@ -405,6 +378,28 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	
+
+	@Override
+	public String getDate() {
+		// 게시글 작성일자 받아오기
+		String sql = "select now()";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				return rs.getString(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return "";
+	}
+	
+	
+	
+	
 	/////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////
 	private void close() {
@@ -416,9 +411,6 @@ public class BoardServiceImpl implements BoardService {
 			e.printStackTrace();
 		}
 	}
-
-
-
 
 
 

@@ -26,6 +26,10 @@
 							<td width="200">
 								<input type="text" id="boardWriter" name="boardWriter">
 							</td>
+							<th width="150">임시 MemberId</th>
+							<td width="200">
+								<input type="text" id="MemberId" name="MemberId">
+							</td>
 							<th width="150">작성일자</th>
 							<td width="200">
 								<input type="date" id="boardDate" name="boardDate">
