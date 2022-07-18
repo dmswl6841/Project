@@ -46,7 +46,7 @@
 
 							<tr>
 								<td class="tit">${b.studyNo }</td>
-								<td class="tit"><a href="views/study/StudyList">${b.studyTitle }</a></td>
+								<td class="tit"><a href="StudyView.do?study_no=${b.studyNo}">${b.studyTitle }</a></td>
 								<td class="tit">${b.studySystem }</td>
 								<td class="tit">${b.studyPeriod }</td>
 								<td class="tit">${b.studyLanguage }</td>

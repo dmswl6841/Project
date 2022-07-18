@@ -32,6 +32,9 @@ import com.team.prj.page.command.MemberScrap;
 import com.team.prj.page.command.MemberStudy;
 import com.team.prj.study.command.StudyInsert;
 import com.team.prj.study.command.StudyList;
+
+import com.team.prj.study.command.StudyView;
+
 import com.team.prj.test.login.MemberJoin;
 import com.team.prj.test.login.MemberJoinForm;
 import com.team.prj.test.login.MemberLogin;
@@ -82,6 +85,7 @@ public class FrontController extends HttpServlet {
 
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출
 		map.put("/StudyInsert.do", new StudyInsert());//게시글등록
+    map.put("/StudyView.do", new StudyView());//게시글세부내용
 	
 		//마이페이지
 		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 게시글 목록

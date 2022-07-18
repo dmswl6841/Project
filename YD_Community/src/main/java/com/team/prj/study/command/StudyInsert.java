@@ -29,15 +29,17 @@ public class StudyInsert implements Command {
 			MultipartRequest multi = new MultipartRequest(
 					request, savePath, upLoadSize,"utf-8", 
 					new DefaultFileRenamePolicy());
+			System.out.println("**********"+multi.getParameter("studyWriter"));
 			String orignalFileName = multi.getOriginalFileName("file");
 			String saveFileName = multi.getFilesystemName("file");
-			vo.setStudyTitle(multi.getParameter("STUDY_TITLE"));
-			vo.setStudySubject(multi.getParameter("STUDY_SUBJECT"));
-			vo.setStudyWriter(multi.getParameter("STUDY_WRITER"));
-			vo.setStudySystem(multi.getParameter("STUDY_SYSTEM"));
-			vo.setStudyPeriod(multi.getParameter("STUDY_PERIOD"));
-			vo.setStudyLanguage(multi.getParameter("STUDY_LANGUAGE"));
-			vo.setStudyDate((multi.getParameter("STUDY_DATE")));
+			vo.setStudyTitle(multi.getParameter("studyTitle"));
+			vo.setStudySubject(multi.getParameter("studySubject"));
+			vo.setStudyWriter(multi.getParameter("studyWriter"));
+			vo.setStudyLanguage(multi.getParameter("studyLanguage"));
+			vo.setStudySystem(multi.getParameter("studySystem"));
+			vo.setMemberNo(Integer.parseInt(multi.getParameter("memberNo")));
+			vo.setStudyPeriod(multi.getParameter("studyPeriod"));
+			//vo.setStudyDate((multi.getParameter("STUDY_DATE")));
 			if(orignalFileName != null) {
 				vo.setStudyAttech(orignalFileName);
 				saveFileName = savePath + saveFileName; //파일경로를 추가한다.
