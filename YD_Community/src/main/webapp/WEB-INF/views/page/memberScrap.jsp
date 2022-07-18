@@ -12,6 +12,16 @@
 <div align="center"></div>
 	<div><h1>스크랩 목록</h1></div>
 	
+		
+	<nav>
+		<ul>
+			<li><a href="memberRecent.do">최근활동</a></li>
+			<li><a href="memberBoard.do">게시글</a></li>
+			<li><a href="memberScrap.do">스크랩</a></li>
+			<li><a href="memberStudy.do">찜한 스터디</a></li>
+		</ul>
+	</nav>
+	
 	<div>
 	<table>
 		<thead>
@@ -28,7 +38,7 @@
 								<tr>
 									<td>${c.scrapNo }</td>
 									<td>${c.boardNo }</td>
-									<td>${r.boardTitle }</td>
+									<td><a href="boardView.do?board_no=${c.boardNo}">${c.boardTitle }</a></td>
 									
 									
 									</tr>

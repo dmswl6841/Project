@@ -12,9 +12,15 @@
 
 	<div align="center"></div>
 	<div><h1>나의 최근 활동</h1></div>
-	<div class="rightSide">
 	
-	</div>
+	<nav>
+		<ul>
+			<li><a href="memberRecent.do">최근활동</a></li>
+			<li><a href="memberBoard.do">게시글</a></li>
+			<li><a href="memberScrap.do">스크랩</a></li>
+			<li><a href="memberStudy.do">찜한 스터디</a></li>
+		</ul>
+	</nav>
 	
 	
 	<div>

@@ -13,6 +13,16 @@
 	<div align="center">
 		<div><h1>나의 게시글</h1></div>
 
+	
+	<nav>
+		<ul>
+			<li><a href="memberRecent.do">최근활동</a></li>
+			<li><a href="memberBoard.do">게시글</a></li>
+			<li><a href="memberScrap.do">스크랩</a></li>
+			<li><a href="memberStudy.do">찜한 스터디</a></li>
+		</ul>
+	</nav>
+
 		<div>
 			<table >
 			<thead>
@@ -28,6 +38,7 @@
 							<c:forEach items="${list }" var="b">
 								<tr>
 									<td>${b.boardWriter }</td>
+									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
 									<td>${b.boardTitle }</td>
 									<td>${b.boardDate }</td>
 									
@@ -38,7 +49,7 @@
 						<c:otherwise>
 							<tr>
 								<td colspan="6" align="center">
-									작성한 게시글이 존재하지 않습니다
+									작성한 게시글이 존재하지 않습니다!
 								</td>
 							</tr>
 						</c:otherwise>
