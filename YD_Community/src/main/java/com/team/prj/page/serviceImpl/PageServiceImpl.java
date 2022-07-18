@@ -42,7 +42,7 @@ public class PageServiceImpl implements PageService {
 			
 			while(rs.next()) {
 				vo = new BoardVO();
-				vo.setBoardDate(rs.getString("board_title"));
+				vo.setBoardDate(rs.getString("board_Date"));
 				vo.setBoardTitle(rs.getString("board_title"));
 				list.add(vo);
 			}
@@ -152,6 +152,7 @@ public class PageServiceImpl implements PageService {
 		ScrapVO vo;
 		//스크랩이랑 보드 조인
 		String sql = " SELECT S.SCRAP_NO,B.BOARD_NO , B.BOARD_TITLE FROM SCRAP S left OUTER JOIN BOARD B ON S.board_no = B.board_no WHERE S.MEMBER_NO = ?";
+		
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);

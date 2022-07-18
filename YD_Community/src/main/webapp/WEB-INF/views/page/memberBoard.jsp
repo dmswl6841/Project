@@ -29,7 +29,7 @@
 	</nav>
 
 		<div>
-			<table >
+			<table border="1">
 			<thead>
 				<tr>  
 						<th width="130">작성자</th>
@@ -42,10 +42,10 @@
 						<c:when test="${not empty list }">
 							<c:forEach items="${list }" var="b">
 								<tr>
-									<td>${b.boardWriter }</td>
-									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
-									<td>${b.boardTitle }</td>
-									<td>${b.boardDate }</td>
+									<td align="center">${b.boardWriter }</td>
+									<td align="center"><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
+									
+									<td align="center">${b.boardDate }</td>
 									
 									
 									</tr>
