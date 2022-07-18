@@ -1,7 +1,7 @@
 package com.team.prj.study.command;
 
 import java.io.IOException;
-import java.sql.Date;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +37,7 @@ public class StudyInsert implements Command {
 			vo.setStudySystem(multi.getParameter("STUDY_SYSTEM"));
 			vo.setStudyPeriod(multi.getParameter("STUDY_PERIOD"));
 			vo.setStudyLanguage(multi.getParameter("STUDY_LANGUAGE"));
-			vo.setStudyDate(Date.valueOf(multi.getParameter("STUDY_DATE")));
+			vo.setStudyDate((multi.getParameter("STUDY_DATE")));
 			if(orignalFileName != null) {
 				vo.setStudyAttech(orignalFileName);
 				saveFileName = savePath + saveFileName; //파일경로를 추가한다.

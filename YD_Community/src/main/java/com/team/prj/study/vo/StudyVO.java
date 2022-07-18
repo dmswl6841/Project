@@ -1,6 +1,6 @@
 package com.team.prj.study.vo;
 
-import java.sql.Date;
+
 
 import com.team.prj.member.vo.MemberVO;
 
@@ -14,7 +14,7 @@ public class StudyVO {
 	private String StudyTitle; //제목1
 	private String StudySubject; //내용2
 	private String StudyWriter; //작성자3
-	private Date StudyDate; //작성일자4
+	private String StudyDate; //작성일자4
 	private String StudySystem; //진행방식6
 	private String StudyPeriod; //진행기간7
 	private String StudyMember; //인원 수8
