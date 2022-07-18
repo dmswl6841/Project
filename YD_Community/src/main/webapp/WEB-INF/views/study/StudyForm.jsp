@@ -50,16 +50,33 @@ h1 {
 	margin-inline-end: 0px;
 	font-weight: bold;
 }
+
+.form1{
+    margin-right: 8px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background: #ffcd00;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    color: #fff;
+    position: absolute;
+}
+
 </style>
 <body>
 	
 	<!-- ---------게시판글쓰기양식-------- -->
-			<div>
-				<h1>
-					<span>1</span>프로젝트 기본 정보를 입력해주세요.
-				</h1>
-				<hr style="margin-bottom: 15px;">
-			</div>
+	<section>
+    <div class="form1">
+    <span class="form">1</span>
+     </div>
+    <h2 class="pro1">&nbsp;&nbsp;&nbsp; 프로젝트 기본 정보를 입력해주세요.</h2>
+    </section>
 		
 	<div align="center">
 		<div>
