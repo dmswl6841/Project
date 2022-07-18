@@ -33,7 +33,7 @@ public class FrontController extends HttpServlet {
 
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
 		
-		mmap.put("/memberBoard.do", new MemberBoard()); //내가 쓴 게시글 목록
+		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 게시글 목록
 
 	}
 	
