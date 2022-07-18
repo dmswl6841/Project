@@ -16,9 +16,9 @@
 		<div>
 			<form id="frm">
 				<select id="key" name="key">
-					<option value="notice_title">제목</option>
-					<option value="notice_subject">내용</option>
-					<option value="notice_writer">작성자</option>
+					<option value="studytitle">제목</option>
+					<option value="studysubject">내용</option>
+					<option value="studywriter">작성자</option>
 				</select> &nbsp; <input type="text" id="val" name="val">&nbsp;&nbsp;
 				<input type="button" value="검색" onclick="StudySearch()">
 

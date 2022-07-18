@@ -39,7 +39,7 @@ public class StudyServiceImpl implements StudyService {
 				vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 스터디기간
 				vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));//스터디언어;
 				vo.setStudyWriter(rs.getString("STUDY_WRITER"));//스터디작성자;
-				vo.setStudyDate(rs.getDate("STUDY_DATE"));//작성일자
+				vo.setStudyDate(rs.getString("STUDY_DATE"));//작성일자
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -65,27 +65,44 @@ public class StudyServiceImpl implements StudyService {
 	public int studyInsert(StudyVO vo) {
 		// 글 등록
 		int n = 0;
-		String sql = "INSERT INTO STUDY VALUES(STUDY_SEQ.NEXTVAL,?,?,?,?,?,?,sysdate)";
+		System.out.println("0데이터확인");
+		String sql = "INSERT INTO STUDY VALUES(STUDY_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,sysdate)";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
+			System.out.println("1데이터확인");
 			
-			
-            //psmt.setInt(1, vo.getStudyNo());
-			//vo.setStudyNo(rs.getInt("STUDY_NO"));// 1글 순서번호
-			vo.setStudyWriter(rs.getString("STUDY_WRITER"));//2글작성자
-			vo.setStudyTitle(rs.getString("STUDY_TITLE")); // 3글 제목
-			vo.setStudySubject(rs.getString("STUDY_SUBJECT")); //4글 내용
-			vo.setStudyDate(rs.getDate("STUDY_DATE"));//5작성일자
-			vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));//6스터디언어;
-			vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 7스터디기간
-			vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 8스터디방식
-			vo.setStudyMember(rs.getString("STUDY_MEMBER"));//9스터디멤버
-			//vo.setMemberNo(rs.getInt("MEMBER_NO"));//포링키
-			vo.setStudyAttech(rs.getString("STUDY_ATTECH"));//11첨부파일
-			vo.setStudyAttechDir(rs.getString("STUDY_ATTECHDIR"));//12첨부파일위치
-
-			n = psmt.executeUpdate();
+           // psmt.setInt(1, vo.getStudyNo());
+			psmt.setString(1, vo.getStudyTitle());
+			psmt.setString(2, vo.getStudySubject());
+            psmt.setString(3, vo.getStudyWriter());
+            psmt.setString(4, vo.getStudyLanguage());
+            psmt.setString(5, vo.getStudySystem());
+            psmt.setString(6, vo.getStudyPeriod());
+            psmt.setString(7, vo.getStudyMember());
+            psmt.setInt(8,vo.getMemberNo());
+            psmt.setString(9, vo.getStudyAttech());
+            psmt.setString(10, vo.getStudyAttechDir());
+            //psmt.setString(10, vo.getStudyDate());
+            System.out.println("2데이터확인");
+            n = psmt.executeUpdate();
+            if(rs.next()){
+            	
+            	//vo.setStudyNo(rs.getInt("STUDY_NO"));// 1글 순서번호
+            	vo.setStudyTitle(rs.getString("STUDY_TITLE")); // 2글 제목
+            	vo.setStudySubject(rs.getString("STUDY_SUBJECT")); //3글 내용
+            	vo.setStudyWriter(rs.getString("STUDY_WRITER"));//4글작성자
+            	vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));//5스터디언어;
+            	vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 6스터디방식
+            	vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 7스터디기간
+            	vo.setStudyMember(rs.getString("STUDY_MEMBER"));//8스터디멤버
+            	vo.setMemberNo(rs.getInt("MEMBER_NO"));//9포링키
+            	vo.setStudyAttech(rs.getString("STUDY_ATTECH"));//10첨부파일
+            	vo.setStudyAttechDir(rs.getString("STUDY_ATTECHDIR"));//11첨부파일위치
+            	vo.setStudyDate(rs.getString("STUDY_DATE"));//12작성일자
+            	System.out.println("3데이터확인");
+            }
+			System.out.println("4데이터확인"+n);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -112,7 +129,7 @@ public class StudyServiceImpl implements StudyService {
 					vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 4글작성자
 					vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 5스터디기간
 					vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));//6스터디언어;
-					vo.setStudyDate(rs.getDate("STUDY_DATE"));//7작성일자
+					vo.setStudyDate(rs.getString("STUDY_DATE"));//7작성일자
 					vo.setMemberNo(rs.getInt("MEMBER_NO"));//포링키
 					vo.setStudyAttech(rs.getString("STUDY_ATTECH"));//첨부파일
 					vo.setStudyAttechDir(rs.getString("STUDY_ATTECHDIR"));//첨부파일
@@ -143,7 +160,7 @@ public class StudyServiceImpl implements StudyService {
 			vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 4글작성자
 			vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 5스터디기간
 			vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));//6스터디언어;
-			//vo.setStudyDate(rs.getDate("STUDY_DATE"));//7작성일자
+			//vo.setStudyDate(rs.getString("STUDY_DATE"));//7작성일자
 			//vo.setMemberNo(rs.getInt("MEMBER_NO"));//포링키
 			vo.setStudyAttech(rs.getString("STUDY_ATTECH"));//첨부파일
 			vo.setStudyAttechDir(rs.getString("STUDY_ATTECHDIR"));//첨부파일

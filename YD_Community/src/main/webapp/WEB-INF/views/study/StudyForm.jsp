@@ -54,16 +54,13 @@ h1 {
 <body>
 	
 	<!-- ---------게시판글쓰기양식-------- -->
-	<form id="main">
-		<div align="left">
 			<div>
-
 				<h1>
 					<span>1</span>프로젝트 기본 정보를 입력해주세요.
 				</h1>
 				<hr style="margin-bottom: 15px;">
-
-	
+			</div>
+		
 	<div align="center">
 		<div>
 			<h1>게시글 등록</h1>
@@ -79,39 +76,37 @@ h1 {
 								name="studyWriter"></td>
 							<th width="150">제목</th>
 							<td width="200"><input type="text" id="studyWriter"
-								name="studyWriter"></td>
+								name="studyTitle"></td>
 						</tr>
 						
 						<tr>
 							<th>내용</th>
 							<td colspan="3">
 							<textarea rows="75" cols="160" size="73" id="studySubject" name="studySubject"></textarea></td>
-						
 						</tr>
 
 						<tr>
-							<th width="150">작성일자</th>
-							<td width="200"><input type="date" id="studyWriter"
-								name="studyWriter"></td>
 							<th width="150">사용언어</th>
 							<td width="200"><input type="text" id="studyWriter"
-								name="studyWriter"></td>
+								name="studyLanguage"></td>
 						</tr>
 						
 						<tr>
 							<th width="150">스터디개월수</th>
 							<td width="200"><input type="text" id="studyWriter"
-								name="studyWriter"></td>
+								name="studyPeriod"></td>
 							<th width="150">스터디방식</th>
 							<td width="200"><input type="text" id="studyWriter"
-								name="studyWriter"></td>
+								name="studySystem"></td>
+								<th width="150">쌤플</th>
+							<td width="200"><input type="text" id="studyWriter"
+								name="memberno"></td>
 						</tr>
-						
 						
 						<tr>
 							<th width="150">스터디멤버수</th>
-							<td width="200"><input type="text" id="studyWriter"
-								name="studyWriter"></td>
+							<td width="200"><input type="text" id="studyMember"
+								name="studyMember"></td>
 						</tr>
 						
 						<tr>
@@ -119,17 +114,22 @@ h1 {
 							<td colspan="3"><input type="file" id="file" name="file">
 							</td>
 						</tr>
+						<tr>
+						<th width="150">작성일자</th>
+							<td width="200"><input type="date" id="studyDate"
+								name="studyDate"></td>
+						</tr>
 					</table>
 				</div>
 				<br>
+
 				<div>
-
-					<input type="submit" value="저장"> &nbsp;&nbsp;&nbsp; <input
-						type="reset" value="취소">
+					<input type="submit" value="저장"> &nbsp;&nbsp;&nbsp; 
+					<input type="reset" value="취소">
 				</div>
+				
 			</form>
-		</div>
-
+	</div>
 	</div>
 </body>
 </html>
