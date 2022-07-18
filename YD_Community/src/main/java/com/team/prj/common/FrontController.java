@@ -27,8 +27,15 @@ import com.team.prj.board.command.QnaBoardForm;
 import com.team.prj.board.command.QnaBoardList;
 import com.team.prj.board.command.TotalBoardList;
 import com.team.prj.page.command.MemberBoard;
+import com.team.prj.page.command.MemberRecent;
+import com.team.prj.page.command.MemberScrap;
+import com.team.prj.page.command.MemberStudy;
 import com.team.prj.study.command.StudyInsert;
 import com.team.prj.study.command.StudyList;
+import com.team.prj.test.login.MemberJoin;
+import com.team.prj.test.login.MemberJoinForm;
+import com.team.prj.test.login.MemberLogin;
+import com.team.prj.test.login.MemberLoginForm;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -73,10 +80,21 @@ public class FrontController extends HttpServlet {
 		//map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		//map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
 
-		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 게시글 목록
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출
 		map.put("/StudyInsert.do", new StudyInsert());//게시글등록
-
+	
+		//마이페이지
+		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 게시글 목록
+		map.put("/memberRecent.do", new MemberRecent()); // 최근활동
+		map.put("/memberScrap.do", new MemberScrap()); //스크랩
+		map.put("/memberStudy.do", new MemberStudy()); //찜한스터디
+	
+		//로그인 테스트용
+		map.put("/memberJoin.do",new MemberJoin());
+		map.put("/memberJoinForm.do",new MemberJoinForm());
+		map.put("/memberLogin.do", new MemberLogin());
+		map.put("/memberLoginForm.do", new MemberLoginForm());
+	
 	}
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response)

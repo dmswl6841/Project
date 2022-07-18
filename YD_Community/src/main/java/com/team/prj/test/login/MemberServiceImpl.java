@@ -149,27 +149,34 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO memberLogin(MemberVO vo) {
+	public MemberVO memberLogin(MemberVO member) {
 		// 회원 로그인
-		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PASSWORD = ?";
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getMemberId());
-			psmt.setString(2, vo.getMemberPw());
+			psmt.setString(1, member.getMemberId());
+			psmt.setString(2, member.getMemberPw());
 			rs = psmt.executeQuery();
+			
+			
 			if(rs.next()) {
-				vo.setMemberId(rs.getString("member_id"));
-				vo.setMemberName(rs.getString("member_name"));
-				vo.setMemberAuthor(rs.getString("member_author"));
+				member.setMemberNo(rs.getInt("member_no"));
+				member.setMemberEmail(rs.getString("member_email"));
+				member.setMemberNick(rs.getString("member_nick"));
+				member.setMemberGit(rs.getString("member_git"));
+				member.setMemberName(rs.getString("member_name"));
+				member.setMemberWarning(rs.getInt("member_warning"));
+				member.setMemberAuthor(rs.getString("member_author"));
 			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
+		return member;
 		
-		return vo;
 	}
 	
 	private void close() {

@@ -12,23 +12,37 @@ public class MemberLogin implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
+		MemberService memberService = new MemberServiceImpl();
+		String id = request.getParameter("memberId");
+		String password = request.getParameter("memberPassword");
 		// 로그인 처리
+		//System.out.println("id: "+id);
 		HttpSession session = request.getSession();  //서버가 만들어 놓은 세션을 가져온다.
-		MemberService memberDao = new MemberServiceImpl();
-		MemberVO vo = new MemberVO();
-		vo.setMemberId(request.getParameter("memberId"));
-		vo.setMemberPw(request.getParameter("memberPw"));
+		MemberVO member = new MemberVO();
+		member.setMemberId(id);
+		member.setMemberPw(password);
+		member = memberService.memberLogin(member);
 	
-		vo = memberDao.memberLogin(vo);
-		if(vo.getMemberName() != null) {
-			session.setAttribute("id", vo.getMemberId());  //세션에 담는다
-			session.setAttribute("author", vo.getMemberAuthor());
-			session.setAttribute("name", vo.getMemberName());
-			request.setAttribute("message",vo.getMemberName() + "님 환영합니다.");
+		if(member != null) {
+			session.setAttribute("member", member);
+			request.setAttribute("message", "login Success!");
+			
 		}else {
-			request.setAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
+			request.setAttribute("message", "아이디 또는 비번 틀렷삼");
 		}
+//		if(member.getMemberName() != null) {
+//			session.setAttribute("member", vo.getMemberNo());   
+//			session.setAttribute("id", vo.getMemberId());   
+//			session.setAttribute("author", vo.getMemberAuthor());
+//			session.setAttribute("name", vo.getMemberName());
+//			request.setAttribute("message",vo.getMemberName() + "님 환영합니다.");
+//		}else {
+//			request.setAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
+//		}
 		return "test/memberLogin";
+		//return "main.do";
 	}
+	
+
 
 }
