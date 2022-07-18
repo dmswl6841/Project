@@ -1,7 +1,5 @@
 package com.team.prj.member.vo;
 
-import com.team.prj.study.vo.StudyVO;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
