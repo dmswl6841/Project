@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.team.prj.common.Command;
-import com.team.prj.log.vo.LogVO;
 import com.team.prj.member.vo.MemberVO;
 import com.team.prj.page.serviceImpl.PageServiceImpl;
 import com.team.prj.scrap.vo.ScrapVO;
