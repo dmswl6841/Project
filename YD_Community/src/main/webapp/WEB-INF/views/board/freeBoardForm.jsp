@@ -14,7 +14,7 @@
 	<div align="center">
 		<div><h1>게시글 등록</h1></div>
 		<div>
-			<form id="frm" action="boardInsert.do" method="post" enctype="multipart/form-data">
+			<form id="frm" action="freeBoardInsert.do" method="post" enctype="multipart/form-data">
 				<div>
 					<table border="1">
 						<tr>
@@ -26,13 +26,9 @@
 							<td width="200">
 								<input type="text" id="boardWriter" name="boardWriter">
 							</td>
-							<th width="150">임시 MemberId</th>
+							<th width="150">임시 MemberNo</th>
 							<td width="200">
-								<input type="text" id="MemberId" name="MemberId">
-							</td>
-							<th width="150">작성일자</th>
-							<td width="200">
-								<input type="date" id="boardDate" name="boardDate">
+								<input type="number" id="MemberNo" name="MemberNo">
 							</td>
 						</tr>
 						<tr>
@@ -53,6 +49,7 @@
 								<input type="file" id="file" name="file">
 							</td>
 						</tr>
+						
 					</table>
 				</div><br>
 				<div>

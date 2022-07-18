@@ -26,9 +26,7 @@ public class BoardServiceImpl implements BoardService {
 	public int boardInsert(BoardVO vo) {
 		//글입력
 		int n =0;
-		String sql = "INSERT INTO BOARD(BOARD_NO, BOARD_TITLE, BOARD_SUBJECT, BOARD_ATTECH, BOARD_ATTECHDIR, "
-				+ "BOARD_WRITER, BOARD_DATE ,BOARD_CATEGORY, BOARD_SCRAP, BOARD_HIT, BOARD_RECOMMEND, MEMBER_NO) "
-				+ "VALUES(board_seq.nextval,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL,?,?,?,?,?,sysdate,0,0,?,?,'',0)";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
@@ -38,13 +36,9 @@ public class BoardServiceImpl implements BoardService {
 			psmt.setString(3, vo.getBoardAttech());
 			psmt.setString(4, vo.getBoardAttechDir());
 			psmt.setString(5, vo.getBoardWriter());
-			psmt.setString(6, vo.getBoardDate());
-			psmt.setString(7, vo.getBoardCategory());
-			psmt.setInt(8, vo.getBoardScrap());
-			psmt.setInt(9, vo.getBoardHit());
-			psmt.setInt(10, vo.getBoardRecommend());
-			psmt.setInt(11, vo.getMemberNo());
-			
+			psmt.setString(6, vo.getBoardCategory());
+			psmt.setInt(7, vo.getMemberNo());
+
 			n = psmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -94,16 +88,17 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public int boardDelete(BoardVO vo) {
+	public int boardDelete(int board_no) {
 		//글삭제
-		int n =0;
+		int n = 0;
+		BoardVO vo = new BoardVO();
 		String sql = "DELETE FROM BOARD WHERE BOARD_NO "
 				+ "IN (SELECT BOARD_NO FROM BOARD START WITH BOARD_NO = ? "
 				+ "CONNECT BY PRIOR BOARD_NO = BOARD_RECOMMEND)";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, vo.getBoardNo());
+			psmt.setInt(1, board_no);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				vo.setBoardNo(rs.getInt("board_no"));

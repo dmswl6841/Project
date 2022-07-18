@@ -23,7 +23,6 @@ public class FreeBoardInsert implements Command {
 
 		String savePath = "C:\\Temp\\"; // 파일 저장위치 "fileSave"
 		int upLoadSize = 1024 * 1024 * 1024; // 최대파일 사이즈 100MB
-
 		int n = 0;
 
 		try {
@@ -31,12 +30,16 @@ public class FreeBoardInsert implements Command {
 					new DefaultFileRenamePolicy());
 			String orignalFileName = multi.getOriginalFileName("file");
 			String saveFileName = multi.getFilesystemName("file");
-			vo.setBoardCategory(multi.getParameter("boardCategory"));
+			
+			// 글 쓰기
 			vo.setBoardTitle(multi.getParameter("boardTitle"));
-			vo.setBoardWriter(multi.getParameter("boardWriter"));
-			vo.setBoardDate(multi.getParameter("boardDate"));
 			vo.setBoardSubject(multi.getParameter("boardSubject"));
-
+			vo.setBoardAttech(multi.getParameter("boardAttech"));
+			vo.setBoardAttechDir(multi.getParameter("boardAttechDir"));
+			vo.setBoardWriter(multi.getParameter("boardWriter"));
+			vo.setBoardCategory(multi.getParameter("boardCategory"));
+			vo.setMemberNo(Integer.parseInt(multi.getParameter("MemberNo")));  
+			
 			if (orignalFileName != null) {
 				vo.setBoardAttech(orignalFileName);
 				saveFileName = savePath + saveFileName; // 파일경로를 추가한다.
@@ -49,9 +52,10 @@ public class FreeBoardInsert implements Command {
 
 		String returnPage = null;
 		if (n != 0) {
-			returnPage = "freeboardList.do";
+			request.setAttribute("message", "게시글 등록에 성공했습니다.");
+			returnPage = "freeBoardList.do";
 		} else {
-			request.setAttribute("message", "게시글 등록이 실패했습니다.");
+			request.setAttribute("message", "게시글 등록을 실패했습니다.");
 			returnPage = "board/boardError";
 		}
 		return returnPage;

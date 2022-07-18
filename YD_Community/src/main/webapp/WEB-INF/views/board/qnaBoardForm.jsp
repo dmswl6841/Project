@@ -12,9 +12,9 @@
 
 <body>
 	<div align="center">
-		<div><h1>게시글 등록</h1></div>
+		<div><h1>QnA 등록</h1></div>
 		<div>
-			<form id="frm" action="noticeBoardInsert.do" method="post" enctype="multipart/form-data">
+			<form id="frm" action="qnaBoardInsert.do" method="post" enctype="multipart/form-data">
 				<div>
 					<table border="1">
 						<tr>
@@ -25,6 +25,10 @@
 							<th width="150">작성자</th>
 							<td width="200">
 								<input type="text" id="boardWriter" name="boardWriter">
+							</td>
+							<th width="150">임시 MemberNo</th>
+							<td width="200">
+								<input type="number" id="MemberNo" name="MemberNo">
 							</td>
 							<th width="150">작성일자</th>
 							<td width="200">
@@ -48,7 +52,14 @@
 							<td colspan="3">
 								<input type="file" id="file" name="file">
 							</td>
+							<td>
+								<input type="hidden" type="text" id="boardHot" name="boardHot" value="">
+								<input type="hidden" type="number" id="boardScrap" name="boardScrap" value="0">
+								<input type="hidden" type="number" id="boardHit" name="boardHit" value="0">
+								<input type="hidden" type="number" id="boardRecommend" name="boardRecommend" value="0">
+							</td>
 						</tr>
+						
 					</table>
 				</div><br>
 				<div>

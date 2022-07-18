@@ -50,14 +50,15 @@
 						<th width="180">첨부파일</th>
 						<th width="70">스크랩수</th>	
 						<th width="70">추천수</th>
-						<th width="70">조회수</th>					
+						<th width="70">조회수</th>	
+						<th width="45">삭제</th>				
 					</tr>
 				</thead>
 				<tbody>
 					<c:choose>
 						<c:when test="${not empty freeboardlist }">
 							<c:forEach items="${freeboardlist }" var="b">
-								<tr onclick="clickBoardView()" >
+								<tr>
 									<td>${b.boardNo }</td>
 									<td>${b.boardWriter }</td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>

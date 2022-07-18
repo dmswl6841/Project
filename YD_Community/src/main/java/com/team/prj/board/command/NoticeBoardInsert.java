@@ -22,44 +22,52 @@ public class NoticeBoardInsert implements Command {
 		// 게시글 등록(파일 업로드 포함)
 		BoardService boardDao = new BoardServiceImpl();
 		BoardVO vo = new BoardVO();
-		
-		String savePath = "C:\\Temp\\";  //파일 저장위치  "fileSave"
-		int upLoadSize = 1024*1024*1024;  //최대파일 사이즈 100MB 
-		
+
+		String savePath = "C:\\Temp\\"; // 파일 저장위치 "fileSave"
+		int upLoadSize = 1024 * 1024 * 1024; // 최대파일 사이즈 100MB
 		int n = 0;
-		
+
 		try {
-			MultipartRequest multi = new MultipartRequest(
-					request, savePath, upLoadSize,"utf-8", 
+			MultipartRequest multi = new MultipartRequest(request, savePath, upLoadSize, "utf-8",
 					new DefaultFileRenamePolicy());
 			String orignalFileName = multi.getOriginalFileName("file");
 			String saveFileName = multi.getFilesystemName("file");
 			
-			vo.setBoardCategory(multi.getParameter("boardCategory"));
+			// 글 쓰기
 			vo.setBoardTitle(multi.getParameter("boardTitle"));
-			vo.setBoardWriter(multi.getParameter("boardWriter"));
-			vo.setBoardDate(multi.getParameter("boardDate"));
 			vo.setBoardSubject(multi.getParameter("boardSubject"));
+			vo.setBoardAttech(multi.getParameter("boardAttech"));
+			vo.setBoardAttechDir(multi.getParameter("boardAttechDir"));
+			vo.setBoardWriter(multi.getParameter("boardWriter"));
+			vo.setBoardDate(multi.getParameter("boardDate")); 
+			vo.setBoardCategory(multi.getParameter("boardCategory"));
+			vo.setBoardHot(multi.getParameter("boardHot"));
+			vo.setBoardScrap(Integer.parseInt(multi.getParameter("boardScrap")));   
+			vo.setBoardHit(Integer.parseInt(multi.getParameter("boardHit")));     
+			vo.setBoardRecommend(Integer.parseInt(multi.getParameter("boardRecommend")));
+			vo.setMemberNo(Integer.parseInt(multi.getParameter("MemberNo")));  
 			
-			
-			if(orignalFileName != null) {
+			if (orignalFileName != null) {
 				vo.setBoardAttech(orignalFileName);
-				saveFileName = savePath + saveFileName; //파일경로를 추가한다.
+				saveFileName = savePath + saveFileName; // 파일경로를 추가한다.
 				vo.setBoardAttechDir(saveFileName);
 			}
-			n = boardDao.boardInsert(vo);			
+			n = boardDao.boardInsert(vo);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		String returnPage = null;
-		if(n != 0) {
-			returnPage = "noticeboardList.do";
-		}else {
-			request.setAttribute("message", "게시글 등록이 실패했습니다.");
+		if (n != 0) {
+			request.setAttribute("message", "게시글 등록에 성공했습니다.");
+			returnPage = "noticeBoardList.do";
+		} else {
+			request.setAttribute("message", "게시글 등록을 실패했습니다.");
 			returnPage = "board/boardError";
 		}
 		return returnPage;
+				
+				
 	}
 
 }
