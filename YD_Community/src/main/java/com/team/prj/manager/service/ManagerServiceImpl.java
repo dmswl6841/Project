@@ -80,19 +80,13 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public int memberDelete(MemberVO vo) {
 		int r = 0;
-		String sql = "delete from member where member_Id=?";
+		String sql = "delete from member where member_no=?";
 
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getMemberId());
-
+			psmt.setInt(1, vo.getMemberNo());
 			r = psmt.executeUpdate();
-
-			if (rs.next()) {
-				vo = new MemberVO();
-				vo.setMemberId(rs.getString("member_Id"));
-			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,6 +96,34 @@ public class ManagerServiceImpl implements ManagerService {
 		return r;
 	}
 	
+	
+	
+	@Override
+	public int memeberUpdateAuthor(MemberVO vo) {
+		int r= 0;
+		String sql = "update member set member_author values (?)";
+
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getMemberAuthor());
+
+			r = psmt.executeUpdate();
+
+			if (rs.next()) {
+				vo = new MemberVO();
+				vo.setMemberAuthor(rs.getString("member_Author"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return r;
+	}
+
+
 	// 게시글 전체 조회
 	@Override
 	public List<BoardVO> boardSelectList() {

@@ -11,6 +11,7 @@ public interface ManagerService {
 	//회원관리
 	List<MemberVO> memberSelectList(); //회원 전체 조회
 	List<MemberVO> memberSearchList(String key, String val); //회원 목록 검색
+	int memeberUpdateAuthor(MemberVO vo); //회원 가입 승인
 	int memberDelete(MemberVO vo); //회원 삭제(탈퇴)
 	
 	//게시글 관리
