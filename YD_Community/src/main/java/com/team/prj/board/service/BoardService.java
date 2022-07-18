@@ -31,5 +31,8 @@ public interface BoardService {
 		//Notice 공지 게시판 crud
 		List<BoardVO> NboardSelectList(); //전체조회
 		
+		//작성일자 받아오는 메소드
+		String getDate();
+		
 
 }
