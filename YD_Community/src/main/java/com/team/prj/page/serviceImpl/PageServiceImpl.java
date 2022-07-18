@@ -99,6 +99,19 @@ public class PageServiceImpl implements PageService {
 		BoardVO vo;
 		//세션 아이디로 member_no를 보내고 세션아이디랑 내 member_no가 같으면 출력하는 식으로
 //		String id = session.getAttribute("id");	//세션 아이디 구하기 //controller!!
+		//로그인 정보를 세션에 저장  -> 로그인에 추가해야함            
+		//session().setAttribute("MemberVO", member);
+		////request.getSession().setAttribute("MemberVO", member);
+		
+		//MemberVO member = new memberVO(); // vo 인스턴스 생성
+		//member.setMemberNo (1); // bminfo.BM_ID 에 1 값저장
+		//session.setAttribute("member", member);  // 세션에 bminfo 라는 변수로 vo  값 저장
+		
+		
+		
+		
+		
+		
 //		String id = null;
 		String sql = "SELECT BOARD_WRITER,BOARD_TITLE,BOARD_DATE FROM BOARD WHERE MEMBER_NO = ?";
 

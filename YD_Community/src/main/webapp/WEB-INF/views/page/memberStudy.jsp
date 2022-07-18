@@ -13,6 +13,16 @@
 
 	<div align="center">
 		<div><h1>찜한 스터디</h1></div>
+		
+			
+	<nav>
+		<ul>
+			<li><a href="memberRecent.do">최근활동</a></li>
+			<li><a href="memberBoard.do">게시글</a></li>
+			<li><a href="memberScrap.do">스크랩</a></li>
+			<li><a href="memberStudy.do">찜한 스터디</a></li>
+		</ul>
+	</nav>
 
 		<div>
 			<table >
