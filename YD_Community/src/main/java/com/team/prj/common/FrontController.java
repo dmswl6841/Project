@@ -17,8 +17,9 @@ import com.team.prj.board.command.BoardUpdate;
 import com.team.prj.board.command.BoardView;
 import com.team.prj.board.command.FreeBoardForm;
 import com.team.prj.manager.command.BoardList;
+import com.team.prj.manager.command.MemberDelete;
 import com.team.prj.manager.command.MemberList;
-import com.team.prj.manager.command.memberSearchList;
+import com.team.prj.manager.command.MemberSearchList;
 import com.team.prj.study.command.StudyForm;
 import com.team.prj.board.command.FreeBoardList;
 import com.team.prj.board.command.NoticeBoardForm;
@@ -64,7 +65,8 @@ public class FrontController extends HttpServlet {
 		//관리자
 		//map.put("/memberMain.do", new MemberMain()); //메인 화면
 		map.put("/memberList.do", new MemberList()); //회원 전체 목록
-		map.put("/memberSearchList.do", new memberSearchList()); //회원 검색
+		map.put("/memberSearchList.do", new MemberSearchList()); //회원 검색
+		map.put("/memberDelete.do", new MemberDelete()); //회원삭제
 		map.put("/boardList.do", new BoardList()); //게시글 전체 목록
 		//map.put("/boardSearchList.do", new BoardSelectList()); //게시글 검색
 		//map.put("/XwordList.do", new XwordList()); //금지어 전체 목록
