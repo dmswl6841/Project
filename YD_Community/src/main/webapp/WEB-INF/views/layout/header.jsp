@@ -23,39 +23,6 @@
                 <p class="masthead-subheading font-weight-light mb-0">YEDAM<br>Developer Community</p>
             </div>
         </header>
-         <div class="row">
-            <div class="leftcolumn">
-              <div class="card">
-                <h2>시험일정</h2>
-                <h5>캘린더!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h5>
-                <div class="fakeimg" style="height:200px;">Image</div>
-                <p>Some text.</p>
-                <p>캘린더!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                </p>
-              </div>
-              <div class="card">
-                <h2>공지사항</h2>
-                <h5>공지사항올리세요</h5>
-                <div class="fakeimg" style="height:200px;">Image</div>
-                <p>공지사항!!!!!!!!!!!!!!!!!!!.</p>
-                <p>공지사항올리세요
-                </p>
-              </div>
-            </div>
-            <div class="rightcolumn">
-              <div class="card">
-                <h2>인기글</h2>
-                <div class="fakeimg" style="height:100px;">Image</div>
-                <p>인기글 올리세요!!!!!!!!!!!!!!!!!!!!!!!!</p>
-              </div>
-              <div class="card">
-                <h3>인기글</h3>
-                <div class="fakeimg"><p>Image</p></div>
-                <div class="fakeimg"><p>Image</p></div>
-                <div class="fakeimg"><p>Image</p></div>
-              </div>
         
-            </div>
-          </div>
 </body>
 </html>

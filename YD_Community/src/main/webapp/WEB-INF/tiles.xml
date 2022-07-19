@@ -4,10 +4,10 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<definition name="myWeb" template="/WEB-INF/views/layout/layout.jsp">
-		<put-attribute name="title" value="My Web"/>
+		<put-attribute name="title" value="YEDAM COMMUNITY"/>
 		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/layout/menu.jsp" />
-		<put-attribute name="body" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/layout/layout.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp"/>
 	</definition>
 	
