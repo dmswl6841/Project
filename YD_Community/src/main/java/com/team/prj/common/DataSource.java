@@ -22,10 +22,8 @@ public class DataSource {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.21:1521","team","1234");
-			System.out.println("Success");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			System.out.println("Fail");
 		} return conn;
 	}
 }

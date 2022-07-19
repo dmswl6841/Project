@@ -18,6 +18,7 @@ public class BoardDelete implements Command {
 		String board_no = request.getParameter("board_no");
 		
 		BoardVO vo = new BoardVO(); 
+
 		BoardService boardDao = new BoardServiceImpl();
 		vo = boardDao.boardViewList(board_no);
 		

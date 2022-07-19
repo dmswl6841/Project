@@ -18,13 +18,11 @@ public class StudyView implements Command {
 		// 글 상세보기
 		
 		int study_no = Integer.parseInt(request.getParameter("study_no"));
-		System.out.println(study_no);
 		StudyService studyDao = new StudyServiceImpl();
-		List<StudyVO> studyviewlist = new ArrayList<>();
-		studyviewlist = studyDao.studyViewList(study_no);
+		StudyVO vo = new StudyVO();
+		vo  = studyDao.studyViewList(study_no);
 		
-		request.setAttribute("studyviewlist", studyviewlist);
-		System.out.println("값" + studyviewlist);
+		request.setAttribute("vo", vo);
 		
 		return "study/StudyView";
 	}
