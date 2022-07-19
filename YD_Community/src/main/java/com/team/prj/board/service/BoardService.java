@@ -11,7 +11,7 @@ public interface BoardService {
 		//BoardVO boardSelect(BoardVO vo);	
 		//글 1개 클릭하여 조회
 		List<BoardVO> boardViewList(int board_no);
-		int boardDelete(int board_no); //글삭제
+		int boardDelete(BoardVO vo); //글삭제
 		int boardUpdate(BoardVO vo); //글수정
 		List<BoardVO> boardSearchList(String categorykey,String categoryval, String searchkey, String searchval); 
 		//카테고리 선택박스 (전체, 공지, 자유, qna, 인기) 세부분류 선택박스 (글쓴이, 제목 포함단어...)     
