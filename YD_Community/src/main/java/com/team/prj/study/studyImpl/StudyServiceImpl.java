@@ -7,12 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.team.prj.common.DataSource;
 import com.team.prj.study.service.StudyService;
 import com.team.prj.study.vo.StudyVO;
-
-
 
 public class StudyServiceImpl implements StudyService {
 	private DataSource dao = DataSource.getInstance();
@@ -38,9 +35,9 @@ public class StudyServiceImpl implements StudyService {
 				vo.setStudyTitle(rs.getString("STUDY_TITLE")); // 글 제목
 				vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 스터디 방식
 				vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 스터디기간
-				vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));//스터디언어;
-				vo.setStudyWriter(rs.getString("STUDY_WRITER"));//스터디작성자;
-				vo.setStudyDate(rs.getString("STUDY_DATE"));//작성일자
+				vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));// 스터디언어;
+				vo.setStudyWriter(rs.getString("STUDY_WRITER"));// 스터디작성자;
+				vo.setStudyDate(rs.getString("STUDY_DATE"));// 작성일자
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -48,10 +45,9 @@ public class StudyServiceImpl implements StudyService {
 		} finally {
 			close();
 		}
-	
+
 		return list;
 	}
-	
 
 	@Override
 	public List<StudyVO> studyViewList(int study_no) {
@@ -59,13 +55,13 @@ public class StudyServiceImpl implements StudyService {
 		List<StudyVO> studyviewlist = new ArrayList<>();
 		StudyVO vo = new StudyVO();
 		String sql = "SELECT * FROM STUDY WHERE STUDY_NO = ?";
-		
+
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, study_no);
 			rs = psmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				vo.setStudyNo(rs.getInt("study_no"));
 				vo.setStudyTitle(rs.getString("study_Title"));
 				vo.setStudySubject(rs.getString("study_Subject"));
@@ -75,13 +71,13 @@ public class StudyServiceImpl implements StudyService {
 				vo.setMemberNo(rs.getInt("member_no"));
 				vo.setStudyAttech(rs.getString("study_Attech"));
 				vo.setStudyAttechDir(rs.getString("study_AttechDir"));
-				vo.setStudyDate(rs.getString("study_date"));	
+				vo.setStudyDate(rs.getString("study_date"));
 				studyviewlist.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return studyviewlist;
 	}
 
@@ -96,18 +92,18 @@ public class StudyServiceImpl implements StudyService {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getStudyTitle());
 			psmt.setString(2, vo.getStudySubject());
-            psmt.setString(3, vo.getStudyWriter());
-            psmt.setString(4, vo.getStudyLanguage());
-            psmt.setString(5, vo.getStudySystem());
-            psmt.setString(6, vo.getStudyPeriod());
-            psmt.setString(7, vo.getStudyMember());
-            psmt.setInt(8, vo.getMemberNo());
-            psmt.setString(9, vo.getStudyAttech());
-            psmt.setString(10, vo.getStudyAttechDir());
-            //psmt.setString(11,vo.getStudyDate());
-            
-            n = psmt.executeUpdate();
-         
+			psmt.setString(3, vo.getStudyWriter());
+			psmt.setString(4, vo.getStudyLanguage());
+			psmt.setString(5, vo.getStudySystem());
+			psmt.setString(6, vo.getStudyPeriod());
+			psmt.setString(7, vo.getStudyMember());
+			psmt.setInt(8, vo.getMemberNo());
+			psmt.setString(9, vo.getStudyAttech());
+			psmt.setString(10, vo.getStudyAttechDir());
+			// psmt.setString(11,vo.getStudyDate());
+
+			n = psmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -119,56 +115,41 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public int studyDelete(StudyVO vo) {
 		// 글 삭제
-				int n = 0;
-				String sql = "DELETE FROM STUDY WHERE STUDY_NO = ?";
-				try {
-					conn = dao.getConnection();
-					psmt = conn.prepareStatement(sql);
-					
-					
-		            //psmt.setInt(1, vo.getStudyNo());
-					vo.setStudyNo(rs.getInt("STUDY_NO"));// 1글 순서번호
-					vo.setStudyTitle(rs.getString("STUDY_TITLE")); // 2글 제목
-					vo.setStudySubject(rs.getString("STUDY_SUBJECT")); // 3글 내용
-					vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 4글작성자
-					vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 5스터디기간
-					vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));//6스터디언어;
-					vo.setStudyDate(rs.getString("STUDY_DATE"));//7작성일자
-					vo.setMemberNo(rs.getInt("MEMBER_NO"));//포링키
-					vo.setStudyAttech(rs.getString("STUDY_ATTECH"));//첨부파일
-					vo.setStudyAttechDir(rs.getString("STUDY_ATTECHDIR"));//첨부파일
-
-					n = psmt.executeUpdate();
-
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} finally {
-					close();
-				}
-				return n;
-			}
+		int r = 0;	
+		String sql = "DELETE FROM STUDY WHERE STUDY_NO = ?";
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1,vo.getStudyNo());
+			r = psmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return r;
+	}
 
 	@Override
 	public int studyUpdate(StudyVO vo) {
 		// 글 수정
 		int n = 0;
-		String sql = "UPDATE STUDY SET STUDY_TITLE=?, STUDY_SUBJECT=?, "
-				+ "STUDY_SYSTEM=?, STUDY_PERIOD=? , "
+		String sql = "UPDATE STUDY SET STUDY_TITLE=?, STUDY_SUBJECT=?, " + "STUDY_SYSTEM=?, STUDY_PERIOD=? , "
 				+ "STUDY_LANGUAGE=? , STUDY_ATTECH=? ,STUDY_ATTECHDIR, WHERE NOTICE_ID=?";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			//vo.setStudyNo(rs.getInt("STUDY_NO"));// 1글 순서번호
+			// vo.setStudyNo(rs.getInt("STUDY_NO"));// 1글 순서번호
 			vo.setStudyTitle(rs.getString("STUDY_TITLE")); // 2글 제목
 			vo.setStudySubject(rs.getString("STUDY_SUBJECT")); // 3글 내용
 			vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 4글작성자
 			vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 5스터디기간
-			vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));//6스터디언어;
-			//vo.setStudyDate(rs.getString("STUDY_DATE"));//7작성일자
-			//vo.setMemberNo(rs.getInt("MEMBER_NO"));//포링키
-			vo.setStudyAttech(rs.getString("STUDY_ATTECH"));//첨부파일
-			vo.setStudyAttechDir(rs.getString("STUDY_ATTECHDIR"));//첨부파일
-			//내용관련메소드 다호출
+			vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));// 6스터디언어;
+			// vo.setStudyDate(rs.getString("STUDY_DATE"));//7작성일자
+			// vo.setMemberNo(rs.getInt("MEMBER_NO"));//포링키
+			vo.setStudyAttech(rs.getString("STUDY_ATTECH"));// 첨부파일
+			vo.setStudyAttechDir(rs.getString("STUDY_ATTECHDIR"));// 첨부파일
+			// 내용관련메소드 다호출
 			n = psmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -181,29 +162,30 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public List<StudyVO> studySearchList(String key, String val) {
 		// 목록검색
-		//작성자,제목만 검색가능하게
-		List<StudyVO> list= new ArrayList<>();
+		// 작성자,제목만 검색가능하게
+		List<StudyVO> list = new ArrayList<>();
 		StudyVO vo;
-		String sql = "select * from study  where study_writer= ?"; 
+		String sql = "select * from study  where study_writer= ?";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, key);
 			psmt.setString(2, val);
 			rs = psmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				vo = new StudyVO();
 				vo.setStudyWriter(rs.getString("STUDY_WRITER"));// 글작성자
-				
+
 				list.add(vo);
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close();
 		}
 		return list;
 	}
+
 /////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	private void close() {

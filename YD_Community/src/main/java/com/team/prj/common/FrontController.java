@@ -94,6 +94,8 @@ public class FrontController extends HttpServlet {
 		//map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		//map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
 
+		
+		//스터디게시판
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출
 		map.put("/StudyInsert.do", new StudyInsert());//게시글등록
 		map.put("/StudyView.do", new StudyView());//게시글세부내용
