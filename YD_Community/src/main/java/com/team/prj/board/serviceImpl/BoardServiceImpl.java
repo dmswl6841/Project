@@ -50,12 +50,14 @@ public class BoardServiceImpl implements BoardService {
 	
 
 	
-	
+
+
+
+
 
 	@Override
-	public List<BoardVO> boardViewList(int board_no) {
+	public BoardVO boardView(int board_no) {
 		// 글 1개조회
-		List<BoardVO> boardviewlist = new ArrayList<>();
 		BoardVO vo = new BoardVO();
 		String sql = "SELECT * FROM BOARD WHERE BOARD_NO = ?";
 		
@@ -75,13 +77,12 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardDate(rs.getString("board_date"));
 				vo.setBoardAttech(rs.getString("board_attech"));
 				vo.setBoardSubject(rs.getString("board_subject"));
-				boardviewlist.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return boardviewlist;
+		return vo;
 	}
 
 	
@@ -97,26 +98,8 @@ public class BoardServiceImpl implements BoardService {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, vo.getBoardNo());
-			 // 쿼리 실행후 결과를 리턴
-//			rs = psmt.executeQuery();
-//			
-//			if(rs.next()) {
-//			BoardVO vo = new BoardVO();
-//			vo.setBoardNo(rs.getInt("board_no"));
-//			vo.setBoardTitle(rs.getString("board_title"));
-//			vo.setBoardSubject(rs.getString("board_subject"));
-//			vo.setBoardAttech(rs.getString("board_attech"));
-//			vo.setBoardWriter(rs.getString("board_writer"));
-//			vo.setBoardDate(rs.getString("board_date"));
-//			vo.setBoardScrap(rs.getInt("board_scrap"));
-//			vo.setBoardHit(rs.getInt("board_hit"));
-//			vo.setBoardCategory(rs.getString("board_category"));	
-//			vo.setBoardHot(rs.getString("board_hot"));
-//			vo.setBoardRecommend(rs.getInt("board_recommend"));
 			n = psmt.executeUpdate(); 
-			
-			
-			
+						
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -131,7 +114,28 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int boardUpdate(BoardVO vo) {
 		//글 수정
-		return 0;
+		int n =0;
+		String sql = "UPDATE BOARD SET BOARD_TITLE= ?, BOARD_SUBJECT= ?, BOARD_WRITER= ?, BOARD_DATE= ?, "
+				+ "BOARD_SCRAP= ?, BOARD_HIT= ?, BOARD_CATEGORY= ?, MEMBER_NO= ? WHERE BOARD_NO= ?";
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getBoardTitle());
+			psmt.setString(2, vo.getBoardSubject());
+			psmt.setString(3, vo.getBoardAttech());
+			psmt.setString(4, vo.getBoardAttechDir());
+			psmt.setString(5, vo.getBoardWriter());
+			psmt.setString(6, vo.getBoardCategory());
+			psmt.setInt(7, vo.getMemberNo());
+			psmt.setInt(8, vo.getBoardNo());
+			
+			n = psmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return n;
 	}
 	
 
@@ -408,9 +412,6 @@ public class BoardServiceImpl implements BoardService {
 			e.printStackTrace();
 		}
 	}
-
-
-
 
 	
 }
