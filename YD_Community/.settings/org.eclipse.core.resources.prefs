@@ -1,5 +1,14 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/boardView.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/freeBoardForm.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/freeBoardList.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/hotBoardList.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/noticeBoardForm.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/noticeBoardList.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/qnaBoardForm.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/qnaBoardList.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/totalBoardList.jsp=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

@@ -76,7 +76,6 @@ public class FrontController extends HttpServlet {
 		
 		map.put("/boardDelete.do", new BoardDelete()); // 자유게시판 글입력
 		
-		
 		////////////////////////////////////////////////////
 		
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출

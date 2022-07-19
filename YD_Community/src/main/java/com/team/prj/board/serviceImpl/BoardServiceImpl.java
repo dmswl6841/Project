@@ -88,32 +88,34 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public int boardDelete(int board_no) {
+	public int boardDelete(BoardVO vo) {
 		//글삭제
 		int n = 0;
-		BoardVO vo = new BoardVO();
-		String sql = "DELETE FROM BOARD WHERE BOARD_NO "
-				+ "IN (SELECT BOARD_NO FROM BOARD START WITH BOARD_NO = ? "
-				+ "CONNECT BY PRIOR BOARD_NO = BOARD_RECOMMEND)";
+		String sql = "DELETE FROM BOARD WHERE BOARD_NO = ?";
+		
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, board_no);
-			rs = psmt.executeQuery();
-			if(rs.next()) {
-				vo.setBoardNo(rs.getInt("board_no"));
-				vo.setBoardTitle(rs.getString("board_title"));
-				vo.setBoardSubject(rs.getString("board_subject"));
-				vo.setBoardAttech(rs.getString("board_attech"));
-				vo.setBoardWriter(rs.getString("board_writer"));
-				vo.setBoardDate(rs.getString("board_date"));
-				vo.setBoardScrap(rs.getInt("board_scrap"));
-				vo.setBoardHit(rs.getInt("board_hit"));
-				vo.setBoardCategory(rs.getString("board_category"));	
-				vo.setBoardHot(rs.getString("board_hot"));
-				vo.setBoardRecommend(rs.getInt("board_recommend"));
-				n = psmt.executeUpdate();
-			}   
+			psmt.setInt(1, vo.getBoardNo());
+			 // 쿼리 실행후 결과를 리턴
+//			rs = psmt.executeQuery();
+//			
+//			if(rs.next()) {
+//			BoardVO vo = new BoardVO();
+//			vo.setBoardNo(rs.getInt("board_no"));
+//			vo.setBoardTitle(rs.getString("board_title"));
+//			vo.setBoardSubject(rs.getString("board_subject"));
+//			vo.setBoardAttech(rs.getString("board_attech"));
+//			vo.setBoardWriter(rs.getString("board_writer"));
+//			vo.setBoardDate(rs.getString("board_date"));
+//			vo.setBoardScrap(rs.getInt("board_scrap"));
+//			vo.setBoardHit(rs.getInt("board_hit"));
+//			vo.setBoardCategory(rs.getString("board_category"));	
+//			vo.setBoardHot(rs.getString("board_hot"));
+//			vo.setBoardRecommend(rs.getInt("board_recommend"));
+			n = psmt.executeUpdate(); 
+			
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -122,7 +124,7 @@ public class BoardServiceImpl implements BoardService {
 		return n;
 	}
 	
-	
+
 	
 	
 	
