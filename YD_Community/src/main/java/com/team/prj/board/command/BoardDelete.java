@@ -17,10 +17,11 @@ public class BoardDelete implements Command {
 		//보드넘버값을 얻어온다
 		String board_no = request.getParameter("board_no");
 		
-		BoardVO vo = new BoardVO();
-		BoardVO vo = new BoardVO();
-		
+		BoardVO vo = new BoardVO(); 
+
 		BoardService boardDao = new BoardServiceImpl();
+		vo = boardDao.boardViewList(board_no);
+		
 		int n = boardDao.boardDelete(board_no);
 		
 		if (n == 1) { //삭제성공
