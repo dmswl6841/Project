@@ -10,25 +10,22 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
-	<div align="center">
-		<div>
-			<h1>시작하는 곳</h1>
-		</div>
+	
 
 		<c:if test="${empty member }">
 			<div>
 				<h3>
-					<a href="memberJoinForm.do">회원 가입</a>
+					<a href=""></a>
 				</h3>
 			</div>
 			<div>
 				<h3>
-					<a href="memberLoginForm.do">로그인</a>
+					<a href=""></a>
 				</h3>
 			</div>
 		</c:if>
 
-		<a href="main.do" onclick="disconnectKakao()">카카오 끊기 안되네..</a>
+		
 		<c:if test="${not empty member }">
 			<div>
 				<h3>
@@ -45,7 +42,8 @@
 		<c:if test="${auth eq 'ADMIN' }">
 			<div>
 				<h3>
-					<a href="memberSelect.do">회원 조회</a>
+				<!-- <a href="memberSelect.do">회원 조회</a> -->
+					
 				</h3>
 			</div>
 		</c:if>

@@ -1,80 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Style the header */
-header {
-  background-color: #666;
-  padding: 30px; 
-  text-align: center;
-  font-size: 35px;
-  color: white;
-}
-
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: left;
-  width: 30%;
-  height: 300px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-article {
-  float: left;
-  padding: 20px;
-  width: 70%;
-  background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
-}
-
-/* Clear floats after the columns */
-section::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the footer */
-footer {
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  nav, article {
-    width: 100%;
-    height: auto;
-  }
-}
-</style>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+     
 </head>
 <body>
-	<header>
-	  <h2>Micol</h2>
-	</header>
+     <!-- Masthead-->
+        <header class="masthead bg-primary text-white text-center">
+            <div class="container d-flex align-items-center flex-column">
+                <!-- Masthead Heading-->
+                <h1 class="masthead-heading text-uppercase mb-0">YEDAM</h1>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Masthead Subheading-->
+                <p class="masthead-subheading font-weight-light mb-0">YEDAM<br>Developer Community</p>
+            </div>
+        </header>
+         <div class="row">
+            <div class="leftcolumn">
+              <div class="card">
+                <h2>시험일정</h2>
+                <h5>캘린더!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h5>
+                <div class="fakeimg" style="height:200px;">Image</div>
+                <p>Some text.</p>
+                <p>캘린더!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                </p>
+              </div>
+              <div class="card">
+                <h2>공지사항</h2>
+                <h5>공지사항올리세요</h5>
+                <div class="fakeimg" style="height:200px;">Image</div>
+                <p>공지사항!!!!!!!!!!!!!!!!!!!.</p>
+                <p>공지사항올리세요
+                </p>
+              </div>
+            </div>
+            <div class="rightcolumn">
+              <div class="card">
+                <h2>인기글</h2>
+                <div class="fakeimg" style="height:100px;">Image</div>
+                <p>인기글 올리세요!!!!!!!!!!!!!!!!!!!!!!!!</p>
+              </div>
+              <div class="card">
+                <h3>인기글</h3>
+                <div class="fakeimg"><p>Image</p></div>
+                <div class="fakeimg"><p>Image</p></div>
+                <div class="fakeimg"><p>Image</p></div>
+              </div>
+        
+            </div>
+          </div>
 </body>
 </html>
