@@ -21,7 +21,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 회원 전체 조회
 	@Override
-	public List<MemberVO> memberSelectList() {
+	public List<MemberVO> managerMemberSelectAll() {
 		List<MemberVO> list = new ArrayList<MemberVO>();
 		MemberVO vo;
 		String sql = "select * from member";
@@ -50,7 +50,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 회원 목록 검색
 	@Override
-	public List<MemberVO> memberSearchList(String key, String val) {
+	public List<MemberVO> managerMemberSearch(String key, String val) {
 		List<MemberVO> list = new ArrayList<MemberVO>();
 		MemberVO vo = new MemberVO();
 		String sql = "select * from member where " + key + " like '%" + val + "%'";
@@ -78,7 +78,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public int memberDelete(MemberVO vo) {
+	public int managerMemberDelete(MemberVO vo) {
 		int r = 0;
 		String sql = "delete from member where member_no=?";
 
@@ -125,7 +125,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 게시글 전체 조회
 	@Override
-	public List<BoardVO> boardSelectList() {
+	public List<BoardVO> managerBoardSelectAll() {
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		BoardVO vo;
 		String sql = "select * from board order by board_no desc";
@@ -153,7 +153,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 게시글 목록 검색
 	@Override
-	public List<BoardVO> boardSearchList(String key, String val) {
+	public List<BoardVO> managerBoardSearch(String key, String val) {
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		BoardVO vo;
 		String sql = "select * from board  where " + key + " like '%" + val + "%'";
@@ -183,7 +183,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 댓글 전체 조회
 	@Override
-	public List<CommentsVO> commentsSelectList() {
+	public List<CommentsVO> managerCommentsSelectAll() {
 		List<CommentsVO> list = new ArrayList<CommentsVO>();
 		CommentsVO vo;
 		String sql = "select * from Comments";
@@ -211,7 +211,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 댓글 목록 검색
 	@Override
-	public List<CommentsVO> commentsSearchList(String key, String val) {
+	public List<CommentsVO> managerCommentsSearch(String key, String val) {
 		List<CommentsVO> list = new ArrayList<CommentsVO>();
 		CommentsVO vo;
 		String sql = "select * from Comments where " + key + " like '%" + val + "%'";
@@ -241,7 +241,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 금지어 전체 조회
 	@Override
-	public List<XwordVO> XwordSelectList() {
+	public List<XwordVO> XwordSelectAll() {
 		List<XwordVO> list = new ArrayList<XwordVO>();
 		XwordVO vo;
 		String sql = "select * from Xword";
@@ -267,7 +267,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 금지어 목록 검색
 	@Override
-	public List<XwordVO> XwordSearchList(String key, String val) {
+	public List<XwordVO> XwordSearch(String key, String val) {
 		List<XwordVO> list = new ArrayList<XwordVO>();
 		XwordVO vo;
 		String sql = "select * from Xword where " + key + " like '%" + val + "%'";
