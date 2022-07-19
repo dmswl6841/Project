@@ -20,20 +20,23 @@
 
 
 	<nav>
-		<ul>
+			<ul style="list-style: none;">
 			<li><a href="memberRecent.do">최근활동</a></li>
-			<li><a href="memberBoard.do">게시글</a></li>
+			<li><a href="memberStudyRecent.do">최근활동/스터디</a></li>
+			<li><a href="memberBoard.do">내가 쓴 자유게시판</a></li>
+			<li><a href="memberStudyBoard.do">내가 쓴 스터디</a></li>
 			<li><a href="memberScrap.do">스크랩</a></li>
 			<li><a href="memberStudy.do">찜한 스터디</a></li>
 		</ul>
 	</nav>
+
 
 		<div>
 			<table border="1">
 			<thead>
 				<tr>  
 						<th width="130">작성자</th>
-						<th width="200">제목</th>
+						<th width="300">제목</th>
 						<th width="130">작성일자</th>
 				</tr>
 				</thead>
@@ -43,7 +46,13 @@
 							<c:forEach items="${list }" var="b">
 								<tr>
 									<td align="center">${b.boardWriter }</td>
-									<td align="center"><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
+									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
+									<td align="center">${b.boardDate }</td>
+										
+									
+								
+									
+									
 									
 									<td align="center">${b.boardDate }</td>
 									

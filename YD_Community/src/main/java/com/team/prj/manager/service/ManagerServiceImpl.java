@@ -99,22 +99,25 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	
 	@Override
-	public int memeberUpdateAuthor(MemberVO vo) {
+	public int memberUpdateAuthor(MemberVO vo) {
 		int r= 0;
-		String sql = "update member set member_author values (?)";
-
+		String sql = "update member set member_author = ? where member_no = ?";
+		String author;
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getMemberAuthor());
-
-			r = psmt.executeUpdate();
-
-			if (rs.next()) {
-				vo = new MemberVO();
-				vo.setMemberAuthor(rs.getString("member_Author"));
+			
+			if(vo.getMemberAuthor() == "ADMIN") {
+				author = "ADMIN";
+			}else {
+				author = "USER";
 			}
-
+			psmt.setString(1, author);
+			psmt.setInt(2, vo.getMemberNo());
+			
+			System.out.println(author);
+			
+			r = psmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

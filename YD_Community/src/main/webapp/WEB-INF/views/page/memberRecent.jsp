@@ -14,9 +14,11 @@
 	<div><h1>나의 최근 활동</h1></div>
 	
 	<nav>
-		<ul>
+			<ul style="list-style: none;">
 			<li><a href="memberRecent.do">최근활동</a></li>
-			<li><a href="memberBoard.do">게시글</a></li>
+			<li><a href="memberStudyRecent.do">최근활동/스터디</a></li>
+			<li><a href="memberBoard.do">자유게시판 게시글</a></li>
+			<li><a href="memberStudyBoard.do">스터디 게시글</a></li>
 			<li><a href="memberScrap.do">스크랩</a></li>
 			<li><a href="memberStudy.do">찜한 스터디</a></li>
 		</ul>
@@ -24,10 +26,10 @@
 	
 	
 	<div>
-	<table>
+	<table border="1">
 		<thead>
 			<tr>
-			<th width="400"></th>
+			<th width="400">목록</th>
 		
 			
 			</tr>
@@ -37,7 +39,7 @@
 						<c:when test="${not empty list }">
 							<c:forEach items="${list }" var="r">
 								<tr>
-									<td>#${r.boardDate }  ${r.boardTitle }</td>
+									<td align="center">#${r.boardDate }  ${r.boardTitle }</td>
 									
 									
 									</tr>
