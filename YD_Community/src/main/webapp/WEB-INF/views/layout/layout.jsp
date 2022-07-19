@@ -12,6 +12,10 @@
 </style>
 </head>
 <body>
+           
+
+
+
   	<tiles:insertAttribute name="header"/>
 	<section>
 	  <tiles:insertAttribute name="menu"/> 
@@ -20,5 +24,7 @@
 	  </article>
 	</section>
 	<tiles:insertAttribute name="footer"/>
+	
+	 
 </body>
 </html>
