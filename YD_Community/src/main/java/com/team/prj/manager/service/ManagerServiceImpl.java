@@ -107,7 +107,7 @@ public class ManagerServiceImpl implements ManagerService {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			
-			if(vo.getMemberAuthor() == "ADMIN") {
+			if(vo.getMemberAuthor().equals("ADMIN")) {
 				author = "ADMIN";
 			}else {
 				author = "USER";
