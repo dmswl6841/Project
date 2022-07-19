@@ -79,8 +79,8 @@
 					} else {
 						errorCallback(new Error(xhr.stautsText));
 					}
-				}
-				;
+				};
+				
 
 				xhr.open('GET', url);
 				console.log(xhr.open('GET', url));
