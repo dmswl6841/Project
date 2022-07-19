@@ -44,10 +44,10 @@
 					<c:forEach items="${list }" var="m">
 						<tr>
 							<td><input id="check" name="check"type="checkbox"></td>
-							<div id="memberNo" name="memberNo"><td>${m.memberNo }</td></div>
-							<div id="memberId" name="memberId"><td>${m.memberId }</td></div>
-							<div id="memberNick" name="memberNick"><td>${m.memberNick }</td></div>
-							<div id="memberWarning" name="memberWarning"><td>${m.memberWarning }</td></div>
+							<td id="memberNo" name="memberNo">${m.memberNo }</td>
+							<td id="memberId" name="memberId">${m.memberId }</td>
+							<td id="memberNick" name="memberNick">${m.memberNick }</td>
+							<td id="memberWarning" name="memberWarning">${m.memberWarning }</td>
 							<td id="memberAuthor" name="memberAuthor">${m.memberAuthor }</td>
 							<td><button type="button" onclick="memberUpdate(this)">승인</button></td>
 							<td align="center">
