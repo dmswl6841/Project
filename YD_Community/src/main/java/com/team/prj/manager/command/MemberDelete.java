@@ -24,12 +24,9 @@ public class MemberDelete implements Command {
 		vo.setMemberNo(Integer.valueOf(request.getParameter("memberNo")));
 		int n = managerDao.memberDelete(vo);
 		String jsonList = "0";
-		
 		if(n != 0) {
 			jsonList = "1";
 		}
 		return "ajax:"+jsonList;
-		
 	}
-
 }
