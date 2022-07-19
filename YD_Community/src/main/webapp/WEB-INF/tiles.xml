@@ -10,6 +10,8 @@
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp"/>
 	</definition>
+	
+	<!-- 타일즈 파일 깃 전송 안되노 빡치구로 -->
 
 	<definition name="WILDCARD:*/*" extends="myWeb">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
