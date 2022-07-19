@@ -19,10 +19,6 @@ import com.team.prj.board.command.BoardView;
 import com.team.prj.board.command.BoardForm;
 import com.team.prj.board.command.BoardInsert;
 
-import com.team.prj.manager.command.BoardList;
-import com.team.prj.manager.command.MemberDelete;
-import com.team.prj.manager.command.MemberList;
-import com.team.prj.manager.command.MemberSearchList;
 import com.team.prj.manager.command.MemberUpdateAuthor;
 import com.team.prj.study.command.StudyDelete;
 import com.team.prj.study.command.StudyForm;

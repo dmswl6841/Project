@@ -47,13 +47,6 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return n;
 	}
-	
-
-	
-
-
-
-
 
 	@Override
 	public BoardVO boardView(int board_no) {
@@ -86,8 +79,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	
-	
 	@Override
 	public int boardDelete(BoardVO vo) {
 		//글삭제
@@ -106,10 +97,6 @@ public class BoardServiceImpl implements BoardService {
 		
 		return n;
 	}
-	
-
-	
-	
 	
 	@Override
 	public int boardUpdate(BoardVO vo) {
@@ -143,8 +130,6 @@ public class BoardServiceImpl implements BoardService {
 		return n;
 	}
 	
-
-
 	@Override
 	public List<BoardVO> boardSearchList(String categorykey, String categoryval, String searchkey, String searchval) {
 		// 글 검색기능                  //카테고리 선택박스 (전체, 공지, 자유, qna, 인기)  세부분류 선택박스 (글쓴이, 제목 포함단어...)             
