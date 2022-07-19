@@ -1,85 +1,93 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>메뉴</title>
-<style>
-* {
-	box-sizing: border-box;
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>YEDAM COMMUNITY</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <style>
+.leftcolumn {   
+    float: left;
+    width: 75%;
 }
-
-body {
-	font-family: Arial, Helvetica, sans-serif;
+/* Right column */
+.rightcolumn {
+    float: left;
+    width: 25%;
+    background-color: #f1f1f1;
+    padding-left: 20px;
 }
-
-/* Style the header */
-header { 
-	background-color: #666;
-	padding: 30px;
-	text-align: center;
-	font-size: 35px;
-	color: white;
+/* Fake image */
+.fakeimg {
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
 }
-
-/* Create two columns/boxes that floats next to each other */
-nav {
-	float: left;
-	width: 30%;
-	height: 300px; /* only for demonstration, should be removed */
-	background: #ccc;
-	padding: 20px;
+/* Add a card effect for articles */
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
 }
-
-/* Style the list inside the menu */
-nav ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-article {
-	float: left;
-	padding: 20px;
-	width: 70%;
-	background-color: #f1f1f1;
-	height: 300px; /* only for demonstration, should be removed */
-}
-
 /* Clear floats after the columns */
-section::after {
-	content: "";
-	display: table;
-	clear: both;
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
-
-/* Style the footer */
-footer {
-	background-color: #777;
-	padding: 10px;
-	text-align: center;
-	color: white;
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {   
+        width: 100%;
+        padding: 0;
+    }
 }
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media ( max-width : 600px) {
-	nav, article {
-		width: 100%;
-		height: auto;
-	}
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .topnav a {
+        float: none;
+        width: 100%;
+    }
+    
 }
+        
 </style>
-
 </head>
-<body>
-	<nav>
-		<ul>
-			<li><a href="memberJoinForm.do">회원가입</a></li>
-			<li><a href="memberLoginForm.do">로그인</a></li>
-			<li><a href="noticeList.do">게시글목록</a></li>
-		</ul>
-	</nav>
+<body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="">YEDAM COMMUNITY</a>
+                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="main.do">HOME</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="">NOTICE</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="StudyList.do">STUDY</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="">COMMUNITY</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="">MYPAGES</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="">LOGIN</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="">LOGOUT</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="">JOIN</a></li>
+    
+                    </ul>
+                </div>
+            </div>
+        </nav>
 </body>
 </html>

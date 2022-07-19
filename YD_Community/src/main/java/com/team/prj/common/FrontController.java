@@ -171,7 +171,7 @@ public class FrontController extends HttpServlet {
 				response.getWriter().append(viewPage.substring(5));
 				return;
 			}
-			viewPage = "/WEB-INF/views/" + viewPage + ".jsp"; // 시스템에서 접근가능한 폴더를 더해주고
+			viewPage = viewPage + ".tiles"; // 시스템에서 접근가능한 폴더를 더해주고
 			RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 			dispatcher.forward(request, response); // 원하는 페이지를 호출에서 전달함
 		} else {
