@@ -16,9 +16,11 @@
 		
 			
 	<nav>
-		<ul>
+			<ul style="list-style: none;">
 			<li><a href="memberRecent.do">최근활동</a></li>
-			<li><a href="memberBoard.do">게시글</a></li>
+			<li><a href="memberStudyRecent.do">최근활동/스터디</a></li>
+			<li><a href="memberBoard.do">자유게시판 게시글</a></li>
+			<li><a href="memberStudyBoard.do">스터디 게시글</a></li>
 			<li><a href="memberScrap.do">스크랩</a></li>
 			<li><a href="memberStudy.do">찜한 스터디</a></li>
 		</ul>
@@ -28,9 +30,9 @@
 			<table >
 			<thead>
 				<tr>  
-						<th width="130">스크랩 날짜</th>
-						<th width="130">스터디 글번호</th>
-						<th width="200">스터디 제목</th>
+						<th width="100"></th>
+						<th width="250"></th>
+						
 				</tr>
 				</thead>
 				<tbody>
@@ -38,11 +40,11 @@
 						<c:when test="${not empty list }">
 							<c:forEach items="${list }" var="s">
 								<tr>
-									<td>${s.scrapDate }</td>
-									<td>${s.studyNo }</td>
-									<td>${s.studyTitle }</td>
+									<td align="center">${s.scrapDate }</td>
+									<td><a href="StudyView.do?study_no=${s.svo.studyNo }">#${s.svo.studyNo }번 스터디를 찜하셨습니다!</a></td>
+								
 									
-									
+								 													
 									</tr>
 							</c:forEach>
 						</c:when>
