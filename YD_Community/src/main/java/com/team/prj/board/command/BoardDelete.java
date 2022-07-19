@@ -18,9 +18,18 @@ public class BoardDelete implements Command {
 		// 게시글 삭제
 		
 		//보드넘버값을 얻어온다
+
 		int board_no =Integer.parseInt(request.getParameter("board_no"));
 		BoardService boardDao = new BoardServiceImpl();		
 		int n = 0;
+
+		String board_no = request.getParameter("board_no");
+		
+		BoardVO vo = new BoardVO(); 
+
+		BoardService boardDao = new BoardServiceImpl();
+		vo = boardDao.boardViewList(board_no);
+
 		
 		BoardVO vo = new BoardVO();
 	    vo.setBoardNo(board_no);

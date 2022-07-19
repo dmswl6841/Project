@@ -48,8 +48,8 @@
 							<div id="memberId" name="memberId"><td>${m.memberId }</td></div>
 							<div id="memberNick" name="memberNick"><td>${m.memberNick }</td></div>
 							<div id="memberWarning" name="memberWarning"><td>${m.memberWarning }</td></div>
-							<div id="memberAuthor" name="memberAuthor"><td>${m.memberAuthor }</td></div>
-							<td><button type="button" onclick="memberUpdate()">승인</button></td>
+							<td id="memberAuthor" name="memberAuthor">${m.memberAuthor }</td>
+							<td><button type="button" onclick="memberUpdate(this)">승인</button></td>
 							<td align="center">
 								<button type="button" onclick="memberDelete(this)">삭제</button>
 							</td>
@@ -97,7 +97,7 @@
 			      }
 			   }﻿
 		
-		function memberUpdate() { //검색 기능
+		function memberSearch() { //검색 기능
 			let key = $("#key").val();
 			let val = $("#val").val();
 			$.ajax({
@@ -117,42 +117,21 @@
 			})
 		}
 			   
-			   function memberSearch() { //가입 승인2 -ing
-					let key = $("#memberAuthor").val();
-					let row = $(obj).parent().parent().get(0);
-					let td = row.cells[1];
-					let val = $(td).html();
-					$.ajax({
-						url : "memberUpdateAuthor.do",
-						type : "post",
-						data : {key : key, val : val},
-						dataType : "json",
-						success : function(result){
-							if(result.length > 0) {
-								alert("가입 승인되었습니다.");
-								jsonHtmlConvert(result);
-							}else {
-								alert("이미 승인된 회원입니다.");
-							}
-						},
-						error : function() {
-						}
-					})
-				}
+			   
 		
 		function jsonHtmlConvert(data) { //검색 후 새로 불러오기
 			$('tbody').remove();
 			var tbody = $("<tbody />");
 			$.each(data, function(index, item){
 				var row = $("<tr />").append(
-							$("<td />").append($("<checkbox>")),
+							$("<td />").append($("<input>").attr('type','checkbox')),
 							$("<td />").text(item.memberNo),
 							$("<td />").text(item.memberId),
 							$("<td />").text(item.memberNick),
 							$("<td />").text(item.memberWarning),
 							$("<td />").text(item.memberAuthor),
-							$("<td />").append($("<botton onclick=memberUpadte(this) />").text("승인")),
-							$("<td />").append($("<botton onclick=memberDelete(this) />").text("삭제"))
+							$("<td />").append($("<button onclick=memberUpdate(this) />").text("승인")),
+							$("<td />").append($("<button onclick=memberDelete(this) />").text("삭제"))
 						);
 				tbody.append(row);
 			});
@@ -161,6 +140,31 @@
 		
 		function errorCallback(err){ //에러
 			console.log('error : '+err.message);
+		}
+		
+		function memberUpdate(obj) { //가입 승인2 -ing
+			let key = obj.parentElement.parentElement.children[5].textContent;
+	   		console.log(key);
+			let row = $(obj).parent().parent().get(0);
+			let td = row.cells[1];
+			let val = $(td).html();
+			console.log(val);
+			$.ajax({
+				url : "memberUpdateAuthor.do",
+				type : "post",
+				data : {key : key, val : val},
+				dataType : "json",
+				success : function(result){
+					if(result.length > 0) {
+						alert("가입 승인되었습니다.");
+						jsonHtmlConvert(result);
+					}else {
+						alert("이미 승인된 회원입니다.");
+					}
+				},
+				error : function() {
+				}
+			})
 		}
 		
 		/* function memberUpdate(obj) { //가입 승인 -ing
@@ -205,9 +209,10 @@
 			xhr.onload = function(){
 				if(xhr.status >=200 && xhr.status <300){
 					if(xhr.response ==1){
+						alert("삭제되었습니다.");
 						$(row).remove();
 					}else{
-						alert ("삭제할 수 없습니다.")
+						alert("삭제할 수 없습니다.");
 					}
 					
 				}else {
@@ -217,7 +222,6 @@
 			xhr.open('GET',url);
 			console.log(xhr.open('GET',url));
 			xhr.send(); 
-			
 		}
 	</script>
 </body>

@@ -19,8 +19,6 @@ public class MemberUpdateAuthor implements Command {
 		//회원 가입 승인
 		System.out.println("확인용");
 		ManagerService managerDao = new ManagerServiceImpl();
-		List<MemberVO> list = new ArrayList<MemberVO>();
-		ObjectMapper mapper = new ObjectMapper(); 
 		MemberVO vo = new MemberVO();
 		vo.setMemberNo(Integer.valueOf(request.getParameter("memberNo")));
 		int n = managerDao.memberUpdateAuthor(vo);

@@ -50,9 +50,8 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
-	public List<StudyVO> studyViewList(int study_no) {
+	public StudyVO studyViewList(int study_no) {
 		// 단건조회
-		List<StudyVO> studyviewlist = new ArrayList<>();
 		StudyVO vo = new StudyVO();
 		String sql = "SELECT * FROM STUDY WHERE STUDY_NO = ?";
 
@@ -72,13 +71,12 @@ public class StudyServiceImpl implements StudyService {
 				vo.setStudyAttech(rs.getString("study_Attech"));
 				vo.setStudyAttechDir(rs.getString("study_AttechDir"));
 				vo.setStudyDate(rs.getString("study_date"));
-				studyviewlist.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return studyviewlist;
+		return vo;
 	}
 
 	@Override

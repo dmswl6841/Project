@@ -4,6 +4,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<style>
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+ 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+ 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+ 
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+ 
+.dropdown-content a:hover {background-color: #ddd;}
+ 
+.dropdown:hover .dropdown-content {display: block;}
+ 
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+
 <meta charset="UTF-8">
 <title>나의 최근 활동</title>
 <script src="js/jquery-3.6.0.min.js"></script>
@@ -13,16 +51,29 @@
 	<div align="center"></div>
 	<div><h1>나의 최근 활동</h1></div>
 	
-	<nav>
-			<ul style="list-style: none;">
-			<li><a href="memberRecent.do">최근활동</a></li>
-			<li><a href="memberStudyRecent.do">최근활동/스터디</a></li>
-			<li><a href="memberBoard.do">자유게시판 게시글</a></li>
-			<li><a href="memberStudyBoard.do">스터디 게시글</a></li>
-			<li><a href="memberScrap.do">스크랩</a></li>
-			<li><a href="memberStudy.do">찜한 스터디</a></li>
-		</ul>
-	</nav>
+	<div class="dropdown">
+  <button class="dropbtn">최근활동</button>
+  <div class="dropdown-content">
+   <a href="memberRecent.do">자유게시판</a>
+    <a href="memberStudyRecent.do">스터디</a>
+  </div>
+  </div>
+  
+  <div class="dropdown">
+   <button class="dropbtn">나의 게시글</button>
+  <div class="dropdown-content">
+   <a href="memberBoard.do">자유게시판</a>
+   <a href="memberStudyBoard.do">스터디</a>
+  </div>
+  </div>
+  
+  <div class="dropdown">
+   <button class="dropbtn">북마크</button>
+  <div class="dropdown-content">
+   <a href="memberScrap.do">스크랩</a>
+     <a href="memberStudy.do">찜한 스터디</a>
+  </div>
+  </div>
 	
 	
 	<div>
