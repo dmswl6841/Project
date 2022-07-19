@@ -30,10 +30,6 @@
 							<td width="200">
 								<input type="number" id="MemberNo" name="MemberNo">
 							</td>
-							<th width="150">작성일자</th>
-							<td width="200">
-								<input type="date" id="boardDate" name="boardDate">
-							</td>
 						</tr>
 						<tr>
 							<th>제목</th>

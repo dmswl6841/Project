@@ -115,11 +115,14 @@ public class BoardServiceImpl implements BoardService {
 	public int boardUpdate(BoardVO vo) {
 		//글 수정
 		int n =0;
-		String sql = "UPDATE BOARD SET BOARD_TITLE= ?, BOARD_SUBJECT= ?, BOARD_WRITER= ?, BOARD_DATE= ?, "
-				+ "BOARD_SCRAP= ?, BOARD_HIT= ?, BOARD_CATEGORY= ?, MEMBER_NO= ? WHERE BOARD_NO= ?";
+		String sql = "UPDATE BOARD SET BOARD_TITLE = ?, BOARD_SUBJECT = ?, BOARD_ATTECH = ?, BOARD_ATTECH_DIR = ?, "
+				+ "BOARD_WRITER = ?, BOARD_CATEGORY = ?, MEMBER_NO = ?, BOARD_DATE = SYSDATE "
+				+ "WHERE BOARD_NO = ?";
+		//BOARD_SCRAP= ?, BOARD_HIT= ?, 
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
+
 			psmt.setString(1, vo.getBoardTitle());
 			psmt.setString(2, vo.getBoardSubject());
 			psmt.setString(3, vo.getBoardAttech());
@@ -127,8 +130,10 @@ public class BoardServiceImpl implements BoardService {
 			psmt.setString(5, vo.getBoardWriter());
 			psmt.setString(6, vo.getBoardCategory());
 			psmt.setInt(7, vo.getMemberNo());
+//			psmt.setInt(8, vo.getBoardScrap());
+//			psmt.setInt(9, vo.getBoardHit());
 			psmt.setInt(8, vo.getBoardNo());
-			
+
 			n = psmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();

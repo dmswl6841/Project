@@ -83,7 +83,7 @@
 			if (result) {
 				var form = document.writeFrm;
 				form.method = "post";
-				form.action = "boardUpdate.do";
+				form.action = "boardUpdateForm.do";
 				form.submit();
 			}
 		}
