@@ -1,7 +1,5 @@
 package com.team.prj.board.command;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +16,9 @@ public class BoardView implements Command{
 		// 글 1개보기
 		int board_no = Integer.parseInt(request.getParameter("board_no"));
 		BoardService boardDao = new BoardServiceImpl();
-		List<BoardVO> boardviewlist = new ArrayList<>();
-		boardviewlist = boardDao.boardViewList(board_no);
-		request.setAttribute("boardviewlist", boardviewlist);
+		BoardVO vo = new BoardVO();
+		vo = boardDao.boardView(board_no);
+		request.setAttribute("vo", vo);
 		return "board/boardView";
 
 	}

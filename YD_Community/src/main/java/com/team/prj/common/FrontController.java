@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team.prj.MainCommand;
 import com.team.prj.board.command.BoardDelete;
+import com.team.prj.board.command.BoardUpdate;
 import com.team.prj.board.command.BoardView;
 import com.team.prj.board.command.FreeBoardForm;
 import com.team.prj.board.command.FreeBoardInsert;
@@ -91,7 +92,7 @@ public class FrontController extends HttpServlet {
 		map.put("/noticeBoardInsert.do", new NoticeBoardInsert()); // 자유게시판 글입력
 		
 		map.put("/boardDelete.do", new BoardDelete()); // 자유게시판 글입력
-		
+		map.put("/boardUpdate.do", new BoardUpdate()); // 자유게시판 글입력
 		////////////////////////////////////////////////////
 		
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
