@@ -157,7 +157,7 @@ footer {
 					<table border="1">
 						<tr>
 							<th width="150">작성자</th>
-							<td width="200"><input type="text" id="studyWriter"
+							<td width="1000"><input type="text" id="studyWriter"
 								name="studyWriter"></td>
 							<th width="150">제목</th>
 							<td width="200"><input type="text" id="studyTitle"
@@ -190,6 +190,12 @@ footer {
 							<th width="150">스터디멤버수</th>
 							<td width="200"><input type="text" id="studyMember"
 								name="studyMember"></td>
+						</tr>
+						
+						<tr>
+							<th width="150">멤버넘버</th>
+							<td width="200"><input type="text" id="memberNo"
+								name="memberNo"></td>
 						</tr>
 						
 						<tr>
