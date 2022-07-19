@@ -13,7 +13,7 @@ import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.Command;
 
 
-public class FreeBoardInsert implements Command {
+public class BoardInsert implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
@@ -53,7 +53,18 @@ public class FreeBoardInsert implements Command {
 		String returnPage = null;
 		if (n != 0) {
 			request.setAttribute("message", "게시글 등록에 성공했습니다.");
-			returnPage = "freeBoardList.do";
+			String category = vo.getBoardCategory();
+			
+			if (category.equals("자유")) {
+				System.out.println(category);
+				returnPage = "freeBoardList.do";		
+			} else if (category.equals("QnA")) {
+				System.out.println(category);
+				returnPage = "qnaBoardList.do";
+			}  else if (category.equals("공지")) {
+				System.out.println(category);
+				returnPage = "noticeBoardList.do";
+			}
 		} else {
 			request.setAttribute("message", "게시글 등록을 실패했습니다.");
 			returnPage = "board/boardError";

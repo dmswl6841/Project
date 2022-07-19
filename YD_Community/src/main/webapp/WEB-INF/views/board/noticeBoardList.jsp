@@ -84,7 +84,7 @@
 			<!-- 관리자 권한으로 글쓰기 -->
 			<div>
 				<c:if test="${author == 'ADMIN'}">
-					<button type="button" onclick="location.href='noticeBoardForm.do'">글등록</button>
+					<button type="button" onclick="location.href='boardForm.do'">글등록</button>
 				</c:if>
 			</div>
 		</div><br>

@@ -84,7 +84,7 @@
 
 		<!-- 글쓰기 버튼 -->
 		<div>
-			<button type="button" onclick="location.href='qnaBoardForm.do'">글쓰기</button>
+			<button type="button" onclick="location.href='boardForm.do'">글쓰기</button>
 		</div>
 	</div>
 	
