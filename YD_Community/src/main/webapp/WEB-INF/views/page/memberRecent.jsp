@@ -48,8 +48,9 @@
 </head>
 <body>
 
-	<div align="center"></div>
-	<div><h1>나의 최근 활동</h1></div>
+	<div align="center">
+	<div><h1>나의 최근 활동</h1>
+	</div>
 	
 	<div class="dropdown">
   <button class="dropbtn">최근활동</button>
@@ -77,7 +78,7 @@
 	
 	
 	<div>
-	<table border="1">
+	<table align="center" border="1">
 		<thead>
 			<tr>
 			<th width="400">목록</th>
