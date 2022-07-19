@@ -95,29 +95,26 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		return r;
 	}
-	
-	
-	
+
 	@Override
-	public int memberUpdateAuthor(MemberVO vo) {
-		int r= 0;
-		String sql = "update member set member_author = ? where member_no = ?";
-		String author;
+	public int memberUpdateAuthor(String key, String val) {
+		int r = 0;
+		String sql = "update member set member_author = ? where member_no =?";
+		
+		if (key.equals("ADMIN")) {
+			key = "ADMIN";
+		} else {
+			key = "USER";
+		}
+		
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			
-			if(vo.getMemberAuthor().equals("ADMIN")) {
-				author = "ADMIN";
-			}else {
-				author = "USER";
-			}
-			psmt.setString(1, author);
-			psmt.setInt(2, vo.getMemberNo());
-			
-			System.out.println(author);
+			psmt.setString(1, key);
+			psmt.setString(2, val);
 			
 			r = psmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -125,7 +122,6 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		return r;
 	}
-
 
 	// 게시글 전체 조회
 	@Override

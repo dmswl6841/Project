@@ -116,10 +116,8 @@
 				}
 			})
 		}
-			   
-			   
 		
-		function jsonHtmlConvert(data) { //검색 후 새로 불러오기
+		function jsonHtmlConvert(data) { //새로 불러오기
 			$('tbody').remove();
 			var tbody = $("<tbody />");
 			$.each(data, function(index, item){
@@ -155,13 +153,16 @@
 				data : {key : key, val : val},
 				dataType : "json",
 				success : function(result){
-					if(result.length > 0) {
+					console.log(result);
+					if(result == "1") {
 						alert("가입 승인되었습니다.");
 						jsonHtmlConvert(result);
+					}else if(result == "2") {
+						alert("관리자는 바꿀 수 없습니다!");
 					}else {
 						alert("이미 승인된 회원입니다.");
 					}
-				},
+				}
 				error : function() {
 				}
 			})

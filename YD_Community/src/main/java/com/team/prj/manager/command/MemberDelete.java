@@ -1,12 +1,8 @@
 package com.team.prj.manager.command;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.prj.common.Command;
 import com.team.prj.manager.service.ManagerService;
 import com.team.prj.manager.service.ManagerServiceImpl;
@@ -18,8 +14,6 @@ public class MemberDelete implements Command {
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		//회원 삭제
 		ManagerService managerDao = new ManagerServiceImpl();
-		List<MemberVO> list = new ArrayList<MemberVO>();
-		ObjectMapper mapper = new ObjectMapper(); 
 		MemberVO vo = new MemberVO();
 		vo.setMemberNo(Integer.valueOf(request.getParameter("memberNo")));
 		int n = managerDao.memberDelete(vo);
