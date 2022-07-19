@@ -16,8 +16,8 @@ import com.team.prj.board.command.BoardDelete;
 import com.team.prj.board.command.BoardUpdate;
 import com.team.prj.board.command.BoardUpdateForm;
 import com.team.prj.board.command.BoardView;
-import com.team.prj.board.command.FreeBoardForm;
-import com.team.prj.board.command.FreeBoardInsert;
+import com.team.prj.board.command.BoardForm;
+import com.team.prj.board.command.BoardInsert;
 
 import com.team.prj.manager.command.BoardList;
 import com.team.prj.manager.command.MemberDelete;
@@ -83,18 +83,15 @@ public class FrontController extends HttpServlet {
 		map.put("/qnaBoardList.do", new QnaBoardList()); // qna 게시판 처음화면
 		map.put("/noticeBoardList.do", new NoticeBoardList()); // 공지 게시판 처음화면
 
-		map.put("/freeBoardForm.do", new FreeBoardForm()); // 자유게시판 글쓰기폼
-		map.put("/qnaBoardForm.do", new QnaBoardForm()); // Qna게시판 글쓰기폼
-		map.put("/noticeBoardForm.do", new NoticeBoardForm()); // 공지게시판 글쓰기폼
-		
+		map.put("/boardForm.do", new BoardForm()); //글쓰기폼 호출
 		map.put("/boardView.do", new BoardView()); // 글 상세보기화면
-		map.put("/freeBoardInsert.do", new FreeBoardInsert()); // 자유게시판 글입력
-		map.put("/qnaBoardInsert.do", new QnaBoardInsert()); //qna 게시판 글입력
-		map.put("/noticeBoardInsert.do", new NoticeBoardInsert()); // 공지게시판 글입력
+		map.put("/boardInsert.do", new BoardInsert()); //글입력
+		
+		
+		//map.put("/qnaBoardInsert.do", new QnaBoardInsert()); //qna 게시판 글입력
+		//map.put("/noticeBoardInsert.do", new NoticeBoardInsert()); // 공지게시판 글입력
 		
 		map.put("/boardUpdate.do", new BoardUpdate()); // 글 수정하기
-
-		
 		map.put("/boardDelete.do", new BoardDelete()); // 자유게시판 글 삭제하기
 		map.put("/boardUpdateForm.do", new BoardUpdateForm()); // 자유게시판 글수정폼
 		////////////////////////////////////////////////////

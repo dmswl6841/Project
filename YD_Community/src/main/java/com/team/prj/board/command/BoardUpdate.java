@@ -53,11 +53,22 @@ public class BoardUpdate implements Command {
 		}
 
 		String returnPage = null;
+		
 		if (n != 0) {
 			request.setAttribute("message", "게시글 수정에 성공했습니다.");
-				
-				returnPage = "freeBoardList.do";
+			String category = vo.getBoardCategory();
 			
+			if (category.equals("자유")) {
+				System.out.println(category);
+				returnPage = "freeBoardList.do";		
+			} else if (category.equals("QnA")) {
+				System.out.println(category);
+				returnPage = "qnaBoardList.do";
+			}  else if (category.equals("공지")) {
+				System.out.println(category);
+				returnPage = "noticeBoardList.do";
+			}
+				
 		} else {
 			request.setAttribute("message", "게시글 수정을 실패했습니다.");
 			returnPage = "board/boardError";
