@@ -17,40 +17,38 @@
 
 
 		<div>
-			<table border="1">
+			<table border="1" id="studyDel">
 				<tbody>
 					<c:choose>
-						<c:when test="${not empty studyviewlist}">
-							<c:forEach items="${studyviewlist }" var="b">
-								<tr>
-								<td id="studyNo" style="display:none">${b.studyNo }</td>
-									<td>${b.studyTitle }</td>
-									<td>${b.studySystem }</td>
-									<td>${b.studyPeriod }</td>
-									<td>${b.studyLanguage }</td>
-								</tr>
-								<tr>
-									<td>${b.studyDate }</td>
-									<td>${b.studyWriter }</td>
-								</tr>
+						<c:when test="${not empty vo}">
+							<tr>
+								<td>${vo.studyTitle }</td>
+								<td>${vo.studySystem }</td>
+								<td>${vo.studyPeriod }</td>
+								<td>${vo.studyLanguage }</td>
+							</tr>
+							<tr>
+								<td colspan="2">${vo.studyDate }</td>
+								<td colspan="2"> ${vo.studyWriter }</td>
+							</tr>
 
-								<tr>
-									<td colspan="5">${b.studySubject }</td>
-								</tr>
-								<tr>
-									<td colspan="3">${b.studySystem }</td>
-									<td>${b.studyAttech }</td>
-								</tr>
-
-								<input type="button" value="수정" onclick="doAction(0)">
-								<input type="button" value="삭제" onclick="studyDelete(this)"
-									name="studyNo">
-
-							</c:forEach>
+							<tr>
+								<td colspan="4">${vo.studySubject }</td>
+							</tr>
+							<tr>
+								<td colspan="2">${vo.studySystem }</td>
+								<td colspan="2">${vo.studyAttech }</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<button type="button">수정</button>&nbsp;&nbsp;
+									<button type="button" onclick="studyDelete(${vo.studyNo })">삭제</button>
+								</td>	
+							</tr>						
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="8" align="center">게시글이 존재하지 않습니다</td>
+								<td colspan="5" align="center">게시글이 존재하지 않습니다</td>
 							</tr>
 						</c:otherwise>
 					</c:choose>
@@ -64,29 +62,22 @@
 
 
 	<script type="text/javascript">
-		function studyDelete(obj) {
-			let boardId=$("#studyNo").text();			
-			console.log(boardId);
-
-			 const xhr = new XMLHttpRequest();
-			const url = "StudyDelete.do?studyNo=" + boardId;
-			console.log(url)
+		function studyDelete(id) {
+			
+			const xhr = new XMLHttpRequest();
+			const url = "StudyDelete.do?studyNo=" + id;
 			xhr.onload = function() {
-
 				if (xhr.status >= 200 && xhr.status < 300) {
 					if (xhr.response == 1) {
-						console.log("12");
+						alert("데이터가 삭제되었습니다.");
+						location.href = "StudyList.do";
 					} else {
-						errorCallback(new Error(xhr.stautsText));
+						alert("데이터가 삭제되지 않았습니다.");
 					}
-				};
-				
-
-				xhr.open('GET', url);
-				console.log(xhr.open('GET', url));
-				xhr.send();
+				};					
 			} 
-
+			xhr.open('GET', url);
+			xhr.send();
 		}
 	</script>
 

@@ -22,6 +22,7 @@ import com.team.prj.manager.command.MemberDelete;
 import com.team.prj.manager.command.MemberList;
 import com.team.prj.manager.command.MemberSearchList;
 import com.team.prj.manager.command.MemberUpdateAuthor;
+import com.team.prj.study.command.StudyDelete;
 import com.team.prj.study.command.StudyForm;
 
 import com.team.prj.board.command.FreeBoardList;
@@ -114,6 +115,7 @@ public class FrontController extends HttpServlet {
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출
 		map.put("/StudyInsert.do", new StudyInsert());//게시글등록
 		map.put("/StudyView.do", new StudyView());//게시글세부내용
+		map.put("/StudyDelete.do", new StudyDelete());
 	
 		//마이페이지//
 		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 자유게시판 글 목록
@@ -154,10 +156,9 @@ public class FrontController extends HttpServlet {
 		String uri = request.getRequestURI(); // 요청된 URI를 확인한다.
 		String contextPath = request.getContextPath(); // 요청 URL로 부터 contextPath를 확인한다.
 		String page = uri.substring(contextPath.length()); // 실제로 요청된 것 (uri에서 contextPath의 길이만큼 빼면 실제 요청한것)
-		System.out.println("page : " + page);
+
 		Command command = map.get(page); // 실제 수행할 Command를 찾음 = new MainCommand();
 		String viewPage = command.exec(request, response); // 요청 Command를 수행하고 결과를 받음
-		System.out.println("viewPage1 : " + viewPage);
 
 		// viewResolve 보여줄 페이지 선택
 		if (!viewPage.endsWith(".do") && !viewPage.equals(null)) {
@@ -172,6 +173,5 @@ public class FrontController extends HttpServlet {
 		} else {
 			response.sendRedirect(viewPage); // .do로 권한 위임 처리
 		}
-		System.out.println("viewPage2 : " + viewPage);
 	}
 }
