@@ -85,6 +85,7 @@
 		function KakaoJoin() {
 
 			Kakao.Auth.login({
+				 scope: 'profile_nickname, account_email',
 				success: function (response) {
 					Kakao.API.request({ // 사용자 정보 가져오기 
 						url: '/v2/user/me',
@@ -110,8 +111,6 @@
 												"memberPw": pw,
 												"memberNickname": nickname,
 												"memberEmail": email,
-												
-												"memberGit": 'git addr'
 											},
 											dataType: "text",
 											success: function (result) {
