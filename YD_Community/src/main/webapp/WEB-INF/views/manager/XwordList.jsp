@@ -48,12 +48,14 @@
 			</c:choose>
 		</tbody>
 	</table>
+	<input type="button" value="선택삭제" onclick="deleteValue()">
 	</div>
 	<script type="text/javascript">
 		function XwordSearch() {
-			let xword = $("#xword").val();
+			let key = $("#key").val();
+			let val = $("#val").val();
 			$.ajax({
-				url : "",
+				url : "XwordList.do",
 				type : "post",
 				data : {},
 				dataType : "json",

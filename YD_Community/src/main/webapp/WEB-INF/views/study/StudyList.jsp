@@ -9,76 +9,95 @@
 <meta charset="UTF-8">
 <title>글 목록</title>
 <script src="js/jquery-3.6.0.min.js"></script>
-</head>
 <style>
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+table {
+    border-collapse: collapse;
 }
 
-/* Style the header */
-header {
-  background-color: #666;
-  padding: 30px; 
-  text-align: center;
-  font-size: 35px;
-  color: white;
+caption {
+    display: none;
 }
 
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: left;
-  width: 30%;
-  height: 300px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
+.board_list_wrap {
+    padding: 50px;
 }
 
-article {
-  float: left;
-  padding: 20px;
-  width: 70%;
-  background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
-}
-
-/* Clear floats after the columns */
-section::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the footer */
-footer {
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  nav, article {
+.board_list {
     width: 100%;
-    height: auto;
-  }
+    border-top: 2px solid green;
 }
-</style>
-<body>
 
-<header>
-<h2>YEDAM</h2>
-</header>
+.board_list tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.board_list th,
+.board_list td {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.board_list td {
+    text-align: center;
+}
+
+.board_list .tit {
+    text-align: left;
+}
+
+.board_list .tit:hover {
+    text-decoration: underline;
+}
+
+.board_list_wrap .paging {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0;
+}
+.board_list_wrap .paging a {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+.board_list_wrap .paging a:first-child {
+    margin-left: 0;
+}
+
+.board_list_wrap .paging a.bt {
+    border: 1px solid #eee;
+    background: #eee;
+}
+
+.board_list_wrap .paging a.num {
+    border: 1px solid green;
+    font-weight: 600;
+    color: green;
+}
+
+.board_list_wrap .paging a.num.on {
+    background: green;
+    color: #fff;
+}
+
+
+
+
+
+</style>
+</head>
+
 
 
 	<div class="board_list_wrap" align="center">

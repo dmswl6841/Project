@@ -101,7 +101,7 @@
 			let key = $("#key").val();
 			let val = $("#val").val();
 			$.ajax({
-				url : "memberSearchList.do",
+				url : "managerMemberSearch.do",
 				type : "post",
 				data : {key : key, val : val},
 				dataType : "json",
@@ -112,7 +112,8 @@
 						alert("검색한 결과가 없습니다.");
 					}
 				},
-				error : function() {
+				error : function(error){
+					alert("ERROR!")
 				}
 			})
 		}

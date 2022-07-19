@@ -209,7 +209,7 @@ public class PageServiceImpl implements PageService {
 		List<ScrapVO> list = new ArrayList<ScrapVO>();
 		ScrapVO vo;
 		//스크랩이랑 보드 조인
-		String sql = " SELECT S.SCRAP_DATE,B.BOARD_NO , B.BOARD_TITLE FROM SCRAP S left OUTER JOIN BOARD B ON S.board_no = B.board_no WHERE S.MEMBER_NO = ?";
+		String sql = "SELECT S.SCRAP_DATE,B.BOARD_NO , B.BOARD_TITLE FROM SCRAP S left OUTER JOIN BOARD B ON S.board_no = B.board_no WHERE S.MEMBER_NO = ?";
 		//
 		try {
 			conn = dao.getConnection();

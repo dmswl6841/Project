@@ -26,7 +26,6 @@ import com.team.prj.manager.command.MemberSearchList;
 import com.team.prj.manager.command.MemberUpdateAuthor;
 import com.team.prj.study.command.StudyDelete;
 import com.team.prj.study.command.StudyForm;
-
 import com.team.prj.board.command.FreeBoardList;
 import com.team.prj.board.command.NoticeBoardForm;
 import com.team.prj.board.command.NoticeBoardInsert;
@@ -35,10 +34,12 @@ import com.team.prj.board.command.QnaBoardForm;
 import com.team.prj.board.command.QnaBoardInsert;
 import com.team.prj.board.command.QnaBoardList;
 import com.team.prj.board.command.TotalBoardList;
-import com.team.prj.manager.command.BoardList;
-import com.team.prj.manager.command.MemberDelete;
-import com.team.prj.manager.command.MemberList;
-import com.team.prj.manager.command.MemberSearchList;
+import com.team.prj.manager.command.ManagerBoardList;
+import com.team.prj.manager.command.ManagerMemberDelete;
+import com.team.prj.manager.command.ManagerMemberList;
+import com.team.prj.manager.command.ManagerMemberSearch;
+import com.team.prj.manager.command.MemberUpdateAuthor;
+import com.team.prj.manager.command.XwordList;
 import com.team.prj.member.command.AjaxMemberIdCheck;
 import com.team.prj.member.command.AjaxMemberNicknameCheck;
 import com.team.prj.member.command.KakaoJoin;
@@ -56,9 +57,10 @@ import com.team.prj.page.command.MemberBoard;
 import com.team.prj.page.command.MemberRecent;
 import com.team.prj.page.command.MemberScrap;
 import com.team.prj.page.command.MemberStudy;
-import com.team.prj.study.command.StudyForm;
 import com.team.prj.page.command.MemberStudyBoard;
 import com.team.prj.page.command.MemberStudyRecent;
+import com.team.prj.study.command.StudyDelete;
+import com.team.prj.study.command.StudyForm;
 import com.team.prj.study.command.StudyInsert;
 import com.team.prj.study.command.StudyList;
 import com.team.prj.study.command.StudyView;
@@ -99,20 +101,19 @@ public class FrontController extends HttpServlet {
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
     
 		//관리자
-		//map.put("/memberMain.do", new MemberMain()); //메인 화면
-		map.put("/memberList.do", new MemberList()); //회원 전체 목록
-		map.put("/memberSearchList.do", new MemberSearchList()); //회원 검색
-		map.put("/memberDelete.do", new MemberDelete()); //회원삭제
+		//map.put("/managerMain.do", new ManagerMain()); //관리자 메인 화면
+		map.put("/managerMemberList.do", new ManagerMemberList()); //회원 전체 목록
+		map.put("/managermemberSearch.do", new ManagerMemberSearch()); //회원 검색
+		map.put("/managerMemberDelete.do", new ManagerMemberDelete()); //회원삭제
 		map.put("/memberUpdateAuthor.do", new MemberUpdateAuthor()); //회원 가입승인
-		map.put("/boardList.do", new BoardList()); //게시글 전체 목록
+		map.put("/managerBoardList.do", new ManagerBoardList()); //게시글 전체 목록
 		//map.put("/boardSearchList.do", new BoardSelectList()); //게시글 검색
-		//map.put("/XwordList.do", new XwordList()); //금지어 전체 목록
+		map.put("/XwordList.do", new XwordList()); //금지어 전체 목록
 		//map.put("/XwordSearchList.do", new XwordSearchList()); //금지어 검색
 		//map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
 		//map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		//map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
 
-		
 		//스터디게시판
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출
 		map.put("/StudyInsert.do", new StudyInsert());//게시글등록
@@ -169,7 +170,7 @@ public class FrontController extends HttpServlet {
 				response.getWriter().append(viewPage.substring(5));
 				return;
 			}
-			viewPage = "/WEB-INF/views/" + viewPage + ".jsp"; // 시스템에서 접근가능한 폴더를 더해주고
+			viewPage = viewPage + ".tiles"; // 시스템에서 접근가능한 폴더를 더해주고
 			RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 			dispatcher.forward(request, response); // 원하는 페이지를 호출에서 전달함
 		} else {

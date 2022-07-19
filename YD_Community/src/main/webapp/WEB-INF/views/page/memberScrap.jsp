@@ -41,17 +41,19 @@
  
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script src="js/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-<div align="center"></div>
-	<div><h1>스크랩 목록</h1></div>
+
+	<div align="center">
+	<div><h1>스크랩 목록</h1>
+	</div>
 	
-		
-<div class="dropdown">
+	
+<div align="center" class="dropdown">
   <button class="dropbtn">최근활동</button>
   <div class="dropdown-content">
    <a href="memberRecent.do">자유게시판</a>

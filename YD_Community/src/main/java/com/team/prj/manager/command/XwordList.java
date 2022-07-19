@@ -18,7 +18,7 @@ public class XwordList implements Command {
 		//금지어 목록
 		ManagerService managerDao = new ManagerServiceImpl();
 		List<XwordVO> list = new ArrayList<>();
-		list = managerDao.XwordSelectList();
+		list = managerDao.XwordSelectAll();
 		request.setAttribute("list", list);
 		return "manager/XwordList";
 	}
