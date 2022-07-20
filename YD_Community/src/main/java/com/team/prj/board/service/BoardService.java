@@ -16,7 +16,7 @@ public interface BoardService {
 		
 		int boardDelete(BoardVO vo); //글삭제
 		int boardUpdate(BoardVO vo); //글수정
-		List<BoardVO> boardSearchList(String categorykey,String categoryval, String searchkey, String searchval); 
+		List<BoardVO> boardSearchList(String key, String val); 
 		//카테고리 선택박스 (전체, 공지, 자유, qna, 인기) 세부분류 선택박스 (글쓴이, 제목 포함단어...)     
 	
 		//total 메인
@@ -33,9 +33,6 @@ public interface BoardService {
 		
 		//Notice 공지 게시판 crud
 		List<BoardVO> NboardSelectList(); //전체조회
-		
-		//작성일자 받아오는 메소드
-		String getDate();
 		
 
 }

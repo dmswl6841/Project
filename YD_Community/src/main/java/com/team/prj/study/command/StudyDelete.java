@@ -20,6 +20,7 @@ public class StudyDelete implements Command {
 		StudyService studyDao = new StudyServiceImpl();		
 		StudyVO vo = new StudyVO();
 		vo.setStudyNo(Integer.parseInt(request.getParameter("studyNo")));
+		
 		int n = studyDao.studyDelete(vo);
 		String jsonList = "0";
 		

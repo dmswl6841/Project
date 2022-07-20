@@ -10,53 +10,32 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
-	<c:if test="${empty member }">
-		<div><h3><a href=""></a></h3></div>
-		<div><h3><a href=""></a></h3></div>
-	</c:if>
-		
-	<c:if test="${not empty member }">
-		<div>
-			<h3>
-				<input type="button" name="logout" id="logout" value="로그아웃" onclick="Logout()">
-				<input type="button" name="myInfo" id="myInfo" value="마이페이지" onclick="location.href='myPage.do'">
-			</h3>
-		</div>
-	</c:if>
-
-	<c:if test="${auth eq 'ADMIN' }">
-		<div>
-			<h3>
-			<!-- <a href="memberSelect.do">회원 조회</a> -->
-			</h3>
-		</div>
-	</c:if>
-
-	<script>
-		function Logout() {
-			Kakao.init("2a2d3b75fcf2829f4ecf48caa95d3805");
-			if (Kakao.Auth.getAccessToken()) {
-				Kakao.Auth.logout(function() {
-					alert('로그아웃 성공!');
-					//disconnectKakao();
-					location.href = 'memberLogout.do'; // 로그아웃 처리
-				});
-			}
-			location.href = 'memberLogout.do';
-		}
-		// 안되노
-		function disconnectKakao() {
-			Kakao.API.request({
-				url : '/v1/user/unlink',
-				success : function(response) {
-					console.log(response);
-				},
-				fail : function(error) {
-					console.log(error);
-				},
-			});
-		}
-
-	</script>
+	<div class="row">
+            <div class="leftcolumn">
+          
+              <div class="card">
+                <h2>공지사항</h2>
+                <h5>공지사항올리세요</h5>
+                <div class="fakeimg" style="height:200px;">Image</div>
+                <p>공지사항!!!!!!!!!!!!!!!!!!!.</p>
+                <p>공지사항올리세요
+                </p>
+              </div>
+            </div>
+            <div class="rightcolumn">
+              <div class="card">
+                <h2>인기글</h2>
+                <div class="fakeimg" style="height:100px;">Image</div>
+                <p>인기글 올리세요!!!!!!!!!!!!!!!!!!!!!!!!</p>
+              </div>
+              <div class="card">
+                <h3>인기글</h3>
+                <div class="fakeimg"><p>Image</p></div>
+                <div class="fakeimg"><p>Image</p></div>
+                <div class="fakeimg"><p>Image</p></div>
+              </div>
+        
+            </div>
+          </div>
 </body>
 </html>

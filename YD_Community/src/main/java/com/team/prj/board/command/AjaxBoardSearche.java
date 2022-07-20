@@ -20,17 +20,15 @@ public class AjaxBoardSearche implements Command {
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		// 게시글 검색
 		BoardService boardDao = new BoardServiceImpl();
-		List<BoardVO> list = new ArrayList<BoardVO>();
+		List<BoardVO> searchboardlist = new ArrayList<BoardVO>();
 		ObjectMapper mapper = new ObjectMapper();  //jackson 라이브러리 사용(json)
-		String categorykey = request.getParameter("categorykey");
-		String categoryval = request.getParameter("categoryval");
-		String searchkey = request.getParameter("searchkey");
-		String searchval = request.getParameter("searchval");
+		String key = request.getParameter("key");
+		String val = request.getParameter("val");
 		
-		list = boardDao.boardSearchList(categorykey, categoryval, searchkey, searchval);
+		searchboardlist = boardDao.boardSearchList(key, val);
 		String jsonList = null;
 		try {
-			jsonList = mapper.writeValueAsString(list);  //객체가 json 타입의 스트링으로 변환
+			jsonList = mapper.writeValueAsString(searchboardlist);  //객체가 json 타입의 스트링으로 변환
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}	

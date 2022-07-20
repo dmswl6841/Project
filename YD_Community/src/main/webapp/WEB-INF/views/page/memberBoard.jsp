@@ -40,7 +40,23 @@
 .dropdown:hover .dropdown-content {display: block;}
  
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+
+
 </style>
+
 
 <meta charset="UTF-8">
 <title>내가 작성한 게시글 목록</title>
@@ -49,7 +65,7 @@
 <body>
 
 	<div align="center">
-		<div><h1>나의 게시글</h1>
+		<div><h1> </h1>
 	</div>
 
 <div class="dropdown">
@@ -81,7 +97,7 @@
 			<table align="center" border="1">
 			<thead>
 				<tr>  
-						<th width="130">작성자</th>
+						<th align="center" width="130">작성자</th>
 						<th width="300">제목</th>
 						<th width="130">작성일자</th>
 				</tr>
