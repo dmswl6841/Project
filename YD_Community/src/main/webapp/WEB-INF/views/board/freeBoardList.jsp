@@ -110,14 +110,14 @@
 			var tbody = $("<tbody id />");
 			$.each(data, function(index, item){
 				var row = $("<tr />").append(
-							$("<td />").text(b.boardNo),
-							$("<td />").text(b.boardWriter),
-							$("<td />").text(b.boardTitle),
-							$("<td />").text(b.boardDate),
-							$("<td />").text(b.boardAttech),
-							$("<td />").text(b.boardScrap),	
-							$("<td />").text(b.boardRecommend),
-							$("<td />").text(b.boardHit),
+							$("<td />").text(item.boardNo),
+							$("<td />").text(item.boardWriter),
+							$("<td />").text(item.boardTitle),
+							$("<td />").text(item.boardDate),
+							$("<td />").text(item.boardAttech),
+							$("<td />").text(item.boardScrap),	
+							$("<td />").text(item.boardRecommend),
+							$("<td />").text(item.boardHit),
 						);
 				tbody.append(row);
 			});

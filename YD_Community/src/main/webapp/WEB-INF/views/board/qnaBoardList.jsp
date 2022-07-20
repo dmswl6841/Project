@@ -19,25 +19,17 @@
 		<!-- 공통 검색기능 -->
 		<div>
 			<form id="frm">
-				<select id="categorykey" name="categorykey">
-				  	<option value="board_category" id="categoryval" name="categoryval">자유</option> 
-				  	<option value="board_category" id="categoryval" name="categoryval" selected>QnA</option> 
-				  	<option value="board_category" id="categoryval" name="categoryval">공지</option> 
-				  	<option value="board_category" id="categoryval" name="categoryval">HOT</option> 
-				</select>
+				<select id="key" name="key">
+					<option value="board_title">제목</option>
+					<option value="board_subject">내용</option>
+					<option value="board_writer">작성자</option>
+				</select> &nbsp; 
+				<input type="text" id="val" name="val">&nbsp;&nbsp;
+				<input type="button" value="검색" onclick=boardSearch()>
 			</form>
-			
-			<form id="frm">
-				<select id="searchkey" name="searchkey">
-				  	<option value="board_title">제목</option>
-				  	<option value="board_subject">내용</option>
-				  	<option value="board_writer">작성자</option>			  
-				</select> &nbsp;
-				<input type="text" id="searchval" name="searchval">&nbsp;&nbsp;
-				<input type="button" value="검색" onclick="boardSearch()">
-			</form>
-		</div><br>
-		<!-- 공통 검색기능-->
+		</div>
+		<br>
+		<!-- 공통 검색기능 -->
 	
 		
 		<div>
@@ -54,7 +46,7 @@
 						<th width="70">조회수</th>					
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tb">
 					<c:choose>
 						<c:when test="${not empty qnaboardlist }">
 							<c:forEach items="${qnaboardlist }" var="b">
@@ -93,48 +85,46 @@
 
 	
 	<script type="text/javascript">
-		function noticeSearch() {
-			let categorykey = $("#categorykey").val();
-			let categoryval = $("#categoryval").val();
-			let searchkey = $("#searchkey").val();
-			let searchval = $("#searchval").val();
+		function boardSearch() {
+			let key = $("#key").val();
+			let val = $("#val").val();
 			$.ajax({
-				url : "ajaxboardSearche.do",
+				url : "ajaxBoardSearche.do",
 				type : "post",
-				data : {categorykey : categorykey, categoryval : categoryval, searchkey : searchkey, searchval : searchval},
-				dataType : "json",
+				data : {key : key, val : val},
+				dataType : "Json",
 				success : function(result){
 					if(result.length > 0) {
 						jsonHtmlConvert(result);
-					}else {
+					} else {
 						alert("검색한 결과가 없습니다.");
-					}
+					} console.log(result);
 				},
-				error : function() {
-					
+				error : function() {	
 				}
 			})
 		}
 		
 		function jsonHtmlConvert(data) {
-			$('tbody').remove();
-			var tbody = $("<tbody />");
+			$("#tb").remove();
+			var tbody = $("<tbody id />");
 			$.each(data, function(index, item){
 				var row = $("<tr />").append(
-							$("<td />").text(b.boardNo),
-							$("<td />").text(b.boardWriter),
-							$("<td />").text(b.boardTitle),
-							$("<td />").text(b.boardDate),
-							$("<td />").text(b.boardAttech),
-							$("<td />").text(b.boardScrap),	
-							$("<td />").text(b.boardRecommend),
-							$("<td />").text(b.boardHit),
+							$("<td />").text(item.boardNo),
+							$("<td />").text(item.boardWriter),
+							$("<td />").text(item.boardTitle),
+							$("<td />").text(item.boardDate),
+							$("<td />").text(item.boardAttech),
+							$("<td />").text(item.boardScrap),	
+							$("<td />").text(item.boardRecommend),
+							$("<td />").text(item.boardHit),
 						);
 				tbody.append(row);
 			});
 			$('table').append(tbody);
 		}
 	</script>
+
 	
 </body>
 </html>

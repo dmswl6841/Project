@@ -7,7 +7,14 @@
 <meta charset="UTF-8">
 <title>게시글 보기</title>
 <script src="js/jquery-3.6.0.min.js"></script>
+
+<style>
+
+
+</style>
 </head>
+
+
 
 <body>
 	<div align="center">
@@ -51,6 +58,12 @@
 					</tbody>
 				</table>
 				<br>
+				
+				<div align="center">
+					<button type="button" id="recommend" onclick="recommendPost()" title="이 글을 추천하기">👍</button>
+					<button type="button" id="scrap" onclick="scrapPost()" title="이 글을 스크랩하기">📌</button>
+				</div>
+				<br>
 
 				<div align="center">
 					<button type="button" onclick="updatePost()">수정</button>
@@ -86,6 +99,29 @@
 				form.action = "boardUpdateForm.do";
 				form.submit();
 			}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function recommendPost() {
+			 
+			var form = document.writeFrm;
+			form.method = "post";
+			form.action = "recommendInsert.do";
+			form.submit();
+			
+		}
+	</script>
+	
+	
+		<script type="text/javascript">
+		function scrapPost() {
+
+			var form = document.writeFrm;
+			//form.method = "post";
+			//form.action = ;
+			//form.submit();
+			
 		}
 	</script>
 
