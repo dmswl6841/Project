@@ -83,7 +83,7 @@ public class StudyServiceImpl implements StudyService {
 	public int studyInsert(StudyVO vo) {
 		// 글 등록
 		int n = 0;
-		System.out.println("0데이터확인");
+		
 		String sql = "INSERT INTO STUDY VALUES (STUDY_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,sysdate)";
 		try {
 			conn = dao.getConnection();
