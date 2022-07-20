@@ -1,6 +1,7 @@
 package com.team.prj.common;
 
 import java.io.IOException;
+
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -13,29 +14,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team.prj.MainCommand;
 import com.team.prj.board.command.BoardDelete;
+import com.team.prj.board.command.BoardForm;
+import com.team.prj.board.command.BoardInsert;
 import com.team.prj.board.command.BoardUpdate;
 import com.team.prj.board.command.BoardUpdateForm;
 import com.team.prj.board.command.BoardView;
-import com.team.prj.board.command.BoardForm;
-import com.team.prj.board.command.BoardInsert;
-
-import com.team.prj.manager.command.MemberUpdateAuthor;
-import com.team.prj.study.command.StudyDelete;
-import com.team.prj.study.command.StudyForm;
 import com.team.prj.board.command.FreeBoardList;
-import com.team.prj.board.command.NoticeBoardForm;
-import com.team.prj.board.command.NoticeBoardInsert;
 import com.team.prj.board.command.NoticeBoardList;
-import com.team.prj.board.command.QnaBoardForm;
-import com.team.prj.board.command.QnaBoardInsert;
 import com.team.prj.board.command.QnaBoardList;
 import com.team.prj.board.command.TotalBoardList;
+import com.team.prj.manager.command.ManagerBoardDelete;
 import com.team.prj.manager.command.ManagerBoardList;
 import com.team.prj.manager.command.ManagerMemberDelete;
 import com.team.prj.manager.command.ManagerMemberList;
 import com.team.prj.manager.command.ManagerMemberSearch;
 import com.team.prj.manager.command.MemberUpdateAuthor;
+import com.team.prj.manager.command.XwordInsertForm;
 import com.team.prj.manager.command.XwordList;
+import com.team.prj.manager.command.ManagerBoardSearch;
 import com.team.prj.member.command.AjaxMemberIdCheck;
 import com.team.prj.member.command.AjaxMemberNicknameCheck;
 import com.team.prj.member.command.KakaoJoin;
@@ -103,9 +99,11 @@ public class FrontController extends HttpServlet {
 		map.put("/managerMemberDelete.do", new ManagerMemberDelete()); //회원삭제
 		map.put("/memberUpdateAuthor.do", new MemberUpdateAuthor()); //회원 가입승인
 		map.put("/managerBoardList.do", new ManagerBoardList()); //게시글 전체 목록
-		//map.put("/boardSearchList.do", new BoardSelectList()); //게시글 검색
+		map.put("/managerBoardSearch.do", new ManagerBoardSearch()); //게시글 검색
+		map.put("/managerBoardDelete.do", new ManagerBoardDelete());
 		map.put("/XwordList.do", new XwordList()); //금지어 전체 목록
 		//map.put("/XwordSearchList.do", new XwordSearchList()); //금지어 검색
+		map.put("/XwordInsertForm.do", new XwordInsertForm()); //금지어 입력 팝업창
 		//map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
 		//map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		//map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제

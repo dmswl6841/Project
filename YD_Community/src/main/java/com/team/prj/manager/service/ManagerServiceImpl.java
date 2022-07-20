@@ -103,7 +103,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		if (key.equals("ADMIN")) {
 			key = "ADMIN";
-		} else {
+		} else if (key.equals("GUEST")){
 			key = "USER";
 		}
 		
@@ -181,6 +181,26 @@ public class ManagerServiceImpl implements ManagerService {
 		return list;
 	}
 
+	//게시글 삭제
+	@Override
+	public int managerBoardDelete(BoardVO vo) {
+		int r = 0;
+		String sql = "delete from board where board_no=?";
+
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, vo.getBoardNo());
+			r = psmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return r;
+	}
+	
 	// 댓글 전체 조회
 	@Override
 	public List<CommentsVO> managerCommentsSelectAll() {
@@ -237,6 +257,26 @@ public class ManagerServiceImpl implements ManagerService {
 			close();
 		}
 		return list;
+	}
+	
+	//댓글 삭제
+	@Override
+	public int managerCommentsDelete(CommentsVO vo) {
+		int r = 0;
+		String sql = "delete from comments where comment_no=?";
+
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, vo.getCommentNo());
+			r = psmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return r;
 	}
 
 	// 금지어 전체 조회
