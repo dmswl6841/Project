@@ -100,19 +100,9 @@ a {
 
 
 
-	<div class="board_list_wrap" align="center">
-		<div>게시글 목록</div>
-		<div>
-			<form id="frm">
-				<select id="key" name="key">
-					<option value="studytitle">제목</option>
-					<option value="studysubject">내용</option>
-					<option value="studywriter">작성자</option>
-				</select> &nbsp; <input type="text" id="val" name="val">&nbsp;&nbsp;
-				<input type="button" value="검색" onclick="StudySearch()">
-
-			</form>
-		</div>
+	<div class="board_list_wrap" align="left">
+		<div>스터디 게시글 목록</div>
+	
 		<br>
 	</div>
 	<div class="board_list_wrap" align="center">
