@@ -30,7 +30,6 @@
 						<c:choose>
 							<c:when test="${not empty vo}">
 								<input type="hidden" name="board_no" value="${vo.boardNo}">
-								<input type="hidden" name="member_no" value="${member.memberNo }">
 								<tr>
 									<td><a href="myPage.do?no=${vo.memberNo}">${vo.boardWriter }</a></td>
 									<td>${vo.boardScrap }</td>
@@ -105,10 +104,12 @@
 	
 	<script type="text/javascript">
 		function recommendPost() {
+			 
 			var form = document.writeFrm;
 			form.method = "post";
 			form.action = "recommendInsert.do";
-			form.submit();	
+			form.submit();
+			
 		}
 	</script>
 	

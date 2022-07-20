@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.DataSource;
 import com.team.prj.recommend.service.RecommendService;
 import com.team.prj.recommend.vo.RecommendVO;
@@ -23,38 +22,30 @@ public class RecommendServiceImpl implements RecommendService {
 
 
 	@Override
-	public int recommendUpdate(BoardVO vo) {
+	public int recommendUpdate(int board_no) {
 		// 추천 버튼 누르면 해당 게시글 추천수 1 추가 (글1개조회 참고) 
-		int y =0;
-		String sql = "UPDATE BOARD SET BOARD_RECOMMEND = BOARD_RECOMMEND+1 WHERE BOARD_NO = ?";
-		try {
-			conn = dao.getConnection();
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, vo.getBoardNo());
-			y = psmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		return y;
+		
+		
+		return 0;
 	}
 
 	
 
 	@Override
 	public int recommendInsert(RecommendVO vo) {
+		// 추천 버튼 누르면 해당 게시글 추천수 1 추가 및
 		// 중복 방지용 member_no&board_no 키 추가
+		// 글수정이랑 비슷함...?
 		int n = 0;
-		String sql = "INSERT INTO RECOMMEND VALUES(RECOMMEND_SEQ.NEXTVAL,?,?)";
+		String sql = "INSERT INTO RECOMMEND VALUES(?,?,?)";
 
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			//psmt.setInt(1, vo.getRecommendNo());
-			psmt.setInt(1, vo.getMemberNo());
-			psmt.setInt(2, vo.getBoardNo());
-			n = psmt.executeUpdate();
+			psmt.setInt(1, vo.getRecommendNo());
+			psmt.setInt(2, vo.getMemberNo());
+			psmt.setInt(3, vo.getBoardNo());
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

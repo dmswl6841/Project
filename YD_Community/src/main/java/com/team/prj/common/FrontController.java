@@ -137,6 +137,7 @@ public class FrontController extends HttpServlet {
 		//마이페이지//
 		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 자유게시판 글 목록
 		map.put("/memberStudyBoard.do", new MemberStudyBoard()); //내가 쓴 스터디 글 목록
+		
 		////////////////////////////////////////////////////
 		
 		
