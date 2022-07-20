@@ -20,7 +20,6 @@ public class ManagerBoardList implements Command {
 		List<BoardVO> list = new ArrayList<>();
 		list = managerDao.managerBoardSelectAll();
 		request.setAttribute("list", list);
-		return "manager/boardList";
+		return "manager/managerBoardList";
 	}
-
 }

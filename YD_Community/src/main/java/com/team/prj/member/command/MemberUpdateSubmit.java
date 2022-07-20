@@ -14,23 +14,23 @@ public class MemberUpdateSubmit implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		//String img = request.getParameter("img");
-		String id = request.getParameter("id");
+		MemberService dao = new MemberServiceImpl();
+
 		String nickname = request.getParameter("nickname");
 		String email = request.getParameter("email");
 		String git = request.getParameter("git");
-		
-		MemberVO vo = new MemberVO();
-		//vo.setMemberImg(img);
-		vo.setMemberId(id);
+
+		MemberVO vo = (MemberVO) session.getAttribute("member");
+
 		vo.setMemberNick(nickname);
 		vo.setMemberEmail(email);
 		vo.setMemberGit(git);
-		
-		session.setAttribute("member", vo);
-		int cnt = new MemberServiceImpl().memberUpdate(vo);
-		
-		return "main.do";
+
+		int cnt = dao.memberUpdate(vo);
+
+		request.setAttribute("message", cnt + "건 수정 완료");
+
+		return "member/memberUpdateComplete";
 	}
 
 }

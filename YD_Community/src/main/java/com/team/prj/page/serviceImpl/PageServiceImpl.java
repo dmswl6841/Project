@@ -123,49 +123,36 @@ public class PageServiceImpl implements PageService {
 	
 	
 	//내가 쓴 게시글 목록
-	@Override
-	public List<BoardVO> myBoardList(int memberNo) {
-		List<BoardVO> list = new ArrayList<BoardVO>();
-		BoardVO vo;
-		//세션 아이디로 member_no를 보내고 세션아이디랑 내 member_no가 같으면 출력하는 식으로
-//		String id = session.getAttribute("id");	//세션 아이디 구하기 //controller!!
-		//로그인 정보를 세션에 저장  -> 로그인에 추가해야함            
-		//session().setAttribute("MemberVO", member);
-		////request.getSession().setAttribute("MemberVO", member);
-		
-		//MemberVO member = new memberVO(); // vo 인스턴스 생성
-		//member.setMemberNo (1); // bminfo.BM_ID 에 1 값저장
-		//session.setAttribute("member", member);  // 세션에 bminfo 라는 변수로 vo  값 저장
-		
-//		String id = null;
-		String sql = "SELECT BOARD_NO, BOARD_WRITER,BOARD_TITLE,BOARD_DATE FROM BOARD WHERE MEMBER_NO = ?";
-
-		 // order by regdate desc
-	
-		 
-		try {
-			conn = dao.getConnection();
-			psmt  = conn.prepareStatement(sql);
-			psmt.setInt(1, memberNo);
-			rs = psmt.executeQuery();
+		@Override
+		public List<BoardVO> myBoardList(int memberNo) {
+			List<BoardVO> list = new ArrayList<BoardVO>();
+			BoardVO vo;
 			
-			while(rs.next()) {
-				vo = new BoardVO();
-				vo.setBoardNo(rs.getInt("board_no"));
-				vo.setBoardWriter(rs.getString("board_writer"));
-				vo.setBoardTitle(rs.getString("board_title"));
-				vo.setBoardDate(rs.getString("board_date"));
-				list.add(vo);
+			String sql = "SELECT BOARD_NO, BOARD_WRITER,BOARD_TITLE,BOARD_DATE FROM BOARD WHERE MEMBER_NO = ? ORDER BY BOARD_NO DESC ";
+
+			try {
+				conn = dao.getConnection();
+				psmt  = conn.prepareStatement(sql);
+				psmt.setInt(1, memberNo);
+				rs = psmt.executeQuery();
+				
+				while(rs.next()) {
+					vo = new BoardVO();
+					vo.setBoardNo(rs.getInt("board_no"));
+					vo.setBoardWriter(rs.getString("board_writer"));
+					vo.setBoardTitle(rs.getString("board_title"));
+					vo.setBoardDate(rs.getString("board_date"));
+					list.add(vo);
+				}
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close();
 			}
 			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
+			return list;
 		}
-		
-		return list;
-	}
 
 
 	//내가 작성한 스터디 게시글 
@@ -173,7 +160,7 @@ public class PageServiceImpl implements PageService {
 	public List<StudyVO> myStudyBoardList(int memberNo) {
 		List<StudyVO> list = new ArrayList<StudyVO>();
 		StudyVO vo;
-		String sql = "SELECT STUDY_NO, STUDY_WRITER,STUDY_TITLE,STUDY_DATE FROM STUDY WHERE MEMBER_NO = ?";	
+		String sql = "SELECT STUDY_NO, STUDY_WRITER,STUDY_TITLE,STUDY_DATE FROM STUDY WHERE MEMBER_NO = ? ORDER BY STUDY_NO DESC";	
 
 		try {
 			conn = dao.getConnection();
@@ -209,7 +196,7 @@ public class PageServiceImpl implements PageService {
 		List<ScrapVO> list = new ArrayList<ScrapVO>();
 		ScrapVO vo;
 		//스크랩이랑 보드 조인
-		String sql = "SELECT S.SCRAP_DATE,B.BOARD_NO , B.BOARD_TITLE FROM SCRAP S left OUTER JOIN BOARD B ON S.board_no = B.board_no WHERE S.MEMBER_NO = ?";
+		String sql = "SELECT S.SCRAP_DATE,B.BOARD_NO , B.BOARD_TITLE FROM SCRAP S left OUTER JOIN BOARD B ON S.board_no = B.board_no WHERE S.MEMBER_NO = ? ORDER BY S.SCRAP_DATE DESC";
 		//
 		try {
 			conn = dao.getConnection();
@@ -245,7 +232,7 @@ public class PageServiceImpl implements PageService {
 
 // 스크랩이랑 스터디 조인하는 방식		
 		//String sql = "SELECT B.SCRAP_DATE , s.STUDY_NO , s.STUDY_TITLE FROM SCRAP B RIGHT OUTER JOIN  study s ON b.study_no = s.study_no WHERE s.MEMBER_NO = ?";
-		String sql = "SELECT B.SCRAP_DATE , s.STUDY_NO , s.STUDY_TITLE FROM SCRAP B LEFT OUTER JOIN  study s ON b.study_no = s.study_no WHERE s.MEMBER_NO = ?";
+		String sql = "SELECT B.SCRAP_DATE , s.STUDY_NO , s.STUDY_TITLE FROM SCRAP B LEFT OUTER JOIN  study s ON b.study_no = s.study_no WHERE s.MEMBER_NO = ? ORDER BY B.SCRAP_DATE DESC";
 	// study 게시판이랑 조인
 //		String sql = "select s.study_writer,s.study_title"
 //				+ "from study s"
