@@ -337,20 +337,13 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public int XwordInsert(XwordVO vo) {
 		int r = 0;
-		String sql = "insert into xword (xword) values (?)";
+		String sql = "insert into xword values(XWORD_seq.nextval,?)";
 
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getXword());
-
 			r = psmt.executeUpdate();
-
-			if (rs.next()) {
-				vo = new XwordVO();
-				vo.setXword(rs.getString("xword"));
-			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -389,7 +382,7 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public int XwordUpdate(XwordVO vo) {
 		int r = 0;
-		String sql = "update xword set (xword) values (?)";
+		String sql = "update xword set xword values (?)";
 
 		try {
 			conn = dao.getConnection();
