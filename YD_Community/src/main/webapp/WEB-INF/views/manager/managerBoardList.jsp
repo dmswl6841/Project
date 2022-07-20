@@ -39,11 +39,11 @@
 				<c:when test="${not empty list }">
 					<c:forEach items="${list }" var="b">
 						<tr>
-							<td><input type="checkbox"></td>
-							<td>${b.boardCategory }</td>
-							<td>${b.boardTitle }</td>
-							<td>${b.boardWriter }</td>
-							<td>${b.boardDate }</td>
+							<td><input id="check" name="check" type="checkbox"></td>
+							<td id="boardCategory" name="boardCategory">${b.boardCategory }</td>
+							<td id="boardTitle" name="boardTitle">${b.boardTitle }</td>
+							<td id="boardWriter" name="boardWriter">${b.boardWriter }</td>
+							<td id="boardDate">${b.boardDate }</td>
 							<td><input type="button" value="삭제" onclick="boardDelete(this)"></td>
 						</tr>
 					</c:forEach>
@@ -58,13 +58,14 @@
 			</c:choose>
 		</tbody>
 	</table>
+	<input type="button" value="선택삭제" onclick="deleteValue()">
 	</div>
 	<script type="text/javascript">
 		function boardSearch() { //게시판 검색
 			let key = $("#key").val();
 			let val = $("#val").val();
 			$.ajax({
-				url : "",
+				url : "managerBoardSearch.do",
 				type : "post",
 				data : {key : key, val : val},
 				dataType : "json",
@@ -78,7 +79,7 @@
 				error : function(error){
 					alert("ERROR!")
 				}
-			})
+			});
 		}
 		
 		function jsonHtmlConvert(data) { //새로 불러오기
@@ -86,6 +87,7 @@
 			var tbody = $("<tbody />");
 			$.each(data, function(index, item){
 				var row = $("<tr />").append(
+							$("<td />").append($("<input>").attr('type','checkbox')),
 							$("<td />").text(item.boardCategory),
 							$("<td />").text(item.boardTitle),
 							$("<td />").text(item.boardWriter),
@@ -97,13 +99,13 @@
 			$('table').append(tbody);
 		}
 		
-		function boardDelete(obj){ //게시판 삭제
-			let row = $(obj).parent().parent().get(0);
-			let td = row.cells[1];
-			let no = $(td).html();
-			
+		function errorCallback(err){ //에러
+			console.log('error : '+err.message);
+		}
+		
+		function boardDelete(id){ //게시판 삭제
 			const xhr = new XMLHttpRequest();
-			const url = "boardDelete.do?boardNo="+no;
+			const url = "managerBoardDelete.d?boardNo="+id;
 			console.log(url)
 			xhr.onload = function(){
 				if(xhr.status >=200 && xhr.status <300){

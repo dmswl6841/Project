@@ -1,8 +1,5 @@
 package com.team.prj.manager.command;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,17 +7,21 @@ import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.Command;
 import com.team.prj.manager.service.ManagerService;
 import com.team.prj.manager.service.ManagerServiceImpl;
+import com.team.prj.member.vo.MemberVO;
 
-public class BoardList implements Command {
+public class ManagerBoardDelete implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		//게시판목록
+		//게시글 삭제
 		ManagerService managerDao = new ManagerServiceImpl();
-		List<BoardVO> list = new ArrayList<>();
-		list = managerDao.boardSelectList();
-		request.setAttribute("list", list);
-		return "manager/boardList";
+		BoardVO vo = new BoardVO();
+		vo.setMemberNo(Integer.valueOf(request.getParameter("memberNo")));
+		int n = managerDao.managerBoardDelete(vo);
+		String jsonList = "0";
+		if(n != 0) {
+			jsonList = "1";
+		}
+		return "ajax:"+jsonList;
 	}
-
 }
