@@ -51,9 +51,19 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardVO boardView(int board_no) {
 		// 글 1개조회
+		String sql1 = "UPDATE BOARD SET BOARD_HIT = BOARD_HIT+1 WHERE BOARD_NO = ?";
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql1);
+			psmt.setInt(1, board_no);
+			psmt.executeUpdate();
+			psmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		
 		BoardVO vo = new BoardVO();
 		String sql = "SELECT * FROM BOARD WHERE BOARD_NO = ?";
-		
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
@@ -71,8 +81,11 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardAttech(rs.getString("board_attech"));
 				vo.setBoardSubject(rs.getString("board_subject"));
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close();
 		}
 		
 		return vo;
@@ -93,6 +106,8 @@ public class BoardServiceImpl implements BoardService {
 						
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close();
 		}
 		
 		return n;
@@ -103,7 +118,7 @@ public class BoardServiceImpl implements BoardService {
 		//글 수정
 		int n =0;
 		String sql = "UPDATE BOARD SET BOARD_TITLE = ?, BOARD_SUBJECT = ?, BOARD_ATTECH = ?, BOARD_ATTECH_DIR = ?, "
-				+ "BOARD_WRITER = ?, BOARD_CATEGORY = ?, MEMBER_NO = ?, BOARD_DATE = SYSDATE "
+				+ "BOARD_WRITER = ?, BOARD_CATEGORY = ?, MEMBER_NO = ?, BOARD_HIT = BOARD_HIT-1"
 				+ "WHERE BOARD_NO = ?";
 		//BOARD_SCRAP= ?, BOARD_HIT= ?, 
 		try {
@@ -117,8 +132,7 @@ public class BoardServiceImpl implements BoardService {
 			psmt.setString(5, vo.getBoardWriter());
 			psmt.setString(6, vo.getBoardCategory());
 			psmt.setInt(7, vo.getMemberNo());
-//			psmt.setInt(8, vo.getBoardScrap());
-//			psmt.setInt(9, vo.getBoardHit());
+			//psmt.setInt(8, vo.getBoardHit());
 			psmt.setInt(8, vo.getBoardNo());
 
 			n = psmt.executeUpdate();
@@ -131,41 +145,36 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<BoardVO> boardSearchList(String categorykey, String categoryval, String searchkey, String searchval) {
+	public List<BoardVO> boardSearchList(String key, String val) {
 		// 글 검색기능                  //카테고리 선택박스 (전체, 공지, 자유, qna, 인기)  세부분류 선택박스 (글쓴이, 제목 포함단어...)             
-		List<BoardVO> boardlist = new ArrayList<>();
+		List<BoardVO> searchboardlist = new ArrayList<>();
 		BoardVO vo;
-		String sql = "SELECT * FROM BOARD WHERE ? LIKE %?% AND ? LIKE %?% ORDER BY BOARD_NO DESC";
+		String sql = "SELECT * FROM BOARD WHERE ? LIKE %?%";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, categorykey);
-			psmt.setString(2, categoryval);
-			psmt.setString(3, searchkey);
-			psmt.setString(4, searchval);
+			psmt.setString(1, key);
+			psmt.setString(2, val);
 			rs = psmt.executeQuery(); 
 			
 			while(rs.next()) {
 				vo = new BoardVO();	//검색해서 존재하면 vo인스턴스를 초기화
 				vo.setBoardNo(rs.getInt("board_no"));
-				vo.setBoardTitle(rs.getString("board_title"));
 				vo.setBoardWriter(rs.getString("board_writer"));
+				vo.setBoardTitle(rs.getString("board_title"));
 				vo.setBoardDate(rs.getString("board_date"));
+				vo.setBoardAttech(rs.getString("board_attech"));
 				vo.setBoardScrap(rs.getInt("board_scrap"));
-				vo.setBoardHit(rs.getInt("board_hit"));
-				vo.setBoardCategory(rs.getString("board_category"));
-				vo.setMemberNo(rs.getInt("member_no"));
-				vo.setBoardHot(rs.getString("board_hot"));
 				vo.setBoardRecommend(rs.getInt("board_recommend"));
-				vo.setBoardDate(rs.getString("board_attech"));
-				boardlist.add(vo);
+				vo.setBoardHit(rs.getInt("board_hit"));
+				searchboardlist.add(vo);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		return boardlist;
+		return searchboardlist;
 
 	}
 	
@@ -368,25 +377,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	
 
-	@Override
-	public String getDate() {
-		// 게시글 작성일자 받아오기
-		String sql = "select now()";
-		try {
-			psmt = conn.prepareStatement(sql);
-			rs = psmt.executeQuery();
-			if (rs.next()) {
-				return rs.getString(1);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return "";
-	}
 	
 	
 	
