@@ -335,27 +335,23 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 금지어 입력
 	@Override
-	public int XwordInsert(XwordVO vo) {
+	public int XwordInsert(String key) {
 		int r = 0;
-		String sql = "insert into xword (xword) values (?)";
-
+		String sql = "insert into xword values(XWORD_seq.nextval,?)";
+		System.out.println(r);
+		System.out.println(key);
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getXword());
-
+			psmt.setString(1, key);
 			r = psmt.executeUpdate();
-
-			if (rs.next()) {
-				vo = new XwordVO();
-				vo.setXword(rs.getString("xword"));
-			}
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
+		System.out.println("r : " +r);
 		return r;
 	}
 
@@ -387,21 +383,17 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 금지어 수정
 	@Override
-	public int XwordUpdate(XwordVO vo) {
+	public int XwordUpdate(String key, String val) {
 		int r = 0;
-		String sql = "update xword set (xword) values (?)";
+		String sql = "update xword set xword = ? where xword_no= ?";
 
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getXword());
+			psmt.setString(1, key);
+			psmt.setString(2, val);
 
 			r = psmt.executeUpdate();
-
-			if (rs.next()) {
-				vo = new XwordVO();
-				vo.setXword(rs.getString("xword"));
-			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -150,12 +150,12 @@ public class BoardServiceImpl implements BoardService {
 		// 글 검색기능                  //카테고리 선택박스 (전체, 공지, 자유, qna, 인기)  세부분류 선택박스 (글쓴이, 제목 포함단어...)             
 		List<BoardVO> searchboardlist = new ArrayList<>();
 		BoardVO vo;
-		String sql = "SELECT * FROM BOARD WHERE ? LIKE %?%";
+		String sql = "SELECT * FROM BOARD WHERE "
+				+ key + " LIKE '%" + val + "%'";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, key);
-			psmt.setString(2, val);
+			//psmt.setString(1, val);
 			rs = psmt.executeQuery(); 
 			
 			while(rs.next()) {

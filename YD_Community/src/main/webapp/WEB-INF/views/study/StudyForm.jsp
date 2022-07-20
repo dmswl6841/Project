@@ -313,7 +313,15 @@ a {
     
     
     textarea::placeholder {
-  font-size: 1.2em;
+         font-size: 2.5em;
+}
+
+.board_view .cont {
+    padding: 15px;
+    border-bottom: 1px solid #000;
+    line-height: 160%;
+    font-size: 1.4rem;
+    font-size:14px;
 }
     
     </style>
@@ -381,9 +389,9 @@ a {
 
                 </div>
                 <div class="cont">
-                    <textarea placeholder="내용 입력 "id="studySubject" name="studySubject"></textarea>
+                    <textarea placeholder="스터디내용을 자유롭게 적어보세요~"id="studySubject" name="studySubject"></textarea>
                 </div>
-            </div> <br>
+            </div> 
             
                <div>
 				   <input type="submit" id ="input1" value="제출">&nbsp;&nbsp;&nbsp; 
