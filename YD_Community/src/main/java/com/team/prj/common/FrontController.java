@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.team.prj.MainCommand;
+import com.team.prj.board.command.AjaxBoardSearche;
 import com.team.prj.board.command.BoardDelete;
 import com.team.prj.board.command.BoardUpdate;
 import com.team.prj.board.command.BoardUpdateForm;
@@ -24,10 +25,8 @@ import com.team.prj.study.command.StudyDelete;
 import com.team.prj.study.command.StudyForm;
 import com.team.prj.board.command.FreeBoardList;
 import com.team.prj.board.command.NoticeBoardForm;
-import com.team.prj.board.command.NoticeBoardInsert;
 import com.team.prj.board.command.NoticeBoardList;
 import com.team.prj.board.command.QnaBoardForm;
-import com.team.prj.board.command.QnaBoardInsert;
 import com.team.prj.board.command.QnaBoardList;
 import com.team.prj.board.command.TotalBoardList;
 import com.team.prj.manager.command.ManagerBoardList;
@@ -85,13 +84,11 @@ public class FrontController extends HttpServlet {
 		map.put("/boardView.do", new BoardView()); // 글 상세보기화면
 		map.put("/boardInsert.do", new BoardInsert()); //글입력
 		
-		
-		//map.put("/qnaBoardInsert.do", new QnaBoardInsert()); //qna 게시판 글입력
-		//map.put("/noticeBoardInsert.do", new NoticeBoardInsert()); // 공지게시판 글입력
-		
 		map.put("/boardUpdate.do", new BoardUpdate()); // 글 수정하기
-		map.put("/boardDelete.do", new BoardDelete()); // 자유게시판 글 삭제하기
-		map.put("/boardUpdateForm.do", new BoardUpdateForm()); // 자유게시판 글수정폼
+		map.put("/boardUpdateForm.do", new BoardUpdateForm()); // 글수정폼
+		map.put("/boardDelete.do", new BoardDelete()); // 글 삭제하기
+		
+		map.put("/ajaxBoardSearche.do", new AjaxBoardSearche()); // 글 삭제하기
 		////////////////////////////////////////////////////
 		
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
