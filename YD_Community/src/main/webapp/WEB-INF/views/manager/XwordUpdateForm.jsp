@@ -4,33 +4,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>금지어 추가</title>
+<title>금지어 수정</title>
 <script src="js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<div><h3>금지어 추가</h3></div>
+	<div><h3>금지어 수정</h3></div>
 	<form id="frm">
 		<div>
 			<input type="text" id="Xword" name="Xword">
-			<button type="button" onclick="XwordInsert()">추가</button>
+			<button type="button" onclick="XwordUpdate()">수정</button>
 		</div>
 	</form>
 <script type="text/javascript">
 
-function XwordInsert() { //추가
+function XwordUpdate() { //추가
 	let key = $("#Xword").val();
 	console.log(key);
 	$.ajax({
-		url : "XwordInsert.do",
+		url : "XwordUpdate.do",
 		type : "post",
 		data : {key : key},
 		dataType : "json",
 		success : function(result){
 				if(result =="1"){
-					alert("등록되었습니다.");
+					alert("수정되었습니다.");
 					history.back();
 				}else{
-					alert("등록할 수 없습니다.");
+					alert("수정할 수 없습니다.");
 				}
 		},
 		error : function(error){

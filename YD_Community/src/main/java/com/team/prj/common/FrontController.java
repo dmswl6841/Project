@@ -34,8 +34,12 @@ import com.team.prj.manager.command.ManagerMemberDelete;
 import com.team.prj.manager.command.ManagerMemberList;
 import com.team.prj.manager.command.ManagerMemberSearch;
 import com.team.prj.manager.command.MemberUpdateAuthor;
+import com.team.prj.manager.command.XwordInsert;
 import com.team.prj.manager.command.XwordInsertForm;
 import com.team.prj.manager.command.XwordList;
+import com.team.prj.manager.command.XwordSearch;
+import com.team.prj.manager.command.XwordUpdate;
+import com.team.prj.manager.command.XwordUpdateForm;
 import com.team.prj.manager.command.ManagerBoardSearch;
 import com.team.prj.member.command.AjaxMemberIdCheck;
 import com.team.prj.member.command.AjaxMemberNicknameCheck;
@@ -57,6 +61,7 @@ import com.team.prj.page.command.MemberStudy;
 import com.team.prj.page.command.MemberStudyBoard;
 import com.team.prj.page.command.MemberStudyRecent;
 import com.team.prj.recommend.command.RecommendInsert;
+import com.team.prj.study.command.AjaxNoticeSearche;
 import com.team.prj.study.command.StudyDelete;
 import com.team.prj.study.command.StudyForm;
 import com.team.prj.study.command.StudyInsert;
@@ -97,7 +102,6 @@ public class FrontController extends HttpServlet {
 
         //////////////////Recommend 기능/////////////////////
 		map.put("/recommendInsert.do", new RecommendInsert()); // 글 추천하기
-
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
     
 		//관리자
@@ -108,12 +112,12 @@ public class FrontController extends HttpServlet {
 		map.put("/memberUpdateAuthor.do", new MemberUpdateAuthor()); //회원 가입승인
 		map.put("/managerBoardList.do", new ManagerBoardList()); //게시글 전체 목록
 		map.put("/managerBoardSearch.do", new ManagerBoardSearch()); //게시글 검색
-		map.put("/managerBoardDelete.do", new ManagerBoardDelete());
-		map.put("/XwordList.do", new XwordList()); //금지어 전체 목록
-		//map.put("/XwordSearchList.do", new XwordSearchList()); //금지어 검색
+		map.put("/managerBoardDelete.do", new ManagerBoardDelete()); //게시글 삭제
+		map.put("/XwordList.do", new XwordList()); //금지어전체 목록
+		map.put("/XwordSearch.do", new XwordSearch()); //금지어 검색
 		map.put("/XwordInsertForm.do", new XwordInsertForm()); //금지어 입력 팝업창
-		//map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
-		//map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
+		map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
+		map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		//map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
 
 		//스터디게시판
@@ -121,11 +125,11 @@ public class FrontController extends HttpServlet {
 		map.put("/StudyInsert.do", new StudyInsert());//게시글등록
 		map.put("/StudyView.do", new StudyView());//게시글세부내용
 		map.put("/StudyDelete.do", new StudyDelete());
+		map.put("/ajaxNoticeSearche.do", new AjaxNoticeSearche());//검색하기
 	
 		//마이페이지//
 		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 자유게시판 글 목록
 		map.put("/memberStudyBoard.do", new MemberStudyBoard()); //내가 쓴 스터디 글 목록
-
 		////////////////////////////////////////////////////
 		
 		
@@ -141,8 +145,9 @@ public class FrontController extends HttpServlet {
 		// map.put("/boardSearchList.do", new BoardSelectList()); //게시글 검색
 		map.put("/XwordList.do", new XwordList()); // 금지어 전체 목록
 		// map.put("/XwordSearchList.do", new XwordSearchList()); //금지어 검색
-		// map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
-		// map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
+		map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
+		map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
+		map.put("/XwordUpdateForm.do", new XwordUpdateForm()); //금지어 수정폼 호출
 		// map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
 
 		// 스터디게시판
