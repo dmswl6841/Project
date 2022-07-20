@@ -66,6 +66,8 @@ import com.team.prj.study.command.StudyDelete;
 import com.team.prj.study.command.StudyForm;
 import com.team.prj.study.command.StudyInsert;
 import com.team.prj.study.command.StudyList;
+import com.team.prj.study.command.StudyUpdate;
+import com.team.prj.study.command.StudyUpdateForm;
 import com.team.prj.study.command.StudyView;
 
 @WebServlet("*.do")
@@ -125,7 +127,12 @@ public class FrontController extends HttpServlet {
 		map.put("/StudyInsert.do", new StudyInsert());//게시글등록
 		map.put("/StudyView.do", new StudyView());//게시글세부내용
 		map.put("/StudyDelete.do", new StudyDelete());
+
+		map.put("/StudyUpdateForm.do", new StudyUpdateForm());
+		map.put("/StudyUpdate.do", new StudyUpdate());
+
 		map.put("/ajaxNoticeSearche.do", new AjaxNoticeSearche());//검색하기
+
 	
 		//마이페이지//
 		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 자유게시판 글 목록

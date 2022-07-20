@@ -22,9 +22,7 @@ public class StudyServiceImpl implements StudyService {
 		// 전체목록(studyList.jsp파일생성)
 		List<StudyVO> list = new ArrayList<>();
 		StudyVO vo;
-		String sql = "SELECT STUDY_NO, STUDY_TITLE, "
-				+ "STUDY_SYSTEM, STUDY_PERIOD, STUDY_LANGUAGE, STUDY_WRITER, STUDY_DATE "
-				+ "FROM STUDY ORDER BY STUDY_NO DESC";
+		String sql = "SELECT * FROM STUDY ORDER BY STUDY_NO DESC";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
@@ -38,6 +36,7 @@ public class StudyServiceImpl implements StudyService {
 				vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));// 스터디언어;
 				vo.setStudyWriter(rs.getString("STUDY_WRITER"));// 스터디작성자;
 				vo.setStudyDate(rs.getString("STUDY_DATE"));// 작성일자
+				vo.setMemberNo(rs.getInt("member_no"));
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -132,21 +131,20 @@ public class StudyServiceImpl implements StudyService {
 	public int studyUpdate(StudyVO vo) {
 		// 글 수정
 		int n = 0;
-		String sql = "UPDATE STUDY SET STUDY_TITLE=?, STUDY_SUBJECT=?, " + "STUDY_SYSTEM=?, STUDY_PERIOD=? , "
-				+ "STUDY_LANGUAGE=? , STUDY_ATTECH=? ,STUDY_ATTECHDIR, WHERE NOTICE_ID=?";
+		String sql = "update study set study_title=?, study_subject=?, study_system=?, study_period=?, study_language=?, study_attech=?, study_attechdir=? where study_no=?";
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			// vo.setStudyNo(rs.getInt("STUDY_NO"));// 1글 순서번호
-			vo.setStudyTitle(rs.getString("STUDY_TITLE")); // 2글 제목
-			vo.setStudySubject(rs.getString("STUDY_SUBJECT")); // 3글 내용
-			vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 4글작성자
-			vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 5스터디기간
-			vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));// 6스터디언어;
-			// vo.setStudyDate(rs.getString("STUDY_DATE"));//7작성일자
-			// vo.setMemberNo(rs.getInt("MEMBER_NO"));//포링키
-			vo.setStudyAttech(rs.getString("STUDY_ATTECH"));// 첨부파일
-			vo.setStudyAttechDir(rs.getString("STUDY_ATTECHDIR"));// 첨부파일
+			
+			psmt.setString(1, vo.getStudyTitle());
+			psmt.setString(2, vo.getStudySubject());
+			psmt.setString(3, vo.getStudySystem());
+			psmt.setString(4, vo.getStudyPeriod());
+			psmt.setString(5, vo.getStudyLanguage());
+			psmt.setString(6, vo.getStudyAttech());
+			psmt.setString(7, vo.getStudyAttechDir());
+			psmt.setInt(8, vo.getStudyNo());
+
 			// 내용관련메소드 다호출
 			n = psmt.executeUpdate();
 		} catch (Exception e) {

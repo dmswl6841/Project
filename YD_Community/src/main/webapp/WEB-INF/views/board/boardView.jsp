@@ -32,7 +32,7 @@
 								<input type="hidden" name="board_no" value="${vo.boardNo}">
 								<input type="hidden" name="member_no" value="${member.memberNo }">
 								<tr>
-									<td>${vo.boardWriter }</td>
+									<td><a href="myPage.do?no=${vo.memberNo}">${vo.boardWriter }</a></td>
 									<td>${vo.boardScrap }</td>
 									<td>${vo.boardRecommend }</td>
 									<td>${vo.boardHit }</td>

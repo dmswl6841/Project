@@ -30,8 +30,8 @@
 							</select></td>
 							<th width="150">작성자</th>
 							<td width="200"><input type="text" id="boardWriter"
-								name="boardWriter" value="${member.memberNick}"></td>
-							<th width="150">임시 MemberNo</th>
+								name="boardWriter" value="${member.memberNick}" readonly></td>
+							<th width="150">MemberNo</th>
 							<td width="200"><input type="number" id="MemberNo"
 								name="MemberNo" value="${member.memberNo }"></td>
 						</tr>

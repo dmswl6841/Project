@@ -153,7 +153,7 @@ a {
 								<td class="tit">${b.studyPeriod }</td>
 								<td class="tit">${b.studyLanguage }</td>
 								<td class="tit">${b.studyDate }</td>
-								<td class="tit">${b.studyWriter }</td>
+								<td class="tit"><a href="myPage.do?no=${b.memberNo}">${b.studyWriter }</a></td>
 							</tr>
 						</c:forEach>
 					</c:when>
