@@ -22,9 +22,9 @@ public class MemberStudyBoard implements Command {
 		PageServiceImpl pageService = new PageServiceImpl();
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int memberNo = member.getMemberNo();
+		//int memberNo = member.getMemberNo();
 		
-	
+		int memberNo = Integer.parseInt(request.getParameter("no")); // 희수가 남에거 보는거때문에 추가
 		List<StudyVO> list = pageService.myStudyBoardList(memberNo);
 		request.setAttribute("list", list);
 		return "page/memberStudyBoard";

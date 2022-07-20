@@ -53,78 +53,80 @@
 </head>
 
 <body>
-
 	<div align="center">
 		<div>
-			<c:if test="${memberNo eq boardWriter }">
-				<input type="button" id="modify"
-					onclick="location.href='memberUpdate.do'"
-					value="내 정보 수정">
-				<input type="button" id="joinout" onclick="joinoutCheck()"
-					value="탈퇴">
-			</c:if>
+			<div>
+				<c:if test="${memberNo eq boardWriter }">
+					<input type="button" id="modify"
+						onclick="location.href='memberUpdate.do'" value="내 정보 수정">
+					<input type="button" id="joinout" onclick="joinoutCheck()"
+						value="탈퇴">
+				</c:if>
+			</div>
 		</div>
-	</div>
-
-	<div align="center">
+		<br>
+		<h1>${boardWriter }</h1>
 		<div>
-			<h1>${memberNick }님의최근 활동</h1>
-		</div>
-
-		<div class="dropdown">
-			<button class="dropbtn">최근활동</button>
-			<div class="dropdown-content">
-				<a href="memberRecent.do">자유게시판</a> <a href="memberStudyRecent.do">스터디</a>
+			<div>
+				<h1>${memberNick }님의 최근 활동</h1>
 			</div>
-		</div>
 
-		<div class="dropdown">
-			<button class="dropbtn">나의 게시글</button>
-			<div class="dropdown-content">
-				<a href="memberBoard.do">자유게시판</a> <a href="memberStudyBoard.do">스터디</a>
+			<div class="dropdown">
+				<button class="dropbtn">최근활동</button>
+				<div class="dropdown-content">
+					<a href="memberRecent.do?no=${boardWriter }">자유게시판</a> <a href="memberStudyRecent.do?no=${boardWriter }">스터디</a>
+				</div>
 			</div>
-		</div>
 
-		<div class="dropdown">
-			<button class="dropbtn">북마크</button>
-			<div class="dropdown-content">
-				<a href="memberScrap.do">스크랩</a> <a href="memberStudy.do">찜한 스터디</a>
+			<div class="dropdown">
+				<button class="dropbtn">나의 게시글</button>
+				<div class="dropdown-content">
+					<a href="memberBoard.do?no=${boardWriter }">자유게시판</a> <a href="memberStudyBoard.do?no=${boardWriter }">스터디</a>
+				</div>
 			</div>
-		</div>
+
+			<div class="dropdown">
+				<button class="dropbtn">북마크</button>
+				<div class="dropdown-content">
+					<a href="memberScrap.do??no=${boardWriter }">스크랩</a> <a href="memberStudy.do?no=${boardWriter }">찜한
+						스터디</a>
+				</div>
+			</div>
 
 
-		<div>
-			<table border="1">
-				<thead>
-					<tr>
-						<th width="400">목록</th>
+			<div>
+				<table border="1">
+					<thead>
+						<tr>
+
+							<th width="400">목록</th>
 
 
-					</tr>
-				</thead>
-				<tbody>
-					<c:choose>
-						<c:when test="${not empty list }">
-							<c:forEach items="${list }" var="r">
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${not empty list }">
+								<c:forEach items="${list }" var="r">
+									<tr>
+										<td align="center">#${r.boardDate } ${r.boardTitle }</td>
+
+
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
 								<tr>
-									<td align="center">#${r.boardDate } ${r.boardTitle }</td>
-
-
+									<td colspan="6" align="center">최근 활동이 없습니다!</td>
 								</tr>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<tr>
-								<td colspan="6" align="center">최근 활동이 없습니다!</td>
-							</tr>
-						</c:otherwise>
-					</c:choose>
-				</tbody>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
 
-			</table>
+				</table>
+			</div>
 		</div>
 	</div>
-
 	<script>
 		function joinoutCheck() {
 			let q = confirm("정말 탈퇴하시겠습니까? 이 행위는 되돌릴 수 없습니다.");

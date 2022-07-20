@@ -30,7 +30,7 @@ public class MemberUpdateSubmit implements Command {
 
 		request.setAttribute("message", cnt + "건 수정 완료");
 
-		return "member/memberUpdateComplete";
+		return "myPage.do";
 	}
 
 }

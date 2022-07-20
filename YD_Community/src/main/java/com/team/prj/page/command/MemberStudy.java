@@ -19,7 +19,8 @@ public class MemberStudy implements Command {
 		PageServiceImpl pageService = new PageServiceImpl();
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		int memberNo = member.getMemberNo();
+		int memberNo = Integer.parseInt(request.getParameter("no")); // 희수가 남에거 보는거때문에 추가
+		//int memberNo = member.getMemberNo();
 		//int memberNo = (int) request.getAttribute("memberNo");
 		List<ScrapVO> list = pageService.myStudyList(memberNo);
 		request.setAttribute("list", list);

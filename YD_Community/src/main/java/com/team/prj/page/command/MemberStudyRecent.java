@@ -19,8 +19,9 @@ public class MemberStudyRecent implements Command{
 		PageServiceImpl pageService = new PageServiceImpl();
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member"); //세션 가져오기
-		int memberNo = member.getMemberNo();
+		//int memberNo = member.getMemberNo();
 		//int memberNo = (int) request.getAttribute("memberNo");
+		int memberNo = Integer.parseInt(request.getParameter("no")); // 희수가 남에거 보는거때문에 추가
 		List<StudyVO> list = pageService.myStudyLogList(memberNo);
 		request.setAttribute("list", list);
 		return "page/memberStudyRecent";

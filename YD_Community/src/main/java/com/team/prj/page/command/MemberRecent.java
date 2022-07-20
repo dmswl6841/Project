@@ -18,9 +18,11 @@ public class MemberRecent implements Command{
 		// 최근활동 목록
 		PageServiceImpl pageService = new PageServiceImpl();
 		HttpSession session = request.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("member"); //세션 가져오기
-		int memberNo = member.getMemberNo();
+		//MemberVO member = (MemberVO) session.getAttribute("member"); //세션 가져오기
+		//int memberNo = member.getMemberNo();
 		//int memberNo = (int) request.getAttribute("memberNo");
+		
+		int memberNo = Integer.parseInt(request.getParameter("no")); // 희수가 남에거 보는거때문에 추가
 		List<BoardVO> list = pageService.myLogList(memberNo);
 		request.setAttribute("list", list);
 		return "page/memberRecent";

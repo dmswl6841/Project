@@ -80,6 +80,7 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardDate(rs.getString("board_date"));
 				vo.setBoardAttech(rs.getString("board_attech"));
 				vo.setBoardSubject(rs.getString("board_subject"));
+				vo.setMemberNo(rs.getInt("member_no"));
 			}
 
 		} catch (SQLException e) {
