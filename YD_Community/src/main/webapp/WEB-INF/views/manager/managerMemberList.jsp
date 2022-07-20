@@ -143,7 +143,7 @@
 			console.log('error : '+err.message);
 		}
 		
-		function memberUpdate(obj) { //가입 승인2 -ing
+		function memberUpdate(obj) { //가입 승인
 			let key = obj.parentElement.parentElement.children[5].textContent;
 	   		console.log(key);
 			let row = $(obj).parent().parent().get(0);

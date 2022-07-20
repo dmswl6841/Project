@@ -38,6 +38,8 @@ import com.team.prj.manager.command.XwordInsert;
 import com.team.prj.manager.command.XwordInsertForm;
 import com.team.prj.manager.command.XwordList;
 import com.team.prj.manager.command.XwordSearch;
+import com.team.prj.manager.command.XwordUpdate;
+import com.team.prj.manager.command.XwordUpdateForm;
 import com.team.prj.manager.command.ManagerBoardSearch;
 import com.team.prj.member.command.AjaxMemberIdCheck;
 import com.team.prj.member.command.AjaxMemberNicknameCheck;
@@ -100,7 +102,6 @@ public class FrontController extends HttpServlet {
 
         //////////////////Recommend 기능/////////////////////
 		map.put("/recommendInsert.do", new RecommendInsert()); // 글 추천하기
-
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
     
 		//관리자
@@ -116,7 +117,7 @@ public class FrontController extends HttpServlet {
 		map.put("/XwordSearch.do", new XwordSearch()); //금지어 검색
 		map.put("/XwordInsertForm.do", new XwordInsertForm()); //금지어 입력 팝업창
 		map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
-		//map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
+		map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		//map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
 
 		//스터디게시판
@@ -129,7 +130,6 @@ public class FrontController extends HttpServlet {
 		//마이페이지//
 		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 자유게시판 글 목록
 		map.put("/memberStudyBoard.do", new MemberStudyBoard()); //내가 쓴 스터디 글 목록
-
 		
 		////////////////////////////////////////////////////
 		
@@ -146,8 +146,9 @@ public class FrontController extends HttpServlet {
 		// map.put("/boardSearchList.do", new BoardSelectList()); //게시글 검색
 		map.put("/XwordList.do", new XwordList()); // 금지어 전체 목록
 		// map.put("/XwordSearchList.do", new XwordSearchList()); //금지어 검색
-		// map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
-		// map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
+		map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
+		map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
+		map.put("/XwordUpdateForm.do", new XwordUpdateForm()); //금지어 수정폼 호출
 		// map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
 
 		// 스터디게시판

@@ -28,8 +28,8 @@ public interface ManagerService {
 	List<XwordVO> XwordSelectAll(); //금지어 전체 조회
 	List<XwordVO> XwordSearch(String key, String val); //금지어 목록 검색
 	
-	int XwordInsert(XwordVO vo); // 금지어 입력
+	int XwordInsert(String key); // 금지어 입력
 	int XwordDelete(XwordVO vo); // 금지어 삭제
-	int XwordUpdate(XwordVO vo); // 금지어 수정
+	int XwordUpdate(String key, String val); // 금지어 수정
 	
 }

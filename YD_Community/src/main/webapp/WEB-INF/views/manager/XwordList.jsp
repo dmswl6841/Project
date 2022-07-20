@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>금지어 관리</title>
+<script src="js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div align="center">
@@ -36,7 +37,7 @@
 							<td><input type="checkbox"></td>
 							<td id="xwordNo" name="xwordNo">${x.xwordNo }</td>
 							<td >${x.xword }</td>
-							<td><input type="button" value="수정" onclick="XwordUpdate(${x.xwordNo })"></td>
+							<td><input type="button" value="수정" onclick="XwordUpdate()"></td>
 							<td><input type="button" value="삭제" onclick="XwordDelete(${x.xwordNo })"></td>
 						</tr>
 					</c:forEach>
@@ -51,11 +52,11 @@
 			</c:choose>
 		</tbody>
 	</table>
-	<input type="button" value="추가" onclick="XwordInsert()">
+	<button type="button" onclick="location.href='XwordInsertForm.do'">추가</button>
 	<input type="button" value="선택삭제" onclick="deleteValue()">
 	</div>
 	<script type="text/javascript">
-		function XwordSearch() {
+		function XwordSearch() { // 검색
 			let key = $("#xwordNo").val();
 			let val = $("#xword").val();
 			console.log(key);
@@ -97,29 +98,28 @@
 			console.log('error : '+err.message);
 		}
 		
-		function XwordInsert(){ //금지어 추가
-			window.open("XwordInsertForm.do","팝업 테스트","width=400, height=300, top=10, left=10");
-		}
-		
-		function XwordUpdate(no) { //금지어 수정
-			let val = $(no);
+	/* 	function XwordUpdate(no) { //금지어 수정
+			let key = $("#xwordNo").val();
+			let val = $("#xword").val();
+			console.log(key);
 			$.ajax({
 				url : "xwordUpdate.do",
 				type : "post",
-				data : {no : no},
+				data : {key : key, val : val},
 				dataType : "json",
 				success : function(result){
-					if(result.length > 0) {
-						jsonHtmlConvert(result);
-					}else {
-						alert("검색한 결과가 없습니다.");
+					if(result =="1"){
+						alert("수정되었습니다.");
+						history.back();
+					}else{
+						alert("수정할 수 없습니다.");
 					}
-				},
-				error : function(error){
-					alert("ERROR!")
-				}
-			});
-		}
+			},
+			error : function(error){
+				alert("ERROR!")
+			}
+		});
+	} */
 		
 		function XwordDelete(obj){ //금지어 삭제
 			let row = $(obj).parent().parent().get(0);
