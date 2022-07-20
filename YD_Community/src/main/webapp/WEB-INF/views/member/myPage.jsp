@@ -7,39 +7,45 @@
 <head>
 <style>
 .dropbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
+	background-color: #04AA6D;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
 }
- 
+
 .dropdown {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
- 
+
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
 }
- 
+
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
 }
- 
-.dropdown-content a:hover {background-color: #ddd;}
- 
-.dropdown:hover .dropdown-content {display: block;}
- 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #3e8e41;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -50,44 +56,41 @@
 
 	<div align="center">
 		<div>
-			<h1>${member.memberNick }</h1>
-		</div>
-		<div>
-			<input type="button" id="modify"
-				onclick="location.href='memberUpdate.do?id=${member.memberId}'"
-				value="내 정보 수정"><input type="button" id="joinout"
-				onclick="joinoutCheck()" value="탈퇴">
+			<c:if test="${memberNo eq boardWriter }">
+				<input type="button" id="modify"
+					onclick="location.href='memberUpdate.do'"
+					value="내 정보 수정">
+				<input type="button" id="joinout" onclick="joinoutCheck()"
+					value="탈퇴">
+			</c:if>
 		</div>
 	</div>
 
 	<div align="center">
 		<div>
-			<h1>나의 최근 활동</h1>
+			<h1>${memberNick }님의최근 활동</h1>
 		</div>
 
 		<div class="dropdown">
-  <button class="dropbtn">최근활동</button>
-  <div class="dropdown-content">
-   <a href="memberRecent.do">자유게시판</a>
-    <a href="memberStudyRecent.do">스터디</a>
-  </div>
-  </div>
-  
-  <div class="dropdown">
-   <button class="dropbtn">나의 게시글</button>
-  <div class="dropdown-content">
-   <a href="memberBoard.do">자유게시판</a>
-   <a href="memberStudyBoard.do">스터디</a>
-  </div>
-  </div>
-  
-  <div class="dropdown">
-   <button class="dropbtn">북마크</button>
-  <div class="dropdown-content">
-   <a href="memberScrap.do">스크랩</a>
-     <a href="memberStudy.do">찜한 스터디</a>
-  </div>
-  </div>
+			<button class="dropbtn">최근활동</button>
+			<div class="dropdown-content">
+				<a href="memberRecent.do">자유게시판</a> <a href="memberStudyRecent.do">스터디</a>
+			</div>
+		</div>
+
+		<div class="dropdown">
+			<button class="dropbtn">나의 게시글</button>
+			<div class="dropdown-content">
+				<a href="memberBoard.do">자유게시판</a> <a href="memberStudyBoard.do">스터디</a>
+			</div>
+		</div>
+
+		<div class="dropdown">
+			<button class="dropbtn">북마크</button>
+			<div class="dropdown-content">
+				<a href="memberScrap.do">스크랩</a> <a href="memberStudy.do">찜한 스터디</a>
+			</div>
+		</div>
 
 
 		<div>
@@ -126,7 +129,7 @@
 		function joinoutCheck() {
 			let q = confirm("정말 탈퇴하시겠습니까? 이 행위는 되돌릴 수 없습니다.");
 			if (q) {
-				location.href = "memberJoinout.do?id=${member.memberId}";
+				location.href = "memberJoinout.do";
 			}
 		}
 	</script>

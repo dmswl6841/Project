@@ -155,10 +155,10 @@ public class FrontController extends HttpServlet {
 		String uri = request.getRequestURI(); // 요청된 URI를 확인한다.
 		String contextPath = request.getContextPath(); // 요청 URL로 부터 contextPath를 확인한다.
 		String page = uri.substring(contextPath.length()); // 실제로 요청된 것 (uri에서 contextPath의 길이만큼 빼면 실제 요청한것)
-
+		System.out.println("page: " + page);
 		Command command = map.get(page); // 실제 수행할 Command를 찾음 = new MainCommand();
 		String viewPage = command.exec(request, response); // 요청 Command를 수행하고 결과를 받음
-
+		System.out.println("viewPage: " + viewPage);
 		// viewResolve 보여줄 페이지 선택
 		if (!viewPage.endsWith(".do") && !viewPage.equals(null)) {
 			if (viewPage.startsWith("ajax:")) {
@@ -172,5 +172,7 @@ public class FrontController extends HttpServlet {
 		} else {
 			response.sendRedirect(viewPage); // .do로 권한 위임 처리
 		}
+		System.out.println("resolved viewPage: " + viewPage);
+		System.out.println();
 	}
 }

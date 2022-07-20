@@ -203,6 +203,27 @@ public class MemberServiceImpl implements MemberService {
 		return vo;
 	}
 	
+	@Override
+	public String searchMemberNick(int no) {
+		String memberNick = null;
+		String sql = "SELECT member_nick FROM MEMBER WHERE MEMBER_no=?";
+
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, no);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				memberNick = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return memberNick;
+	}
+
 	private void close() {
 		try {
 			if(rs != null) rs.close();
@@ -212,5 +233,6 @@ public class MemberServiceImpl implements MemberService {
 			e.printStackTrace();
 		}		
 	}
+
 
 }

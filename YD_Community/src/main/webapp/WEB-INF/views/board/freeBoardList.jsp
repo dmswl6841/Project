@@ -63,7 +63,7 @@
 							<c:forEach items="${freeboardlist }" var="b">
 								<tr>
 									<td>${b.boardNo }</td>
-									<td>${b.boardWriter }</td>
+									<td><a href="myPage.do?no=${b.memberNo}">${b.boardWriter }</a></td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
 									<td>${b.boardDate }</td>
 									<td>${b.boardAttech }</td>

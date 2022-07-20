@@ -15,5 +15,7 @@ public interface MemberService {
 	boolean isMemberId(String id); //아이디 중복체크
 	boolean isMemberNickname(String nickname);
 	MemberVO memberLogin(MemberVO vo); //로그인 처리  R
+	
+	String searchMemberNick(int no);
 }
 

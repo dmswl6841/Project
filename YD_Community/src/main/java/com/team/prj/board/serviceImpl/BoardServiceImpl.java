@@ -238,6 +238,7 @@ public class BoardServiceImpl implements BoardService {
 						vo.setBoardScrap(rs.getInt("board_scrap"));
 						vo.setBoardRecommend(rs.getInt("board_recommend"));
 						vo.setBoardHit(rs.getInt("board_hit"));
+						vo.setMemberNo(rs.getInt("member_no"));
 						noticeboardlist.add(vo);
 					}
 				} catch (SQLException e) {
@@ -276,6 +277,7 @@ public class BoardServiceImpl implements BoardService {
 						vo.setBoardScrap(rs.getInt("board_scrap"));
 						vo.setBoardRecommend(rs.getInt("board_recommend"));
 						vo.setBoardHit(rs.getInt("board_hit"));
+						vo.setMemberNo(rs.getInt("member_no"));
 						freeboardlist.add(vo);
 					}
 				} catch (SQLException e) {
@@ -316,6 +318,7 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardScrap(rs.getInt("board_scrap"));
 				vo.setBoardRecommend(rs.getInt("board_recommend"));
 				vo.setBoardHit(rs.getInt("board_hit"));
+				vo.setMemberNo(rs.getInt("member_no"));
 				qnaboardlist.add(vo);
 			}
 		} catch (SQLException e) {
@@ -356,6 +359,7 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardScrap(rs.getInt("board_scrap"));
 				vo.setBoardRecommend(rs.getInt("board_recommend"));
 				vo.setBoardHit(rs.getInt("board_hit"));
+				vo.setMemberNo(rs.getInt("member_no"));
 
 				hotboardlist.add(vo);
 			}

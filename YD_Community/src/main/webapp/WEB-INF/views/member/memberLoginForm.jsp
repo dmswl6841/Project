@@ -49,16 +49,14 @@
 
 		function KakaoLogin() {
 			window.Kakao.Auth.login({
-				//scope: 'profile_nickname, profile_image, account_email, gender',
+				scope: 'profile_nickname, account_email',
 				success: function (response) {
 					window.Kakao.API.request({
-						//console.log(response);
 						url: '/v2/user/me',
 						success: res => {
-							console.log(res);
+							console.log("response ", res);
 							let id = res.id + "kId";
 							let pw = res.id + "kPw";
-							let kakao_account = res.kakao_account
 							if (res.kakao_account != null) {
 								//xhtp.open("get", "ajaxMemberIdCheck.do?id=" + id); // 호출할 주소와 방식 설정				
 								let xhtp = new XMLHttpRequest();

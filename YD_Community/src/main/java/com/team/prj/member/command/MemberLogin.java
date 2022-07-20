@@ -22,7 +22,7 @@ public class MemberLogin implements Command {
 		vo.setMemberPw(request.getParameter("memberPw"));
 		vo = dao.memberLogin(vo);
 
-		if (vo != null) {
+		if (vo.getMemberNick() != null) {
 			session.setAttribute("member", vo);
 			request.setAttribute("message", "환영합니다, " + vo.getMemberNick() + "님!");
 
