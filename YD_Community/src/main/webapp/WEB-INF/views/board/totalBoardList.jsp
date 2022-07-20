@@ -23,7 +23,7 @@
 					<c:choose>
 						<c:when test="${not empty totalboardlist }">	
 							<c:forEach items="${totalboardlist }" var="b">
-								<c:if test="${b.boardHot =='HOT' }">
+								<c:if test="${b.boardCategory =='HOT' }">
 									<tr>
 										<td>${b.boardNo }</td>
 										<td>${b.boardHot }</td>
