@@ -50,7 +50,7 @@
 <body>
 
 	<div align="center">
-		<div><h1>찜한 스터디</h1></div>
+		<div><h1> </h1></div>
 		
 			
 	<div class="dropdown">
@@ -78,7 +78,7 @@
   </div>
 
 		<div>
-			<table >
+			<table align="center" border="1">
 			<thead>
 				<tr>  
 						<th width="100"></th>
