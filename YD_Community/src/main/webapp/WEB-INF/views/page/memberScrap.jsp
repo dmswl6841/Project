@@ -49,7 +49,7 @@
 <body>
 
 	<div align="center">
-	<div><h1>스크랩 목록</h1>
+	<div><h1> </h1>
 	</div>
 	
 	
@@ -79,7 +79,7 @@
 
 	
 	<div>
-	<table >
+	<table align="center" border="1">
 		<thead>
 			<tr>
 			<th width="100"></th>

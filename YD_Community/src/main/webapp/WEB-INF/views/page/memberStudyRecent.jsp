@@ -48,7 +48,7 @@
 </head>
 <body>
 	<div align="center">
-	<div><h1>나의 최근 활동</h1>
+	<div><h1> </h1>
 	</div>
 	
 	
@@ -84,9 +84,8 @@
 	<table align="center" border="1">
 		<thead>
 			<tr>
-			<th width="400">목록</th>
-		
-			
+			<th width="200"></th>
+			<th width="250"></th>
 			</tr>
 		</thead>
 		<tbody>
