@@ -14,7 +14,7 @@
 	</div>
 	<div align="center">
 	<form id="frm">
-		<input type="text" id="xword" name="xword">&nbsp;
+		<input type="text" id="search" name="search">&nbsp;
 		<input type="button" value="검색" onclick="XwordSearch()">
 	</form>
 	</div>
@@ -36,9 +36,9 @@
 						<tr>
 							<td><input type="checkbox"></td>
 							<td id="xwordNo" name="xwordNo">${x.xwordNo }</td>
-							<td >${x.xword }</td>
+							<td id="xword" name="xword">${x.xword }</td>
 							<td><input type="button" value="수정" onclick="XwordUpdate(${x.xwordNo })"></td>
-							<td><input type="button" value="삭제" onclick="XwordDelete(${x.xwordNo })"></td>
+							<td><input type="button" value="삭제" onclick="XwordDelete(this)"></td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -52,19 +52,17 @@
 			</c:choose>
 		</tbody>
 	</table>
-	<button type="button" onclick="location.href='XwordInsertForm.do'">추가</button>
+	<button type="button" onclick="XwordInsert()">추가</button>
 	<input type="button" value="선택삭제" onclick="deleteValue()">
 	</div>
 	<script type="text/javascript">
 		function XwordSearch() { // 검색
-			let key = $("#xwordNo").val();
-			let val = $("#xword").val();
+			let key = $("#search").val();
 			console.log(key);
-			console.log(val);
 			$.ajax({
-				url : "XwordSearch.do",
+				url : "XwordSearch.do", 
 				type : "post",
-				data : {key : key, val : val},
+				data : {key : key},
 				dataType : "json",
 				success : function(result){
 					if(result.length > 0) {
@@ -78,6 +76,11 @@
 				}
 			});
 		}
+		
+		function XwordInsert(){
+			window.open("XwordInsertForm.do","금지어 추가","width=400, height=300, top=10, left=10");
+		}
+		
 		function jsonHtmlConvert(data) { //새로 불러오기
 			$('tbody').remove();
 			var tbody = $("<tbody />");
@@ -98,19 +101,19 @@
 			console.log('error : '+err.message);
 		}
 		
-	 	function XwordUpdate(no) { //금지어 수정
-			let key = $("#xwordNo").val();
-			let val = $("#xword").val();
+/* 	 	function XwordUpdate(obj) { //금지어 수정
+			let key = obj;
+	 		window.open("XwordUpdate.do");
 			console.log(key);
 			$.ajax({
-				url : "xwordUpdateForm.do",
+				url : "",
 				type : "post",
-				data : {key : key, val : val},
+				data : {key : key},
 				dataType : "json",
 				success : function(result){
-					if(result =="1"){
-						alert("수정되었습니다.");
-						history.back();
+					if(result = 1){
+						console.log(result);
+						window.open("XwordUpdateFrom.do");
 					}else{
 						alert("수정할 수 없습니다.");
 					}
@@ -119,7 +122,11 @@
 				alert("ERROR!")
 			}
 		});
-	} 
+	} */
+	 	
+	 	function XwordUpdate(obj){
+			let key = obj;
+		}
 		
 		function XwordDelete(obj){ //금지어 삭제
 			let row = $(obj).parent().parent().get(0);
