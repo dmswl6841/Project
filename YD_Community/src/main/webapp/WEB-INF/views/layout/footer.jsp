@@ -62,7 +62,13 @@
     }
     
 }
-        </style>
+
+article {
+  width: auto;
+  height: auto; /* only for demonstration, should be removed */
+}
+
+</style>
 <title>Insert title here</title>
 </head>
 <body>

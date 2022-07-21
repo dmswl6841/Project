@@ -57,6 +57,7 @@ import com.team.prj.page.command.MemberScrap;
 import com.team.prj.page.command.MemberStudy;
 import com.team.prj.page.command.MemberStudyBoard;
 import com.team.prj.page.command.MemberStudyRecent;
+import com.team.prj.study.command.AjaxNoticeSearche;
 import com.team.prj.study.command.StudyDelete;
 import com.team.prj.study.command.StudyForm;
 import com.team.prj.study.command.StudyInsert;
@@ -122,6 +123,8 @@ public class FrontController extends HttpServlet {
 		map.put("/StudyDelete.do", new StudyDelete());
 		map.put("/StudyUpdateForm.do", new StudyUpdateForm());
 		map.put("/StudyUpdate.do", new StudyUpdate());
+		map.put("/StudyUpdate.do", new StudyUpdate());
+		map.put("/ajaxNoticeSearche.do", new AjaxNoticeSearche());
 		
 	
 		//마이페이지//
