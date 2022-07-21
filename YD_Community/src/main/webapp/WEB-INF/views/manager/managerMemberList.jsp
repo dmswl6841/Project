@@ -106,17 +106,12 @@ a {
     margin-top: 5px;
     font-size: 1.4rem;
 }
-
-
-
-
 </style>
 </head>
 <body>
 	<div class="board_title" align="center">
       <strong>회 원 목 록</strong>
    </div>
-   
    
 	<div class="board_list_wrap" align="right">
 		<form id="frm">
@@ -137,25 +132,20 @@ a {
 		<div class="board_list_wrap" align="center">
 		<table class="board_list">
 			<thead>
-			<div>
-			
-				<tr>
-					<th width="7"><input id="allCheck" name="allCheck" type="checkbox"></th>
-					<th width="7">NO</th>
-					<th width="7">사용자 ID</th>
-					<th width="7">사용자 명</th>
-					<th width="7">경고 횟수</th>
-					<th width="7">회원권한</th>
-					<th width="7">가입여부</th>
-					<th width="7">탈퇴</th>
-				</tr>
-				
-			
-			
-			</div>
+				<div>
+					<tr>
+						<th width="7"><input id="allCheck" name="allCheck" type="checkbox"></th>
+						<th width="7">NO</th>
+						<th width="7">사용자 ID</th>
+						<th width="7">사용자 명</th>
+						<th width="7">경고 횟수</th>
+						<th width="7">회원권한</th>
+						<th width="7">가입여부</th>
+						<th width="7">탈퇴</th>
+					</tr>
+				</div>
 			</thead>
 			<tbody>
-			
 				<c:choose>
 					<c:when test="${not empty list }">
 						<c:forEach items="${list }" var="m">
@@ -249,8 +239,8 @@ a {
 							$("<td />").text(item.memberNick),
 							$("<td />").text(item.memberWarning),
 							$("<td />").text(item.memberAuthor),
-							$("<td />").append($("<button onclick=memberUpdate(this) />").text("승인")),
-							$("<td />").append($("<button onclick=memberDelete(this) />").text("삭제"))
+							$("<td />").append($("<button class='tn btn-success btn-sm' style='background-color: #1abc9c' onclick='memberUpdate(this)' />").text("승인")),
+							$("<td />").append($("<button class='btn btn-outline-danger btn-sm' onclick='memberDelete(this)' />").text("삭제"))
 						);
 				tbody.append(row);
 			});

@@ -137,7 +137,6 @@ a {
 	<table class="board_list">
 		<thead>
 			<tr>
-
 				<th width="50"><input type="checkbox"></th>
 				<th width="70">게시판</th>
 				<th width="50">게시글 제목</th>
@@ -206,7 +205,7 @@ a {
 							$("<td />").text(item.boardTitle),
 							$("<td />").text(item.boardWriter),
 							$("<td />").text(item.boardDate),
-							$("<td />").append($("<button onclick=boardDelete(this) />").text("삭제"))
+							$("<td />").append($("<button onclick='boardDelete(this)' />").text("삭제"))
 						);
 				tbody.append(row);
 			});
