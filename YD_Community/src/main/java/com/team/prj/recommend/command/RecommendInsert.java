@@ -1,7 +1,5 @@
 package com.team.prj.recommend.command;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +15,9 @@ public class RecommendInsert implements Command{
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 //		response.setContentType("text/html; charset=UTF-8");
 //		PrintWriter writer;
-		//DB에 추천누른사람 정보저장 (중복방지)
+		
+		
+		//1. 먼저 DB에 추천누른사람 정보저장 (중복방지부터 체크한다)
 		
 		RecommendService recommendDao = new RecommendServiceImpl();
 		int n = 0; 
@@ -27,7 +27,7 @@ public class RecommendInsert implements Command{
 		//vo.setRecommendNo(Integer.parseInt(request.getParameter("recommendNo")));
 		n = recommendDao.recommendInsert(vo);
 		
-		if (n !=0) {
+		if (n !=0) { //2. 1에서 중복 추천이 아닌 사용자일 때 게시글에 추천수 카운트
 			
 			int y = 0; //추천 카운트업뎃
 			BoardVO vo2 = new BoardVO();
@@ -39,8 +39,6 @@ public class RecommendInsert implements Command{
 			
 			if(y !=0) {
 				request.setAttribute("message", "추천성공.");
-				
-				
 	
 //				try {
 //					writer = response.getWriter();
@@ -66,7 +64,7 @@ public class RecommendInsert implements Command{
 			
 		}
 		
-		return "freeBoardList.do";
+		return "boardView.do";
 	}
 
 }

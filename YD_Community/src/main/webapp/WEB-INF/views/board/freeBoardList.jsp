@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,7 +105,7 @@ a {
 
 
 		<!-- 공통 검색기능 -->
-		<div>
+		<div class="board_list_wrap" align="right">
 			<form id="frm">
 				<select id="key" name="key">
 					<option value="board_title">제목</option>
@@ -122,6 +124,7 @@ a {
 			<table class="board_list">
 				<thead>
 					<tr>
+						<th width="130">카테고리</th>
 						<th width="70">No.</th>
 						<th width="130">작성자</th>
 						<th width="200">제목</th>
@@ -135,8 +138,9 @@ a {
 				<tbody id="tb">
 					<c:choose>
 						<c:when test="${not empty freeboardlist }">
-							<c:forEach items="${freeboardlist }" var="b">
+							<c:forEach items="${freeboardlist }" var="b">			
 								<tr>
+									<td>${b.boardCategory }</td>
 									<td>${b.boardNo }</td>
 									<td><a href="myPage.do?no=${b.memberNo}">${b.boardWriter }</a></td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
@@ -161,7 +165,7 @@ a {
 
 		<!-- 글쓰기 버튼 -->
 		<div>
-			<button type="button" onclick="location.href='boardForm.do'">글쓰기</button>
+			<button type="button" class="btn btn-success" onclick="location.href='boardForm.do'">글쓰기</button>
 		</div>
 	</div>
 
@@ -194,6 +198,7 @@ a {
 			var tbody = $("<tbody id />");
 			$.each(data, function(index, item){
 				var row = $("<tr />").append(
+							$("<td />").text(item.boardCategory),
 							$("<td />").text(item.boardNo),
 							$("<td />").text(item.boardWriter),
 							$("<td />").text(item.boardTitle),
