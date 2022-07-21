@@ -6,25 +6,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.team.prj.common.Command;
 import com.team.prj.manager.service.ManagerService;
 import com.team.prj.manager.service.ManagerServiceImpl;
+import com.team.prj.member.vo.MemberVO;
+import com.team.prj.xword.vo.XwordVO;
 
-public class XwordUpdate implements Command {
+public class XwordDelete implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		//금지어 수정
+		//회원 삭제
 		ManagerService managerDao = new ManagerServiceImpl();
-		String key = request.getParameter("key");
-		String val = request.getParameter("val");
-		System.out.println(key);
-		System.out.println(val);
-		
-		int n =managerDao.XwordUpdate(key, val);
-		
+		XwordVO vo = new XwordVO();
+		vo.setXwordNo(Integer.valueOf(request.getParameter("xwordNo")));
+		int n = managerDao.XwordDelete(vo);
 		String jsonList = "0";
 		if(n != 0) {
-			jsonList="1";
+			jsonList = "1";
 		}
-		System.out.println("ajax:"+jsonList);
 		return "ajax:"+jsonList;
 	}
 

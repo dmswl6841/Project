@@ -11,19 +11,32 @@
 	<div><h3>금지어 수정</h3></div>
 	<form id="frm">
 		<div>
-			<input type="text" id="Xword" name="Xword">
-			<button type="button" onclick="XwordUpdate()">수정</button>
+			<table>
+				<tbody>
+					<c:choose>
+						<c:when test="${not empty vo}">
+							<tr>
+								<td id="xwordNo">${vo.xwordNo }</td>
+								<td><input type="text" id="Xword" name="Xword"></td>
+								<td><button type="button" onclick="XwordUpdate()">수정</button></td>
+							</tr>
+						</c:when>
+					</c:choose>
+				</tbody>
+			</table>
 		</div>
 	</form>
 <script type="text/javascript">
 
-function XwordUpdate() { //추가
-	let key = $("#Xword").val();
+function XwordUpdate() { //수정
+	let key = $("#xwordNo").val();
+	let val = $("#Xword").val();
 	console.log(key);
+	console.log(val);
 	$.ajax({
 		url : "XwordUpdate.do",
 		type : "post",
-		data : {key : key},
+		data : {key : key, val : val},
 		dataType : "json",
 		success : function(result){
 				if(result =="1"){

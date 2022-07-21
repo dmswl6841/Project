@@ -355,8 +355,6 @@ a {
 		</div>
 	</div>
 
-
-	
 	<br>
 
 	<script type="text/javascript">
