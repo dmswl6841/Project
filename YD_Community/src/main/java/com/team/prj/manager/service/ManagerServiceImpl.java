@@ -30,7 +30,7 @@ public class ManagerServiceImpl implements ManagerService {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
-
+			System.out.println(rs);
 			while (rs.next()) {
 				vo = new MemberVO();
 				vo.setMemberNo(rs.getInt("member_no"));
@@ -124,7 +124,38 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		return r;
 	}
+	
+	//가입대기 회원 목록
+	@Override
+	public List<MemberVO> managerGuestList() {
+		List<MemberVO> mlist = new ArrayList<MemberVO>();
+		MemberVO vo;
+		String sql = "select * from member where member_author='GUEST' order by member_no desc";
 
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			
+				while (rs.next()) {
+					vo = new MemberVO();
+					vo.setMemberNo(rs.getInt("member_no"));
+					vo.setMemberId(rs.getString("member_id"));
+					vo.setMemberNick(rs.getString("member_nick"));
+					vo.setMemberWarning(rs.getInt("member_warning"));
+					vo.setMemberAuthor(rs.getString("member_author"));
+					mlist.add(vo);
+				}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return mlist;
+	}
+
+	
 	// 게시글 전체 조회
 	@Override
 	public List<BoardVO> managerBoardSelectAll() {
@@ -313,13 +344,14 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<XwordVO> XwordSearch(String key) {
 		List<XwordVO> list = new ArrayList<XwordVO>();
 		XwordVO vo;
-		String sql = "select * from xword where xword like '%"+key+"%' order by xwords_no";
-
+		String sql = "select * from xword where xword like '%?%'";
+		System.out.println(sql);
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, key);
 			rs = psmt.executeQuery();
-
+			System.out.println("sql key : " + key);
 			while (rs.next()) {
 				vo = new XwordVO();
 				vo.setXwordNo(rs.getInt("xword_no"));
@@ -331,6 +363,7 @@ public class ManagerServiceImpl implements ManagerService {
 		} finally {
 			close();
 		}
+		System.out.println(list);
 		return list;
 	}
 

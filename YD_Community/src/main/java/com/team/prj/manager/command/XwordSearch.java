@@ -22,14 +22,16 @@ public class XwordSearch implements Command {
 		List<XwordVO> list = new ArrayList<XwordVO>();
 		ObjectMapper mapper = new ObjectMapper();
 		String key = request.getParameter("key");
-		
+		System.out.println("command : " + key);
 		list = managerDao.XwordSearch(key);
+		
 		String jsonList = null;
 		try {
 			jsonList = mapper.writeValueAsString(list);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
+		System.out.println("ajax:" + jsonList);
 		return "ajax:" + jsonList;
 	}
 

@@ -105,11 +105,7 @@ a {
     margin-top: 5px;
     font-size: 1.4rem;
 }
-
-
-
 </style>
-
 
 </head>
 <body>
@@ -156,7 +152,7 @@ a {
 			</c:choose>
 		</tbody>
 	</table>
-	<button type="button"  class="btn btn-success btn-sm" style="background-color: #1abc9c;  onclick="XwordInsert()">추가</button>
+	<button type="button"  class="btn btn-success btn-sm" style="background-color: #1abc9c"  onclick="XwordInsert()">추가</button>
 	<input type="button" class="btn btn-outline-danger btn-sm" value="선택삭제" onclick="deleteValue()">
 	</div>
 	<script type="text/javascript">
@@ -193,8 +189,8 @@ a {
 							$("<td />").append($("<input>").attr('type','checkbox')),
 							$("<td />").text(item.xwordNo),
 							$("<td />").text(item.xword),
-							$("<td />").append($("<button onclick=XwordUpdate(this) />").text("수정")),
-							$("<td />").append($("<button onclick=XwordDelete(this) />").text("삭제"))
+							$("<td />").append($("<button class='btn btn-success btn-sm' onclick='XwordUpdate(this)' />").text("수정")),
+							$("<td />").append($("<button onclick='XwordDelete(this)' />").text("삭제"))
 						);
 				tbody.append(row);
 			});
