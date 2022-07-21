@@ -39,6 +39,7 @@ public class StudyInsert implements Command {
 			vo.setStudySystem(multi.getParameter("studySystem"));
 			vo.setMemberNo(Integer.parseInt(multi.getParameter("memberNo")));
 			vo.setStudyPeriod(multi.getParameter("studyPeriod"));
+			vo.setStudyMember(multi.getParameter("studyMember"));
 			//vo.setStudyDate((multi.getParameter("STUDY_DATE")));
 			if(orignalFileName != null) {
 				vo.setStudyAttech(orignalFileName);
