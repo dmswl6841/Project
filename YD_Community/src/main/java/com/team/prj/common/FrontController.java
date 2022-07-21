@@ -27,6 +27,7 @@ import com.team.prj.comments.command.CommentInsert;
 import com.team.prj.manager.command.ManagerBoardDelete;
 import com.team.prj.manager.command.ManagerBoardList;
 import com.team.prj.manager.command.ManagerBoardSearch;
+import com.team.prj.manager.command.ManagerMain;
 import com.team.prj.manager.command.ManagerMemberDelete;
 import com.team.prj.manager.command.ManagerMemberList;
 import com.team.prj.manager.command.ManagerMemberSearch;
@@ -99,7 +100,7 @@ public class FrontController extends HttpServlet {
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
     
 		//관리자
-		//map.put("/managerMain.do", new ManagerMain()); //관리자 메인 화면
+		map.put("/managerMain.do", new ManagerMain()); //관리자 메인 화면
 		map.put("/managerMemberList.do", new ManagerMemberList()); //회원 전체 목록
 		map.put("/managermemberSearch.do", new ManagerMemberSearch()); //회원 검색
 		map.put("/managerMemberDelete.do", new ManagerMemberDelete()); //회원삭제

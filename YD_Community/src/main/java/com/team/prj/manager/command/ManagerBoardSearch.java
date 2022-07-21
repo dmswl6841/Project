@@ -24,6 +24,9 @@ public class ManagerBoardSearch implements Command {
 		ObjectMapper mapper = new ObjectMapper();
 		String key = request.getParameter("key");
 		String val = request.getParameter("val");
+		System.out.println(key);
+		System.out.println(val);
+		
 		
 		list = managerDao.managerBoardSearch(key, val);
 		String jsonList = null;

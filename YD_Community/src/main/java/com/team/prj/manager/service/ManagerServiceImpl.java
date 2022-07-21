@@ -141,7 +141,8 @@ public class ManagerServiceImpl implements ManagerService {
 				vo = new BoardVO();
 				vo.setBoardNo(rs.getInt("board_no"));
 				vo.setBoardCategory(rs.getString("board_category"));
-				vo.setBoardTitle(rs.getString("borad_title"));
+				vo.setBoardTitle(rs.getString("board_title"));
+				vo.setBoardWriter(rs.getString("board_writer"));
 				vo.setBoardDate(rs.getString("board_date"));
 				list.add(vo);
 			}
