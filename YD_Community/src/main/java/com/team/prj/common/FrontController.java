@@ -44,6 +44,7 @@ import com.team.prj.manager.command.XwordInsert;
 import com.team.prj.manager.command.XwordInsertForm;
 import com.team.prj.manager.command.XwordList;
 import com.team.prj.manager.command.XwordSearch;
+import com.team.prj.manager.command.XwordSelectOne;
 import com.team.prj.manager.command.XwordUpdate;
 import com.team.prj.manager.command.XwordUpdateForm;
 import com.team.prj.member.command.AjaxMemberIdCheck;
@@ -141,6 +142,7 @@ public class FrontController extends HttpServlet {
 		map.put("/XwordUpdateForm.do", new XwordUpdateForm()); //금지어 수정 팝업창
 		map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
+		map.put("/XwordSelectOne.do", new XwordSelectOne());
 
 		//스터디게시판
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출

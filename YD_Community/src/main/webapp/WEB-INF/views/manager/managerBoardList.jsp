@@ -137,6 +137,7 @@ a {
 	<table class="board_list">
 		<thead>
 			<tr>
+
 				<th width="50"><input type="checkbox"></th>
 				<th width="70">게시판</th>
 				<th width="50">게시글 제목</th>
@@ -151,17 +152,18 @@ a {
 					<c:forEach items="${list }" var="b">
 						<tr>
 							<td><input id="check" name="check" type="checkbox"></td>
+							<td id="boardNo" name="boardNo">${b.boardNo }</td>
 							<td id="boardCategory" name="boardCategory">${b.boardCategory }</td>
 							<td id="boardTitle" name="boardTitle">${b.boardTitle }</td>
 							<td id="boardWriter" name="boardWriter">${b.boardWriter }</td>
 							<td id="boardDate">${b.boardDate }</td>
-							<td><input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="boardDelete(this)"></td>
+							<td><input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="boardDelete(${b.boardNo })"></td>
 						</tr>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td colspan="7" align="center">
+						<td colspan="8" align="center">
 							게시글이 존재하지 않습니다
 						</td>
 					</tr>
@@ -216,25 +218,25 @@ a {
 		}
 		
 		function boardDelete(id){ //게시판 삭제
-			const xhr = new XMLHttpRequest();
-			const url = "managerBoardDelete.d?boardNo="+id;
-			console.log(url)
-			xhr.onload = function(){
-				if(xhr.status >=200 && xhr.status <300){
-					if(xhr.response ==1){
+			let key = id;
+			$.ajax({
+				url : "managerBoardDelete.do",
+				type : "post",
+				data : {key : key},
+				dataType : "json",
+				success : function(result){
+					if(result ==1){
 						alert("삭제되었습니다.");
 						$(row).remove();
+						location.reload();
 					}else{
 						alert("삭제할 수 없습니다.");
 					}
-					
-				}else {
-					errorCallback(new Error(xhr.stautsText));
+				},
+				error : function(error){
+					alert("ERROR!")
 				}
-			};
-			xhr.open('GET',url);
-			console.log(xhr.open('GET',url));
-			xhr.send(); 
+			});
 		}
 	</script>
 </body>
