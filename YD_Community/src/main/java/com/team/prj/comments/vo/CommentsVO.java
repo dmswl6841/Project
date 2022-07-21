@@ -7,8 +7,9 @@ import lombok.Setter;
 @Setter
 public class CommentsVO {
 	private int commentNo;
-	private int commentBoard; //board테이블의 no, 외래키
+	private int boardNo; //board테이블의 no, 외래키
 	private String commentWriter; //댓글 작성자
 	private String commentContent; //댓글 내용
 	private String commentDate; //댓글 작성일자
+	private int memberNo;
 }

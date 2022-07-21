@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,7 +105,7 @@ a {
 
 
 		<!-- 공통 검색기능 -->
-		<div>
+		<div class="board_list_wrap" align="right">
 			<form id="frm">
 				<select id="key" name="key">
 					<option value="board_title">제목</option>
@@ -111,7 +113,7 @@ a {
 					<option value="board_writer">작성자</option>
 				</select> &nbsp; 
 				<input type="text" id="val" name="val">&nbsp;&nbsp;
-				<input type="button" value="검색" onclick=boardSearch()>
+				<input type="button" class="btn btn-success" value="검색" onclick=boardSearch()>
 			</form>
 		</div>
 		<br>
@@ -163,7 +165,7 @@ a {
 
 		<!-- 글쓰기 버튼 -->
 		<div>
-			<button type="button" onclick="location.href='boardForm.do'">글쓰기</button>
+			<button type="button" class="btn btn-success" onclick="location.href='boardForm.do'">글쓰기</button>
 		</div>
 	</div>
 

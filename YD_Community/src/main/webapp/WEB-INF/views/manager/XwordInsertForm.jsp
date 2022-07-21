@@ -28,7 +28,9 @@ function XwordInsert() { //추가
 		success : function(result){
 				if(result =="1"){
 					alert("등록되었습니다.");
-					history.back();
+					opener.location.reload();
+					window.close();
+					
 				}else{
 					alert("등록할 수 없습니다.");
 				}

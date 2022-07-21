@@ -63,9 +63,11 @@ public class StudyServiceImpl implements StudyService {
 				vo.setStudyNo(rs.getInt("study_no"));
 				vo.setStudyTitle(rs.getString("study_Title"));
 				vo.setStudySubject(rs.getString("study_Subject"));
+				vo.setStudyWriter(rs.getString("study_writer"));
 				vo.setStudyLanguage(rs.getString("study_Language"));
 				vo.setStudySystem(rs.getString("study_System"));
 				vo.setStudyPeriod(rs.getString("study_Period"));
+				vo.setStudyMember(rs.getString("study_Member"));
 				vo.setMemberNo(rs.getInt("member_no"));
 				vo.setStudyAttech(rs.getString("study_Attech"));
 				vo.setStudyAttechDir(rs.getString("study_AttechDir"));
@@ -142,6 +144,7 @@ public class StudyServiceImpl implements StudyService {
 			psmt.setString(4, vo.getStudyPeriod());
 			psmt.setString(5, vo.getStudyLanguage());
 			psmt.setString(6, vo.getStudyAttech());
+			psmt.setString(7, vo.getStudyMember());
 			psmt.setString(7, vo.getStudyAttechDir());
 			psmt.setInt(8, vo.getStudyNo());
 
@@ -154,41 +157,41 @@ public class StudyServiceImpl implements StudyService {
 		}
 		return n;
 	}
-
+///////////////////////////////////////////////////////////////
 	@Override
 	public List<StudyVO> studySearchList(String key, String val) {
 		// 목록검색
-		// 작성자,제목만 검색가능하게
-		List<StudyVO> searchstudylist = new ArrayList<>();
-		StudyVO vo;
-		String sql = "SELECT * FROM STUDY WHERE "
-				+ key + " LIKE '%" + val + "%'";
-		try {
-			conn = dao.getConnection();//
-			psmt = conn.prepareStatement(sql);//
-			
-			rs = psmt.executeQuery();//
-			
-			while (rs.next()) {
-				vo = new StudyVO(); //검색해서 존재하면 vo인스턴스를 초기화
-				vo.setStudyNo(rs.getInt("STUDY_NO"));// 1글 순서번호
-				vo.setStudyTitle(rs.getString("STUDY_TITLE")); // 2글 제목
-				vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 4글작성자
-				vo.setStudyWriter(rs.getString("STUDY_WRITER"));//작성자
-				vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 5스터디기간
-				vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));// 6스터디언어;
-				vo.setStudyDate(rs.getString("STUDY_DATE"));//7작성일자
-				vo.setStudyAttech(rs.getString("STUDY_ATTECH"));// 첨부파일
-				
-				searchstudylist.add(vo);
-			
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		return searchstudylist;
+				// 작성자,제목만 검색가능하게
+				List<StudyVO> searchstudylist = new ArrayList<>();
+				StudyVO vo;
+				String sql = "SELECT * FROM STUDY WHERE "
+						+ key + " LIKE '%" + val + "%'";
+				try {
+					conn = dao.getConnection();//
+					psmt = conn.prepareStatement(sql);//
+					
+					rs = psmt.executeQuery();//
+					
+					while (rs.next()) {
+						vo = new StudyVO(); //검색해서 존재하면 vo인스턴스를 초기화
+						vo.setStudyNo(rs.getInt("STUDY_NO"));// 1글 순서번호
+						vo.setStudyTitle(rs.getString("STUDY_TITLE")); // 2글 제목
+						vo.setStudySystem(rs.getString("STUDY_SYSTEM"));// 4글작성자
+						vo.setStudyWriter(rs.getString("STUDY_WRITER"));//작성자
+						vo.setStudyPeriod(rs.getString("STUDY_PERIOD"));// 5스터디기간
+						vo.setStudyLanguage(rs.getString("STUDY_LANGUAGE"));// 6스터디언어;
+						vo.setStudyDate(rs.getString("STUDY_DATE"));//7작성일자
+						vo.setStudyAttech(rs.getString("STUDY_ATTECH"));// 첨부파일
+						
+						searchstudylist.add(vo);
+					
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					close();
+				}
+				return searchstudylist;
 	}
 
 /////////////////////////////////////////////////////////////////////////

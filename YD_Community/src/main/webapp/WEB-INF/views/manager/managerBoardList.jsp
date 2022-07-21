@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 관리</title>
+<script src="js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div align="center">
@@ -50,8 +51,8 @@
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td colspan="6" align="center">
-							금지어가 존재하지 않습니다
+						<td colspan="7" align="center">
+							게시글이 존재하지 않습니다
 						</td>
 					</tr>
 				</c:otherwise>
@@ -61,7 +62,8 @@
 	<input type="button" value="선택삭제" onclick="deleteValue()">
 	</div>
 	<script type="text/javascript">
-		function boardSearch() { //게시판 검색
+	
+		function boardSearch() { //게시글 검색
 			let key = $("#key").val();
 			let val = $("#val").val();
 			$.ajax({

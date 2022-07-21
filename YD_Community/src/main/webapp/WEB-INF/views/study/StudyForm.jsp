@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -394,8 +396,8 @@ a {
             </div> 
             
                <div>
-				   <input type="submit" id ="input1" value="제출">&nbsp;&nbsp;&nbsp; 
-					<input id ="input2" type="reset" value="취소">
+				   <input type="submit" class="btn btn-success"  value="제출">&nbsp;&nbsp;&nbsp; 
+					<input  class="btn btn-success"type="reset" value="취소">
 				</div>
             
             </div>

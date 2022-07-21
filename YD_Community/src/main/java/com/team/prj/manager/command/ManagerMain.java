@@ -1,17 +1,16 @@
-package com.team.prj.test.login;
+package com.team.prj.manager.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.team.prj.common.Command;
 
-
-public class MemberJoinForm implements Command {
+public class ManagerMain implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		// 회원가입 폼 처리
-		return "test/memberJoinForm";
+		//관리자 메인 화면
+		return "manager/managerMain";
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.team.prj.common;
 
 import java.io.IOException;
-
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -21,26 +20,32 @@ import com.team.prj.board.command.BoardUpdate;
 import com.team.prj.board.command.BoardUpdateForm;
 import com.team.prj.board.command.BoardView;
 import com.team.prj.board.command.FreeBoardList;
+
 import com.team.prj.board.command.HotBoardList;
 import com.team.prj.board.command.NoticeBoardForm;
-import com.team.prj.board.command.NoticeBoardList;
-import com.team.prj.board.command.QnaBoardForm;
 
+import com.team.prj.board.command.NoticeBoardList;
 import com.team.prj.board.command.QnaBoardList;
 import com.team.prj.board.command.TotalBoardList;
+import com.team.prj.comments.command.CommentDelete;
+import com.team.prj.comments.command.CommentInsert;
+import com.team.prj.comments.command.CommentUpdate;
+import com.team.prj.comments.command.CommentUpdateForm;
 import com.team.prj.manager.command.ManagerBoardDelete;
 import com.team.prj.manager.command.ManagerBoardList;
+import com.team.prj.manager.command.ManagerBoardSearch;
+import com.team.prj.manager.command.ManagerMain;
 import com.team.prj.manager.command.ManagerMemberDelete;
 import com.team.prj.manager.command.ManagerMemberList;
 import com.team.prj.manager.command.ManagerMemberSearch;
 import com.team.prj.manager.command.MemberUpdateAuthor;
+import com.team.prj.manager.command.XwordDelete;
 import com.team.prj.manager.command.XwordInsert;
 import com.team.prj.manager.command.XwordInsertForm;
 import com.team.prj.manager.command.XwordList;
 import com.team.prj.manager.command.XwordSearch;
 import com.team.prj.manager.command.XwordUpdate;
 import com.team.prj.manager.command.XwordUpdateForm;
-import com.team.prj.manager.command.ManagerBoardSearch;
 import com.team.prj.member.command.AjaxMemberIdCheck;
 import com.team.prj.member.command.AjaxMemberNicknameCheck;
 import com.team.prj.member.command.KakaoJoin;
@@ -60,8 +65,11 @@ import com.team.prj.page.command.MemberScrap;
 import com.team.prj.page.command.MemberStudy;
 import com.team.prj.page.command.MemberStudyBoard;
 import com.team.prj.page.command.MemberStudyRecent;
+
 import com.team.prj.recommend.command.RecommendInsert;
 import com.team.prj.scrap.command.ScrapInsert;
+
+
 import com.team.prj.study.command.AjaxNoticeSearche;
 import com.team.prj.study.command.StudyDelete;
 import com.team.prj.study.command.StudyForm;
@@ -85,24 +93,28 @@ public class FrontController extends HttpServlet {
 		// 초기화 하는 메소드(Mapping하는 부분을 작성)
 		map.put("/main.do", new MainCommand()); // 처음접속하는 페이지
 
-		////////////////////// board 게시판//////////////////////
+		//////////////////////board 게시판//////////////////////
 		map.put("/totalBoardList.do", new TotalBoardList()); // 커뮤니티 메인 처음화면
 		map.put("/freeBoardList.do", new FreeBoardList()); // 자유 게시판 처음화면
 		map.put("/qnaBoardList.do", new QnaBoardList()); // qna 게시판 처음화면
 		map.put("/noticeBoardList.do", new NoticeBoardList()); // 공지 게시판 처음화면
+
 		map.put("/hotBoardList.do", new HotBoardList()); // 인기 게시판 처음화면
 		
 		map.put("/boardForm.do", new BoardForm()); // 글쓰기폼 호출
-		map.put("/boardView.do", new BoardView()); // 글 상세보기화면
-		map.put("/boardInsert.do", new BoardInsert()); // 글입력
 
+
+		map.put("/boardView.do", new BoardView()); // 글 상세보기화면
+		map.put("/boardInsert.do", new BoardInsert()); //글입력
+		
 		map.put("/boardUpdate.do", new BoardUpdate()); // 글 수정하기
 		map.put("/boardUpdateForm.do", new BoardUpdateForm()); // 글수정폼
 		map.put("/boardDelete.do", new BoardDelete()); // 글 삭제하기
-
+		
 		map.put("/ajaxBoardSearche.do", new AjaxBoardSearche()); // 글 삭제하기
 		////////////////////////////////////////////////////
 		
+
 
         //////////////////Recommend & Scrap기능/////////////////////
 		map.put("/recommendInsert.do", new RecommendInsert()); // 글 추천하기
@@ -110,79 +122,51 @@ public class FrontController extends HttpServlet {
 		
 		
 		
+
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
     
 		//관리자
-		//map.put("/managerMain.do", new ManagerMain()); //관리자 메인 화면
+		map.put("/managerMain.do", new ManagerMain()); //관리자 메인 화면
 		map.put("/managerMemberList.do", new ManagerMemberList()); //회원 전체 목록
 		map.put("/managermemberSearch.do", new ManagerMemberSearch()); //회원 검색
 		map.put("/managerMemberDelete.do", new ManagerMemberDelete()); //회원삭제
 		map.put("/memberUpdateAuthor.do", new MemberUpdateAuthor()); //회원 가입승인
 		map.put("/managerBoardList.do", new ManagerBoardList()); //게시글 전체 목록
 		map.put("/managerBoardSearch.do", new ManagerBoardSearch()); //게시글 검색
-		map.put("/managerBoardDelete.do", new ManagerBoardDelete()); //게시글 삭제
-		map.put("/XwordList.do", new XwordList()); //금지어전체 목록
+		map.put("/managerBoardDelete.do", new ManagerBoardDelete());
+		map.put("/XwordList.do", new XwordList()); //금지어 전체 목록
 		map.put("/XwordSearch.do", new XwordSearch()); //금지어 검색
 		map.put("/XwordInsertForm.do", new XwordInsertForm()); //금지어 입력 팝업창
-		map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
+		map.put("/XwordInsert.do", new XwordInsert());
+		map.put("/XwordUpdateForm.do", new XwordUpdateForm()); //금지어 수정 팝업창
 		map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
-		//map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
+		map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
 
 		//스터디게시판
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출
 		map.put("/StudyInsert.do", new StudyInsert());//게시글등록
 		map.put("/StudyView.do", new StudyView());//게시글세부내용
 		map.put("/StudyDelete.do", new StudyDelete());
-
 		map.put("/StudyUpdateForm.do", new StudyUpdateForm());
 		map.put("/StudyUpdate.do", new StudyUpdate());
-
-		map.put("/ajaxNoticeSearche.do", new AjaxNoticeSearche());//검색하기
-
+		map.put("/StudyUpdate.do", new StudyUpdate());
+		map.put("/ajaxNoticeSearche.do", new AjaxNoticeSearche());
+		
 	
 		//마이페이지//
 		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 자유게시판 글 목록
 		map.put("/memberStudyBoard.do", new MemberStudyBoard()); //내가 쓴 스터디 글 목록
-		////////////////////////////////////////////////////
 		
-		
-		map.put("/StudyForm.do", new StudyForm());// 게시글입력폼 호출
-
-		// 관리자
-		// map.put("/managerMain.do", new ManagerMain()); //관리자 메인 화면
-		map.put("/managerMemberList.do", new ManagerMemberList()); // 회원 전체 목록
-		map.put("/managermemberSearch.do", new ManagerMemberSearch()); // 회원 검색
-		map.put("/managerMemberDelete.do", new ManagerMemberDelete()); // 회원삭제
-		map.put("/memberUpdateAuthor.do", new MemberUpdateAuthor()); // 회원 가입승인
-		map.put("/managerBoardList.do", new ManagerBoardList()); // 게시글 전체 목록
-		// map.put("/boardSearchList.do", new BoardSelectList()); //게시글 검색
-		map.put("/XwordList.do", new XwordList()); // 금지어 전체 목록
-		// map.put("/XwordSearchList.do", new XwordSearchList()); //금지어 검색
-		map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
-		map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
-		map.put("/XwordUpdateForm.do", new XwordUpdateForm()); //금지어 수정폼 호출
-		// map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
-
-		// 스터디게시판
-		map.put("/StudyList.do", new StudyList());// 게시글리스트폼 호출
-		map.put("/StudyInsert.do", new StudyInsert());// 게시글등록
-		map.put("/StudyView.do", new StudyView());// 게시글세부내용
-		map.put("/StudyDelete.do", new StudyDelete());
-
-		// 마이페이지//
-		map.put("/memberBoard.do", new MemberBoard()); // 내가 쓴 자유게시판 글 목록
-		map.put("/memberStudyBoard.do", new MemberStudyBoard()); // 내가 쓴 스터디 글 목록
-
 		map.put("/memberRecent.do", new MemberRecent()); // 최근활동 자유게시판
 		map.put("/memberStudyRecent.do", new MemberStudyRecent()); // 최근활동 자유게시판
-
-		map.put("/memberScrap.do", new MemberScrap()); // 스크랩
-
-		map.put("/memberStudy.do", new MemberStudy()); // 찜한스터디
-
-		// 로그인 테스트용//
-		map.put("/memberJoin.do", new MemberJoin());
-		map.put("/memberJoinForm.do", new MemberJoinForm());
+		
+		map.put("/memberScrap.do", new MemberScrap()); //스크랩
+		
+		map.put("/memberStudy.do", new MemberStudy()); //찜한스터디
+	
+		//로그인 테스트용//
+		map.put("/memberJoin.do",new MemberJoin());
+		map.put("/memberJoinForm.do",new MemberJoinForm());
 
 		map.put("/memberLogin.do", new MemberLogin());
 		map.put("/memberLoginForm.do", new MemberLoginForm());
@@ -191,16 +175,24 @@ public class FrontController extends HttpServlet {
 		map.put("/memberJoin.do", new MemberJoin());
 		map.put("/ajaxMemberIdCheck.do", new AjaxMemberIdCheck());
 		map.put("/ajaxMemberNicknameCheck.do", new AjaxMemberNicknameCheck());
-
+		
 		map.put("/KakaoLogin.do", new KakaoLogin());
 		map.put("/KakaoJoin.do", new KakaoJoin());
-
+		
 		map.put("/myPage.do", new MyPage());
 		map.put("/memberUpdate.do", new MemberUpdate());
 		map.put("/memberUpdateSubmit.do", new MemberUpdateSubmit());
 		map.put("/memberJoinout.do", new MemberJoinout());
+		
+		
+		// 댓글
+		map.put("/commentInsert.do", new CommentInsert());
+		map.put("/commentDelete.do", new CommentDelete());
+		map.put("/commentUpdateForm.do", new CommentUpdateForm());
+		map.put("/commentUpdate.do", new CommentUpdate());
+		
 	}
-
+	
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 서비스(실행)하는 메소드
