@@ -98,11 +98,13 @@ a {
 </head>
 
 <body>
-	<div align="center">
+	<div class="board_list_wrap" align="center">
 	
 	    <!-- -------- 공지게시판 ------------->
-		<div class="board_list_wrap" align="left">
-		<h1>공지사항</h1></div><br>
+		  <div class="board_title" align="center">
+      <strong>공지사항</strong>
+   </div>
+   
 		
 		
 		<!-- 공통 검색기능 -->

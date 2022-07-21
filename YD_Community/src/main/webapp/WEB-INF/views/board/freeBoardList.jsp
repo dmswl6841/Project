@@ -100,8 +100,9 @@ a {
 	<div align="center">
 
 		<!-- 자유게시판 -->
-		<div class="board_list_wrap" align="left">
-			<h1>자유게시판</h1></div><br>
+		 <div class="board_title" align="center">
+      <strong>자유게시판</strong>
+   </div>
 
 
 		<!-- 공통 검색기능 -->
