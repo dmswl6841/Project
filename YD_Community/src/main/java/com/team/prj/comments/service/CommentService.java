@@ -12,7 +12,7 @@ public interface CommentService {
 	// 등록
 	CommentsVO commentInsert(CommentsVO vo);
 	// 수정
-	CommentsVO commentUpdate(CommentsVO vo);
+	int commentUpdate(int no);
 	// 삭제
-	int commentDelete(CommentsVO vo);
+	int commentDelete(int no);
 }

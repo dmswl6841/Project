@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.team.prj.comments.vo.CommentsVO;
 import com.team.prj.common.DataSource;
-import com.team.prj.member.vo.MemberVO;
 
 public class CommentServiceImpl implements CommentService {
 	private DataSource dao = DataSource.getInstance();
@@ -33,7 +32,7 @@ public class CommentServiceImpl implements CommentService {
 				vo.setCommentWriter(rs.getString(3));
 				vo.setCommentContent(rs.getString(4));
 				vo.setCommentDate(rs.getString(5));
-				vo.setMember_no(rs.getInt(6));
+				vo.setMemberNo(rs.getInt(6));
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -46,31 +45,74 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public CommentsVO commentInsert(CommentsVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "insert into comments (comment_no, board_no, comment_writer, comment_content, member_no) values (comments_seq.nextval, ?, ?, ?,?)";
+
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, vo.getBoardNo());
+			psmt.setString(2, vo.getCommentWriter());
+			psmt.setString(3, vo.getCommentContent());
+			psmt.setInt(4, vo.getMemberNo());
+			psmt.executeUpdate();
+
+			sql = "select * from comments where board_no=" + vo.getBoardNo();
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				vo = new CommentsVO();
+				vo.setCommentNo(rs.getInt("comment_no"));
+				vo.setBoardNo(rs.getInt(2));
+				vo.setCommentWriter(rs.getString(3));
+				vo.setCommentContent(rs.getString(4));
+				vo.setCommentDate(rs.getString(5));
+				vo.setMemberNo(rs.getInt(6));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return vo;
 	}
 
 	@Override
-	public CommentsVO commentUpdate(CommentsVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public int commentUpdate(int no) {
 
-	@Override
-	public int commentDelete(CommentsVO vo) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	private void close() {
+
+	@Override
+	public int commentDelete(int no) {
+		int cnt = 0;
+
+		String sql = "delete comments where comment_no=?";
+
 		try {
-			if(rs != null) rs.close();
-			if(psmt != null) psmt.close();
-			if(conn != null) conn.close();
-		}catch(SQLException e) {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, no);
+			cnt = psmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		} finally {
+			close();
+		}
+		return cnt;
 	}
 
+	private void close() {
+		try {
+			if (rs != null)
+				rs.close();
+			if (psmt != null)
+				psmt.close();
+			if (conn != null)
+				conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
