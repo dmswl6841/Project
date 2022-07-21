@@ -124,6 +124,7 @@ a {
 			<table class="board_list">
 				<thead>
 					<tr>
+						<th width="130">카테고리</th>
 						<th width="70">No.</th>
 						<th width="130">작성자</th>
 						<th width="200">제목</th>
@@ -137,8 +138,9 @@ a {
 				<tbody id="tb">
 					<c:choose>
 						<c:when test="${not empty freeboardlist }">
-							<c:forEach items="${freeboardlist }" var="b">
+							<c:forEach items="${freeboardlist }" var="b">			
 								<tr>
+									<td>${b.boardCategory }</td>
 									<td>${b.boardNo }</td>
 									<td><a href="myPage.do?no=${b.memberNo}">${b.boardWriter }</a></td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
@@ -196,6 +198,7 @@ a {
 			var tbody = $("<tbody id />");
 			$.each(data, function(index, item){
 				var row = $("<tr />").append(
+							$("<td />").text(item.boardCategory),
 							$("<td />").text(item.boardNo),
 							$("<td />").text(item.boardWriter),
 							$("<td />").text(item.boardTitle),

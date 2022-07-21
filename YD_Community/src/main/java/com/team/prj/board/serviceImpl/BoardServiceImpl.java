@@ -155,7 +155,6 @@ public class BoardServiceImpl implements BoardService {
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			//psmt.setString(1, val);
 			rs = psmt.executeQuery(); 
 			
 			while(rs.next()) {
@@ -168,6 +167,7 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardScrap(rs.getInt("board_scrap"));
 				vo.setBoardRecommend(rs.getInt("board_recommend"));
 				vo.setBoardHit(rs.getInt("board_hit"));
+				vo.setBoardCategory(rs.getString("board_category"));
 				searchboardlist.add(vo);
 			}
 		}catch(SQLException e) {
@@ -249,6 +249,7 @@ public class BoardServiceImpl implements BoardService {
 						vo.setBoardRecommend(rs.getInt("board_recommend"));
 						vo.setBoardHit(rs.getInt("board_hit"));
 						vo.setMemberNo(rs.getInt("member_no"));
+						vo.setBoardCategory(rs.getString("board_category"));
 						noticeboardlist.add(vo);
 					}
 				} catch (SQLException e) {
@@ -288,6 +289,7 @@ public class BoardServiceImpl implements BoardService {
 						vo.setBoardRecommend(rs.getInt("board_recommend"));
 						vo.setBoardHit(rs.getInt("board_hit"));
 						vo.setMemberNo(rs.getInt("member_no"));
+						vo.setBoardCategory(rs.getString("board_category"));
 						freeboardlist.add(vo);
 					}
 				} catch (SQLException e) {
@@ -329,6 +331,7 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardRecommend(rs.getInt("board_recommend"));
 				vo.setBoardHit(rs.getInt("board_hit"));
 				vo.setMemberNo(rs.getInt("member_no"));
+				vo.setBoardCategory(rs.getString("board_category"));
 				qnaboardlist.add(vo);
 			}
 		} catch (SQLException e) {
@@ -370,7 +373,7 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardRecommend(rs.getInt("board_recommend"));
 				vo.setBoardHit(rs.getInt("board_hit"));
 				vo.setMemberNo(rs.getInt("member_no"));
-
+				vo.setBoardCategory(rs.getString("board_category"));
 				hotboardlist.add(vo);
 			}
 		} catch (SQLException e) {
