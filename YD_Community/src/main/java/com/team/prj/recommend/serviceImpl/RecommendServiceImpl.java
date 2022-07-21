@@ -15,11 +15,6 @@ public class RecommendServiceImpl implements RecommendService {
 	private Connection conn;
 	private PreparedStatement psmt;
 	private ResultSet rs;
-	
-	
-	
-
-
 
 
 	@Override

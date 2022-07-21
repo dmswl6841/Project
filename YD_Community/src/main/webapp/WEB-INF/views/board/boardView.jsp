@@ -115,11 +115,10 @@
 	
 		<script type="text/javascript">
 		function scrapPost() {
-
 			var form = document.writeFrm;
-			//form.method = "post";
-			//form.action = ;
-			//form.submit();
+			form.method = "post";
+			form.action = "scrapInsert.do";
+			form.submit();
 			
 		}
 	</script>
