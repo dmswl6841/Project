@@ -310,7 +310,6 @@ a {
 			</div>
 			<div class="info" id="studyDel">
 
-
 		<form name="writeFrm">
 			<div>
 				<table border="1" id="studyDel">
