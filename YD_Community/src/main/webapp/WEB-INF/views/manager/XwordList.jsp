@@ -37,7 +37,7 @@
 							<td><input type="checkbox"></td>
 							<td id="xwordNo" name="xwordNo">${x.xwordNo }</td>
 							<td >${x.xword }</td>
-							<td><input type="button" value="수정" onclick="XwordUpdate()"></td>
+							<td><input type="button" value="수정" onclick="XwordUpdate(${x.xwordNo })"></td>
 							<td><input type="button" value="삭제" onclick="XwordDelete(${x.xwordNo })"></td>
 						</tr>
 					</c:forEach>
@@ -98,12 +98,12 @@
 			console.log('error : '+err.message);
 		}
 		
-	/* 	function XwordUpdate(no) { //금지어 수정
+	 	function XwordUpdate(no) { //금지어 수정
 			let key = $("#xwordNo").val();
 			let val = $("#xword").val();
 			console.log(key);
 			$.ajax({
-				url : "xwordUpdate.do",
+				url : "xwordUpdateForm.do",
 				type : "post",
 				data : {key : key, val : val},
 				dataType : "json",
@@ -119,7 +119,7 @@
 				alert("ERROR!")
 			}
 		});
-	} */
+	} 
 		
 		function XwordDelete(obj){ //금지어 삭제
 			let row = $(obj).parent().parent().get(0);

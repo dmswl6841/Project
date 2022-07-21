@@ -17,7 +17,7 @@
 	</form>
 <script type="text/javascript">
 
-function XwordUpdate() { //추가
+function XwordUpdate() { //수정
 	let key = $("#Xword").val();
 	console.log(key);
 	$.ajax({

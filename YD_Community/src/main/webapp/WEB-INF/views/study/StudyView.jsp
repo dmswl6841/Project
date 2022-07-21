@@ -299,8 +299,8 @@ a {
 	</div>
 	<div class="info" id="studyDel">
 
-
 		<div align="center">
+
 			<div>
 				<h1>스터디게시글 보기</h1>
 			</div>
