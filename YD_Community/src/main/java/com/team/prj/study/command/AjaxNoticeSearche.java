@@ -20,15 +20,15 @@ public class AjaxNoticeSearche implements Command {
 		// 게시글검색
 		
 		StudyService studyDao  = new StudyServiceImpl();
-		List<StudyVO> searchstudylist = new ArrayList<StudyVO>();
+		List<StudyVO> list = new ArrayList<StudyVO>();
 		ObjectMapper mapper = new ObjectMapper();
 		String key = request.getParameter("key");
 		String val = request.getParameter("val");
 		
-		searchstudylist = studyDao.studySearchList(key, val);
+		list = studyDao.studySearchList(key, val);
 		String jsonList=null;
 		try {
-			jsonList = mapper.writeValueAsString(searchstudylist);
+			jsonList = mapper.writeValueAsString(list);
 		}catch(JsonProcessingException e) {
 			e.printStackTrace();
 		}
