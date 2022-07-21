@@ -113,7 +113,7 @@ a {
 					<option value="board_writer">작성자</option>
 				</select> &nbsp; 
 				<input type="text" id="val" name="val">&nbsp;&nbsp;
-				<input type="button" value="검색" onclick=boardSearch()>
+				<input type="button" class="btn btn-success" value="검색" onclick=boardSearch()>
 			</form>
 		</div>
 		<br>

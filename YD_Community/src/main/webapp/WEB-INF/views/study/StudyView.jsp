@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -289,74 +291,75 @@ a {
 			<strong>스터디게시판</strong>
 			<p>더 나은 개발자로 나가는 지름길</p>
 		</div>
-	</div>
-	<div class="board_view_wrap">
-		<div class="board_view">
-			<div class="title">
+		<div class="board_view_wrap">
+			<div class="board_view">
+				<div class="title"></div>
+				<c:choose>
+					<c:when test="${not empty vo}">
+
+						<form name="writeFrm">
+							<input type="hidden" name="studyNo" value="${vo.getStudyNo()}">
+						</form>
+
+						<div class="info" id="studyDel">
+							
+							<dl>
+								<dt>제 목</dt>
+								<dd>${vo.getStudyTitle()}</dd>
+							</dl>
+							<dl>
+								<dt>스터디방식</dt>
+								<dd>${vo.studySystem }</dd>
+							</dl>
+							<dl>
+								<dt>작성날짜</dt>
+								<dd>${vo.studyDate }</dd>
+							</dl>
+							<dl>
+								<dt>작성자</dt>
+								<dd>${vo.getStudyWriter() }</dd>
+							</dl>
+							<dl>
+								<dt>스터디언어</dt>
+								<dd>${vo.studyLanguage }</dd>
+							</dl>
+							
+							<dl>
+								<dt>스터디인원</dt>
+								<dd>${vo.studyMember }</dd>
+							</dl>
+							
+							
+							<br>
+						</div>
+						<div class="cont">${vo.studySystem }</div>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="5" align="center">게시글이 존재하지 않습니다</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+
+			</div>
+			&nbsp;
 			
-			</div>
+			
+				<button type="button" class="btn btn-success" onclick="studyUpdate(${vo.studyNo })">수정</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="button" class="btn btn-success" onclick="studyDelete(${vo.studyNo })">삭제</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="StudyList.do" class="btn btn-success">목록</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
 		</div>
 	</div>
-	<div class="info" id="studyDel">
 
 
-		<div align="center">
-			<div>
-				<h1>스터디게시글 보기</h1>
-			</div>
+	
+	<br>
 
-			<form name="writeFrm">
-				<div>
-					<table border="1" id="studyDel">
-						<tbody>
-							<c:choose>
-								<c:when test="${not empty vo}">
-									<input type="hidden" name="studyNo" value="${vo.studyNo}">
-									<tr>
-										<td>${vo.studyTitle }</td>
-										<td>${vo.studySystem }</td>
-										<td>${vo.studyPeriod }</td>
-										<td>${vo.studyLanguage }</td>
-									</tr>
-									<tr>
-										<td colspan="2">${vo.studyDate }</td>
-										<td colspan="2">${vo.studyWriter }</td>
-									</tr>
-
-									<tr>
-										<td colspan="4">${vo.studySubject }</td>
-									</tr>
-									<tr>
-										<td colspan="2">${vo.studySystem }</td>
-										<td colspan="2">${vo.studyAttech }</td>
-									</tr>
-									<c:if test="${vo.memberNo eq memberNo}">
-										<tr>
-											<td colspan="4">
-												<button type="button" onclick="studyUpdate(${vo.studyNo })">수정</button>&nbsp;&nbsp;
-												<button type="button" onclick="studyDelete(${vo.studyNo })">삭제</button>
-											</td>
-										</tr>
-									</c:if>
-								</c:when>
-								<c:otherwise>
-									<tr>
-										<td colspan="5" align="center">게시글이 존재하지 않습니다</td>
-									</tr>
-								</c:otherwise>
-							</c:choose>
-						</tbody>
-					</table>
-				</div>
-			</form>
-
-			<a href="StudyList.do" class="btn">목록</a><br>
-
-		</div>
-
-
-		<script type="text/javascript">
-	// 삭제
+	<script type="text/javascript">
 		function studyDelete(id) {
 			
 			const xhr = new XMLHttpRequest();
@@ -375,7 +378,7 @@ a {
 			xhr.send();
 		}
 		
-	// 수정
+		// 수정
 		function studyUpdate(id) {
 			var result = confirm("게시글을 수정하시겠습니까?");
 			if (result) {
@@ -385,6 +388,9 @@ a {
 				form.submit();
 			}
 		}
+		
+		
 	</script>
+
 </body>
 </html>
