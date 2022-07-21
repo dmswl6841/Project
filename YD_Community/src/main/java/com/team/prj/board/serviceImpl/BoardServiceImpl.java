@@ -10,6 +10,7 @@ import java.util.List;
 import com.team.prj.board.service.BoardService;
 import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.DataSource;
+import com.team.prj.paging.Criteria;
 
 
 public class BoardServiceImpl implements BoardService {
@@ -281,38 +282,67 @@ public class BoardServiceImpl implements BoardService {
 	/////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////Free 자유게시판//////////////////////////////
 	@Override
-	public List<BoardVO> FboardSelectList() {
+	public List<BoardVO> FboardSelectList(Criteria cri) {
 		//전체조회
-				List<BoardVO> freeboardlist = new ArrayList<>();
-				BoardVO vo;
-				String sql = "SELECT * FROM BOARD WHERE board_category = '자유' ORDER BY BOARD_NO DESC";
-				
-				try {
-					conn = dao.getConnection();
-					psmt = conn.prepareStatement(sql);
-					rs = psmt.executeQuery();
-					
-					while(rs.next()) {
-						vo = new BoardVO();
-						vo.setBoardNo(rs.getInt("board_no"));
-						vo.setBoardWriter(rs.getString("board_writer"));
-						vo.setBoardTitle(rs.getString("board_title"));
-						vo.setBoardDate(rs.getString("board_date"));
-						vo.setBoardAttech(rs.getString("board_attech"));
-						vo.setBoardScrap(rs.getInt("board_scrap"));
-						vo.setBoardRecommend(rs.getInt("board_recommend"));
-						vo.setBoardHit(rs.getInt("board_hit"));
-						vo.setMemberNo(rs.getInt("member_no"));
-						vo.setBoardCategory(rs.getString("board_category"));
-						freeboardlist.add(vo);
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}finally {
-					close();
-				}
-				return freeboardlist;
+		List<BoardVO> freeboardlist = new ArrayList<>();
+		BoardVO vo;
+
+		
+		String sql = "SELECT"
+				+ "    *"
+				+ "FROM"
+				+ "    ("
+				+ "    SELECT"
+				+ "        rownum rn,"
+				+ "        tb1.*"
+				+ "    FROM"
+				+ "        (SELECT"
+				+ "            b.*"
+				+ "        FROM"
+				+ "            board b"
+				+ "        WHERE"
+				+ "            b.board_category = '자유'"
+				+ "          and"
+				+ "             b." + cri.getSearchType() + " like ?"
+				+ "        ORDER BY "
+				+ "            b.board_date DESC"
+				+ "        ) tb1"
+				+ "    WHERE"
+				+ "        rownum <= ?"
+				+ "    )"
+				+ "WHERE"
+				+ "    rn > ?";
+
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, "%" + cri.getKeyword() + "%");
+			psmt.setInt(2, cri.getPageNum() * cri.getAmount());
+			psmt.setInt(3, (cri.getPageNum() - 1) * cri.getAmount());
+			System.out.println(cri);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new BoardVO();
+				vo.setBoardNo(rs.getInt("board_no"));
+				vo.setBoardWriter(rs.getString("board_writer"));
+				vo.setBoardTitle(rs.getString("board_title"));
+				vo.setBoardDate(rs.getString("board_date"));
+				vo.setBoardAttech(rs.getString("board_attech"));
+				vo.setBoardScrap(rs.getInt("board_scrap"));
+				vo.setBoardRecommend(rs.getInt("board_recommend"));
+				vo.setBoardHit(rs.getInt("board_hit"));
+				vo.setMemberNo(rs.getInt("member_no"));
+				freeboardlist.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return freeboardlist;
 	}
+
 	
 	
 	
@@ -422,6 +452,43 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	
+
+	@Override
+	public int fTotalBoardCount(Criteria cri) {
+		//전체조회
+		int totalCount = 0;
+		String sql = "select count(*) total_count from board where board_category = '자유'";
+				
+				
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+
+			//키워드가 있을 경우
+			if(!cri.getKeyword().equals("")) {
+				System.out.println("enter impl keyword");
+				sql = "select count(*) total_count from board where board_category = '자유' and "
+					+ cri.getSearchType() + " like '%" + cri.getKeyword() + "%'";
+				
+				psmt = conn.prepareStatement(sql);
+			}
+
+			rs = psmt.executeQuery();
+			System.out.println();
+			while(rs.next()) {
+				totalCount = rs.getInt("total_count");
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return totalCount;
+}
+	
+	
+	
 	
 	/////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////
@@ -434,6 +501,4 @@ public class BoardServiceImpl implements BoardService {
 			e.printStackTrace();
 		}
 	}
-
-	
 }
