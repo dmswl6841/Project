@@ -164,15 +164,14 @@ public class ManagerServiceImpl implements ManagerService {
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, key);
-			psmt.setString(2, val);
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
 				vo = new BoardVO();
 				vo.setBoardNo(rs.getInt("board_no"));
 				vo.setBoardCategory(rs.getString("board_category"));
-				vo.setBoardTitle(rs.getString("borad_title"));
+				vo.setBoardTitle(rs.getString("board_title"));
+				vo.setBoardWriter(rs.getString("board_writer"));
 				vo.setBoardDate(rs.getString("board_date"));
 				list.add(vo);
 			}
@@ -188,19 +187,20 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public int managerBoardDelete(BoardVO vo) {
 		int r = 0;
-		String sql = "delete from board where board_no=?";
-
+		String sql = "delete from board where board_no= ?";
+		System.out.println(sql);
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, vo.getBoardNo());
 			r = psmt.executeUpdate();
-
+			System.out.println("sql 구문1");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
+		System.out.println("r : "+r);
 		return r;
 	}
 	

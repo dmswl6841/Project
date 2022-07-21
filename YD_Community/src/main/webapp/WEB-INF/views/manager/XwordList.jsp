@@ -106,7 +106,7 @@
 	 		window.open("XwordUpdate.do");
 			console.log(key);
 			$.ajax({
-				url : "",
+				url : "XwordUpdate.do",
 				type : "post",
 				data : {key : key},
 				dataType : "json",
@@ -122,10 +122,28 @@
 				alert("ERROR!")
 			}
 		});
-	} */
+	}  */
 	 	
 	 	function XwordUpdate(obj){
 			let key = obj;
+			$.ajax({
+				url : "XwordSelectOne.do",
+				type : "post",
+				data : {key : key},
+				dataType : "json",
+				success : function(result){
+					if(result = 1){
+						console.log("단건조회 결과 : ")
+						console.log(result);
+						window.open("XwordUpdateForm.do");
+					}else{
+						alert("수정할 수 없습니다.");
+					}
+			},
+			error : function(error){
+				alert("ERROR!")
+			}
+		});
 		}
 		
 		function XwordDelete(obj){ //금지어 삭제

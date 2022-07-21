@@ -16,7 +16,7 @@
 					<c:choose>
 						<c:when test="${not empty vo}">
 							<tr>
-								<td id="xwordNo">${vo.xwordNo }</td>
+								<td id="no" name="no">${vo.xwordNo }</td>
 								<td><input type="text" id="Xword" name="Xword"></td>
 								<td><button type="button" onclick="XwordUpdate()">수정</button></td>
 							</tr>

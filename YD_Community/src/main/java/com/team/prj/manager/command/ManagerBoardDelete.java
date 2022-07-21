@@ -7,7 +7,6 @@ import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.Command;
 import com.team.prj.manager.service.ManagerService;
 import com.team.prj.manager.service.ManagerServiceImpl;
-import com.team.prj.member.vo.MemberVO;
 
 public class ManagerBoardDelete implements Command {
 
@@ -16,12 +15,13 @@ public class ManagerBoardDelete implements Command {
 		//게시글 삭제
 		ManagerService managerDao = new ManagerServiceImpl();
 		BoardVO vo = new BoardVO();
-		vo.setMemberNo(Integer.valueOf(request.getParameter("memberNo")));
+		vo.setBoardNo(Integer.valueOf(request.getParameter("key")));
 		int n = managerDao.managerBoardDelete(vo);
 		String jsonList = "0";
 		if(n != 0) {
 			jsonList = "1";
 		}
-		return "ajax:"+jsonList;
+		System.out.println(n);
+		return "ajax:"+ jsonList;
 	}
 }
