@@ -23,7 +23,10 @@ import com.team.prj.board.command.FreeBoardList;
 import com.team.prj.board.command.NoticeBoardList;
 import com.team.prj.board.command.QnaBoardList;
 import com.team.prj.board.command.TotalBoardList;
+import com.team.prj.comments.command.CommentDelete;
 import com.team.prj.comments.command.CommentInsert;
+import com.team.prj.comments.command.CommentUpdate;
+import com.team.prj.comments.command.CommentUpdateForm;
 import com.team.prj.manager.command.ManagerBoardDelete;
 import com.team.prj.manager.command.ManagerBoardList;
 import com.team.prj.manager.command.ManagerBoardSearch;
@@ -162,6 +165,10 @@ public class FrontController extends HttpServlet {
 		
 		// 댓글
 		map.put("/commentInsert.do", new CommentInsert());
+		map.put("/commentDelete.do", new CommentDelete());
+		map.put("/commentUpdateForm.do", new CommentUpdateForm());
+		map.put("/commentUpdate.do", new CommentUpdate());
+		
 	}
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response)

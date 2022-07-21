@@ -16,21 +16,27 @@ public class CommentInsert implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		CommentService dao = new CommentServiceImpl();
-
 		CommentsVO vo = new CommentsVO();
-		vo.setBoardNo(Integer.valueOf(request.getParameter("boardNo")));
-		vo.setCommentWriter(request.getParameter("commentWriter"));
-		vo.setCommentContent(request.getParameter("commentContent"));
-
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonList = null;
-		try {
-			jsonList = mapper.writeValueAsString(dao.commentInsert(vo));
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "ajax:" + jsonList;
+		System.out.println("No::" + request.getParameter("mNo"));
+		vo.setBoardNo(Integer.valueOf(request.getParameter("bNo")));
+		vo.setCommentWriter(request.getParameter("wr"));
+		vo.setCommentContent(request.getParameter("con"));
+		vo.setMemberNo(Integer.parseInt(request.getParameter("mNo")));
+		vo = dao.commentInsert(vo);
+		// gsonbuilder랑 printwriter
+		//ObjectMapper mapper = new ObjectMapper();
+		//String jsonList = null;
+		//try {
+		//	jsonList = mapper.writeValueAsString(dao.commentInsert(vo));
+		//} catch (JsonProcessingException e) {
+		//	e.printStackTrace();
+		//}
+		
+		
+		
+		return "ajax:" + vo.getBoardNo();
 	}
 
 }
+
+
