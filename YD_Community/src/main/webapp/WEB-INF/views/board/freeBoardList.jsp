@@ -100,8 +100,9 @@ a {
 	<div align="center">
 
 		<!-- 자유게시판 -->
-		<div class="board_list_wrap" align="left">
-			<h1>자유게시판</h1></div><br>
+		 <div class="board_title" align="center">
+      <strong>자유게시판</strong>
+   </div>
 
 
 		<!-- 공통 검색기능 -->
@@ -125,7 +126,7 @@ a {
 				<thead>
 					<tr>
 						<th width="130">카테고리</th>
-						<th width="70">No.</th>
+						<th width="70">글번호</th>
 						<th width="130">작성자</th>
 						<th width="200">제목</th>
 						<th width="130">작성일자</th>
@@ -140,7 +141,9 @@ a {
 						<c:when test="${not empty freeBoardList }">
 							<c:forEach items="${freeBoardList }" var="b">
 								<tr>
-									<td>${b.boardNo }</td>
+
+									<td>${b.boardCategory }</td>
+									<td>#${b.boardNo }</td>
 									<td><a href="myPage.do?no=${b.memberNo}">${b.boardWriter }</a></td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
 									<td>${b.boardDate }</td>

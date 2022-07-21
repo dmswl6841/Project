@@ -20,7 +20,7 @@ public class BoardUpdateForm implements Command {
 		BoardVO vo = new BoardVO();
 		vo = boardDao.boardView(board_no);
 		request.setAttribute("vo", vo);
-		return "board/boardUpdate";
+		return "board/boardUpdateForm";
 
 	}
 
