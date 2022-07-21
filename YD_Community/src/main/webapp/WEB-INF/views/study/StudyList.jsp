@@ -109,12 +109,14 @@ a {
 </style>
 </head>
 
+<body>
 
-
-   <div class="board_title" align="left">
+   <div class="board_title" align="center">
       <strong>스터디게시판</strong>
    </div>
    
+  
+  
    <!-- 공통 검색기능 -->
       <div class="board_list_wrap" align="right">
          <form id="frm">
@@ -132,10 +134,7 @@ a {
    
    
    
-   
-   
-   
-   
+  
    
    <div class="board_list_wrap" align="center">
       <table class="board_list">
