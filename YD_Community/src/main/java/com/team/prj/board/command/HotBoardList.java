@@ -1,5 +1,8 @@
 package com.team.prj.board.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,20 +11,24 @@ import com.team.prj.board.serviceImpl.BoardServiceImpl;
 import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.Command;
 
-public class BoardUpdateForm implements Command {
+public class HotBoardList implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		// 게시글 작성폼 호출
-
-		// 글 1개보기
-		int board_no = Integer.parseInt(request.getParameter("board_no"));
+		// 게시글 목록 가져오기
 		BoardService boardDao = new BoardServiceImpl();
 		BoardVO vo = new BoardVO();
-		vo = boardDao.boardView(board_no);
-		request.setAttribute("vo", vo);
-		return "board/boardUpdateForm";
-
+		int n = 0;
+		
+		n = boardDao.HboardUpdate(vo);
+		
+		if (n != 0) {
+			
+			List<BoardVO> hotboardlist = new ArrayList<>();
+			hotboardlist = boardDao.HboardSelectList();
+			request.setAttribute("hotboardlist", hotboardlist);		
+		}
+		return "board/hotBoardList";
 	}
 
 }
