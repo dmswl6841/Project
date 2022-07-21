@@ -1,5 +1,6 @@
 package com.team.prj.recommend.serviceImpl;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,6 +53,7 @@ public class RecommendServiceImpl implements RecommendService {
 			n = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		} finally {
 			close();
 		}

@@ -16,8 +16,9 @@
 			<h1>게시글 수정</h1>
 		</div>
 		<div>
-
-			<form id="frm" action="boardUpdate.do" method="post" enctype="multipart/form-data">
+			<!-- 수정폼 -->
+			<form id="frm" action="boardUpdate.do" method="post"
+				enctype="multipart/form-data">
 				<div>
 					<table border="1">
 						<tbody>
@@ -64,13 +65,14 @@
 				</div>
 				<br>
 				<div>
-					<input type="submit" value="수정">&nbsp;&nbsp;&nbsp; <input
-						type="reset" value="취소">
+					<input type="submit" value="수정">&nbsp;&nbsp;&nbsp; 
+					<input type="reset" value="취소">
 				</div>
 			</form>
-
-
 		</div>
 	</div>
+
+
+
 </body>
 </html>

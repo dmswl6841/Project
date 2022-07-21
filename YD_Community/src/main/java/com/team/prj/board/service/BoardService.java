@@ -14,6 +14,7 @@ public interface BoardService {
 		//List<BoardVO> boardViewList(int board_no);
 		BoardVO boardView(int board_no);
 		
+		
 		int boardDelete(BoardVO vo); //글삭제
 		int boardUpdate(BoardVO vo); //글수정
 		List<BoardVO> boardSearchList(String key, String val); 
@@ -28,11 +29,13 @@ public interface BoardService {
 		//Qna 질문게시판 crud
 		List<BoardVO> QboardSelectList(); //전체조회
 		
-		//Hot 주간 인기글 게시판 crud (인기글 게시판으로 올라가면 수정은 불가능해짐)
-		List<BoardVO> HboardSelectList(); //전체조회
-		
 		//Notice 공지 게시판 crud
 		List<BoardVO> NboardSelectList(); //전체조회
 		
-
+		
+		//Hot 인기글 게시판 crud (인기글 게시판으로 올라가면 수정은 불가능해짐)
+		List<BoardVO> HboardSelectList(); //전체조회
+		
+		//인기글 업뎃
+		int HboardUpdate(BoardVO vo); //글수정
 }

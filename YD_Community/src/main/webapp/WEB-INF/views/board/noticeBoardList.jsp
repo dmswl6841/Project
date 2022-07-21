@@ -126,7 +126,7 @@ a {
 				<thead>
 					<tr>
 						<th width="130">카테고리</th>
-						<th width="3">No.</th>
+						<th width="70">글번호</th>
 						<th width="3">작성자</th>
 						<th width="3">제목</th>
 						<th width="3">작성일자</th>
@@ -141,7 +141,7 @@ a {
 							<c:forEach items="${noticeboardlist }" var="b">
 								<tr>
 									<td>${b.boardCategory }</td>
-									<td>${b.boardNo }</td>
+									<td>#${b.boardNo }</td>
 									<td><a href="myPage.do?no=${b.memberNo}">${b.boardWriter }</a></td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
 									<td>${b.boardDate }</td>

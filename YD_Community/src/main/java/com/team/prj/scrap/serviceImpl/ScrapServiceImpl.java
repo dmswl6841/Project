@@ -42,7 +42,7 @@ public class ScrapServiceImpl implements ScrapService {
 	public int scrapInsert(ScrapVO vo) {
 		// 중복 방지용 member_no&board_no 키 추가
 		int n = 0;
-		String sql = "INSERT INTO SCRAP VALUES(SCRAP_SEQ.NEXTVAL,?,?,SYSDATE)";
+		String sql = "INSERT INTO SCRAP VALUES(SCRAP_SEQ.NEXTVAL,?,?, SYSDATE)";
 
 		try {
 			conn = dao.getConnection();

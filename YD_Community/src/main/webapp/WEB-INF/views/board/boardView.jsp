@@ -9,8 +9,6 @@
 <script src="js/jquery-3.6.0.min.js"></script>
 
 <style>
-
-
 </style>
 </head>
 
@@ -30,16 +28,26 @@
 						<c:choose>
 							<c:when test="${not empty vo}">
 								<input type="hidden" name="board_no" value="${vo.boardNo}">
-								<input type="hidden" name="member_no" value="${member.memberNo }">
+								<input type="hidden" name="member_no"
+									value="${member.memberNo }">
 								<tr>
 									<td><a href="myPage.do?no=${vo.memberNo}">${vo.boardWriter }</a></td>
-									<td>${vo.boardScrap }</td>
-									<td>${vo.boardRecommend }</td>
-									<td>${vo.boardHit }</td>
+									<td>👀 ${vo.boardHit }</td>
 								</tr>
 								<tr>
-									<td>${vo.boardNo }</td>
-									<td>${vo.boardCategory }</td>
+									<td># ${vo.boardNo }</td>
+									<c:if test="${vo.boardCategory =='자유' }">
+										<td>🎡 ${vo.boardCategory }</td>
+									</c:if>
+									<c:if test="${vo.boardCategory =='QnA' }">
+										<td>💡 ${vo.boardCategory }</td>
+									</c:if>
+									<c:if test="${vo.boardCategory =='공지' }">
+										<td>📢 ${vo.boardCategory }</td>
+									</c:if>
+									<c:if test="${vo.boardCategory =='HOT' }">
+										<td>🏆 ${vo.boardCategory }</td>
+									</c:if>
 								</tr>
 								<tr>
 									<td colspan="3">${vo.boardTitle }</td>
@@ -59,10 +67,16 @@
 					</tbody>
 				</table>
 				<br>
-				
+
 				<div align="center">
-					<button type="button" id="recommend" onclick="recommendPost()" title="이 글을 추천하기">👍</button>
-					<button type="button" id="scrap" onclick="scrapPost()" title="이 글을 스크랩하기">📌</button>
+					<button type="button" id="recommend" onclick="recommendPost()"
+						title="이 글을 추천하기">👍 ${vo.boardRecommend }</button>
+
+					<button type="button" id="scrap" onclick="scrapPost()"
+						title="이 글을 스크랩하기">📌 ${vo.boardScrap }</button>
+
+					<button type="button" id="scrap" onclick="reportPost()"
+						title="이 글을 신고하기"> 🚫 </button>
 				</div>
 				<br>
 
@@ -74,8 +88,6 @@
 			</div>
 		</form>
 	</div>
-
-
 
 
 
@@ -91,6 +103,9 @@
 		}
 	</script>
 
+
+
+
 	<script type="text/javascript">
 		function updatePost() {
 			var result = confirm("게시글을 수정하시겠습니까?");
@@ -102,24 +117,31 @@
 			}
 		}
 	</script>
-	
+
+
+
 	<script type="text/javascript">
 		function recommendPost() {
-			var form = document.writeFrm;
-			form.method = "post";
-			form.action = "recommendInsert.do";
-			form.submit();	
+			var result = confirm("게시글을 추천하시겠습니까?");
+			if (result) {
+				var form = document.writeFrm;
+				form.method = "post";
+				form.action = "recommendInsert.do";
+				form.submit();
+			}
 		}
 	</script>
-	
-	
-		<script type="text/javascript">
+
+
+	<script type="text/javascript">
 		function scrapPost() {
-			var form = document.writeFrm;
-			form.method = "post";
-			form.action = "scrapInsert.do";
-			form.submit();
-			
+			var result = confirm("게시글을 스크랩하시겠습니까?");
+			if (result) {
+				var form = document.writeFrm;
+				form.method = "post";
+				form.action = "scrapInsert.do";
+				form.submit();
+			}
 		}
 	</script>
 
