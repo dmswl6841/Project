@@ -100,20 +100,21 @@ a {
 	<div align="center">
 
 		<!-- 자유게시판 -->
-		<div class="board_list_wrap" align="left">
-			<h1>자유게시판</h1></div><br>
+		 <div class="board_title" align="center">
+      <strong>자유게시판</strong>
+   </div>
 
 
 		<!-- 공통 검색기능 -->
 		<div class="board_list_wrap" align="right">
-			<form id="frm">
-				<select id="key" name="key">
+			<form id="frm" action="freeBoardList.do">
+				<select id="searchType" name="searchType">
 					<option value="board_title">제목</option>
 					<option value="board_subject">내용</option>
 					<option value="board_writer">작성자</option>
 				</select> &nbsp; 
-				<input type="text" id="val" name="val">&nbsp;&nbsp;
-				<input type="button" class="btn btn-success" value="검색" onclick=boardSearch()>
+				<input type="text" id="searchKeyword" name="searchKeyword" value="">&nbsp;&nbsp;
+				<button type="submit" id="searchBtn">검색</button>
 			</form>
 		</div>
 		<br>
@@ -125,7 +126,7 @@ a {
 				<thead>
 					<tr>
 						<th width="130">카테고리</th>
-						<th width="70">No.</th>
+						<th width="70">글번호</th>
 						<th width="130">작성자</th>
 						<th width="200">제목</th>
 						<th width="130">작성일자</th>
@@ -136,12 +137,13 @@ a {
 					</tr>
 				</thead>
 				<tbody id="tb">
-					<c:choose>
-						<c:when test="${not empty freeboardlist }">
-							<c:forEach items="${freeboardlist }" var="b">			
+				<c:choose>
+						<c:when test="${not empty freeBoardList }">
+							<c:forEach items="${freeBoardList }" var="b">
 								<tr>
+
 									<td>${b.boardCategory }</td>
-									<td>${b.boardNo }</td>
+									<td>#${b.boardNo }</td>
 									<td><a href="myPage.do?no=${b.memberNo}">${b.boardWriter }</a></td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
 									<td>${b.boardDate }</td>
@@ -151,6 +153,8 @@ a {
 									<td>${b.boardHit }</td>
 								</tr>
 							</c:forEach>
+
+
 						</c:when>
 						<c:otherwise>
 							<tr>
@@ -162,10 +166,30 @@ a {
 			</table>
 		</div>
 		<br>
+		
 
+		<!-- Pagination -->
+		<div class="page">
+			<c:if test="${page.prev}"> 
+				<a href="${page.startPage - 1}" class="bt">이전 페이지</a>
+			</c:if>
+			<c:forEach var="num" begin="${page.startPage }" end="${page.endPage }">
+				<!-- <a href="freeBoardList.do?pageNum=${num}" class="pagination-num">${num}</a> -->
+				<a href="${num}">${num}</a>
+			</c:forEach>
+			<c:if test="${page.next}">
+				<a href="${page.endPage + 1}" class="bt">다음 페이지</a>
+			</c:if>
+		</div>
+		<form id='actionForm' action="freeBoardList.do" method="get"> 
+			<input type="hidden" id="pageNum" name="pageNum" value="${page.cri.pageNum}"> 
+			<input type="hidden" name="searchType" value="${page.cri.searchType}"> 
+			<input type="hidden" name="searchKeyword" value="${page.cri.keyword}"> 
+		</form>
+		<br>
 		<!-- 글쓰기 버튼 -->
 		<div>
-			<button type="button" class="btn btn-success" onclick="location.href='boardForm.do'">글쓰기</button>
+			<button type="button" onclick="location.href='boardForm.do'">글쓰기</button>
 		</div>
 	</div>
 
@@ -212,6 +236,24 @@ a {
 			});
 			$('table').append(tbody);
 		}
+		let actionForm = $('#actionForm'); 
+		// let _actionForm = document.getElementById('actionForm');
+		$('.page a').on('click', function(e) { 
+		 
+			e.preventDefault(); 
+			//걸어둔 링크로 이동하는 것을 일단 막음 
+			console.log($(this).attr('href'));
+			actionForm.find('input[name="pageNum"]').val($(this).attr('href')); 
+			// actionForm.find('#pageNum').val($(this).attr('href')); 
+			// let paginationNum = document.getElementById('num');
+			// let pageNum = document.getElementById('pageNum');
+
+			// pageNum.value = paginationNum.value;
+			
+			actionForm.submit(); 
+		});
+		
+		
 	</script>
 
 </body>

@@ -8,8 +8,9 @@
 </head>
 <body>
 	<div align="center">
-		<h1>${message }</h1>
+		<h1>${message }  ;</h1>
 		<input type="button" value="홈" onclick="location.href='main.do'">
+		
 	</div>
 </body>
 </html>

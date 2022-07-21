@@ -11,5 +11,5 @@ public class CommentsVO {
 	private String commentWriter; //댓글 작성자
 	private String commentContent; //댓글 내용
 	private String commentDate; //댓글 작성일자
-	private int member_no;
+	private int memberNo;
 }
