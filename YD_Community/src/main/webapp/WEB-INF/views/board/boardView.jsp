@@ -90,7 +90,7 @@
 		</c:if>
 
 		<!-- 로그인 안해도 볼 수 있는 댓글리스트 -->
-		<p>댓글 수:</p>
+		<p>댓글 수: ${count }</p>
 		<table id="list" border=1>
 			<thead>
 				<tr>
@@ -98,9 +98,12 @@
 					<th>닉네임</th>
 					<th>등록 날짜</th>
 					<th width="500px">내용</th>
-					<th>수정</th>
-					<th>삭제</th>
-
+					<c:if test="${not empty member}">
+					<c:if test="${list.memberNo eq member.memberNo }">
+						<th>수정</th>
+						<th>삭제</th>
+					</c:if>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody>
@@ -111,10 +114,15 @@
 						<td>${list.commentWriter }</td>
 						<td>${list.commentDate }</td>
 						<th>${list.commentContent }</th>
-						<td><button type="button"
-								onclick="modComment(${list.commentNo },${list.boardNo })">수정</button></td>
-						<td><button type="button"
-								onclick="delComment(${list.commentNo },${list.boardNo })">삭제</button></td>
+						<c:if test="${not empty member}">
+						<c:if test="${list.memberNo eq member.memberNo }">
+
+							<td><button type="button"
+									onclick="modComment(${list.commentNo })">수정</button></td>
+							<td><button type="button"
+									onclick="delComment(${list.commentNo },${list.boardNo })">삭제</button></td>
+						</c:if>
+						</c:if>
 					</tr>
 				</c:forEach>
 
@@ -206,12 +214,13 @@
 	}
 	</script>
 
-				
+
 	<script type="text/javascript">
-		function modComment(cNo,bNo) {
+		function modComment(cNo) {
 			var result = confirm("댓글을 수정하시겠습니까?");
 			if (result) {
-				window.open("","댓글 수정","width=400, height=300, top=10, left=10");
+				location.href='commentUpdateForm.do?commentNo=' + cNo;
+				//window.open("","댓글 수정","width=400, height=300, top=10, left=10");
 			}
 			
 		}

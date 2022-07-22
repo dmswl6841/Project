@@ -17,26 +17,25 @@ public class CommentInsert implements Command {
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		CommentService dao = new CommentServiceImpl();
 		CommentsVO vo = new CommentsVO();
-		System.out.println("No::" + request.getParameter("mNo"));
-		vo.setBoardNo(Integer.valueOf(request.getParameter("bNo")));
-		vo.setCommentWriter(request.getParameter("wr"));
-		vo.setCommentContent(request.getParameter("con"));
-		vo.setMemberNo(Integer.parseInt(request.getParameter("mNo")));
-		vo = dao.commentInsert(vo);
-		// gsonbuilder랑 printwriter
-		//ObjectMapper mapper = new ObjectMapper();
-		//String jsonList = null;
-		//try {
-		//	jsonList = mapper.writeValueAsString(dao.commentInsert(vo));
-		//} catch (JsonProcessingException e) {
-		//	e.printStackTrace();
-		//}
-		
-		
-		
-		return "ajax:" + vo.getBoardNo();
+		int no = 0;
+		// board 댓글일때
+		if (request.getParameter("bNo") != null) {
+			vo.setBoardNo(Integer.valueOf(request.getParameter("bNo")));
+			vo.setCommentWriter(request.getParameter("wr"));
+			vo.setCommentContent(request.getParameter("con"));
+			vo.setMemberNo(Integer.parseInt(request.getParameter("mNo")));
+			vo = dao.commentInsert(vo);
+			no = vo.getBoardNo();
+		} else if (request.getParameter("sNo") != null) {
+			// study 댓글일때
+			vo.setStudyNo(Integer.valueOf(request.getParameter("sNo")));
+			vo.setCommentWriter(request.getParameter("wr"));
+			vo.setCommentContent(request.getParameter("con"));
+			vo.setMemberNo(Integer.parseInt(request.getParameter("mNo")));
+			vo = dao.commentInsertStudy(vo);
+			no = Integer.parseInt(request.getParameter("sNo"));
+		}
+		return "ajax:" + no;
 	}
 
 }
-
-
