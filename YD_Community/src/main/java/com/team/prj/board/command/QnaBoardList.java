@@ -41,7 +41,7 @@ public class QnaBoardList implements Command {
 		cri.setKeyword(searchKeyword);
 		cri.setSearchType(searchType);
 			
-		
+
 		List<BoardVO> qnaboardlist = boardDao.QboardSelectList(cri);
 		System.out.println(qnaboardlist);
 		int total = boardDao.fTotalBoardCount(cri);
@@ -49,6 +49,7 @@ public class QnaBoardList implements Command {
 		PageVO page = new PageVO(cri, total);
 
 		request.setAttribute("qnaboardlist", qnaboardlist);
+
 		request.setAttribute("page", page);
 		return "board/qnaBoardList";
 		

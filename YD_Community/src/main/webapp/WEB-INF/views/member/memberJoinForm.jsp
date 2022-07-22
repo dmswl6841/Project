@@ -12,8 +12,34 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 <style>
-form{
-border-top-color: gray;
+
+.input-group {
+	position: relative;
+	width: 100%;
+	margin: 1rem 0;
+}
+
+.input-group i {
+	position: absolute;
+	top: 50%;
+	left: 1rem;
+	transform: translateY(-50%);
+	font-size: 1.4rem;
+	color: var(- -gray-2);
+}
+
+.input-group input {
+	width: 100%;
+	
+	font-size: 1rem;
+	background-color: var(- -gray);
+	border-radius: .5rem;
+	border: 0.125rem solid var(- -white);
+	outline: none;
+}
+
+.input-group input:focus {
+	border: 0.125rem solid var(- -primary-color);
 }
 
 </style>
@@ -21,51 +47,55 @@ border-top-color: gray;
 <body>
 	<div align="center">
 		<div>
-			<h1>회 원 가 입</h1>
-		</div>
-		<div>
 			<form id="frm" action="memberJoin.do" onsubmit="return formCheck()"
 				method="post">
 				<div>
-					<table border="1">
+					<table >
 						<!-- placeholder, required -->
 
 						<tr>
-							<th width="150">아이디</th>
-							<td width="300"><input type="text" id="memberId"
-								name="memberId" size="20"> &nbsp; <input type="hidden"
-								id="checkId" value="No">
-								<button type="button" class="btn btn-success" id="btn" onclick="idCheck()">중복체크</button>
+							<th>아이디</th>
+							<td>
+							<div class="input-group">
+							<input type="text" id="memberId"
+								name="memberId" size="20" placeholder="Enter Id.."> &nbsp;
+								 &nbsp; <input type="hidden"
+								id="checkId" value="No"> &nbsp;
+								<button type="button" id="btn" onclick="idCheck()">중복체크</button>
+								</div>
 							</td>
 						</tr>
+						
 						<tr>
-							<th width="150">패스워드</th>
-							<td width="300"><input type="password" id="memberPassword"
-								name="memberPassword" size="20"></td>
+							<th>패스워드</th>
+							<td>
+							<div class="input-group">
+							<input type="password" id="memberPassword"
+								name="memberPassword" size="20" placeholder="Enter Password.."></div></td>
 						</tr>
 						<tr>
-							<th width="150">패스워드확인</th>
-							<td width="300"><input type="password" id="checkPw"
-								name="checkPw" size="20"></td>
+							<th>패스워드확인</th>
+							<td><div class="input-group"><input type="password" id="checkPw"
+								name="checkPw" size="20" placeholder="Confirm Your Password.."></div></td>
 						</tr>
 
 						<tr>
-							<th width="150">닉네임</th>
-							<td width="300"><input type="text" id="memberNickname"
-								name="memberNickname" size="20"> <input type="hidden"
+							<th>닉네임</th>
+							<td><div class="input-group"><input type="text" id="memberNickname"
+								name="memberNickname" size="20" placeholder="Enter Nickname.."> </div><input type="hidden"
 								id="checkNickname" value="No">
-								<button type="button" class="btn btn-success" onclick="nicknameCheck()">중복체크</button></td>
+								<button type="button"  onclick="nicknameCheck()">중복체크</button></td>
 						</tr>
 
 						<tr>
-							<th width="150">이메일</th>
-							<td width="300"><input type="text" id="memberEmail"
-								name="memberEmail" size="20"></td>
+							<th>이메일</th>
+							<td><div class="input-group"><input type="text" id="memberEmail"
+								name="memberEmail" size="20" placeholder="Enter Email.."></div></td>
 						</tr>
 						<tr>
-							<th width="150">git 주소</th>
-							<td width="300"><input type="text" id="memberGit"
-								name="memberGit" size="20"></td>
+							<th>git 주소</th>
+							<td><div class="input-group"><input type="text" id="memberGit"
+								name="memberGit" size="20" placeholder="Enter Git Address.."></div></td>
 						</tr>
 					</table>
 				</div>
@@ -124,7 +154,7 @@ border-top-color: gray;
 											success: function (result) {
 												console.log("ajax result " + result);
 												if (result == "ok") {
-													alert('${message}');
+													alert('회원가입이 정상적으로 처리되었습니다');
 													location.href='main.do';
 												}
 											},
@@ -165,7 +195,7 @@ border-top-color: gray;
 
 		function successAjaxKakao(str) {
 			if (str == "ok") {
-				alert('로그인 성공!');
+				alert('이미 가입된 계정입니다');
 				location.href = 'main.do';
 			} else {
 				alert('로그인 실패!');
