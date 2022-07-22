@@ -106,17 +106,12 @@ a {
     margin-top: 5px;
     font-size: 1.4rem;
 }
-
-
-
-
 </style>
 </head>
 <body>
 	<div class="board_title" align="center">
       <strong>회 원 목 록</strong>
    </div>
-   
    
 	<div class="board_list_wrap" align="right">
 		<form id="frm">
@@ -137,30 +132,23 @@ a {
 		<div class="board_list_wrap" align="center">
 		<table class="board_list">
 			<thead>
-			<div>
-			
-				<tr>
-					<th width="7"><input id="allCheck" name="allCheck" type="checkbox"></th>
-					<th width="7">NO</th>
-					<th width="7">사용자 ID</th>
-					<th width="7">사용자 명</th>
-					<th width="7">경고 횟수</th>
-					<th width="7">회원권한</th>
-					<th width="7">가입여부</th>
-					<th width="7">탈퇴</th>
-				</tr>
-				
-			
-			
-			</div>
+				<div>
+					<tr>
+						<th width="7">NO</th>
+						<th width="7">사용자 ID</th>
+						<th width="7">사용자 명</th>
+						<th width="7">경고 횟수</th>
+						<th width="7">회원권한</th>
+						<th width="7">가입여부</th>
+						<th width="7">탈퇴</th>
+					</tr>
+				</div>
 			</thead>
 			<tbody>
-			
 				<c:choose>
 					<c:when test="${not empty list }">
 						<c:forEach items="${list }" var="m">
 							<tr>
-								<td><input id="check" name="check"type="checkbox"></td>
 								<td id="memberNo" name="memberNo">${m.memberNo }</td>
 								<td id="memberId" name="memberId">${m.memberId }</td>
 								<td id="memberNick" name="memberNick">${m.memberNick }</td>
@@ -185,37 +173,10 @@ a {
 				</c:choose>
 			</tbody>
 		</table>
-		<input type="button" class="btn btn-success" value="선택삭제" onclick="deleteValue()">
 		</div>
 	</form>
 	<script type="text/javascript">
-/* 	   function deleteValue(){	//선택 삭제 -ing
-		   var memberId = "";
-		   var memberChk = document.getElementsByName("RowCheck");
-		   var chked = false;
-		   var indexid = false;
-		   for(i=0; i < memberChk.length; i++){
-		    if(memberChk[i].checked){
-		     if(indexid){
-		       userid = userid + '-';
-		     }
-		     userid = userid + memberChk[i].value;
-		     indexid = true;
-		    }
-		   }
-		   if(!indexid){
-		    alert("삭제할 사용자를 체크해 주세요");
-		    return;
-		   }
-		   document.userForm.delUserid.value = userid;       // 체크된 사용자 아이디를 '-'로 묶은 userid 를 document.userForm.delUserid 의 value로 저장
-		   
-		   var agree=confirm("삭제 하시겠습니까?");
-		      if (agree){
-		    document.userForm.execute.value = "userDel";
-		      document.userForm.submit();
-		      }
-		} */﻿
-	
+﻿
 		function memberSearch() { //검색 기능
 			let key = $("#key").val();
 			let val = $("#val").val();
@@ -243,14 +204,13 @@ a {
 			var tbody = $("<tbody />");
 			$.each(data, function(index, item){
 				var row = $("<tr />").append(
-							$("<td />").append($("<input>").attr('type','checkbox')),
 							$("<td />").text(item.memberNo),
 							$("<td />").text(item.memberId),
-							$("<td />").text(item.memberNick),
+							$("<td />").append($("<a href='myPage.do?no=${b.memberNo}'>").text(item.memberNick)),
 							$("<td />").text(item.memberWarning),
 							$("<td />").text(item.memberAuthor),
-							$("<td />").append($("<button onclick=memberUpdate(this) />").text("승인")),
-							$("<td />").append($("<button onclick=memberDelete(this) />").text("삭제"))
+							$("<td />").append($("<button class='tn btn-success btn-sm' style='background-color: #1abc9c' onclick='memberUpdate(this)' />").text("승인")),
+							$("<td />").append($("<button class='btn btn-outline-danger btn-sm' onclick='memberDelete(this)' />").text("삭제"))
 						);
 				tbody.append(row);
 			});

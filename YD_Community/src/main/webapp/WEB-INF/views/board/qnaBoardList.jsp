@@ -1,19 +1,114 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>QnA게시판</title>
 <script src="js/jquery-3.6.0.min.js"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+caption {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.board_list_wrap {
+    padding: 50px;
+}
+
+.board_list {
+    width: 100%;
+    border-top: 2px solid green;
+}
+
+.board_list tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.board_list th,
+.board_list td {
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.board_list td {
+    text-align: center;
+}
+
+.board_list .tit {
+    text-align: left;
+}
+
+.board_list .tit:hover {
+    text-decoration: underline;
+}
+
+.board_list_wrap .paging {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0;
+}
+.board_list_wrap .paging a {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+.board_list_wrap .paging a:first-child {
+    margin-left: 0;
+}
+
+.board_list_wrap .paging a.bt {
+    border: 1px solid #eee;
+    background: #eee;
+}
+
+.board_list_wrap .paging a.num {
+    border: 1px solid green;
+    font-weight: 600;
+    color: green;
+}
+
+.board_list_wrap .paging a.num.on {
+    background: green;
+    color: #fff;
+}
+
+strong {
+	font-size: 60px;
+}
+
+
+
+</style>
+
 </head>
 
 <body>
-	<div align="center">
+	<div class="board_list_wrap" align="center">
 	
 	    <!-- QnA게시판 -->
-		<div><h1>QnA게시판</h1></div><br>
+	    <div class="board_title" align="center">
+		<strong>QnA게시판</strong></div><br>
 		
 		
 		<!-- 공통 검색기능 -->
@@ -26,7 +121,7 @@
 					<option value="board_writer">작성자</option>
 				</select> &nbsp; 
 				<input type="text" id="searchKeyword" name="searchKeyword" value="">&nbsp;&nbsp;
-				<button type="submit" id="searchBtn">검색</button>
+				<button type="submit" class="btn btn-success" id="searchBtn">검색</button>
 			</form>
 		</div>
 		<br>
@@ -36,8 +131,8 @@
 		<!-- 공통 검색기능 -->
 	
 		
-		<div>
-			<table border="1">
+               <div class="board_list_wrap" align="right">	
+               	<table class="board_list">
 				<thead>
 					<tr>
 						<th width="130">카테고리</th>
@@ -104,7 +199,7 @@
 
 		<!-- 글쓰기 버튼 -->
 		<div>
-			<button type="button" onclick="location.href='boardForm.do'">글쓰기</button>
+			<button type="button" class="btn btn-success" onclick="location.href='boardForm.do'">글쓰기</button>
 		</div>
 	</div>
 	
