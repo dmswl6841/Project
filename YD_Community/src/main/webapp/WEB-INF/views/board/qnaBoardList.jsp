@@ -19,6 +19,23 @@
     padding: 0;
 }
 
+.board_title {
+font-size: 3.5em;
+font-style :italic;
+text-align: left;
+color: gray;
+padding-left: 3em;
+padding-right:0.5em;
+padding-top: 1em;
+padding-bottom: 0.5em;
+float: left;
+}
+
+.board_title a {
+text-decoration:none;
+}
+
+
 table {
     border-collapse: collapse;
 }
@@ -122,8 +139,8 @@ strong {
 	<div class="board_list_wrap" align="center">
 	
 	    <!-- QnA게시판 -->
-	    <div class="board_title" align="center">
-		<strong>QnA게시판</strong></div><br>
+	    <div class="board_title">
+		<strong><a href="qnaBoardList.do">QnA Board</a></strong></div><br>
 		
 		
 		<!-- 공통 검색기능 -->
@@ -165,8 +182,8 @@ strong {
 				
 				<tbody id="tb">
 					<c:choose>
-						<c:when test="${not empty qnaBoardList }">
-							<c:forEach items="${qnaBoardList }" var="b">
+						<c:when test="${not empty qnaboardlist }">
+							<c:forEach items="${qnaboardlist }" var="b">
 								<tr>
 									<td>${b.boardCategory }</td>
 									<td>#${b.boardNo }</td>

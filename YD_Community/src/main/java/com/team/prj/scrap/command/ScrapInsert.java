@@ -7,6 +7,8 @@ import com.team.prj.board.service.BoardService;
 import com.team.prj.board.serviceImpl.BoardServiceImpl;
 import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.Command;
+import com.team.prj.member.service.MemberService;
+import com.team.prj.member.service.MemberServiceImpl;
 import com.team.prj.scrap.service.ScrapService;
 import com.team.prj.scrap.serviceImpl.ScrapServiceImpl;
 import com.team.prj.scrap.vo.ScrapVO;

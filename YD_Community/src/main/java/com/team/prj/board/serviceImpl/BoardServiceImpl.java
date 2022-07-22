@@ -416,7 +416,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> QboardSelectList(Criteria cri) {
 		//전체조회
-		List<BoardVO> qnaBoardList = new ArrayList<>();
+		List<BoardVO> qnaboardlist = new ArrayList<>();
 		BoardVO vo;
 
 		String sql = "SELECT"
@@ -467,14 +467,14 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardHit(rs.getInt("board_hit"));
 				vo.setMemberNo(rs.getInt("member_no"));
 				vo.setBoardCategory(rs.getString("board_category"));
-				qnaBoardList.add(vo);
+				qnaboardlist.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		return qnaBoardList;
+		return qnaboardlist;
 	}
 		
 		
