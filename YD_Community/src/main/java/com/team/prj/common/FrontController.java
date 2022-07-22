@@ -138,11 +138,11 @@ public class FrontController extends HttpServlet {
 		map.put("/XwordList.do", new XwordList()); //금지어 전체 목록
 		map.put("/XwordSearch.do", new XwordSearch()); //금지어 검색
 		map.put("/XwordInsertForm.do", new XwordInsertForm()); //금지어 입력 팝업창
-		map.put("/XwordInsert.do", new XwordInsert());
+		map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
 		map.put("/XwordUpdateForm.do", new XwordUpdateForm()); //금지어 수정 팝업창
 		map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
-		map.put("/XwordSelectOne.do", new XwordSelectOne());
+		map.put("/XwordSelectOne.do", new XwordSelectOne()); //금지어 단건 조회
 
 		//스터디게시판
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출
