@@ -10,19 +10,6 @@ public interface BoardService {
 	
 
 	
-	
-
-		//Free 자유게시판 crud
-		List<BoardVO> FboardSelectList(Criteria cri); //전체조회
-
-	
-		int fTotalBoardCount(Criteria cri);//페이징 카운트 조회
-	
-
-
-	
-
-	
 		int fTotalBoardCount(Criteria cri);//페이징 카운트 조회
 
 

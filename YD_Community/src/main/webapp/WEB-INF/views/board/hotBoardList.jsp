@@ -14,6 +14,24 @@
     padding: 0;
 }
 
+.board_title {
+font-size: 3.5em;
+font-style :italic;
+text-align: left;
+color: gray;
+padding-left: 3em;
+padding-right:0.5em;
+padding-top: 1em;
+padding-bottom: 0.5em;
+float: left;
+}
+
+.board_title a {
+text-decoration:none;
+}
+
+
+
 table {
     border-collapse: collapse;
 }
@@ -119,8 +137,8 @@ background-color:#FE2E2E;
 
 	
 	    <!-- -------- HOT게시판 ------------->
-	    <div class="board_title" align="center">
-		<strong>인기글</strong>
+	    <div class="board_title">
+		<strong><a href="hotBoardList.do">Hot Board</a></strong>
 		</div>
 		
 		
