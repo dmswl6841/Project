@@ -1,4 +1,4 @@
-package com.team.prj.member.command;
+package com.team.prj.page.command;
 
 import java.util.List;
 
@@ -6,40 +6,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.team.prj.board.vo.BoardVO;
+import com.team.prj.comments.vo.CommentsVO;
 import com.team.prj.common.Command;
 import com.team.prj.member.service.MemberServiceImpl;
 import com.team.prj.member.vo.MemberVO;
 import com.team.prj.page.serviceImpl.PageServiceImpl;
 
-public class MyPage implements Command {
+public class MemberComments implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-
+		//댓글 목록
 		PageServiceImpl pageService = new PageServiceImpl();
 		HttpSession session = request.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("member"); // 세션 가져오기
+		MemberVO member = (MemberVO) session.getAttribute("member");
 		int memberNo = member.getMemberNo();
-		List<BoardVO> list = pageService.myBoardList(memberNo);	//최근활동 없애고 내가 쓴 글목록(현진)
-		
+		List<CommentsVO> list = pageService.myCommentsList(memberNo);
+
 		String memberNick = new MemberServiceImpl().searchMemberNick(memberNo);
 		int boardWriter = memberNo;
 		
-		// 남의 이름 클릭해서 myPage 보는 경우
 		if (request.getParameter("no") != null) {
 			boardWriter = Integer.parseInt(request.getParameter("no"));
-			list = pageService.myBoardList(boardWriter); //최근활동 없애고 내가 쓴 글목록(현진)
+			list = pageService.myCommentsList(boardWriter);
 			memberNick = new MemberServiceImpl().searchMemberNick(boardWriter);
+			memberNo = Integer.parseInt(request.getParameter("no")); // 희수가 남에거 보는거때문에 추가
+			
+		
 		}
-
+		
 		request.setAttribute("boardWriter", boardWriter);
 		request.setAttribute("memberNo", memberNo);
 		request.setAttribute("memberNick", memberNick);
 		request.setAttribute("list", list);
+		
+		return "page/memberComments";
 
-		// my Page 출력
-		return "member/myPage";
 	}
 
 }

@@ -61,11 +61,9 @@ import com.team.prj.member.command.MemberUpdate;
 import com.team.prj.member.command.MemberUpdateSubmit;
 import com.team.prj.member.command.MyPage;
 import com.team.prj.page.command.MemberBoard;
-import com.team.prj.page.command.MemberRecent;
+import com.team.prj.page.command.MemberComments;
 import com.team.prj.page.command.MemberScrap;
-import com.team.prj.page.command.MemberStudy;
 import com.team.prj.page.command.MemberStudyBoard;
-import com.team.prj.page.command.MemberStudyRecent;
 
 import com.team.prj.recommend.command.RecommendInsert;
 import com.team.prj.scrap.command.ScrapInsert;
@@ -156,15 +154,11 @@ public class FrontController extends HttpServlet {
 		
 	
 		//마이페이지//
-		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 자유게시판 글 목록
-		map.put("/memberStudyBoard.do", new MemberStudyBoard()); //내가 쓴 스터디 글 목록
-		
-		map.put("/memberRecent.do", new MemberRecent()); // 최근활동 자유게시판
-		map.put("/memberStudyRecent.do", new MemberStudyRecent()); // 최근활동 자유게시판
-		
+		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 게시글
+		map.put("/memberStudyBoard.do", new MemberStudyBoard()); //내가 쓴 스터디글
+		map.put("/memberComments.do",new MemberComments());//내가 쓴 댓글
 		map.put("/memberScrap.do", new MemberScrap()); //스크랩
 		
-		map.put("/memberStudy.do", new MemberStudy()); //찜한스터디
 	
 		//로그인 테스트용//
 		map.put("/memberJoin.do",new MemberJoin());

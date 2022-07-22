@@ -6,47 +6,23 @@
 
 <head>
 <style>
-.dropbtn {
-	background-color: #04AA6D;
-	color: white;
-	padding: 16px;
-	font-size: 16px;
-	border: none;
+.w-btn-green2 {
+    background-color: #519d9e;
+    color: #9dc8c8;
 }
 
-.dropdown {
-	position: relative;
-	display: inline-block;
+.w-btn-green2-outline {
+    border: 3px solid #519d9e;
+    color: black;
 }
 
-.dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: #f1f1f1;
-	min-width: 160px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	z-index: 1;
+.w-btn-green2-outline:hover {
+    background-color: #519d9e;
+    color: #9dc8c8;
 }
 
-.dropdown-content a {
-	color: black;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
-}
-
-.dropdown-content a:hover {
-	background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-	display: block;
-}
-
-.dropdown:hover .dropbtn {
-	background-color: #3e8e41;
-}
 </style>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="js/jquery-3.6.0.min.js"></script>
@@ -71,61 +47,64 @@
 				<h1>${memberNick }님의 최근 활동</h1>
 			</div>
 
-			<div class="dropdown">
-				<button class="dropbtn">최근활동</button>
-				<div class="dropdown-content">
-					<a href="memberRecent.do?no=${boardWriter }">자유게시판</a> <a href="memberStudyRecent.do?no=${boardWriter }">스터디</a>
-				</div>
-			</div>
-
-			<div class="dropdown">
-				<button class="dropbtn">나의 게시글</button>
-				<div class="dropdown-content">
-					<a href="memberBoard.do?no=${boardWriter }">자유게시판</a> <a href="memberStudyBoard.do?no=${boardWriter }">스터디</a>
-				</div>
-			</div>
-
-			<div class="dropdown">
-				<button class="dropbtn">북마크</button>
-				<div class="dropdown-content">
-					<a href="memberScrap.do??no=${boardWriter }">스크랩</a> <a href="memberStudy.do?no=${boardWriter }">찜한
-						스터디</a>
-				</div>
-			</div>
-
-
-			<div>
-				<table border="1">
-					<thead>
-						<tr>
-
-							<th width="400">목록</th>
+		<button class="w-btn-outline w-btn-green2-outline" type="button"
+	onclick="location.href='memberBoard.do?no=${boardWriter}'">
+       게시글
+    </button>
+    
+    <button class="w-btn-outline w-btn-green2-outline" type="button"
+   onclick="location.href='memberComments.do?no=${boardWriter}'">
+    댓글
+    </button>
+    
+    <button class="w-btn-outline w-btn-green2-outline" type="button"
+    onclick="location.href='memberStudyBoard.do?no=${boardWriter}'">
+      스터디
+    </button>
+    
+    
+    <button class="w-btn-outline w-btn-green2-outline" type="button"
+     onclick="location.href='memberScrap.do?no=${boardWriter}'">
+       스크랩
+    </button>
 
 
-						</tr>
-					</thead>
-					<tbody>
-						<c:choose>
-							<c:when test="${not empty list }">
-								<c:forEach items="${list }" var="r">
-									<tr>
-										<td align="center">#${r.boardDate } ${r.boardTitle }</td>
-
-
-									</tr>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
+		<div>
+			<table align="center" border="1">
+			<thead>
+				<tr>  
+						<th width="50">No.</th>
+						<th width="100">카테고리</th>
+						<th width="250">제목</th>
+						<th width="100">작성자</th>
+						<th width="150">작성일자</th>
+				</tr>
+				</thead>
+				<tbody>
+					<c:choose>
+						<c:when test="${not empty list }">
+							<c:forEach items="${list }" var="b">
 								<tr>
-									<td colspan="6" align="center">최근 활동이 없습니다!</td>
-								</tr>
-							</c:otherwise>
-						</c:choose>
-					</tbody>
-
-				</table>
-			</div>
-		</div>
+									<td align="center">${b.boardNo }</td>
+									<td align="center">${b.boardCategory }</td>
+									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
+									<td align="center">${b.boardWriter }</td>
+									<td align="center">${b.boardDate }</td>
+									</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="6" align="center">
+									작성한 게시글이 존재하지 않습니다!
+								</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+	</div>
+	</div><br>
 	</div>
 	<script>
 		function joinoutCheck() {
