@@ -21,7 +21,7 @@ public class CommentsVO {
 	//마이페이지 조인용입니다
 	MemberVO mbvo = new MemberVO();
 
-
+}
 
 
 
