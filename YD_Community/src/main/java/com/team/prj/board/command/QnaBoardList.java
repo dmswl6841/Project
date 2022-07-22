@@ -44,11 +44,11 @@ public class QnaBoardList implements Command {
 		
 		List<BoardVO> qnaBoardList = boardDao.QboardSelectList(cri);
 		System.out.println(qnaBoardList);
-		int total = boardDao.fTotalBoardCount(cri);
+		int total = boardDao.QboardBoardCount(cri);
 		System.out.println(total);
 		PageVO page = new PageVO(cri, total);
 
-		request.setAttribute("freeBoardList", qnaBoardList);
+		request.setAttribute("qnaBoardList", qnaBoardList);
 		request.setAttribute("page", page);
 		return "board/qnaBoardList";
 		
