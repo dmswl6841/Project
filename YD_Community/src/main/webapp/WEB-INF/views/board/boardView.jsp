@@ -384,12 +384,12 @@ a {
 
 
 
-	<div>
+	<div align="center">
 		<h1>댓글</h1>
 
 	</div>
 
-
+<div align="center">
 	<!-- 로그인 한 사람만 댓글 작성폼 보이게 -->
 	<c:if test="${not empty member}">
 		<form name="commentFrm" action="">
@@ -404,6 +404,7 @@ a {
 	</c:if>
 
 	<!-- 로그인 안해도 볼 수 있는 댓글리스트 -->
+	
 	<p>댓글 수:</p>
 	<table id="list" border=1>
 		<thead>
@@ -439,9 +440,8 @@ a {
 		</tbody>
 		<tr></tr>
 	</table>
+</div>
 
-
-	</div>
 
 
 	<script type="text/javascript">
