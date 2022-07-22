@@ -11,14 +11,10 @@ public interface BoardService {
 
 	
 	
-	//Free 자유게시판 crud
-	List<BoardVO> FboardSelectList(Criteria cri); //전체조회
 	
 
 	
-	int fTotalBoardCount(Criteria cri);//페이징 카운트 조회
-	
-
+		int fTotalBoardCount(Criteria cri);//페이징 카운트 조회
 
 		//게시판 공통기능 (글 입력, 글 1개 보기, 글 검색)
 		int boardInsert(BoardVO vo); //글입력
@@ -37,13 +33,16 @@ public interface BoardService {
 		//total 메인
 		List<BoardVO> TboardSelectList(); //전체조회
 		
-		
+
+		//Free 자유게시판 crud
+		List<BoardVO> FboardSelectList(Criteria cri); //전체조회  
+
 		
 		//Qna 질문게시판 crud
-		List<BoardVO> QboardSelectList(); //전체조회
+		List<BoardVO> QboardSelectList(Criteria cri); //전체조회
 		
 		//Notice 공지 게시판 crud
-		List<BoardVO> NboardSelectList(); //전체조회
+		List<BoardVO> NboardSelectList(Criteria cri); //전체조회
 		
 		
 		//Hot 인기글 게시판 crud (인기글 게시판으로 올라가면 수정은 불가능해짐)

@@ -1,5 +1,7 @@
 package com.team.prj.comments.vo;
 
+import com.team.prj.member.vo.MemberVO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,5 +14,15 @@ public class CommentsVO {
 	private String commentContent; //댓글 내용
 	private String commentDate; //댓글 작성일자
 	private int memberNo;
+
+	
+	
+	//마이페이지 조인용입니다
+	MemberVO mbvo = new MemberVO();
+}
+
+
+
 	private int studyNo;
 }
+

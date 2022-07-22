@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+   
 <!DOCTYPE html>
 <html>
 
@@ -46,16 +47,17 @@
 			<div>
 				<h1>${memberNick }님의 최근 활동</h1>
 			</div>
+		
 
 <button class="w-btn-outline w-btn-green2-outline" type="button"
 
 	onclick="location.href='memberBoard.do?no=${boardWriter}'">
-       나의 게시글
+       게시글
     </button>
     
     <button class="w-btn-outline w-btn-green2-outline" type="button"
    onclick="location.href='memberComments.do?no=${boardWriter}'">
-    나의 댓글
+    댓글
     </button>
     
     <button class="w-btn-outline w-btn-green2-outline" type="button"
@@ -74,25 +76,20 @@
 		<div>
 			<table align="center" border="1">
 			<thead>
-				<tr> 
-						<th width="50">No.</th>
-						<th width="70">언어</th>
-						<th width="250">제목</th>
-						<th width="100">작성자</th>
-						<th width="150">작성일자</th>
+				<tr>  
+						<th width="100">No.</th>
+						<th width="100">댓글</th>
+						<th width="100">작성일</th>
 				</tr>
 				</thead>
 				<tbody>
 					<c:choose>
 						<c:when test="${not empty list }">
-							<c:forEach items="${list }" var="x">
+							<c:forEach items="${list }" var="cm">
 								<tr>
-								<td align="center">${x.studyNo }</td>
-								<td align="center">${x.studyLanguage }</td>
-									<td><a href="StudyView.do?study_no=${x.studyNo}">${x.studyTitle }</a></td>
-									<td align="center">${x.studyWriter }</td>
-									<td align="center">${x.studyDate }</td>
-									
+									<td align="center">${cm.boardNo }</td>
+									<td><a href="boardView.do?board_no=${cm.boardNo}">${cm.commentContent }</a></td>
+									<td align="center">${cm.commentDate }</td>
 									</tr>
 							</c:forEach>
 						</c:when>
@@ -106,9 +103,9 @@
 					</c:choose>
 				</tbody>
 			</table>
-		</div>
+	</div>
 	</div><br>
-	<script>
+			<script>
 		function joinoutCheck() {
 			let q = confirm("정말 탈퇴하시겠습니까? 이 행위는 되돌릴 수 없습니다.");
 			if (q) {
@@ -116,6 +113,6 @@
 			}
 		}
 	</script>
-		
 </body>
+
 </html>
