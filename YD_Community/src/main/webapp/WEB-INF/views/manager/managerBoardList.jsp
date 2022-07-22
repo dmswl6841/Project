@@ -137,7 +137,6 @@ a {
 	<table class="board_list">
 		<thead>
 			<tr>
-				<th width="50"><input type="checkbox"></th>
 				<th width="70">NO</th>
 				<th width="70">게시판</th>
 				<th width="50">게시글 제목</th>
@@ -151,7 +150,6 @@ a {
 				<c:when test="${not empty list }">
 					<c:forEach items="${list }" var="b">
 						<tr>
-							<td><input id="check" name="check" type="checkbox"></td>
 							<td id="boardNo" name="boardNo">${b.boardNo }</td>
 							<td id="boardCategory" name="boardCategory">${b.boardCategory }</td>
 							<td id="boardTitle" name="boardTitle"><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
@@ -171,7 +169,6 @@ a {
 			</c:choose>
 		</tbody>
 	</table>
-	<input type="button" class="btn btn-outline-danger btn-sm" value="선택삭제" onclick="deleteValue()">
 	</div>
 	<script type="text/javascript">
 	
@@ -204,8 +201,8 @@ a {
 							$("<td />").append($("<input>").attr('type','checkbox')),
 							$("<td />").text(item.boardNo),
 							$("<td />").text(item.boardCategory),
-							$("<td />").text(item.boardTitle),
-							$("<td />").text(item.boardWriter),
+							$("<td />").append($("<a href='boardView.do?board_no=${b.boardNo}'>").text(item.boardTitle),
+							$("<td />").append($("<a href='myPage.do?no=${b.memberNo}'>").text(item.boardWriter),
 							$("<td />").text(item.boardDate),
 							$("<td />").append($("<button class='btn btn-outline-danger btn-sm' onclick='boardDelete(this)' />").text("삭제"))
 						);
@@ -218,7 +215,7 @@ a {
 			console.log('error : '+err.message);
 		}
 		
-		function boardDelete(id){ //게시판 삭제
+		function boardDelete(id){ //게시글 삭제
 			let key = id;
 			$.ajax({
 				url : "managerBoardDelete.do",

@@ -151,7 +151,7 @@ a {
 							<tr>
 								<td id="memberNo" name="memberNo">${m.memberNo }</td>
 								<td id="memberId" name="memberId">${m.memberId }</td>
-								<td id="memberNick" name="memberNick">${m.memberNick }</td>
+								<td id="memberNick" name="memberNick"><a href="myPage.do?no=${m.memberNo}">${m.memberNick }</a></td>
 								<td id="memberWarning" name="memberWarning">${m.memberWarning }</td>
 								<td id="memberAuthor" name="memberAuthor">${m.memberAuthor }</td>
 								<td><button type="button" class="btn btn-success btn-sm" style="background-color: #1abc9c;"
@@ -206,7 +206,7 @@ a {
 				var row = $("<tr />").append(
 							$("<td />").text(item.memberNo),
 							$("<td />").text(item.memberId),
-							$("<td />").append($("<a href='myPage.do?no=${b.memberNo}'>").text(item.memberNick)),
+							$("<td />").append($("<a href='myPage.do?no=${m.memberNo}'>").text(item.memberNick)),
 							$("<td />").text(item.memberWarning),
 							$("<td />").text(item.memberAuthor),
 							$("<td />").append($("<button class='tn btn-success btn-sm' style='background-color: #1abc9c' onclick='memberUpdate(this)' />").text("승인")),
@@ -251,37 +251,6 @@ a {
 				}
 			});
 		}
-		
-		/* function memberUpdate(obj) { //가입 승인 -ing
-			let row = $(obj).parent().parent().get(0);
-			let td = row.cells[1];
-			let no = $(td).html();
-			console.log(author);
-			
-			const xhr = new XMLHttpRequest();
-			const url = "memberUpdateAuthor.do?memberNo="+no;
-			console.log(url)
-			xhr.onload = function(){
-				if(xhr.status >=200 && xhr.status <300){
-					if(xhr.response ==0){
-						if(memberAuthor =="GUEST"){
-							alert("가입 승인되었습니다.");
-							jsonHtmlConvert(result);
-						}else if(memberAuthor=="ADMIN"){
-							alert("관리자는 바꿀 수 없습니다!")
-						}else{
-							alert ("이미 승인된 회원입니다.");
-						}
-					}else{
-						alert ("이미 승인된 회원입니다.");
-					}
-				}else {
-					errorCallback(new Error(xhr.stautsText));
-				}
-			};
-			xhr.open('GET',url);
-			xhr.send();
-		} */
 		
 		function memberDelete(id){ //회원 삭제
 			const xhr = new XMLHttpRequest();
