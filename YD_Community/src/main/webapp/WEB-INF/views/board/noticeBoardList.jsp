@@ -16,6 +16,23 @@
     padding: 0;
 }
 
+.board_title {
+font-size: 3.5em;
+font-style :italic;
+text-align: left;
+color: gray;
+padding-left: 3em;
+padding-right:0.5em;
+padding-top: 1em;
+padding-bottom: 0.5em;
+float: left;
+}
+
+.board_title a {
+text-decoration:none;
+}
+
+
 table {
     border-collapse: collapse;
 }
@@ -107,8 +124,8 @@ strong {
 	<div align="center">
 	
 	    <!-- -------- 공지게시판 ------------->
-	<div class="board_title" align="center">
-      <strong>공지사항</strong>
+	<div class="board_title">
+      <strong><a href="noticeBoardList.do">Notice Board</a></strong>
    </div>
    
 		

@@ -9,21 +9,10 @@ import com.team.prj.paging.Criteria;
 public interface BoardService {
 	
 
-	
-	
-
-		//Free 자유게시판 crud
-		List<BoardVO> FboardSelectList(Criteria cri); //전체조회
 
 	
 		int fTotalBoardCount(Criteria cri);//페이징 카운트 조회
-	
 
-
-	
-
-	
-		int fTotalBoardCount(Criteria cri);//페이징 카운트 조회
 
 
 		//게시판 공통기능 (글 입력, 글 1개 보기, 글 검색)

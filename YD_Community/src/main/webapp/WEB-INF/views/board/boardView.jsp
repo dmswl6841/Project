@@ -363,33 +363,21 @@ a {
 
 			</div>
 
-			<div align="center">
-				<button type="button" class="btn btn-success"
-					onclick="recommendPost()" title="이 글을 추천하기">👍
-					${vo.boardRecommend }</button>
-
-				<button type="button" class="btn btn-success" onclick="scrapPost()"
-					title="이 글을 스크랩하기">📌 ${vo.boardScrap }</button>
-
-				<button type="button" class="btn btn-success" onclick="reportPost()"
-					title="이 글을 신고하기">🚫</button>
-			</div>
 			<br>
 
 
-			<c:if test="${vo.memberNo eq memberNo}">
 				<div align="center">
-					<button type="button" class="btn btn-success" onclick="recommendPost()"
-						title="이 글을 추천하기">👍</button>
-					<button type="button" class="btn btn-success" onclick="scrapPost()"
-						title="이 글을 스크랩하기">📌</button>
+					<button type="button" class="btn btn-success btn-lg" onclick="recommendPost()"
+						title="이 글을 추천하기">👍 ${vo.boardRecommend }</button>
+					<button type="button" class="btn btn-success btn-lg" onclick="scrapPost()"
+						title="이 글을 스크랩하기">📌 ${vo.boardScrap }</button>
 				</div>
 
 				<div align="center">
 					<button type="button" class="btn btn-success" onclick="updatePost()">수정</button>
 					<button type="button" class="btn btn-success" onclick="deletePost()">삭제</button>
 				</div>
-			</c:if>
+	
 
 		</div>
 	</div>

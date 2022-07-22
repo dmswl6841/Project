@@ -16,6 +16,23 @@
     padding: 0;
 }
 
+.board_title {
+font-size: 3.5em;
+font-style :italic;
+text-align: left;
+color: gray;
+padding-left: 3em;
+padding-right:0.5em;
+padding-top: 1em;
+padding-bottom: 0.5em;
+float: left;
+}
+
+.board_title a {
+text-decoration:none;
+}
+
+
 table {
     border-collapse: collapse;
 }
@@ -108,8 +125,8 @@ div > a {
 	<div align="center">
 
 		<!-- 자유게시판 -->
-		 <div class="board_title" align="center">
-      <strong>자유게시판</strong>
+		 <div class="board_title" align="left">
+      <strong><a href="freeBoardList.do">Free Board</a></strong>
    </div>
 
 

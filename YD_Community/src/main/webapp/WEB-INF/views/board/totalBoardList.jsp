@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 <!DOCTYPE html>
 <html>
 <style>
@@ -8,6 +17,23 @@ body {
 	align-self: center;
 	color: white;
 }
+
+.board_title {
+font-size: 3.5em;
+font-style :italic;
+text-align: left;
+color: gray;
+padding-left: 3em;
+padding-right:0.5em;
+padding-top: 1em;
+padding-bottom: 0.5em;
+float: left;
+}
+
+.board_title a {
+text-decoration:none;
+}
+
 
 .scrolltable {
 	display: block;
@@ -108,9 +134,11 @@ td {
 </head>
 
 <body>
-	<div>
-		<h1>YD 커뮤니티</h1>
+	<div class="board_title" align="left">
+		<strong><a href="totalBoardList.do">YD Community</a></strong>
 	</div>
+	
+	
 	<div class="box1" >
 		<div>
 			<a href="hotBoardList.do">🏆 인기글</a>
@@ -230,7 +258,9 @@ td {
 				<tbody>
 					<c:choose>
 						<c:when test="${not empty totalboardlist }">
-							<c:forEach items="${totalboardlist }">
+
+							<c:forEach items="${totalboardlist }"   var="b">
+
 								<c:if test="${b.boardCategory =='QnA' }">
 									<tr>
 										<td width="70">#${b.boardNo }</td>

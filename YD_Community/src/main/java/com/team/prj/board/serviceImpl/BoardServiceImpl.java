@@ -416,10 +416,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> QboardSelectList(Criteria cri) {
 		//전체조회
-		List<BoardVO> qnaBoardList = new ArrayList<>();
+		List<BoardVO> qnaboardlist = new ArrayList<>();
 		BoardVO vo;
 
-		
 		String sql = "SELECT"
 				+ "    *"
 				+ "FROM"
@@ -437,13 +436,15 @@ public class BoardServiceImpl implements BoardService {
 				+ "          and"
 				+ "             b." + cri.getSearchType() + " like ?"
 				+ "        ORDER BY "
-				+ "            b.BOARD_NO DESC"
+				+ "            b.board_date DESC"
 				+ "        ) tb1"
 				+ "    WHERE"
 				+ "        rownum <= ?"
 				+ "    )"
 				+ "WHERE"
 				+ "    rn > ?";
+		
+		
 		
 		try {
 			conn = dao.getConnection();
@@ -466,14 +467,14 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardHit(rs.getInt("board_hit"));
 				vo.setMemberNo(rs.getInt("member_no"));
 				vo.setBoardCategory(rs.getString("board_category"));
-				qnaBoardList.add(vo);
+				qnaboardlist.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		return qnaBoardList;
+		return qnaboardlist;
 	}
 		
 		
@@ -625,5 +626,73 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 
+	@Override
+	public int QboardBoardCount(Criteria cri) {
+		//전체조회
+		int totalCount = 0;
+		String sql =  "select count(*) total_count from board where board_category = 'QnA' order by board_no desc";
+		
+		
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
 
+			//키워드가 있을 경우
+			if(!cri.getKeyword().equals("")) {
+				System.out.println("enter impl keyword");
+				sql = "select count(*) total_count from board where board_category = 'QnA' and "
+					+ cri.getSearchType() + " like '%" + cri.getKeyword() + "%'";
+				
+				psmt = conn.prepareStatement(sql);
+			}
+
+			rs = psmt.executeQuery();
+			System.out.println();
+			while(rs.next()) {
+				totalCount = rs.getInt("total_count");
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return totalCount;
+}
+
+	@Override
+	public int NoticeBoardCount(Criteria cri) {
+		//전체조회
+				int totalCount = 0;
+				String sql = "SELECT * FROM BOARD WHERE board_category ='공지' ORDER BY BOARD_NO DESC";
+				
+				
+				
+				
+				try {
+					conn = dao.getConnection();
+					psmt = conn.prepareStatement(sql);
+
+					//키워드가 있을 경우
+					if(!cri.getKeyword().equals("")) {
+						System.out.println("enter impl keyword");
+						sql = "select count(*) total_count from board where board_category = '공지' and "
+							+ cri.getSearchType() + " like '%" + cri.getKeyword() + "%'";
+						
+						psmt = conn.prepareStatement(sql);
+					}
+
+					rs = psmt.executeQuery();
+					System.out.println();
+					while(rs.next()) {
+						totalCount = rs.getInt("total_count");
+
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}finally {
+					close();
+				}
+				return totalCount;
+		}
 }
