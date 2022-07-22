@@ -18,19 +18,22 @@ public class ManagerMain implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		//관리자 메인 화면
+		//가입 대기
 		ManagerService managerDao = new ManagerServiceImpl();
 		List<MemberVO> mlist = new ArrayList<>();
 		mlist = managerDao.managerGuestList();
 		request.setAttribute("mlist", mlist);
 		
-		List<BoardVO> blist = new ArrayList<>();
-		blist = managerDao.managerBoardSelectAll();
-		request.setAttribute("blist", blist);
+		//최근게시글
+		List<BoardVO> bList = new ArrayList<>();
+		bList = managerDao.managerBoardSelectAll();
+		request.setAttribute("bList", bList);
 		
+		//금지어 목록
 		List<XwordVO> xList = new ArrayList<>();
 		xList = managerDao.XwordSelectAll();
 		request.setAttribute("xList", xList);
+		
 		return "manager/managerMain";
 	}
-
 }
