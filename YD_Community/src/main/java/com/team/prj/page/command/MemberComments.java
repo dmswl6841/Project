@@ -30,7 +30,6 @@ public class MemberComments implements Command {
 			boardWriter = Integer.parseInt(request.getParameter("no"));
 			list = pageService.myCommentsList(boardWriter);
 			memberNick = new MemberServiceImpl().searchMemberNick(boardWriter);
-			memberNo = Integer.parseInt(request.getParameter("no")); // 희수가 남에거 보는거때문에 추가
 			
 		
 		}

@@ -32,6 +32,9 @@
 
 <body>
 	<div align="center">
+	${memberNo }
+	<br>
+	${boardWriter }
 		<div>
 			<div>
 				<c:if test="${memberNo eq boardWriter }">

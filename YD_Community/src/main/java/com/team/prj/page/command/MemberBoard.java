@@ -30,7 +30,6 @@ public class MemberBoard implements Command {
 			boardWriter = Integer.parseInt(request.getParameter("no"));
 			list = pageService.myBoardList(boardWriter); //최근활동 없애고 내가 쓴 글목록(현진)
 			memberNick = new MemberServiceImpl().searchMemberNick(boardWriter);
-			memberNo = Integer.parseInt(request.getParameter("no")); // 희수가 남에거 보는거때문에 추가
 		}
 		//int memberNo = (int) request.getAttribute("memberNo");
 	//	List<LogVO> list = pageService.myLogList(memberNo);
