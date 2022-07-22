@@ -173,12 +173,27 @@
 		}
 
 	</script>
+	<script type="text/javascript">
+		function reportPost(){
+			var result = confirm("게시글을 신고하시겠습니까?");
+			if(result){
+				window.open("reportForm.do");
+			}
+			function recommendPost() {
+				var result = confirm("게시글을 추천하시겠습니까?");
+				if (result) {
+					var form = document.writeFrm;
+					form.method = "post";
+					form.action = "recommendInsert.do";
+					form.submit();
+				}
+			}
+		}
+	
 
 
 
-
-
-		</script>
+	</script>
 
 	<script type="text/javascript">
 		function updatePost() {

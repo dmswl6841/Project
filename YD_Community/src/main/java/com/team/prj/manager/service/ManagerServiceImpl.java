@@ -171,6 +171,7 @@ public class ManagerServiceImpl implements ManagerService {
 			while (rs.next()) {
 				vo = new BoardVO();
 				vo.setBoardNo(rs.getInt("board_no"));
+				vo.setMemberNo(rs.getInt("member_no"));
 				vo.setBoardCategory(rs.getString("board_category"));
 				vo.setBoardTitle(rs.getString("board_title"));
 				vo.setBoardWriter(rs.getString("board_writer"));
@@ -318,7 +319,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<XwordVO> XwordSelectAll() {
 		List<XwordVO> list = new ArrayList<XwordVO>();
 		XwordVO vo;
-		String sql = "select * from Xword order by xword_no";
+		String sql = "select * from Xword order by xword_no desc";
 
 		try {
 			conn = dao.getConnection();

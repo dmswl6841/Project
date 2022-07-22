@@ -201,51 +201,6 @@ a {
 			console.log('error : '+err.message);
 		}
 		
-/* 	 	function XwordUpdate(obj) { //금지어 수정
-			let key = obj;
-	 		window.open("XwordUpdate.do");
-			console.log(key);
-			$.ajax({
-				url : "XwordUpdate.do",
-				type : "post",
-				data : {key : key},
-				dataType : "json",
-				success : function(result){
-					if(result = 1){
-						console.log(result);
-						window.open("XwordUpdateFrom.do");
-					}else{
-						alert("수정할 수 없습니다.");
-					}
-			},
-			error : function(error){
-				alert("ERROR!")
-			}
-		});
-	}  */
-	 	
-	 	function XwordUpdate(obj){
-			let key = obj;
-			$.ajax({
-				url : "XwordSelectOne.do",
-				type : "post",
-				data : {key : key},
-				dataType : "json",
-				success : function(result){
-					if(result = 1){
-						console.log("단건조회 결과 : ")
-						console.log(result);
-						window.open("XwordUpdateForm.do");
-					}else{
-						alert("수정할 수 없습니다.");
-					}
-			},
-			error : function(error){
-				alert("ERROR!")
-			}
-		});
-		}
-		
 		function XwordDelete(obj){ //금지어 삭제
 			let row = $(obj).parent().parent().get(0);
 			let td = row.cells[1];

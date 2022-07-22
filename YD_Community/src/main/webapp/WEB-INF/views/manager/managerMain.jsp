@@ -144,7 +144,7 @@ a {
 				<c:otherwise>
 					<tr>
 						<td colspan="7" align="center">
-							회원이 존재하지 않습니다
+							가입 대기 중인 회원이 존재하지 않습니다
 						</td>
 					</tr>
 				</c:otherwise>
@@ -154,7 +154,6 @@ a {
 	</div>
 </form>
 
-
 <h5>최신 게시글</h5>
 <a href="managerBoardList.do">게시글 전체보기</a><br>
 <form id="form2">
@@ -162,6 +161,7 @@ a {
 	<table class="board_list">
 		<thead>
 			<tr>
+				<th width="70">NO</th>
 				<th width="70">게시판</th>
 				<th width="50">게시글 제목</th>
 				<th width="50">작성자</th>
@@ -211,8 +211,8 @@ a {
 		</thead>
 		<tbody>
 			<c:choose>
-				<c:when test="${not empty  bList }">
-					<c:forEach items="${bList }" var="b" begin="0" end="9">
+				<c:when test="${not empty  xList }">
+					<c:forEach items="${xList }" var="x" begin="0" end="9">
 						<tr>
 							<td id="xwordNo" name="xwordNo">${x.xwordNo }</td>
 							<td id="xword" name="xword">${x.xword }</td>
