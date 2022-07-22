@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!DOCTYPE html>
 <html>
@@ -24,10 +27,21 @@ caption {
     display: none;
 }
 
+
 a {
     text-decoration: none;
     color: inherit;
 }
+
+
+tr >td >a {
+ 	text-decoration-line : none;
+}
+ 
+div > a {
+	text-decoration-line : none;
+}
+
 
 .board_list_wrap {
     padding: 50px;
@@ -93,6 +107,7 @@ a {
     color: #fff;
 }
 
+
 strong {
 	font-size: 60px;
 }
@@ -130,9 +145,10 @@ strong {
 		
 		<!-- 공통 검색기능 -->
 	
-		
-               <div class="board_list_wrap" align="right">	
-               	<table class="board_list">
+
+		<div class="board_list_wrap" align="right">
+			<table class="board_list">
+
 				<thead>
 					<tr>
 						<th width="130">카테고리</th>

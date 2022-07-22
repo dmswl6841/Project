@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>주간 HOT</title>
 <script src="js/jquery-3.6.0.min.js"></script>
+
 <style>
 * {
     margin: 0;
@@ -21,10 +22,26 @@ caption {
     display: none;
 }
 
+
 a {
     text-decoration: none;
     color: inherit;
 }
+
+
+tr >td >a {
+ 	text-decoration-line : none;
+}
+ 
+div > a {
+	text-decoration-line : none;
+}
+
+#hotbtn {
+color:#FFFFFF; 
+background-color:#FE2E2E;
+}
+
 
 .board_list_wrap {
     padding: 50px;
@@ -33,7 +50,7 @@ a {
 .board_list {
     width: 100%;
     border-top: 2px solid green;
-    text-align: center;
+
 }
 
 .board_list tr {
@@ -92,10 +109,8 @@ a {
 }
 
 
-
-
-
 </style>
+
 
 </head>
 
@@ -124,11 +139,13 @@ a {
 		<!-- -------- 공통 검색기능 ------------->
 	
 		
-		<div class="board_list_wrap" align="center">
+
+		<div class="board_list_wrap" align="right">
+
+
 			<table class="board_list">
 				<thead>
 					<tr>
-						<th></th>
 						<th width="130">카테고리</th>
 						<th width="70">글번호</th>
 						<th width="130">작성자</th>
@@ -140,13 +157,12 @@ a {
 						<th width="70">조회수</th>					
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tb">
 					<c:choose>
 						<c:when test="${not empty hotboardlist }">
 							<c:forEach items="${hotboardlist }" var="b">
 								<tr>
-									<td><button style="color:#FFFFFF; background-color:#FE2E2E" disabled>HOT</button></td>
-									<td>${b.boardCategory }</td>
+									<td width="70px"><button id="hotbtn" disabled>HOT</button>&nbsp;&nbsp;${b.boardCategory }</td>
 									<td>#${b.boardNo }</td>
 									<td><a href="myPage.do?no=${b.memberNo}">${b.boardWriter }</a></td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>

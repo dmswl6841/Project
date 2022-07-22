@@ -29,6 +29,14 @@ a {
     color: inherit;
 }
 
+tr >td >a {
+ 	text-decoration-line : none;
+}
+ 
+div > a {
+	text-decoration-line : none;
+}
+
 .board_list_wrap {
     padding: 50px;
 }

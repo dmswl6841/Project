@@ -335,7 +335,7 @@ public class BoardServiceImpl implements BoardService {
 //				return noticeboardlist;
 //	}
 	
-	
+	 
 	
 	
 	
@@ -394,6 +394,7 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardRecommend(rs.getInt("board_recommend"));
 				vo.setBoardHit(rs.getInt("board_hit"));
 				vo.setMemberNo(rs.getInt("member_no"));
+				vo.setBoardCategory(rs.getString("board_category"));
 				freeboardlist.add(vo);
 			}
 		} catch (SQLException e) {
@@ -624,5 +625,5 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 
-	
+
 }

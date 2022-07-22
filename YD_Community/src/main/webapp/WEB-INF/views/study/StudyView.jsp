@@ -334,7 +334,6 @@ a {
 								<dd>${vo.studyMember }</dd>
 							</dl>
 
-
 							<br>
 						</div>
 						<div class="cont">${vo.studySystem }</div>
