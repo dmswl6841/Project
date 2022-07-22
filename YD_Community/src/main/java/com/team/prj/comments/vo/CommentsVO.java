@@ -14,6 +14,7 @@ public class CommentsVO {
 	private String commentContent; //댓글 내용
 	private String commentDate; //댓글 작성일자
 	private int memberNo;
+	private int studyNo;
 
 	
 	
@@ -23,6 +24,4 @@ public class CommentsVO {
 
 
 
-	private int studyNo;
-}
 
