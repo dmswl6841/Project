@@ -20,6 +20,10 @@ import com.team.prj.board.command.BoardUpdate;
 import com.team.prj.board.command.BoardUpdateForm;
 import com.team.prj.board.command.BoardView;
 import com.team.prj.board.command.FreeBoardList;
+
+import com.team.prj.board.command.HotBoardList;
+import com.team.prj.board.command.NoticeBoardForm;
+
 import com.team.prj.board.command.NoticeBoardList;
 import com.team.prj.board.command.QnaBoardList;
 import com.team.prj.board.command.TotalBoardList;
@@ -40,6 +44,7 @@ import com.team.prj.manager.command.XwordInsert;
 import com.team.prj.manager.command.XwordInsertForm;
 import com.team.prj.manager.command.XwordList;
 import com.team.prj.manager.command.XwordSearch;
+import com.team.prj.manager.command.XwordSelectOne;
 import com.team.prj.manager.command.XwordUpdate;
 import com.team.prj.manager.command.XwordUpdateForm;
 import com.team.prj.member.command.AjaxMemberIdCheck;
@@ -61,6 +66,11 @@ import com.team.prj.page.command.MemberScrap;
 import com.team.prj.page.command.MemberStudy;
 import com.team.prj.page.command.MemberStudyBoard;
 import com.team.prj.page.command.MemberStudyRecent;
+
+import com.team.prj.recommend.command.RecommendInsert;
+import com.team.prj.scrap.command.ScrapInsert;
+
+
 import com.team.prj.study.command.AjaxNoticeSearche;
 import com.team.prj.study.command.StudyDelete;
 import com.team.prj.study.command.StudyForm;
@@ -90,7 +100,11 @@ public class FrontController extends HttpServlet {
 		map.put("/qnaBoardList.do", new QnaBoardList()); // qna 게시판 처음화면
 		map.put("/noticeBoardList.do", new NoticeBoardList()); // 공지 게시판 처음화면
 
-		map.put("/boardForm.do", new BoardForm()); //글쓰기폼 호출
+		map.put("/hotBoardList.do", new HotBoardList()); // 인기 게시판 처음화면
+		
+		map.put("/boardForm.do", new BoardForm()); // 글쓰기폼 호출
+
+
 		map.put("/boardView.do", new BoardView()); // 글 상세보기화면
 		map.put("/boardInsert.do", new BoardInsert()); //글입력
 		
@@ -101,6 +115,15 @@ public class FrontController extends HttpServlet {
 		map.put("/ajaxBoardSearche.do", new AjaxBoardSearche()); // 글 삭제하기
 		////////////////////////////////////////////////////
 		
+
+
+        //////////////////Recommend & Scrap기능/////////////////////
+		map.put("/recommendInsert.do", new RecommendInsert()); // 글 추천하기
+		map.put("/scrapInsert.do", new ScrapInsert()); // 글 추천하기
+		
+		
+		
+
 		map.put("/StudyForm.do", new StudyForm());//게시글입력폼 호출
     
 		//관리자
@@ -115,10 +138,11 @@ public class FrontController extends HttpServlet {
 		map.put("/XwordList.do", new XwordList()); //금지어 전체 목록
 		map.put("/XwordSearch.do", new XwordSearch()); //금지어 검색
 		map.put("/XwordInsertForm.do", new XwordInsertForm()); //금지어 입력 팝업창
-		map.put("/XwordInsert.do", new XwordInsert());
+		map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
 		map.put("/XwordUpdateForm.do", new XwordUpdateForm()); //금지어 수정 팝업창
 		map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
+		map.put("/XwordSelectOne.do", new XwordSelectOne()); //금지어 단건 조회
 
 		//스터디게시판
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출

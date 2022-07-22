@@ -1,25 +1,125 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>금지어 관리</title>
 <script src="js/jquery-3.6.0.min.js"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+caption {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.board_list_wrap {
+    padding: 50px;
+}
+
+.board_list {
+    width: 100%;
+    border-top: 2px solid green;
+    text-align: center;
+}
+
+.board_list tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.board_list th,
+.board_list td {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.board_list td {
+    text-align: center;
+}
+
+.board_list .tit {
+    text-align: left;
+}
+
+.board_list .tit:hover {
+    text-decoration: underline;
+}
+
+.board_list_wrap .paging {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0;
+}
+.board_list_wrap .paging a {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+.board_list_wrap .paging a:first-child {
+    margin-left: 0;
+}
+
+.board_list_wrap .paging a.bt {
+    border: 1px solid #eee;
+    background: #eee;
+}
+
+.board_list_wrap .paging a.num {
+    border: 1px solid green;
+    font-weight: 600;
+    color: green;
+}
+
+.board_list_wrap .paging a.num.on {
+    background: green;
+    color: #fff;
+}
+
+.board_title {
+    margin-bottom: 30px;
+}
+.board_title strong {
+    font-size: 3rem;
+}
+.board_title p {
+    margin-top: 5px;
+    font-size: 1.4rem;
+}
+</style>
+
 </head>
 <body>
-	<div align="center">
-		<div>금지어 목록</div>
-	</div>
-	<div align="center">
+	<div class="board_title" align="center">
+      <strong>금 지 어 목 록</strong>
+   </div>
+	<div class="board_list_wrap" align="right">
 	<form id="frm">
 		<input type="text" id="search" name="search">&nbsp;
-		<input type="button" value="검색" onclick="XwordSearch()">
+		<input type="button" class="btn btn-success" value="검색" onclick="XwordSearch()">
 	</form>
 	</div>
-	<div align="center">
-	<table border="1">
+	<div class="board_list_wrap" align="center">
+	<table class="board_list">
 		<thead>
 			<tr>
 				<th><input type="checkbox"></th>
@@ -37,8 +137,8 @@
 							<td><input type="checkbox"></td>
 							<td id="xwordNo" name="xwordNo">${x.xwordNo }</td>
 							<td id="xword" name="xword">${x.xword }</td>
-							<td><input type="button" value="수정" onclick="XwordUpdate(${x.xwordNo })"></td>
-							<td><input type="button" value="삭제" onclick="XwordDelete(this)"></td>
+							<td><input type="button" class="btn btn-success btn-sm" value="수정" onclick="XwordUpdate(${x.xwordNo })"></td>
+							<td><input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="XwordDelete(this)"></td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -52,8 +152,8 @@
 			</c:choose>
 		</tbody>
 	</table>
-	<button type="button" onclick="XwordInsert()">추가</button>
-	<input type="button" value="선택삭제" onclick="deleteValue()">
+	<button type="button"  class="btn btn-success btn-sm" style="background-color: #1abc9c"  onclick="XwordInsert()">추가</button>
+	<input type="button" class="btn btn-outline-danger btn-sm" value="선택삭제" onclick="deleteValue()">
 	</div>
 	<script type="text/javascript">
 		function XwordSearch() { // 검색
@@ -89,8 +189,8 @@
 							$("<td />").append($("<input>").attr('type','checkbox')),
 							$("<td />").text(item.xwordNo),
 							$("<td />").text(item.xword),
-							$("<td />").append($("<button onclick=XwordUpdate(this) />").text("수정")),
-							$("<td />").append($("<button onclick=XwordDelete(this) />").text("삭제"))
+							$("<td />").append($("<button class='btn btn-success btn-sm' onclick='XwordUpdate(this)' />").text("수정")),
+							$("<td />").append($("<button onclick='XwordDelete(this)' />").text("삭제"))
 						);
 				tbody.append(row);
 			});
@@ -106,7 +206,7 @@
 	 		window.open("XwordUpdate.do");
 			console.log(key);
 			$.ajax({
-				url : "",
+				url : "XwordUpdate.do",
 				type : "post",
 				data : {key : key},
 				dataType : "json",
@@ -122,10 +222,28 @@
 				alert("ERROR!")
 			}
 		});
-	} */
+	}  */
 	 	
 	 	function XwordUpdate(obj){
 			let key = obj;
+			$.ajax({
+				url : "XwordSelectOne.do",
+				type : "post",
+				data : {key : key},
+				dataType : "json",
+				success : function(result){
+					if(result = 1){
+						console.log("단건조회 결과 : ")
+						console.log(result);
+						window.open("XwordUpdateForm.do");
+					}else{
+						alert("수정할 수 없습니다.");
+					}
+			},
+			error : function(error){
+				alert("ERROR!")
+			}
+		});
 		}
 		
 		function XwordDelete(obj){ //금지어 삭제

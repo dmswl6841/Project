@@ -14,20 +14,11 @@
 	<div align="center">
 	
 	    <!-- -------- HOT게시판 ------------->
-		<div><h1>주간 HOT</h1></div><br>
+		<div><h1>인기글</h1></div><br>
 		
 		
 		<!-- -------- 공통 검색기능 ------------->
 		<div>
-			<form id="frm">
-				<select id="categorykey" name="categorykey">
-				  	<option value="board_category" id="categoryval" name="categoryval">자유</option> 
-				  	<option value="board_category" id="categoryval" name="categoryval">QnA</option> 
-				  	<option value="board_category" id="categoryval" name="categoryval">공지</option> 
-				  	<option value="board_category" id="categoryval" name="categoryval" selected>HOT</option> 
-				</select>
-			</form>
-			
 			<form id="frm">
 				<select id="searchkey" name="searchkey">
 				  	<option value="board_title">제목</option>
@@ -45,8 +36,9 @@
 			<table border="1">
 				<thead>
 					<tr>
+						<th></th>
 						<th width="130">카테고리</th>
-						<th width="70">No.</th>
+						<th width="70">글번호</th>
 						<th width="130">작성자</th>
 						<th width="200">제목</th>
 						<th width="130">작성일자</th>
@@ -61,8 +53,9 @@
 						<c:when test="${not empty hotboardlist }">
 							<c:forEach items="${hotboardlist }" var="b">
 								<tr>
+									<td><button style="color:#FFFFFF; background-color:#FE2E2E" disabled>HOT</button></td>
 									<td>${b.boardCategory }</td>
-									<td>${b.boardNo }</td>
+									<td>#${b.boardNo }</td>
 									<td><a href="myPage.do?no=${b.memberNo}">${b.boardWriter }</a></td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
 									<td>${b.boardDate }</td>

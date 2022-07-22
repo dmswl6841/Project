@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 
@@ -14,148 +14,152 @@
 </head>
 
 <body>
-	<div><h1>YD 커뮤니티입니다.</h1></div>
-	<div align="left">
-		<div><a href="hotBoardList.do">주간 인기글</a></div>
+	<div>
+		<h1>YD 커뮤니티입니다.</h1>
+	</div>
+	<div align="center">
+		<div>
+			<a href="hotBoardList.do">🏆 인기글</a>
+		</div>
 		<div>
 			<table border="1">
 				<tbody>
 					<c:choose>
-						<c:when test="${not empty totalboardlist }">	
+						<c:when test="${not empty totalboardlist }">
 							<c:forEach items="${totalboardlist }" var="b">
-								<c:if test="${b.boardCategory =='HOT' }">
+								<c:if test="${b.boardHot =='HOT' }">
 									<tr>
-										<td>${b.boardNo }</td>
-										<td>${b.boardHot }</td>
+										<td><button
+												style="color: #FFFFFF; background-color: #FE2E2E" disabled>HOT</button></td>
 										<td>${b.boardCategory }</td>
+										<td>#${b.boardNo }</td>
 										<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
-										<td>${b.boardRecommend }</td>
-										<td>${b.boardHit }</td>
+										<td>👍 ${b.boardRecommend }</td>
+										<td>👀 ${b.boardHit }</td>
 									</tr>
 								</c:if>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="6" align="center">
-									게시글이 존재하지 않습니다
-								</td>
+								<td colspan="6" align="center">게시글이 존재하지 않습니다</td>
 							</tr>
 						</c:otherwise>
 					</c:choose>
 				</tbody>
-			</table><br>
+			</table>
+			<br>
 		</div>
 	</div>
-	
-	
-	
-	
-	
-	<div align="right">
-		<div><a href="noticeBoardList.do">공지사항</a></div>
+
+
+
+
+
+	<div align="center">
+		<div>
+			<a href="noticeBoardList.do">📢 공지사항</a>
+		</div>
 		<div>
 			<table border="1">
 				<tbody>
 					<c:choose>
-						<c:when test="${not empty totalboardlist }">	
+						<c:when test="${not empty totalboardlist }">
 							<c:forEach items="${totalboardlist }" var="b">
 								<c:if test="${b.boardCategory =='공지' }">
 									<tr>
-									    <td>${b.boardNo }</td>
-										<td>${b.boardCategory }</td>
+										<td>#${b.boardNo }</td>
 										<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
-										<td>${b.boardHit }</td>
+										<td>👀 ${b.boardHit }</td>
 									</tr>
 								</c:if>
-								
+
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="6" align="center">
-									게시글이 존재하지 않습니다
-								</td>
+								<td colspan="6" align="center">게시글이 존재하지 않습니다</td>
 							</tr>
 						</c:otherwise>
 					</c:choose>
 				</tbody>
-			</table><br>
+			</table>
+			<br>
 		</div>
 	</div>
-	
-	
-	
-	
-	<div align="left">
-		<div><a href="freeBoardList.do">자유게시판</a></div>
+
+
+
+
+	<div align="center">
+		<div>
+			<a href="freeBoardList.do">🎡 자유게시판</a>
+		</div>
 		<div>
 			<table border="1">
 				<tbody>
 					<c:choose>
-						<c:when test="${not empty totalboardlist }">	
+						<c:when test="${not empty totalboardlist }">
 							<c:forEach items="${totalboardlist }" var="b">
 								<c:if test="${b.boardCategory =='자유' }">
-									<tr onclick="clickBoardView()" >
-										<td>${b.boardNo }</td>
-										<td>${b.boardCategory }</td>
+									<tr onclick="clickBoardView()">
+										<td>#${b.boardNo }</td>
 										<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
-										<td>${b.boardRecommend }</td>
-										<td>${b.boardHit }</td>
+										<td>👍 ${b.boardRecommend }</td>
+										<td>👀 ${b.boardHit }</td>
 									</tr>
 								</c:if>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="6" align="center">
-									게시글이 존재하지 않습니다
-								</td>
+								<td colspan="6" align="center">게시글이 존재하지 않습니다</td>
 							</tr>
 						</c:otherwise>
 					</c:choose>
 				</tbody>
-			</table><br>
+			</table>
+			<br>
 		</div>
 	</div>
-	
-	
-	
-	
-	<div align="right">
-		<div><a href="qnaBoardList.do">QnA게시판</a></div>
+
+
+
+
+	<div align="center">
+		<div>
+			<a href="qnaBoardList.do">💡 QnA게시판</a>
+		</div>
 		<div>
 			<table border="1">
 				<tbody>
 					<c:choose>
-						<c:when test="${not empty totalboardlist }">	
+						<c:when test="${not empty totalboardlist }">
 							<c:forEach items="${totalboardlist }" var="b">
-						 		<c:if test="${b.boardCategory =='QnA' }">
-									<tr onclick="clickBoardView()" >
-										<td>${b.boardNo }</td>
-										<td>${b.boardCategory }</td>
+								<c:if test="${b.boardCategory =='QnA' }">
+									<tr onclick="clickBoardView()">
+										<td>#${b.boardNo }</td>
 										<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
-										<td>${b.boardRecommend }</td>
-										<td>${b.boardHit }</td>
+										<td>👍 ${b.boardRecommend }</td>
+										<td>👀 ${b.boardHit }</td>
 									</tr>
-						 		</c:if>
+								</c:if>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="8" align="center">
-									게시글이 존재하지 않습니다
-								</td>
+								<td colspan="8" align="center">게시글이 존재하지 않습니다</td>
 							</tr>
 						</c:otherwise>
 					</c:choose>
 				</tbody>
-			</table><br>
+			</table>
+			<br>
 		</div>
 	</div>
-	
 
-	
+
+
 	<script type="text/javascript">
 		function noticeSearch() {
 			let categorykey = $("#categorykey").val();
@@ -199,7 +203,7 @@
 			$('table').append(tbody);
 		}
 	</script>
-	
-	
+
+
 </body>
 </html>

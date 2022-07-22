@@ -10,6 +10,7 @@ import java.util.List;
 import com.team.prj.board.service.BoardService;
 import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.DataSource;
+import com.team.prj.paging.Criteria;
 
 
 public class BoardServiceImpl implements BoardService {
@@ -52,6 +53,7 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVO boardView(int board_no) {
 		// 글 1개조회
 		String sql1 = "UPDATE BOARD SET BOARD_HIT = BOARD_HIT+1 WHERE BOARD_NO = ?";
+
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql1);
@@ -61,6 +63,8 @@ public class BoardServiceImpl implements BoardService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
+
+		
 		
 		BoardVO vo = new BoardVO();
 		String sql = "SELECT * FROM BOARD WHERE BOARD_NO = ?";
@@ -93,26 +97,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	@Override
-	public int boardDelete(BoardVO vo) {
-		//글삭제
-		int n = 0;
-		String sql = "DELETE FROM BOARD WHERE BOARD_NO = ?";
-		
-		try {
-			conn = dao.getConnection();
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, vo.getBoardNo());
-			n = psmt.executeUpdate(); 
-						
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		
-		return n;
-	}
+	
+	
+	
 	
 	@Override
 	public int boardUpdate(BoardVO vo) {
@@ -135,7 +122,6 @@ public class BoardServiceImpl implements BoardService {
 			psmt.setInt(7, vo.getMemberNo());
 			//psmt.setInt(8, vo.getBoardHit());
 			psmt.setInt(8, vo.getBoardNo());
-
 			n = psmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -144,6 +130,34 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return n;
 	}
+	
+
+	
+	
+	@Override
+	public int boardDelete(BoardVO vo) {
+		//글삭제
+		int n = 0;
+		String sql = "DELETE FROM BOARD WHERE BOARD_NO = ?";
+		
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, vo.getBoardNo());
+			n = psmt.executeUpdate(); 
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return n;
+	}
+	
+	
+	
+	
 	
 	@Override
 	public List<BoardVO> boardSearchList(String key, String val) {
@@ -210,6 +224,7 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardCategory(rs.getString("board_category"));
 				vo.setMemberNo(rs.getInt("member_no"));
 				vo.setBoardRecommend(rs.getInt("board_recommend"));
+				vo.setBoardHot(rs.getString("board_Hot"));
 				totalboardlist.add(vo);
 			}
 		} catch (SQLException e) {
@@ -267,38 +282,67 @@ public class BoardServiceImpl implements BoardService {
 	/////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////Free 자유게시판//////////////////////////////
 	@Override
-	public List<BoardVO> FboardSelectList() {
+	public List<BoardVO> FboardSelectList(Criteria cri) {
 		//전체조회
-				List<BoardVO> freeboardlist = new ArrayList<>();
-				BoardVO vo;
-				String sql = "SELECT * FROM BOARD WHERE board_category = '자유' ORDER BY BOARD_NO DESC";
-				
-				try {
-					conn = dao.getConnection();
-					psmt = conn.prepareStatement(sql);
-					rs = psmt.executeQuery();
-					
-					while(rs.next()) {
-						vo = new BoardVO();
-						vo.setBoardNo(rs.getInt("board_no"));
-						vo.setBoardWriter(rs.getString("board_writer"));
-						vo.setBoardTitle(rs.getString("board_title"));
-						vo.setBoardDate(rs.getString("board_date"));
-						vo.setBoardAttech(rs.getString("board_attech"));
-						vo.setBoardScrap(rs.getInt("board_scrap"));
-						vo.setBoardRecommend(rs.getInt("board_recommend"));
-						vo.setBoardHit(rs.getInt("board_hit"));
-						vo.setMemberNo(rs.getInt("member_no"));
-						vo.setBoardCategory(rs.getString("board_category"));
-						freeboardlist.add(vo);
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}finally {
-					close();
-				}
-				return freeboardlist;
+		List<BoardVO> freeboardlist = new ArrayList<>();
+		BoardVO vo;
+
+		
+		String sql = "SELECT"
+				+ "    *"
+				+ "FROM"
+				+ "    ("
+				+ "    SELECT"
+				+ "        rownum rn,"
+				+ "        tb1.*"
+				+ "    FROM"
+				+ "        (SELECT"
+				+ "            b.*"
+				+ "        FROM"
+				+ "            board b"
+				+ "        WHERE"
+				+ "            b.board_category = '자유'"
+				+ "          and"
+				+ "             b." + cri.getSearchType() + " like ?"
+				+ "        ORDER BY "
+				+ "            b.board_date DESC"
+				+ "        ) tb1"
+				+ "    WHERE"
+				+ "        rownum <= ?"
+				+ "    )"
+				+ "WHERE"
+				+ "    rn > ?";
+
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, "%" + cri.getKeyword() + "%");
+			psmt.setInt(2, cri.getPageNum() * cri.getAmount());
+			psmt.setInt(3, (cri.getPageNum() - 1) * cri.getAmount());
+			System.out.println(cri);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new BoardVO();
+				vo.setBoardNo(rs.getInt("board_no"));
+				vo.setBoardWriter(rs.getString("board_writer"));
+				vo.setBoardTitle(rs.getString("board_title"));
+				vo.setBoardDate(rs.getString("board_date"));
+				vo.setBoardAttech(rs.getString("board_attech"));
+				vo.setBoardScrap(rs.getInt("board_scrap"));
+				vo.setBoardRecommend(rs.getInt("board_recommend"));
+				vo.setBoardHit(rs.getInt("board_hit"));
+				vo.setMemberNo(rs.getInt("member_no"));
+				freeboardlist.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return freeboardlist;
 	}
+
 	
 	
 	
@@ -320,7 +364,6 @@ public class BoardServiceImpl implements BoardService {
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
-				vo = new BoardVO();
 				vo = new BoardVO();
 				vo.setBoardNo(rs.getInt("board_no"));
 				vo.setBoardWriter(rs.getString("board_writer"));
@@ -348,13 +391,14 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	/////////////////////////////////////////////////////////////////////////////
-	/////////Hot 주간 인기글 게시판 crud (인기글 게시판으로 올라가면 수정 불가해짐)///////////
+	/////////Hot 인기글 게시판 crud (인기글 게시판으로 올라가면 수정 불가해짐)///////////
 	@Override
 	public List<BoardVO> HboardSelectList() {
 		//전체조회
 		List<BoardVO> hotboardlist = new ArrayList<>();
 		BoardVO vo;
-		String sql = "SELECT * FROM BOARD WHERE board_category ='HOT' ORDER BY BOARD_NO DESC";
+
+		String sql = "SELECT * FROM BOARD WHERE BOARD_HOT ='HOT' ORDER BY BOARD_NO DESC";
 		
 		try {
 			conn = dao.getConnection();
@@ -362,7 +406,6 @@ public class BoardServiceImpl implements BoardService {
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
-				vo = new BoardVO();
 				vo = new BoardVO();
 				vo.setBoardNo(rs.getInt("board_no"));
 				vo.setBoardWriter(rs.getString("board_writer"));
@@ -374,6 +417,8 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardHit(rs.getInt("board_hit"));
 				vo.setMemberNo(rs.getInt("member_no"));
 				vo.setBoardCategory(rs.getString("board_category"));
+				
+				vo.setBoardHot(rs.getString("board_hot"));
 				hotboardlist.add(vo);
 			}
 		} catch (SQLException e) {
@@ -386,6 +431,61 @@ public class BoardServiceImpl implements BoardService {
 
 	
 
+
+	@Override
+	public int HboardUpdate(BoardVO vo) {
+		// 추천수 일정 이상 글 hot태그 추가로 달아주기
+		int n = 0;
+		String sql = "UPDATE BOARD SET BOARD_HOT = 'HOT' WHERE BOARD_RECOMMEND >= 20";
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			n = psmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		} 	
+		return n;
+	}
+
+
+	
+	
+
+	@Override
+	public int fTotalBoardCount(Criteria cri) {
+		//전체조회
+		int totalCount = 0;
+		String sql = "select count(*) total_count from board where board_category = '자유'";
+				
+				
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+
+			//키워드가 있을 경우
+			if(!cri.getKeyword().equals("")) {
+				System.out.println("enter impl keyword");
+				sql = "select count(*) total_count from board where board_category = '자유' and "
+					+ cri.getSearchType() + " like '%" + cri.getKeyword() + "%'";
+				
+				psmt = conn.prepareStatement(sql);
+			}
+
+			rs = psmt.executeQuery();
+			System.out.println();
+			while(rs.next()) {
+				totalCount = rs.getInt("total_count");
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return totalCount;
+}
 	
 	
 	
@@ -401,6 +501,4 @@ public class BoardServiceImpl implements BoardService {
 			e.printStackTrace();
 		}
 	}
-
-	
 }

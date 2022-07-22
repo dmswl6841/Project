@@ -27,5 +27,4 @@ public class XwordUpdate implements Command {
 		System.out.println("ajax:"+jsonList);
 		return "ajax:"+jsonList;
 	}
-
 }
