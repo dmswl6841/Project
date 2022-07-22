@@ -336,7 +336,7 @@ a {
 
 							<br>
 						</div>
-						<div class="cont">${vo.studySystem }</div>
+						<div class="cont">${vo.studySubject }</div>
 					</c:when>
 					<c:otherwise>
 						<tr>
