@@ -130,7 +130,7 @@ a {
 						<tr>
 							<td id="memberNo" name="memberNo">${m.memberNo }</td>
 							<td id="memberId" name="memberId">${m.memberId }</td>
-							<td id="memberNick" name="memberNick">${m.memberNick }</td>
+							<td id="memberNick" name="memberNick"><a href="myPage.do?no=${m.memberNo}">${m.memberNick }</a></td>
 							<td id="memberWarning" name="memberWarning">${m.memberWarning }</td>
 							<td id="memberAuthor" name="memberAuthor">${m.memberAuthor }</td>
 							<td><button type="button" class="btn btn-success btn-sm" style="background-color: #1abc9c;"
@@ -176,8 +176,8 @@ a {
 						<tr>
 							<td id="boardNo" name="boardNo">${b.boardNo }</td>
 							<td id="boardCategory" name="boardCategory">${b.boardCategory }</td>
-							<td id="boardTitle" name="boardTitle">${b.boardTitle }</td>
-							<td id="boardWriter" name="boardWriter">${b.boardWriter }</td>
+							<td id="boardTitle" name="boardTitle"><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
+							<td id="boardWriter" name="boardWriter"><a href="myPage.do?no=${b.memberNo}">${b.boardWriter }</a></td>
 							<td id="boardDate">${b.boardDate }</td>
 							<td><input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="boardDelete(${b.boardNo })"></td>
 						</tr>
