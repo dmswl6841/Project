@@ -179,13 +179,7 @@ a {
       <button type="button"  class="btn btn-success" onclick="location.href='StudyForm.do'">글등록</button>
         
       
-   
-      <div class="paging" align="center">
-         <a href="#" class="bt">첫 페이지</a> <a href="#" class="bt">이전 페이지</a> <a
-            href="#" class="num on">1</a> <a href="#" class="num">2</a> <a
-            href="#" class="num">3</a> <a href="#" class="bt">다음 페이지</a> <a
-            href="#" class="bt">마지막 페이지</a>
-      </div>
+ 
    </div>
    
    
