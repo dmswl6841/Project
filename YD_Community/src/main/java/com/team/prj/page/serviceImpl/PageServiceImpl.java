@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.team.prj.board.vo.BoardVO;
+import com.team.prj.comments.vo.CommentsVO;
 import com.team.prj.common.DataSource;
 import com.team.prj.member.vo.MemberVO;
 import com.team.prj.page.service.PageService;
@@ -23,66 +24,67 @@ public class PageServiceImpl implements PageService {
 	private PreparedStatement psmt;
 	private ResultSet rs;
 	
+	//이거씀
 	//최근 활동 (7일 내의 작성글)
-	@Override
-	public List<BoardVO> myLogList(int memberNo) {
-		//최근 활동 
-		List<BoardVO> list = new ArrayList<BoardVO>();
-		BoardVO vo;
-		//BoardVO boar3dVo = new BoardVO(); 
-		//최근 일주일만 나오게 하려면
-		String sql = "SELECT BOARD_DATE, BOARD_TITLE FROM BOARD WHERE BOARD_DATE >= TO_CHAR(SYSDATE-7,'YYMMDD') AND MEMBER_NO = ?";
-		try {
-			conn = dao.getConnection();
-			psmt  = conn.prepareStatement(sql);
-			psmt.setInt(1, memberNo);
-			rs = psmt.executeQuery();
-			
-			while(rs.next()) {
-				vo = new BoardVO();
-				vo.setBoardDate(rs.getString("board_Date"));
-				vo.setBoardTitle(rs.getString("board_title"));
-				list.add(vo);
-			}
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close();
-		}
-		return list;
-	}
+//	@Override
+//	public List<BoardVO> myLogList(int memberNo) {
+//		//최근 활동 
+//		List<BoardVO> list = new ArrayList<BoardVO>();
+//		BoardVO vo;
+//		//BoardVO boar3dVo = new BoardVO(); 
+//		//최근 일주일만 나오게 하려면
+//		String sql = "SELECT BOARD_DATE, BOARD_TITLE FROM BOARD WHERE BOARD_DATE >= TO_CHAR(SYSDATE-7,'YYMMDD') AND MEMBER_NO = ?";
+//		try {
+//			conn = dao.getConnection();
+//			psmt  = conn.prepareStatement(sql);
+//			psmt.setInt(1, memberNo);
+//			rs = psmt.executeQuery();
+//			
+//			while(rs.next()) {
+//				vo = new BoardVO();
+//				vo.setBoardDate(rs.getString("board_Date"));
+//				vo.setBoardTitle(rs.getString("board_title"));
+//				list.add(vo);
+//			}
+//			
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close();
+//		}
+//		return list;
+//	}
+//	
 	
-	
-	
+	//이거씀
 	//최근 활동 (7일 내의 스터디글)
-	@Override
-	public List<StudyVO> myStudyLogList(int memberNo) {
-		List<StudyVO> list = new ArrayList<StudyVO>();
-		StudyVO vo;
-		//최근 일주일
-		String sql = "SELECT STUDY_DATE, STUDY_TITLE FROM STUDY WHERE STUDY_DATE >= TO_CHAR(SYSDATE-7,'YYMMDD') AND MEMBER_NO = ?";
-		
-		try {
-			conn = dao.getConnection();
-			psmt  = conn.prepareStatement(sql);
-			psmt.setInt(1, memberNo);
-			rs = psmt.executeQuery();
-			
-			while(rs.next()) {
-				vo = new StudyVO();
-				vo.setStudyDate(rs.getString("study_date"));
-				vo.setStudyTitle(rs.getString("study_title"));
-				list.add(vo);
-			}
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		
-		return list;
-	}
+//	@Override
+//	public List<StudyVO> myStudyLogList(int memberNo) {
+//		List<StudyVO> list = new ArrayList<StudyVO>();
+//		StudyVO vo;
+//		//최근 일주일
+//		String sql = "SELECT STUDY_DATE, STUDY_TITLE FROM STUDY WHERE STUDY_DATE >= TO_CHAR(SYSDATE-7,'YYMMDD') AND MEMBER_NO = ?";
+//		
+//		try {
+//			conn = dao.getConnection();
+//			psmt  = conn.prepareStatement(sql);
+//			psmt.setInt(1, memberNo);
+//			rs = psmt.executeQuery();
+//			
+//			while(rs.next()) {
+//				vo = new StudyVO();
+//				vo.setStudyDate(rs.getString("study_date"));
+//				vo.setStudyTitle(rs.getString("study_title"));
+//				list.add(vo);
+//			}
+//		} catch(SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close();
+//		}
+//		
+//		return list;
+//	}
 	
 	
 		
@@ -128,8 +130,8 @@ public class PageServiceImpl implements PageService {
 			List<BoardVO> list = new ArrayList<BoardVO>();
 			BoardVO vo;
 			
-			String sql = "SELECT BOARD_NO, BOARD_WRITER,BOARD_TITLE,BOARD_DATE FROM BOARD WHERE MEMBER_NO = ? ORDER BY BOARD_NO DESC ";
-
+			//String sql = "SELECT BOARD_NO, BOARD_WRITER,BOARD_TITLE,BOARD_DATE FROM BOARD WHERE MEMBER_NO = ? ORDER BY BOARD_NO DESC ";
+			String sql = "SELECT BOARD_NO, BOARD_CATEGORY,BOARD_TITLE,BOARD_WRITER,BOARD_DATE FROM BOARD WHERE MEMBER_NO = ? ORDER BY BOARD_NO DESC ";
 			try {
 				conn = dao.getConnection();
 				psmt  = conn.prepareStatement(sql);
@@ -139,8 +141,9 @@ public class PageServiceImpl implements PageService {
 				while(rs.next()) {
 					vo = new BoardVO();
 					vo.setBoardNo(rs.getInt("board_no"));
-					vo.setBoardWriter(rs.getString("board_writer"));
+					vo.setBoardCategory(rs.getString("board_category"));
 					vo.setBoardTitle(rs.getString("board_title"));
+					vo.setBoardWriter(rs.getString("board_writer"));
 					vo.setBoardDate(rs.getString("board_date"));
 					list.add(vo);
 				}
@@ -160,8 +163,8 @@ public class PageServiceImpl implements PageService {
 	public List<StudyVO> myStudyBoardList(int memberNo) {
 		List<StudyVO> list = new ArrayList<StudyVO>();
 		StudyVO vo;
-		String sql = "SELECT STUDY_NO, STUDY_WRITER,STUDY_TITLE,STUDY_DATE FROM STUDY WHERE MEMBER_NO = ? ORDER BY STUDY_NO DESC";	
-
+		//String sql = "SELECT STUDY_NO, STUDY_WRITER,STUDY_TITLE,STUDY_DATE FROM STUDY WHERE MEMBER_NO = ? ORDER BY STUDY_NO DESC";	
+		String sql = "SELECT STUDY_NO, STUDY_LANGUAGE,STUDY_TITLE,STUDY_WRITER,STUDY_DATE FROM STUDY WHERE MEMBER_NO = ? ORDER BY STUDY_NO DESC";
 		try {
 			conn = dao.getConnection();
 			psmt  = conn.prepareStatement(sql);
@@ -171,8 +174,9 @@ public class PageServiceImpl implements PageService {
 			while(rs.next()) {
 				vo = new StudyVO();
 				vo.setStudyNo(rs.getInt("study_no"));
-				vo.setStudyWriter(rs.getString("study_writer"));
+				vo.setStudyLanguage(rs.getString("study_language"));
 				vo.setStudyTitle(rs.getString("study_title"));
+				vo.setStudyWriter(rs.getString("study_writer"));
 				vo.setStudyDate(rs.getString("study_date"));
 				list.add(vo);
 			}
@@ -196,8 +200,9 @@ public class PageServiceImpl implements PageService {
 		List<ScrapVO> list = new ArrayList<ScrapVO>();
 		ScrapVO vo;
 		//스크랩이랑 보드 조인
-		String sql = "SELECT S.SCRAP_DATE,B.BOARD_NO , B.BOARD_TITLE FROM SCRAP S left OUTER JOIN BOARD B ON S.board_no = B.board_no WHERE S.MEMBER_NO = ? ORDER BY S.SCRAP_DATE DESC";
-		//
+		//String sql = "SELECT S.SCRAP_DATE,B.BOARD_NO , B.BOARD_TITLE FROM SCRAP S left OUTER JOIN BOARD B ON S.board_no = B.board_no WHERE S.MEMBER_NO = ? ORDER BY S.SCRAP_DATE DESC";
+		String sql ="SELECT s.scrap_no, b.board_category, B.BOARD_TITLE, s. scrap_date FROM SCRAP S left OUTER JOIN BOARD B ON S.board_no = B.board_no WHERE S.MEMBER_NO = ? ORDER BY S.SCRAP_DATE DESC";
+
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
@@ -207,10 +212,11 @@ public class PageServiceImpl implements PageService {
 			if(rs.next()) {
 				BoardVO board = new BoardVO();
 				vo = new ScrapVO();
-				//vo.setScrapNo(rs.getInt("scrap_no"));
+				vo.setScrapNo(rs.getInt("scrap_no"));
+				board.setBoardCategory(rs.getString("board_category"));
+				board.setBoardTitle(rs.getString("board_title"));
 			vo.setScrapDate(rs.getString("scrap_date"));
-			board.setBoardNo(rs.getInt("board_no"));
-			board.setBoardTitle(rs.getString("board_title"));
+		//	board.setBoardNo(rs.getInt("board_no"));
 		vo.setBvo(board);
 		list.add(vo);
 			}
@@ -224,19 +230,14 @@ public class PageServiceImpl implements PageService {
 	}
 
 	@Override
-	public List<ScrapVO> myStudyList(int memberNo) {
-		//찜한 스터디 리스트
-		List<ScrapVO> list = new ArrayList<ScrapVO>();
-		ScrapVO vo;
+	public List<CommentsVO> myCommentsList(int memberNo) {
+		// 내가 쓴 댓글 목록//
+		List<CommentsVO> list = new ArrayList<CommentsVO>();
+		CommentsVO vo;
 		
-
-// 스크랩이랑 스터디 조인하는 방식		
-		//String sql = "SELECT B.SCRAP_DATE , s.STUDY_NO , s.STUDY_TITLE FROM SCRAP B RIGHT OUTER JOIN  study s ON b.study_no = s.study_no WHERE s.MEMBER_NO = ?";
-		String sql = "SELECT B.SCRAP_DATE , s.STUDY_NO , s.STUDY_TITLE FROM SCRAP B LEFT OUTER JOIN  study s ON b.study_no = s.study_no WHERE s.MEMBER_NO = ? ORDER BY B.SCRAP_DATE DESC";
-	// study 게시판이랑 조인
-//		String sql = "select s.study_writer,s.study_title"
-//				+ "from study s"
-//				+ "left outer join member m on s.member_no =  m.member_no  where s.member_no = ?";		
+		String sql = "select c.board_no,c.comment_content,c.comment_date from comments c left outer join member m on c.member_no = m.member_no where c.member_no = ? order by comment_date desc";
+		
+		
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
@@ -244,14 +245,14 @@ public class PageServiceImpl implements PageService {
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
-			StudyVO study = new StudyVO();	
-			vo = new ScrapVO();
-			vo.setScrapDate(rs.getString("scrap_date"));
-			study.setStudyNo(rs.getInt("study_no"));
-			study.setStudyTitle(rs.getString("study_title"));
-			vo.setSvo(study);
+				MemberVO mbvo = new MemberVO();	
+			vo = new CommentsVO();
+			vo.setBoardNo(rs.getInt("board_no"));
+			vo.setCommentContent(rs.getString("comment_content"));
+			vo.setCommentDate(rs.getString("comment_date"));
+			vo.setMbvo(mbvo);
 			list.add(vo);
-				
+			
 			}
 			
 		}catch(SQLException e) {
@@ -265,15 +266,6 @@ public class PageServiceImpl implements PageService {
 
 	
 
-
-
-
-
-
-
-
-	
-	
 	
 	private void close() {
 		try {

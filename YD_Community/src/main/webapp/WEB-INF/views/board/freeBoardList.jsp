@@ -122,7 +122,7 @@ div > a {
 					<option value="board_writer">작성자</option>
 				</select> &nbsp; 
 				<input type="text" id="searchKeyword" name="searchKeyword" value="">&nbsp;&nbsp;
-				<button type="submit" id="searchBtn">검색</button>
+				<button type="submit" class="btn btn-success" id="searchBtn">검색</button>
 			</form>
 		</div>
 		<br>
@@ -197,7 +197,7 @@ div > a {
 		<br>
 		<!-- 글쓰기 버튼 -->
 		<div>
-			<button type="button" onclick="location.href='boardForm.do'">글쓰기</button>
+			<button type="button" class="btn btn-success" onclick="location.href='boardForm.do'">글쓰기</button>
 		</div>
 	</div>
 

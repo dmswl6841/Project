@@ -13,6 +13,7 @@ public interface ManagerService {
 	List<MemberVO> managerMemberSearch(String key, String val); //회원 목록 검색
 	int managerMemberDelete(MemberVO vo); //회원 삭제(탈퇴)
 	int memberUpdateAuthor(String key, String val); //회원 가입 승인
+	List<MemberVO> managerGuestList(); //가입대기 목록
 	
 	//게시글 관리
 	List<BoardVO> managerBoardSelectAll(); //게시글 전체 조회
@@ -22,7 +23,7 @@ public interface ManagerService {
 	//댓글 관리
 	List<CommentsVO> managerCommentsSelectAll(); //댓글 전체 조회
 	List<CommentsVO> managerCommentsSearch(String key, String val); //댓글 목록 검색
-	int managerCommentsDelete(CommentsVO vo);
+	int managerCommentsDelete(CommentsVO vo); //댓글 삭제
 	
 	//금지어 관리
 	List<XwordVO> XwordSelectAll(); //금지어 전체 조회
@@ -32,5 +33,6 @@ public interface ManagerService {
 	int XwordDelete(XwordVO vo); // 금지어 삭제
 	int XwordUpdate(String key, String val); // 금지어 수정
 	XwordVO XwordSelectOne(String key); //금지어 단건 검색
+	
 	
 }

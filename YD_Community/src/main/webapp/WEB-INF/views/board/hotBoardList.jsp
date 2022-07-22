@@ -28,6 +28,7 @@ a {
     color: inherit;
 }
 
+
 tr >td >a {
  	text-decoration-line : none;
 }
@@ -41,6 +42,7 @@ color:#FFFFFF;
 background-color:#FE2E2E;
 }
 
+
 .board_list_wrap {
     padding: 50px;
 }
@@ -48,6 +50,7 @@ background-color:#FE2E2E;
 .board_list {
     width: 100%;
     border-top: 2px solid green;
+
 }
 
 .board_list tr {
@@ -105,23 +108,24 @@ background-color:#FE2E2E;
     color: #fff;
 }
 
+
 </style>
-
-
 
 
 </head>
 
 
 <body>
-	<div align="center">
+
 	
 	    <!-- -------- HOT게시판 ------------->
-		<div><h1>인기글</h1></div><br>
+	    <div class="board_title" align="center">
+		<strong>인기글</strong>
+		</div>
 		
 		
 		<!-- -------- 공통 검색기능 ------------->
-		<div>
+		<div class="board_list_wrap" align="right">
 			<form id="frm">
 				<select id="searchkey" name="searchkey">
 				  	<option value="board_title">제목</option>
@@ -129,13 +133,16 @@ background-color:#FE2E2E;
 				  	<option value="board_writer">작성자</option>			  
 				</select> &nbsp;
 				<input type="text" id="searchval" name="searchval">&nbsp;&nbsp;
-				<input type="button" value="검색" onclick="boardSearch()">
+				<input type="button"  class="btn btn-success" value="검색" onclick="boardSearch()">
 			</form>
 		</div><br>
 		<!-- -------- 공통 검색기능 ------------->
 	
 		
-		<div class="board_list_wrap" align="right">>
+
+		<div class="board_list_wrap" align="right">
+
+
 			<table class="board_list">
 				<thead>
 					<tr>

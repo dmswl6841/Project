@@ -401,6 +401,7 @@ a {
 
 	</div>
 
+
 	<!-- 로그인 한 사람만 댓글 작성폼 보이게 -->
 	<c:if test="${not empty member}">
 		<form name="commentFrm" action="">
@@ -434,6 +435,7 @@ a {
 			<c:forEach items="${commentList}" var="list">
 				<tr>
 
+
 					<td><input type="checkbox"></td>
 					<td>${list.commentWriter }</td>
 					<td>${list.commentDate }</td>
@@ -443,11 +445,14 @@ a {
 					<td><button type="button"
 							onclick="delComment(${list.commentNo },${list.boardNo })">삭제</button></td>
 				</tr>
+
 			</c:forEach>
 
 		</tbody>
 		<tr></tr>
 	</table>
+
+
 	</div>
 
 
@@ -463,7 +468,23 @@ a {
 		}
 
 	</script>
-
+	<script type="text/javascript">
+		function reportPost(){
+			var result = confirm("게시글을 신고하시겠습니까?");
+			if(result){
+				window.open("reportForm.do");
+			}
+			function recommendPost() {
+				var result = confirm("게시글을 추천하시겠습니까?");
+				if (result) {
+					var form = document.writeFrm;
+					form.method = "post";
+					form.action = "recommendInsert.do";
+					form.submit();
+				}
+			}
+		}
+	
 
 
 
@@ -570,10 +591,11 @@ a {
 
 
 	<script type="text/javascript">
-		function modComment(cNo,bNo) {
+		function modComment(cNo) {
 			var result = confirm("댓글을 수정하시겠습니까?");
 			if (result) {
-				window.open("","댓글 수정","width=400, height=300, top=10, left=10");
+				location.href='commentUpdateForm.do?commentNo=' + cNo;
+				//window.open("","댓글 수정","width=400, height=300, top=10, left=10");
 			}
 			
 		}

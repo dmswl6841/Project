@@ -13,13 +13,16 @@ public class CommentDelete implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		CommentService dao = new CommentServiceImpl();
-		String bNo = request.getParameter("boardNo");
+		String msg = null;
 		String cNo = request.getParameter("commentNo");
-		int n = dao.commentDelete(Integer.parseInt(cNo));
-		String msg = "";
-		if (n > 0) {
-			msg = bNo;
+		dao.commentDelete(Integer.parseInt(cNo));
+		
+		if (request.getParameter("boardNo") != null) {
+			msg = request.getParameter("boardNo");
+		} else if (request.getParameter("studyNo") != null) {
+			msg = request.getParameter("studyNo");
 		}
+
 		return "ajax:" + msg;
 	}
 

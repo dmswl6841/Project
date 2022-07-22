@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.team.prj.board.vo.BoardVO;
 import com.team.prj.common.DataSource;
 import com.team.prj.study.service.StudyService;
 import com.team.prj.study.vo.StudyVO;

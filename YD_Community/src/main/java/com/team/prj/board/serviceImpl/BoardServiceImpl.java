@@ -17,7 +17,7 @@ public class BoardServiceImpl implements BoardService {
 
 	private DataSource dao = DataSource.getInstance();
 	private Connection conn;
-	private PreparedStatement psmt;
+	private PreparedStatement psmt; 
 	private ResultSet rs;
 	
 	
@@ -242,38 +242,98 @@ public class BoardServiceImpl implements BoardService {
 	//////////////////////////////////Notice 공지게시판//////////////////////////////
 	
 	@Override
-	public List<BoardVO> NboardSelectList() {
+	public List<BoardVO> NboardSelectList(Criteria cri) {
 		//전체조회
-				List<BoardVO> noticeboardlist = new ArrayList<>();
-				BoardVO vo;
-				String sql = "SELECT * FROM BOARD WHERE board_category ='공지' ORDER BY BOARD_NO DESC";
-				
-				try {
-					conn = dao.getConnection();
-					psmt = conn.prepareStatement(sql);
-					rs = psmt.executeQuery();
-					
-					while(rs.next()) {
-						vo = new BoardVO();
-						vo.setBoardNo(rs.getInt("board_no"));
-						vo.setBoardWriter(rs.getString("board_writer"));
-						vo.setBoardTitle(rs.getString("board_title"));
-						vo.setBoardDate(rs.getString("board_date"));
-						vo.setBoardAttech(rs.getString("board_attech"));
-						vo.setBoardScrap(rs.getInt("board_scrap"));
-						vo.setBoardRecommend(rs.getInt("board_recommend"));
-						vo.setBoardHit(rs.getInt("board_hit"));
-						vo.setMemberNo(rs.getInt("member_no"));
-						vo.setBoardCategory(rs.getString("board_category"));
-						noticeboardlist.add(vo);
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}finally {
-					close();
-				}
-				return noticeboardlist;
+		List<BoardVO> noticeBoardList = new ArrayList<>();
+		BoardVO vo;
+
+		String sql = "SELECT"
+				+ "    *"
+				+ "FROM"
+				+ "    ("
+				+ "    SELECT"
+				+ "        rownum rn,"
+				+ "        tb1.*"
+				+ "    FROM"
+				+ "        (SELECT"
+				+ "            b.*"
+				+ "        FROM"
+				+ "            board b"
+				+ "        WHERE"
+				+ "            b.board_category = '공지'"
+				+ "          and"
+				+ "             b." + cri.getSearchType() + " like ?"
+				+ "        ORDER BY "
+				+ "            b.BOARD_NO DESC"
+				+ "        ) tb1"
+				+ "    WHERE"
+				+ "        rownum <= ?"
+				+ "    )"
+				+ "WHERE"
+				+ "    rn > ?";
+
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, "%" + cri.getKeyword() + "%");
+			psmt.setInt(2, cri.getPageNum() * cri.getAmount());
+			psmt.setInt(3, (cri.getPageNum() - 1) * cri.getAmount());
+			System.out.println(cri);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new BoardVO();
+				vo.setBoardCategory(rs.getString("board_category"));
+				vo.setBoardNo(rs.getInt("board_no"));
+				vo.setBoardWriter(rs.getString("board_writer"));
+				vo.setBoardTitle(rs.getString("board_title"));
+				vo.setBoardDate(rs.getString("board_date"));
+				vo.setBoardAttech(rs.getString("board_attech"));
+				vo.setBoardScrap(rs.getInt("board_scrap"));
+				vo.setBoardRecommend(rs.getInt("board_recommend"));
+				vo.setBoardHit(rs.getInt("board_hit"));
+				vo.setMemberNo(rs.getInt("member_no"));
+				noticeBoardList.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return noticeBoardList;
 	}
+		
+		
+//				List<BoardVO> noticeboardlist = new ArrayList<>();
+//				BoardVO vo;
+//				String sql = "SELECT * FROM BOARD WHERE board_category ='공지' ORDER BY BOARD_NO DESC";
+//				
+//				try {
+//					conn = dao.getConnection();
+//					psmt = conn.prepareStatement(sql);
+//					rs = psmt.executeQuery();
+//					
+//					while(rs.next()) {
+//						vo = new BoardVO();
+//						vo.setBoardNo(rs.getInt("board_no"));
+//						vo.setBoardWriter(rs.getString("board_writer"));
+//						vo.setBoardTitle(rs.getString("board_title"));
+//						vo.setBoardDate(rs.getString("board_date"));
+//						vo.setBoardAttech(rs.getString("board_attech"));
+//						vo.setBoardScrap(rs.getInt("board_scrap"));
+//						vo.setBoardRecommend(rs.getInt("board_recommend"));
+//						vo.setBoardHit(rs.getInt("board_hit"));
+//						vo.setMemberNo(rs.getInt("member_no"));
+//						vo.setBoardCategory(rs.getString("board_category"));
+//						noticeboardlist.add(vo);
+//					}
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}finally {
+//					close();
+//				}
+//				return noticeboardlist;
+//	}
 	
 	 
 	
@@ -324,6 +384,7 @@ public class BoardServiceImpl implements BoardService {
 			
 			while(rs.next()) {
 				vo = new BoardVO();
+				vo.setBoardCategory(rs.getString("board_category"));
 				vo.setBoardNo(rs.getInt("board_no"));
 				vo.setBoardWriter(rs.getString("board_writer"));
 				vo.setBoardTitle(rs.getString("board_title"));
@@ -353,15 +414,44 @@ public class BoardServiceImpl implements BoardService {
 	/////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////Qna 질문게시판///////////////////////////////
 	@Override
-	public List<BoardVO> QboardSelectList() {
+	public List<BoardVO> QboardSelectList(Criteria cri) {
 		//전체조회
-		List<BoardVO> qnaboardlist = new ArrayList<>();
+		List<BoardVO> qnaBoardList = new ArrayList<>();
 		BoardVO vo;
-		String sql = "SELECT * FROM BOARD WHERE board_category ='QnA' ORDER BY BOARD_NO DESC";
+
+		
+		String sql = "SELECT"
+				+ "    *"
+				+ "FROM"
+				+ "    ("
+				+ "    SELECT"
+				+ "        rownum rn,"
+				+ "        tb1.*"
+				+ "    FROM"
+				+ "        (SELECT"
+				+ "            b.*"
+				+ "        FROM"
+				+ "            board b"
+				+ "        WHERE"
+				+ "            b.board_category = 'QnA'"
+				+ "          and"
+				+ "             b." + cri.getSearchType() + " like ?"
+				+ "        ORDER BY "
+				+ "            b.BOARD_NO DESC"
+				+ "        ) tb1"
+				+ "    WHERE"
+				+ "        rownum <= ?"
+				+ "    )"
+				+ "WHERE"
+				+ "    rn > ?";
 		
 		try {
 			conn = dao.getConnection();
 			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, "%" + cri.getKeyword() + "%");
+			psmt.setInt(2, cri.getPageNum() * cri.getAmount());
+			psmt.setInt(3, (cri.getPageNum() - 1) * cri.getAmount());
+			System.out.println(cri);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -376,15 +466,47 @@ public class BoardServiceImpl implements BoardService {
 				vo.setBoardHit(rs.getInt("board_hit"));
 				vo.setMemberNo(rs.getInt("member_no"));
 				vo.setBoardCategory(rs.getString("board_category"));
-				qnaboardlist.add(vo);
+				qnaBoardList.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		return qnaboardlist;
+		return qnaBoardList;
 	}
+		
+		
+//		List<BoardVO> qnaboardlist = new ArrayList<>();
+//		BoardVO vo;
+//		String sql = "SELECT * FROM BOARD WHERE board_category ='QnA' ORDER BY BOARD_NO DESC";
+//		
+//		try {
+//			conn = dao.getConnection();
+//			psmt = conn.prepareStatement(sql);
+//			rs = psmt.executeQuery();
+//			
+//			while(rs.next()) {
+//				vo = new BoardVO();
+//				vo.setBoardNo(rs.getInt("board_no"));
+//				vo.setBoardWriter(rs.getString("board_writer"));
+//				vo.setBoardTitle(rs.getString("board_title"));
+//				vo.setBoardDate(rs.getString("board_date"));
+//				vo.setBoardAttech(rs.getString("board_attech"));
+//				vo.setBoardScrap(rs.getInt("board_scrap"));
+//				vo.setBoardRecommend(rs.getInt("board_recommend"));
+//				vo.setBoardHit(rs.getInt("board_hit"));
+//				vo.setMemberNo(rs.getInt("member_no"));
+//				vo.setBoardCategory(rs.getString("board_category"));
+//				qnaboardlist.add(vo);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close();
+//		}
+//		return qnaboardlist;
+//	}
 	
 	
 	

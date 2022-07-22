@@ -61,11 +61,9 @@ import com.team.prj.member.command.MemberUpdate;
 import com.team.prj.member.command.MemberUpdateSubmit;
 import com.team.prj.member.command.MyPage;
 import com.team.prj.page.command.MemberBoard;
-import com.team.prj.page.command.MemberRecent;
+import com.team.prj.page.command.MemberComments;
 import com.team.prj.page.command.MemberScrap;
-import com.team.prj.page.command.MemberStudy;
 import com.team.prj.page.command.MemberStudyBoard;
-import com.team.prj.page.command.MemberStudyRecent;
 
 import com.team.prj.recommend.command.RecommendInsert;
 import com.team.prj.scrap.command.ScrapInsert;
@@ -138,11 +136,11 @@ public class FrontController extends HttpServlet {
 		map.put("/XwordList.do", new XwordList()); //금지어 전체 목록
 		map.put("/XwordSearch.do", new XwordSearch()); //금지어 검색
 		map.put("/XwordInsertForm.do", new XwordInsertForm()); //금지어 입력 팝업창
-		map.put("/XwordInsert.do", new XwordInsert());
+		map.put("/XwordInsert.do", new XwordInsert()); //금지어 입력
 		map.put("/XwordUpdateForm.do", new XwordUpdateForm()); //금지어 수정 팝업창
 		map.put("/XwordUpdate.do", new XwordUpdate()); //금지어 수정
 		map.put("/XwordDelete.do", new XwordDelete()); //금지어 삭제
-		map.put("/XwordSelectOne.do", new XwordSelectOne());
+		map.put("/XwordSelectOne.do", new XwordSelectOne()); //금지어 단건 조회
 
 		//스터디게시판
 		map.put("/StudyList.do", new StudyList());//게시글리스트폼 호출
@@ -156,15 +154,11 @@ public class FrontController extends HttpServlet {
 		
 	
 		//마이페이지//
-		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 자유게시판 글 목록
-		map.put("/memberStudyBoard.do", new MemberStudyBoard()); //내가 쓴 스터디 글 목록
-		
-		map.put("/memberRecent.do", new MemberRecent()); // 최근활동 자유게시판
-		map.put("/memberStudyRecent.do", new MemberStudyRecent()); // 최근활동 자유게시판
-		
+		map.put("/memberBoard.do", new MemberBoard()); //내가 쓴 게시글
+		map.put("/memberStudyBoard.do", new MemberStudyBoard()); //내가 쓴 스터디글
+		map.put("/memberComments.do",new MemberComments());//내가 쓴 댓글
 		map.put("/memberScrap.do", new MemberScrap()); //스크랩
 		
-		map.put("/memberStudy.do", new MemberStudy()); //찜한스터디
 	
 		//로그인 테스트용//
 		map.put("/memberJoin.do",new MemberJoin());

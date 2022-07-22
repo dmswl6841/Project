@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YEDAMSTUDY_스터디게시판</title>
+<script src="js/jquery-3.6.0.min.js"></script>
+
 <link rel="stylesheet" href="css/css.css">
 <style>
 * {
@@ -302,7 +307,7 @@ a {
 						</form>
 
 						<div class="info" id="studyDel">
-							
+
 							<dl>
 								<dt>제 목</dt>
 								<dd>${vo.getStudyTitle()}</dd>
@@ -323,11 +328,12 @@ a {
 								<dt>스터디언어</dt>
 								<dd>${vo.studyLanguage }</dd>
 							</dl>
-							
+
 							<dl>
 								<dt>스터디인원</dt>
 								<dd>${vo.studyMember }</dd>
 							</dl>
+
 							<br>
 						</div>
 						<div class="cont">${vo.studySystem }</div>
@@ -341,15 +347,76 @@ a {
 
 			</div>
 			&nbsp;
-			
-			
-				<button type="button" class="btn btn-success" onclick="studyUpdate(${vo.studyNo })">수정</button>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" class="btn btn-success" onclick="studyDelete(${vo.studyNo })">삭제</button>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="StudyList.do" class="btn btn-success">목록</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			
+
+
+			<button type="button" class="btn btn-success"
+				onclick="studyUpdate(${vo.studyNo })">수정</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" class="btn btn-success"
+				onclick="studyDelete(${vo.studyNo })">삭제</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="StudyList.do"
+				class="btn btn-success">목록</a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<div id="commentArea">
+				<!-- 로그인 한 사람만 댓글 작성폼 보이게 -->
+				<c:if test="${not empty member}">
+					<form name="commentFrm" action="">
+						<input type="hidden" name="studyNo" id="studyNo"
+							value="${vo.studyNo}"> <input type="hidden"
+							name="memberNo" id="memberNo" value="${member.memberNo}">
+						<input type="text" name="commentWriter" id="commentWriter"
+							value="${member.memberNick }" readonly><input type="text"
+							name="commentContent" id="commentContent" placeholder="댓글을 입력하세요">
+						<input type="button" onclick="insertComment()" value="등록">
+					</form>
+				</c:if>
+
+				<!-- 로그인 안해도 볼 수 있는 댓글리스트 -->
+				<p>댓글 수: ${count }</p>
+				<table id="list" border=1>
+					<thead>
+						<tr>
+							<th><input type="checkbox"></th>
+							<th>닉네임</th>
+							<th>등록 날짜</th>
+							<th width="500px">내용</th>
+							<c:if test="${not empty member}">
+								<c:if test="${list.memberNo eq member.memberNo }">
+									<th>수정</th>
+									<th>삭제</th>
+								</c:if>
+							</c:if>
+
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${commentList}" var="list">
+							<tr>
+
+								<td><input type="checkbox"></td>
+								<td>${list.commentWriter }</td>
+								<td>${list.commentDate }</td>
+								<th>${list.commentContent }</th>
+								<c:if test="${not empty member}">
+									<c:if test="${list.memberNo eq member.memberNo }">
+
+										<td><button type="button"
+												onclick="modComment(${list.commentNo })">수정</button></td>
+										<td><button type="button"
+												onclick="delComment(${list.commentNo },${list.studyNo })">삭제</button></td>
+									</c:if>
+								</c:if>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+					<tr></tr>
+				</table>
+
+			</div>
+
+
 		</div>
 	</div>
 
@@ -384,6 +451,62 @@ a {
 				form.submit();
 			}
 		}
+		
+		function insertComment() {
+			var result = confirm("댓글을 등록하시겠습니까?");
+			if (result) {
+				let sNo = document.commentFrm.studyNo.value;
+				let mNo = document.commentFrm.memberNo.value;
+				let wr = document.commentFrm.commentWriter.value;
+				let con = document.commentFrm.commentContent.value;
+
+				$.ajax({
+					url : 'commentInsert.do',
+					method : 'post',
+					contentType : 'application/x-www-form-urlencoded',
+					data : {
+						sNo : sNo,
+						mNo : mNo,
+						wr : wr,
+						con : con
+					},
+					dataType : 'text',
+					success : result => {
+						//console.log("ajaxres: " + result);
+						location.href='StudyView.do?study_no=' + result},
+					error : function(error) {
+						alert('처리 중 오류 발생!');
+					}
+				})
+
+				// 폼 인풋 초기화
+				document.commentFrm.commentContent.value = "";
+			}
+		}
+		
+		
+		function delComment(cNo,sNo) {
+			
+			var result = confirm("댓글을 삭제하시겠습니까?");
+			if (result) {
+				$.ajax({
+					url : 'commentDelete.do',
+					method : 'post',
+					contentType : 'application/x-www-form-urlencoded',
+					data : {commentNo: cNo, studyNo: sNo},
+					dataType : 'text',
+					success : result => {
+						//console.log("ajaxres: " + result);
+						location.href='StudyView.do?study_no=' + result},
+					error : function(error) {
+						alert('처리 중 오류 발생!');
+					}
+				})
+
+			}
+		}
+
+
 		
 		
 	</script>
