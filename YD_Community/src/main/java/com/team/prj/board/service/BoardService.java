@@ -11,12 +11,11 @@ public interface BoardService {
 
 	
 	
-	//Free 자유게시판 crud
-	List<BoardVO> FboardSelectList(Criteria cri); //전체조회
-	
+		//Free 자유게시판 crud
+		List<BoardVO> FboardSelectList(Criteria cri); //전체조회
 
 	
-	int fTotalBoardCount(Criteria cri);//페이징 카운트 조회
+		int fTotalBoardCount(Criteria cri);//페이징 카운트 조회
 	
 
 
@@ -36,10 +35,7 @@ public interface BoardService {
 	
 		//total 메인
 		List<BoardVO> TboardSelectList(); //전체조회
-		
-		//Free 자유게시판 crud
-		List<BoardVO> FboardSelectList(); //전체조회
-		
+
 		//Qna 질문게시판 crud
 		List<BoardVO> QboardSelectList(); //전체조회
 		

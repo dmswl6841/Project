@@ -328,8 +328,6 @@ a {
 								<dt>스터디인원</dt>
 								<dd>${vo.studyMember }</dd>
 							</dl>
-							
-							
 							<br>
 						</div>
 						<div class="cont">${vo.studySystem }</div>

@@ -7,6 +7,109 @@
 <meta charset="UTF-8">
 <title>주간 HOT</title>
 <script src="js/jquery-3.6.0.min.js"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+caption {
+    display: none;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+tr >td >a {
+ 	text-decoration-line : none;
+}
+ 
+div > a {
+	text-decoration-line : none;
+}
+
+#hotbtn {
+color:#FFFFFF; 
+background-color:#FE2E2E;
+}
+
+.board_list_wrap {
+    padding: 50px;
+}
+
+.board_list {
+    width: 100%;
+    border-top: 2px solid green;
+}
+
+.board_list tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.board_list th,
+.board_list td {
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.board_list td {
+    text-align: center;
+}
+
+.board_list .tit {
+    text-align: left;
+}
+
+.board_list .tit:hover {
+    text-decoration: underline;
+}
+
+.board_list_wrap .paging {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0;
+}
+.board_list_wrap .paging a {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+.board_list_wrap .paging a:first-child {
+    margin-left: 0;
+}
+
+.board_list_wrap .paging a.bt {
+    border: 1px solid #eee;
+    background: #eee;
+}
+
+.board_list_wrap .paging a.num {
+    border: 1px solid green;
+    font-weight: 600;
+    color: green;
+}
+
+.board_list_wrap .paging a.num.on {
+    background: green;
+    color: #fff;
+}
+
+</style>
+
+
+
+
 </head>
 
 
@@ -32,11 +135,10 @@
 		<!-- -------- 공통 검색기능 ------------->
 	
 		
-		<div>
-			<table border="1">
+		<div class="board_list_wrap" align="right">>
+			<table class="board_list">
 				<thead>
 					<tr>
-						<th></th>
 						<th width="130">카테고리</th>
 						<th width="70">글번호</th>
 						<th width="130">작성자</th>
@@ -48,13 +150,12 @@
 						<th width="70">조회수</th>					
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tb">
 					<c:choose>
 						<c:when test="${not empty hotboardlist }">
 							<c:forEach items="${hotboardlist }" var="b">
 								<tr>
-									<td><button style="color:#FFFFFF; background-color:#FE2E2E" disabled>HOT</button></td>
-									<td>${b.boardCategory }</td>
+									<td width="70px"><button id="hotbtn" disabled>HOT</button>&nbsp;&nbsp;${b.boardCategory }</td>
 									<td>#${b.boardNo }</td>
 									<td><a href="myPage.do?no=${b.memberNo}">${b.boardWriter }</a></td>
 									<td><a href="boardView.do?board_no=${b.boardNo}">${b.boardTitle }</a></td>
