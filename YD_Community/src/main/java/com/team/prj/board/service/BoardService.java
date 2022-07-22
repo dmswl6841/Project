@@ -37,8 +37,7 @@ public interface BoardService {
 		//total 메인
 		List<BoardVO> TboardSelectList(); //전체조회
 		
-		//Free 자유게시판 crud
-		List<BoardVO> FboardSelectList(); //전체조회
+		
 		
 		//Qna 질문게시판 crud
 		List<BoardVO> QboardSelectList(); //전체조회

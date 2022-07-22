@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,6 +92,9 @@ a {
     color: #fff;
 }
 
+strong {
+	font-size: 60px;
+}
 
 
 
@@ -98,17 +103,18 @@ a {
 </head>
 
 <body>
-	<div class="board_list_wrap" align="center">
+	
 	
 	    <!-- -------- 공지게시판 ------------->
-		  <div class="board_title" align="center">
+	<div class="board_title" align="center">
       <strong>공지사항</strong>
    </div>
    
 		
 		
 		<!-- 공통 검색기능 -->
-		<div>
+		      <div class="board_list_wrap" align="right">
+
 			<form id="frm">
 				<select id="key" name="key">
 					<option value="board_title">제목</option>
@@ -116,14 +122,14 @@ a {
 					<option value="board_writer">작성자</option>
 				</select> &nbsp; 
 				<input type="text" id="val" name="val">&nbsp;&nbsp;
-				<input type="button" value="검색" onclick=boardSearch()>
+				<input type="button" class="btn btn-success" value="검색" onclick=boardSearch()>
 			</form>
 		</div>
 		<br>
 		<!-- 공통 검색기능 -->
 	
 		
-		<div class="board_list_wrap" align="right">
+		<div class="board_list_wrap" align="center">
 			<table class="board_list">
 				<thead>
 					<tr>
@@ -167,7 +173,7 @@ a {
 			<!-- 관리자 권한으로 글쓰기 -->
 			<div>
 				<c:if test="${author == 'ADMIN'}">
-					<button type="button" onclick="location.href='boardForm.do'">글등록</button>
+					<button type="button" class="btn btn-success" onclick="location.href='boardForm.do'">글등록</button>
 				</c:if>
 			</div>
 		</div><br>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +11,12 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
+<style>
+form{
+border-top-color: gray;
+}
+
+</style>
 </head>
 <body>
 	<div align="center">
@@ -27,7 +35,7 @@
 							<td width="300"><input type="text" id="memberId"
 								name="memberId" size="20"> &nbsp; <input type="hidden"
 								id="checkId" value="No">
-								<button type="button" id="btn" onclick="idCheck()">중복체크</button>
+								<button type="button" class="btn btn-success" id="btn" onclick="idCheck()">중복체크</button>
 							</td>
 						</tr>
 						<tr>
@@ -46,7 +54,7 @@
 							<td width="300"><input type="text" id="memberNickname"
 								name="memberNickname" size="20"> <input type="hidden"
 								id="checkNickname" value="No">
-								<button type="button" onclick="nicknameCheck()">중복체크</button></td>
+								<button type="button" class="btn btn-success" onclick="nicknameCheck()">중복체크</button></td>
 						</tr>
 
 						<tr>
@@ -66,8 +74,8 @@
 					data-sitekey="6LdZtPggAAAAAA6ZEiPG56C-XmfBK7EJhpmMnaSm"></div>
 				<br> <br>
 				<div>
-					<input type="submit" value="회원가입"> <input type="reset"
-						value="취소"> <input type="button" value="홈으로 이동"
+					<input type="submit" class="btn btn-success" value="회원가입"> <input type="reset"
+					class="btn btn-success"	value="취소"> <input type="button" class="btn btn-success" value="홈으로 이동"
 						onclick="location.href='main.do'">
 				</div>
 				<br> <br>

@@ -7,18 +7,110 @@
 <meta charset="UTF-8">
 <title>주간 HOT</title>
 <script src="js/jquery-3.6.0.min.js"></script>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+caption {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.board_list_wrap {
+    padding: 50px;
+}
+
+.board_list {
+    width: 100%;
+    border-top: 2px solid green;
+    text-align: center;
+}
+
+.board_list tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.board_list th,
+.board_list td {
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.board_list td {
+    text-align: center;
+}
+
+.board_list .tit {
+    text-align: left;
+}
+
+.board_list .tit:hover {
+    text-decoration: underline;
+}
+
+.board_list_wrap .paging {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0;
+}
+.board_list_wrap .paging a {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+.board_list_wrap .paging a:first-child {
+    margin-left: 0;
+}
+
+.board_list_wrap .paging a.bt {
+    border: 1px solid #eee;
+    background: #eee;
+}
+
+.board_list_wrap .paging a.num {
+    border: 1px solid green;
+    font-weight: 600;
+    color: green;
+}
+
+.board_list_wrap .paging a.num.on {
+    background: green;
+    color: #fff;
+}
+
+
+
+
+
+</style>
+
 </head>
 
 
 <body>
-	<div align="center">
+
 	
 	    <!-- -------- HOT게시판 ------------->
-		<div><h1>인기글</h1></div><br>
+	    <div class="board_title" align="center">
+		<strong>인기글</strong>
+		</div>
 		
 		
 		<!-- -------- 공통 검색기능 ------------->
-		<div>
+		<div class="board_list_wrap" align="right">
 			<form id="frm">
 				<select id="searchkey" name="searchkey">
 				  	<option value="board_title">제목</option>
@@ -26,14 +118,14 @@
 				  	<option value="board_writer">작성자</option>			  
 				</select> &nbsp;
 				<input type="text" id="searchval" name="searchval">&nbsp;&nbsp;
-				<input type="button" value="검색" onclick="boardSearch()">
+				<input type="button"  class="btn btn-success" value="검색" onclick="boardSearch()">
 			</form>
 		</div><br>
 		<!-- -------- 공통 검색기능 ------------->
 	
 		
-		<div>
-			<table border="1">
+		<div class="board_list_wrap" align="center">
+			<table class="board_list">
 				<thead>
 					<tr>
 						<th></th>
