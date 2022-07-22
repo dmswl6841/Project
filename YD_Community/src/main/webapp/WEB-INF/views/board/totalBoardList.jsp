@@ -230,7 +230,7 @@ td {
 				<tbody>
 					<c:choose>
 						<c:when test="${not empty totalboardlist }">
-							<c:forEach items="${totalboardlist }">
+							<c:forEach items="${totalboardlist }"  var="b">
 								<c:if test="${b.boardCategory =='QnA' }">
 									<tr>
 										<td width="70">#${b.boardNo }</td>

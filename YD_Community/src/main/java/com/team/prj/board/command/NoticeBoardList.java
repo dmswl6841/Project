@@ -46,7 +46,7 @@ public class NoticeBoardList implements Command {
 			
 		
 		List<BoardVO> noticeBoardList = boardDao.NboardSelectList(cri);
-		int total = boardDao.fTotalBoardCount(cri);
+		int total = boardDao.NoticeBoardCount(cri);
 		PageVO page = new PageVO(cri, total);
 
 		request.setAttribute("noticeBoardList", noticeBoardList);
