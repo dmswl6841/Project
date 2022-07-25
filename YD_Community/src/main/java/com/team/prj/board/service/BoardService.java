@@ -12,8 +12,8 @@ public interface BoardService {
 
 	
 		int fTotalBoardCount(Criteria cri);//페이징 카운트 조회
-
-
+		int NoticeBoardCount(Criteria cri);
+		int QboardBoardCount(Criteria cri);
 
 		//게시판 공통기능 (글 입력, 글 1개 보기, 글 검색)
 		int boardInsert(BoardVO vo); //글입력

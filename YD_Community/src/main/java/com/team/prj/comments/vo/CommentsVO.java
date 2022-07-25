@@ -22,7 +22,7 @@ public class CommentsVO {
 	MemberVO mbvo = new MemberVO();
 
 
-
+}
 
 
 
