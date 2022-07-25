@@ -21,8 +21,13 @@ public class CommentsVO {
 	//마이페이지 조인용입니다
 	MemberVO mbvo = new MemberVO();
 
+<<<<<<< HEAD
 
 }
+=======
+}
+
+>>>>>>> branch 'master' of https://github.com/dmswl6841/Project.git
 
 
 
