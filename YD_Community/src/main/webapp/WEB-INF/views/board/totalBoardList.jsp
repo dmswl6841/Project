@@ -32,8 +32,38 @@ float: left;
 
 .board_title a {
 text-decoration:none;
+margin-right:20em;
 }
 
+
+
+.box1 {
+	clear: both;
+	float: left;
+	padding-right:5em;
+	padding-bottom: 1em;
+}
+
+.box2 {
+	display: inline-block;	
+	padding-bottom: 1em;
+}
+
+.box3 {
+	clear: left;
+	float: left;
+	padding-right: 5em;
+}
+
+.box4 {
+	float: left;
+	display: inline-block;	
+}
+
+.cover {
+height: 50em;
+padding-left:30em;
+}
 
 .scrolltable {
 	display: block;
@@ -96,30 +126,9 @@ td {
 	text-align: center;
 }
 
-.box1 {
-	float: center;
-	margin-left: 20%;
-	margin-right: -20%;
-}
-
-.box2 {
-	margin-left: 20%;
-	margin-right: -20%;
-}
- 
-.box3 {
-	clear: both;
-	float: center;
-	margin-left: -20%;
-	margin-right: 20%;
-}
 
 
-.box4 {
-	margin-left: -20%;
-	margin-right: 20%;
-}
-  article {
+article {
   width: auto;
   height: auto; /* only for demonstration, should be removed */
 }
@@ -138,7 +147,7 @@ td {
 		<strong><a href="totalBoardList.do">YD Community</a></strong>
 	</div>
 	
-	
+	<div class="cover">
 	<div class="box1" >
 		<div>
 			<a href="hotBoardList.do">🏆 인기글</a>
@@ -249,7 +258,7 @@ td {
 
 
 
-	<div align="center" class="box4" id="li">
+	<div class="box4" id="li">
 		<div>
 			<a href="qnaBoardList.do">💡 QnA게시판</a>
 		</div>
@@ -283,7 +292,7 @@ td {
 		</div>
 	</div>
 
-
+</div>
 
 	<script type="text/javascript">
 		function noticeSearch() {

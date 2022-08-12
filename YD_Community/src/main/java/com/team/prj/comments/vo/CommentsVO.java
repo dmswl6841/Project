@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class CommentsVO {
 	private int commentNo;
 	private int boardNo; //board테이블의 no, 외래키
@@ -17,18 +18,10 @@ public class CommentsVO {
 	private int studyNo;
 
 	
-	
 	//마이페이지 조인용입니다
 	MemberVO mbvo = new MemberVO();
 
-<<<<<<< HEAD
 
 }
-=======
-}
-
->>>>>>> branch 'master' of https://github.com/dmswl6841/Project.git
-
-
 
 
